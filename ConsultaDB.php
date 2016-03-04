@@ -12,8 +12,7 @@ while($tablaDB=mysql_fetch_array($consulta)){
 
 $latitud=$tablaDB['LATITUD'];
 $longitud=$tablaDB['LONGITUD'];
-$fecha=$tablaDB['FECHA'];
-$hora=$tablaDB['HORA'];
+$fecha=$tablaDB['FECHA_HORA'];
 								   		}
 ?>
 
@@ -22,6 +21,5 @@ $hora=$tablaDB['HORA'];
 var Latitud_Gps = <?php echo json_encode($latitud); ?>;
 var Longitud_Gps = <?php echo json_encode($longitud); ?>;
 var Fecha_Gps = <?php echo json_encode($fecha); ?>;
-var Hora_Gps = <?php echo json_encode($hora); ?>;
 
 </script>

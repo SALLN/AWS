@@ -101,6 +101,8 @@ function SetMarker(){
 
 	auxlat =Latitud;	auxlon =Longitud;
 
+	Hora_Gps=Fecha_Gps.substring(11,19);
+	Fecha_Gps=Fecha_Gps.substring(0,10);
 	document.getElementById('fila_latitud').innerHTML  = Latitud;		document.getElementById('fila_longitud').innerHTML = Longitud;
 	document.getElementById('fila_fecha').innerHTML    = Fecha_Gps;		document.getElementById('fila_hora').innerHTML     = Hora_Gps;
 
