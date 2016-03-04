@@ -64,13 +64,6 @@ var Longitud;				var Hora;					var auxlon;					var k;
 var Latitudes_Historicas;	var Latitud_Historica;		var Fechas_Historicas;		var columnas;
 var Longitudes_Historicas;	var Longitud_Historica;		var Horas_Historicas;		var Datos;
 
-
-
-
-
-
-
-
 var PoliLinea_Real = new google.maps.Polyline({ path: Ruta_Real,   strokeColor: '#FFFF00',  strokeOpacity: 1.0,	 strokeWeight: 5	});
 
 var PoliLinea_Historica = new google.maps.Polyline({ path: Ruta_Historica,  strokeColor: '#000000', strokeOpacity: 1.0,	strokeWeight: 5	});
