@@ -133,12 +133,11 @@ function SetMarker(){
 function Consulta_Real(){
 
 	PoliLinea_Historica.setMap(null);
-	PoliLinea_Real.setMap(map);
-	MarkerInterval = setInterval(function(){SetMarker()}, 1000);
-
 	for (var l = 0; l <Marker_Historico.length; l++)	{	Marker_Historico[l].setMap(null);		}
 
+	PoliLinea_Real.setMap(map);
 
+	MarkerInterval = setInterval(function(){SetMarker()}, 1000);
 	}
 
 function Consulta_Historico(){
