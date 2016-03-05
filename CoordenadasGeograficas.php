@@ -215,7 +215,7 @@ function Decodificar(data){
 		} // FOR MARKER
 
 			} // fin funcion decodificar
-
+// COEMTNARIO 01:24:00
 </script>
 
 </body>
