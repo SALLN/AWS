@@ -6,10 +6,16 @@
     <head>
 
 
+
+        <link rel="stylesheet" media="screen" type="text/css" href="css/datepicker.css" />
+        <link rel="stylesheet" media="screen" type="text/css" href="css/layout.css" />
+
         <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
         <script src="http://maps.googleapis.com/maps/api/js"></script>
         <link rel=StyleSheet href="css/encabezado.css" type="text/css">
+
         <link rel="shortcut icon" href="taxi3.ico">
+
 
 
 
@@ -241,6 +247,9 @@
 
 
                <div id="googleMap"></div>
+               <div id="date34"></div>
+               <input id="Boton_Real2" type="button" value="CONSULTAR REAL" onclick="Consulta_Real2();" />
+               <input id="Boton_Real22" type="button" value="OCULTAR" onclick="Consulta_Real22();" />
  
 
         </section>
@@ -357,9 +366,16 @@
         <!-- theme custom scripts -->
         <script src="js/main.js"></script>
 
+        <script src="js/datepicker.js"></script>
+        <script src="js/eye.js"></script>
+        <script src="js/utils.js"></script>
+        <script src="js/layout.js?ver=1.0.2"></script>
 
+        <!--
+        <script type="text/javascript" src="js/jquery.js"></script>
+        -->
 <script>
-        
+
 
 var myCenter=new google.maps.LatLng(parseFloat(Latitud_Gps),parseFloat(Longitud_Gps));
 
@@ -525,6 +541,22 @@ function Decodificar(data){
         } // FOR MARKER
 
             } // fin funcion decodificar
+
+function Consulta_Real2(){
+
+$('#date34').DatePicker({
+    flat: true,
+    date: '2016',
+    current: '2016',
+    calendars: 1,
+    starts: 1
+});
+    }
+
+    function Consulta_Real22(){
+        $('#date34').DatePickerHide();
+    }
+
  </script>
 
 
