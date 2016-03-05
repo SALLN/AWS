@@ -13,7 +13,16 @@
 
         <!-- Input datetime...............   -->
 
+        <link rel="stylesheet" type="text/css" href="src/DateTimePicker.css" />
+        <link rel="stylesheet" type="text/css" href="dist/DateTimePicker.min.css" />
 
+    
+        <script type="text/javascript" src="jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="src/DateTimePicker.js"></script>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js" type="text/javascript"></script>
+
+        
 
 
         <!-- Mobile Specific Meta -->
@@ -262,7 +271,12 @@
 
                <div id="googleMap"></div> 
 
-            
+        <p>DateTime : </p>
+        <input type="text" data-field="datetime" readonly>
+    
+        <div id="dtBox"></div>
+
+
                  <!-- end .row -->
 
 
@@ -383,11 +397,13 @@
         <!-- theme custom scripts -->
         <script src="js/main.js"></script>
 
-      
-
-
 
 <script>
+
+( function($) {
+    // we can now rely on $ within the safety of our "bodyguard" function
+    $(document).ready( function() { $("#dtBox").DateTimePicker();  } );
+} ) ( jQuery );
 
 
 var myCenter=new google.maps.LatLng(parseFloat(Latitud_Gps),parseFloat(Longitud_Gps));
