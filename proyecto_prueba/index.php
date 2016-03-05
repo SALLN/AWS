@@ -247,10 +247,12 @@
 
 
                <div id="googleMap"></div>
-               <div id="date34"></div>
+               <div id="date_inicio"></div>
+               <div id="date_final"></div>
                <input id="Boton_Real2" type="button" value="CONSULTAR REAL" onclick="Consulta_Real2();" />
                <input id="Boton_Real22" type="button" value="OCULTAR" onclick="Consulta_Real22();" />
- 
+                <div><h3 class="parametros4">Fecha Inicial:</h3><h3 id="fila_latitud4">0000-00-00</h3></div>
+                <div><h3 class="parametros4">Fecha Final:</h3><h3 id="fila_latitud44">0000-00-00</h3></div>
 
         </section>
         <!--
@@ -544,17 +546,58 @@ function Decodificar(data){
 
 function Consulta_Real2(){
 
-$('#date34').DatePicker({
+$('#date_inicio').DatePicker({
+    
     flat: true,
-    date: '2016',
-    current: '2016',
+    date:  '',
+    current: '2016-03-05',
     calendars: 1,
-    starts: 1
+    starts: 0,
+    mode: 'single',
+    view: 'days',
+    //onBeforeShow: function(){
+    //   $('#date34').DatePickerClear();
+    //    },
+    onChange: function(formated, dates){ 
+
+        if ($('#date_inicio').DatePickerGetDate(true) != ""){
+
+            $('#date_inicio').DatePickerHide();    
+               document.getElementById('fila_latitud4').innerHTML  = $('#date_inicio').DatePickerGetDate(true);  
+               Iniciar_date2();   
+            }
+    }
 });
+$('#date_inicio').DatePickerClear();
+
     }
 
-    function Consulta_Real22(){
-        $('#date34').DatePickerHide();
+function Iniciar_date2(){
+
+ $('#date_final').DatePicker({
+    
+    flat: true,
+    date:  '',
+    current: $('#date_inicio').DatePickerGetDate(true),
+    calendars: 1,
+    starts: 0,
+    mode: 'single',
+    view: 'days',
+    onChange: function(formated, dates){ 
+
+        if ($('#date_final').DatePickerGetDate(true) != ""){
+
+            $('#date_final').DatePickerHide();    
+               document.getElementById('fila_latitud44').innerHTML  = $('#date_final').DatePickerGetDate(true);  
+            }
+    }
+});
+$('#date_final').DatePickerClear();
+      //  $('#date34').DatePickerHide();
+
+    }
+
+function Consulta_Real22(){   
     }
 
  </script>
