@@ -13,11 +13,6 @@
 
         <!-- Input datetime...............   -->
 
-        <link rel="stylesheet" type="text/css" href="../src/DateTimePicker.css" />
-    
-        <script type="text/javascript" src="jquery-1.11.0.min.js"></script>
-        <script type="text/javascript" src="../src/DateTimePicker.js"></script>
-
 
 
 
@@ -265,18 +260,6 @@
      
 
 
-             <div>
-
-                  <p>DateTime : </p>
-
-
-                 <input type="text" data-field="datetime" readonly>
-    
-                  <div id="dtBox"></div>
-            </div>
-
-
-
                <div id="googleMap"></div> 
 
             
@@ -405,6 +388,7 @@
 
 
 <script>
+
 
 var myCenter=new google.maps.LatLng(parseFloat(Latitud_Gps),parseFloat(Longitud_Gps));
 
@@ -571,17 +555,6 @@ function Decodificar(data){
 
             } // fin funcion decodificar
  </script>
-
-
-<script type="text/javascript">
-        
-            $(document).ready(function()
-            {
-                $("#dtBox").DateTimePicker();
-            });
-        
-        </script>
-
 
 
 </body>
