@@ -2,7 +2,7 @@
 
 $host="localhost";
 $user="root";
-$pw="1140870255";
+$pw="ticoll";
 $db="diseno";
 
 
