@@ -137,7 +137,7 @@ function Consulta_Real(){
 
 	PoliLinea_Real.setMap(map);
 
-	MarkerInterval = setInterval(function(){SetMarker()}, 10000);
+	MarkerInterval = setInterval(function(){SetMarker()}, 1000);
 	}
 
 function Consulta_Historico(){
