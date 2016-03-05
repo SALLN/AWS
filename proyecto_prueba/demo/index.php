@@ -11,7 +11,7 @@
         <link rel=StyleSheet href="css/encabezado.css" type="text/css">
         <link rel="shortcut icon" href="taxi6.ico">
 
-        <!-- Input datetime   -->
+        <!-- Input datetime...............   -->
 
         <link rel="stylesheet" type="text/css" href="../src/DateTimePicker.css" />
     
