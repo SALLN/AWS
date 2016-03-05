@@ -9,20 +9,9 @@
         <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
         <script src="http://maps.googleapis.com/maps/api/js"></script>
         <link rel=StyleSheet href="css/encabezado.css" type="text/css">
-        <link rel="shortcut icon" href="taxi6.ico">
+        <link rel="shortcut icon" href="taxi3.ico">
 
-        <!-- Input datetime...............   -->
 
-        <link rel="stylesheet" type="text/css" href="src/DateTimePicker.css" />
-        <link rel="stylesheet" type="text/css" href="dist/DateTimePicker.min.css" />
-
-    
-        <script type="text/javascript" src="jquery-1.11.0.min.js"></script>
-        <script type="text/javascript" src="src/DateTimePicker.js"></script>
-
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js" type="text/javascript"></script>
-
-        
 
 
         <!-- Mobile Specific Meta -->
@@ -63,24 +52,6 @@
 		
 		<!-- Modernizer Script for old Browsers -->
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
-
-
-       <style type="text/css">
-        
-            p
-            {
-                margin-left: 20px;
-            }
-        
-            input
-            {
-                width: 200px;
-                padding: 10px;
-                margin-left: 20px;
-                margin-bottom: 20px;
-            }
-        
-        </style>
 
 		
     </head>
@@ -269,19 +240,8 @@
      
 
 
-               <div id="googleMap"></div> 
-
-        <p>DateTime : </p>
-        <input type="text" data-field="datetime" readonly>
-    
-        <div id="dtBox"></div>
-
-
-                 <!-- end .row -->
-
-
-
-            <!-- end .container -->
+               <div id="googleMap"></div>
+ 
 
         </section>
         <!--
@@ -399,12 +359,7 @@
 
 
 <script>
-
-( function($) {
-    // we can now rely on $ within the safety of our "bodyguard" function
-    $(document).ready( function() { $("#dtBox").DateTimePicker();  } );
-} ) ( jQuery );
-
+        
 
 var myCenter=new google.maps.LatLng(parseFloat(Latitud_Gps),parseFloat(Longitud_Gps));
 
