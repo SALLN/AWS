@@ -68,8 +68,8 @@ var PoliLinea_Real = new google.maps.Polyline({ path: Ruta_Real,   strokeColor: 
 
 var PoliLinea_Historica = new google.maps.Polyline({ path: Ruta_Historica,  strokeColor: '#000000', strokeOpacity: 1.0,	strokeWeight: 5	});
 
-var MarkerInterval = setInterval(function(){SetMarker()}, 10000);
-var DbInterval =     setInterval(function(){CargarDB()}, 10000);
+var MarkerInterval = setInterval(function(){SetMarker()}, 1000);
+var DbInterval =     setInterval(function(){CargarDB()}, 1000);
 
 var mapOptions ={		center : myCenter,		zoom : 16,		mapTypeId: google.maps.MapTypeId.ROADMAP,	 disableDefaultUI: false	};
 
@@ -181,6 +181,7 @@ function Decodificar(data){
 
   	for (i = 0; i <Horas_Historicas.length; i++) {		Horas_Historicas[i]=Horas_Historicas[i].substring(1,9);	 }
 
+
 		k=0;
 		NumMark=0;
   	for(var i=0;i<Latitudes_Historicas.length;i++)
@@ -201,7 +202,7 @@ function Decodificar(data){
 		Marker_Historico[NumMark]=new google.maps.Marker({  
 									position:Posicion_Historica, 		//animation:google.maps.Animation.DROP,
 									map: map,
-									title: Fechas_Historicas[i]+"--"+Horas_Historicas[i],
+									title: Fechas_Historicas[i]+"--",//+Horas_Historicas[i],
 									//animation:google.maps.Animation.BOUNCE, // SALTANDO
 									//draggable: true, // PERMITE ARRASTRARLOS
 									label: "1",
