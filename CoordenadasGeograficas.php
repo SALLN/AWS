@@ -202,7 +202,7 @@ function Decodificar(data){
 		Marker_Historico[NumMark]=new google.maps.Marker({  
 									position:Posicion_Historica, 		//animation:google.maps.Animation.DROP,
 									map: map,
-									title: Fechas_Historicas[i]+"--",//+Horas_Historicas[i],
+									title: Fechas_Historicas[i]+"--"+Horas_Historicas[i],
 									//animation:google.maps.Animation.BOUNCE, // SALTANDO
 									//draggable: true, // PERMITE ARRASTRARLOS
 									label: "1",
