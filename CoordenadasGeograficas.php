@@ -173,7 +173,7 @@
 
 
                 </div>
-                <div id="googleMap"></div>
+<div id="googleMap"></div>
 <div id="Fecha_Inicio"></div>
 <div id="Fecha_Final"></div>
 <input id="Boton_Real22" type="button" value="CONSULTAR CALENDARIO" onclick="Consulta_Calendario();" />
@@ -249,7 +249,7 @@
         </footer>
 
         <!--#SCRIPT, DONDE ESTAN LAS FUNCIONES-->    
-            <script src="js/vendor/jquery-1.11.1.min.js"></script>
+            <script src="js/vendor/jquery-1.12.1.min.js"></script>
             <script src="js/bootstrap.min.js"></script>
             <script src="js/jquery.nav.js"></script>
             <script src="js/jquery.mixitup.min.js"></script>
