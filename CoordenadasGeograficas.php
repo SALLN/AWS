@@ -9,7 +9,7 @@
     <script src="http://maps.googleapis.com/maps/api/js"></script>
     <link rel=StyleSheet href="css/encabezado.css" type="text/css">
 
-    <link rel="shortcut icon" href="taxi3.ico">
+    <link rel="shortcut icon" href="taxi6.ico">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
