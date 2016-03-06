@@ -1,76 +1,41 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
-    <head>
+ <html lang="en" class="no-js">
+<head>
 
+    <link rel="stylesheet" media="screen" type="text/css" href="css/datepicker.css" />
+    <link rel="stylesheet" media="screen" type="text/css" href="css/layout.css" />
 
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
+    <link rel=StyleSheet href="css/encabezado.css" type="text/css">
 
-        <link rel="stylesheet" media="screen" type="text/css" href="css/datepicker.css" />
-        <link rel="stylesheet" media="screen" type="text/css" href="css/layout.css" />
+    <link rel="shortcut icon" href="taxi3.ico">
 
-        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-        <script src="http://maps.googleapis.com/maps/api/js"></script>
-        <link rel=StyleSheet href="css/encabezado.css" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="one page, business template, single page, onepage, responsive, parallax, creative, business, html5, css3, css3 animation">
+    <meta charset="utf-8">
 
-        <link rel="shortcut icon" href="taxi3.ico">
-
-
-
-
-
-        <!-- Mobile Specific Meta -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- Always force latest IE rendering engine -->
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <!-- Meta Keyword -->
-        <meta name="keywords" content="one page, business template, single page, onepage, responsive, parallax, creative, business, html5, css3, css3 animation">
-        <!-- meta character set -->
-        <meta charset="utf-8">
-
-        <!-- Site Title -->
-        <title>Coordenadas Ticoll</title>
+    <title>Coordenadas Ticoll</title>
         
-        <!--
-        Google Fonts
-        ============================================= -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" rel="stylesheet" type="text/css">
-		
-        <!--
-        CSS
-        ============================================= -->
-        <!-- Fontawesome -->
+    		
         <link rel="stylesheet" href="css/font-awesome.min.css">
-        <!-- Bootstrap -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <!-- Fancybox -->
         <link rel="stylesheet" href="css/jquery.fancybox.css">
-        <!-- owl carousel -->
         <link rel="stylesheet" href="css/owl.carousel.css">
-        <!-- Animate -->
         <link rel="stylesheet" href="css/animate.css">
-        <!-- Main Stylesheet -->
         <link rel="stylesheet" href="css/main.css">
-        <!-- Main Responsive -->
         <link rel="stylesheet" href="css/responsive.css">
-		
-		
-		<!-- Modernizer Script for old Browsers -->
+    			
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
 
-		
-    </head>
+</head>
 	
+<body>
 
-
-
-    <body>
     <div id="result"><?php include("ConsultaDB.php"); ?></div> 
-        <!--
-        Fixed Navigation
-        ==================================== -->
-        <header id="navigation" class="navbar-fixed-top">
+    <header id="navigation" class="navbar-fixed-top">
             <div class="container">
 
                 <div class="navbar-header">
@@ -82,52 +47,26 @@
                         <span class="icon-bar"></span>
                     </button>
                     <!-- /responsive nav button -->
-
                     <!-- logo -->
-                    
                     <h1 class="navbar-brand">
                         <a href="#body">
                             <img src="img/logo.png" alt="Kasper Logo">
                         </a>
                     </h1>
-                       
                     <!-- /logo -->
-
                 </div>
-
                     <!-- main nav -->
                     <nav class="collapse navigation navbar-collapse navbar-right" role="navigation">
                         <ul id="nav" class="nav navbar-nav">
                             <li class="current"><a href="#home">Home</a></li>
                             <li><a href="#service">Mapa</a></li>
                             <li><a href="#contact">Contact</a></li>
-                            
-                            <!--<li><a href="#portfolio">portfolio</a></li>
-                            <li><a href="#about">About</a></li>
-                            <li><a href="#pricing">Pricing</a></li>-->
-                            
                         </ul>
                     </nav>
                     <!-- /main nav -->
-                </div>
+            </div>
+    </header>
 
-        
-
-               </div>
-
-
-
-         </header>
-
-
-        <!--
-        End Fixed Navigation
-        ==================================== -->
-
-
-        <!--
-        Home Slider
-        ==================================== -->
         <section id="home">     
             <div id="home-carousel" class="carousel slide" data-interval="false">
                 <ol class="carousel-indicators">
@@ -143,7 +82,7 @@
                         <div class="carousel-caption">
                             <div class="animated bounceInRight">
                                 <h2>HELLO WORLD! <br>WE ARE TICOLL</h2>
-                                <p>Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur aliquet quam. Accumsan id imperdiet et, porttitor at sem. Mauris blandit aliquet elit, eget tincidunt.</p>
+                                <p>ACA QUE VAMOS A PONER? 1</p>
                             </div>
                         </div>
                     </div>              
@@ -152,7 +91,7 @@
                         <div class="carousel-caption">
                             <div class="animated bounceInDown">
                                 <h2>HELLO WORLD! <br>WE ARE TICOLL</h2>
-                                <p>Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur aliquet quam. Accumsan id imperdiet et, porttitor at sem. Mauris blandit aliquet elit, eget tincidunt.</p>
+                                <p>ACA QUE VAMOS A PONER? 2</p>
                             </div>
                         </div>
                     </div>
@@ -161,7 +100,7 @@
                          <div class="carousel-caption">
                             <div class="animated bounceInUp">
                                 <h2>HELLO WORLD! <br>WE ARE TICOLL</h2>
-                                <p>Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur aliquet quam. Accumsan id imperdiet et, porttitor at sem. Mauris blandit aliquet elit, eget tincidunt.</p>
+                                <p>ACA QUE VAMOS A PONER? 3</p>
                             </div>
                         </div>
                     </div>
@@ -175,107 +114,83 @@
                         <i class="fa fa-angle-right fa-3x"></i>
                     </a>
                 </nav>
-
             </div>
         </section>
-        <!--
-        End #home Slider
-        ========================== -->
-
         
-        <!--
-        #Mapa
-        ========================== -->
-    <section id="service">
+            <section id="service"> <!--#Mapa-->
 
-     <div class="container">
-                <div class="row">
+                <div class="container">
+                    <div class="row">
 
-                    <div class="col-md-3 col-sm-10 wow fadeInLeft">
-                        <div class="media">
-                            <a href="#" class="pull-left">
-                                <img src="img/icons/longi.jpg" class="media-object" alt="Monitor">
-                            </a>
-                            <div class="media-body">
-                                <h3>Latitud</h3>
-                                <p id="fila_latitud">00.00000</p>
+                        <div class="col-md-3 col-sm-10 wow fadeInLeft">
+                            <div class="media">
+                                <a href="#" class="pull-left">
+                                    <img src="img/icons/longi.jpg" class="media-object" alt="Monitor">
+                                </a>
+                                <div class="media-body">
+                                    <h3>Latitud</h3>
+                                    <p id="fila_latitud">00.00000</p>
+                                </div>
                             </div>
                         </div>
 
-                    </div>
-
-                    <div class="col-md-3 col-sm-10 wow fadeInRight" data-wow-delay="0.2s">
-                        <div class="media">
-                            <a href="#" class="pull-left">
-                                <img src="img/icons/longi.jpg" alt="Cog">
-                            </a>
-                            <div class="media-body">
-                                <h3>Longitud</h3>
-                                <p id="fila_longitud">-00.00000</p>
+                        <div class="col-md-3 col-sm-10 wow fadeInRight" data-wow-delay="0.2s">
+                            <div class="media">
+                                <a href="#" class="pull-left">
+                                    <img src="img/icons/longi.jpg" alt="Cog">
+                                </a>
+                                <div class="media-body">
+                                    <h3>Longitud</h3>
+                                    <p id="fila_longitud">-00.00000</p>
+                                </div>
                             </div>
                         </div>
-                        
-                    </div>
 
-                    <div class="col-md-3 col-sm-10 wow fadeInLeft">
-                        <div class="media">
-                            <a href="#" class="pull-left">
-                                <img src="img/icons/fecha.jpg" alt="Ruler">
-                            </a>
-                            <div class="media-body">
-                                <h3>Fecha</h3>
-                                <p id="fila_fecha">0000-00-00</p>
+                        <div class="col-md-3 col-sm-10 wow fadeInLeft">
+                            <div class="media">
+                                <a href="#" class="pull-left">
+                                    <img src="img/icons/fecha.jpg" alt="Ruler">
+                                </a>
+                                <div class="media-body">
+                                    <h3>Fecha</h3>
+                                    <p id="fila_fecha">0000-00-00</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-3 col-sm-10 wow fadeInRight" data-wow-delay="0.2s">
-                        <div class="media">
-                            <a href="#" class="pull-left">
-                                <img src="img/icons/hora.png" alt="Camera">
-                            </a>
-                            <div class="media-body">
-                                <h3>Hora</h3>
-                                <p id="fila_hora">00:00:00</p>
+                        <div class="col-md-3 col-sm-10 wow fadeInRight" data-wow-delay="0.2s">
+                            <div class="media">
+                                <a href="#" class="pull-left">
+                                    <img src="img/icons/hora.png" alt="Camera">
+                                </a>
+                                <div class="media-body">
+                                    <h3>Hora</h3>
+                                    <p id="fila_hora">00:00:00</p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
+<div id="googleMap"></div>
+<div id="Fecha_Inicio"></div>
+<div id="Fecha_Final"></div>
+<input id="Boton_Real2" type="button" value="CONSULTAR CALENDARIO" onclick="Consulta_Calendario();" />
+<input id="Boton_Real22" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Historico();" />
+<input type="time"       name="hora"        id="Hora_Inicio"        step="1"/>
+<input type="time"       name="hora"        id="Hora_Final"         step="1"/>
+                </div>
+            </section>
 
-        </div>
-     
-
-
-               <div id="googleMap"></div>
-               <div id="date_inicio"></div>
-               <div id="date_final"></div>
-               <input id="Boton_Real2" type="button" value="CONSULTAR REAL" onclick="Consulta_Real2();" />
-               <input id="Boton_Real22" type="button" value="OCULTAR" onclick="Consulta_Real22();" />
-                <div><h3 class="parametros4">Fecha Inicial:</h3><h3 id="fila_latitud4">0000-00-00</h3></div>
-                <div><h3 class="parametros4">Fecha Final:</h3><h3 id="fila_latitud44">0000-00-00</h3></div>
-
-        </section>
-        <!--
-        End #Mapa
-        ========================== -->
-
-       
-
-
-        <!--
-        #contact
-        ========================== -->
-        <section id="contact">
-            <div class="container">
-                <div class="row">
-
-                    <div class="section-title text-center wow fadeInDown">
-                        <h2>Contact Us</h2>
-                        <p>Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Mauris blandit aliquet elit, eget tincidunt.</p>
-                    </div>
+                <section id="contact"> <!--#contact-->
+                    <div class="container">
+                        <div class="row">
+                            <div class="section-title text-center wow fadeInDown">
+                         <h2>Contact Us</h2>
+                         <p>Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Mauris blandit aliquet elit, eget tincidunt.</p>
+                         </div>
                     
-                    <div class="col-md-8 col-sm-9 wow fadeInLeft">
-                        <div class="contact-form clearfix">
+                            <div class="col-md-8 col-sm-9 wow fadeInLeft">
+                            <div class="contact-form clearfix">
                             <form action="index.html" method="post">
                                 <div class="input-field">
                                     <input type="text" class="form-control" name="name" placeholder="Your Name" required="">
@@ -288,10 +203,10 @@
                                 </div>
                                 <input type="submit" class="btn btn-blue pull-right" value="SEND MESSAGE" id="msg-submit">
                             </form>
-                        </div> <!-- end .contact-form -->
-                    </div> <!-- .col-md-8 -->
+                         </div> <!-- end .contact-form -->
+                         </div> <!-- .col-md-8 -->
 
-                    <div class="col-md-4 col-sm-3 wow fadeInRight">
+                         <div class="col-md-4 col-sm-3 wow fadeInRight">
                         <div class="contact-details">
                             <span>GET IN TOUCH</span>
                             <p>+00 123.456.789 <br> <br> +00 123.456.789</p>
@@ -301,18 +216,12 @@
                             <span>GET IN TOUCH</span>
                             <p>+00 123.456.789 <br> <br> +00 123.456.789</p>
                         </div> <!-- end .contact-details -->
-                    </div> <!-- .col-md-4 -->
+                         </div> <!-- .col-md-4 -->
 
-                </div>
-            </div>
-        </section>
-        <!--
-        End #contact
-        ========================== -->
+                         </div>
+                    </div>
+                </section>
 
-        <!--
-        #footer
-        ========================== -->
         <footer id="footer" class="text-center">
             <div class="container">
                 <div class="row">
@@ -336,64 +245,34 @@
                 </div>
             </div>
         </footer>
-        <!--
-        End #footer
-        ========================== -->
 
+        <!--#SCRIPT, DONDE ESTAN LAS FUNCIONES-->    
+            <script src="js/vendor/jquery-1.11.1.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/jquery.nav.js"></script>
+            <script src="js/jquery.mixitup.min.js"></script>
+            <script src="js/jquery.fancybox.pack.js"></script>
+            <script src="js/jquery.parallax-1.1.3.js"></script>
+            <script src="js/jquery.appear.js"></script>
+            <script src="js/jquery-countTo.js"></script>
+            <script src="js/owl.carousel.min.js"></script>
+            <script src="js/wow.min.js"></script>
+            <script src="js/main.js"></script>
+            <script src="js/datepicker.js"></script>
+            <script src="js/eye.js"></script>
+            <script src="js/utils.js"></script>
+            <script src="js/layout.js?ver=1.0.2"></script>
 
-        <!--
-        JavaScripts
-        ========================== -->
-        
-        <!-- main jQuery -->
-        <script src="js/vendor/jquery-1.11.1.min.js"></script>
-        <!-- Bootstrap -->
-        <script src="js/bootstrap.min.js"></script>
-        <!-- jquery.nav -->
-        <script src="js/jquery.nav.js"></script>
-        <!-- Portfolio Filtering -->
-        <script src="js/jquery.mixitup.min.js"></script>
-        <!-- Fancybox -->
-        <script src="js/jquery.fancybox.pack.js"></script>
-        <!-- Parallax sections -->
-        <script src="js/jquery.parallax-1.1.3.js"></script>
-        <!-- jQuery Appear -->
-        <script src="js/jquery.appear.js"></script>
-        <!-- countTo -->
-        <script src="js/jquery-countTo.js"></script>
-        <!-- owl carousel -->
-        <script src="js/owl.carousel.min.js"></script>
-        <!-- WOW script -->
-        <script src="js/wow.min.js"></script>
-        <!-- theme custom scripts -->
-        <script src="js/main.js"></script>
-
-        <script src="js/datepicker.js"></script>
-        <script src="js/eye.js"></script>
-        <script src="js/utils.js"></script>
-        <script src="js/layout.js?ver=1.0.2"></script>
-
-        <!--
-        <script type="text/javascript" src="js/jquery.js"></script>
-        -->
 <script>
-
 
 var myCenter=new google.maps.LatLng(parseFloat(Latitud_Gps),parseFloat(Longitud_Gps));
 
 var Marker_Real;            var Ruta_Historica = [];    var Posicion_Historica;     var Fecha_Inicio_PHP;       var Hora_Inicio_PHP;        
 var Marker_Historico=[];    var Ruta_Real = [];         var Posicion_Real;          var Fecha_Final_PHP;        var Hora_Final_PHP;         
 var Latitud;                var Fecha;                  var auxlat;                 var map;                    var NumMark;    
-var Longitud;               var Hora;                   var auxlon;                 var k;
-
-var columnas;
-var Datos;
-var Latitudes_Historicas;
-var Longitudes_Historicas;
-var Fechas_Historicas;
-var Horas_Historicas;
-var Latitud_Historica;
-var Longitud_Historica;
+var Longitud;               var Hora;                   var auxlon;                 var k;                      var Datos;
+var Latitudes_Historicas;   var Latitud_Historica;      var Fechas_Historicas;      var columnas;
+var Longitudes_Historicas;  var Longitud_Historica;     var Horas_Historicas;       
 
 var PoliLinea_Real = new google.maps.Polyline({ path: Ruta_Real,   strokeColor: '#FFFF00',  strokeOpacity: 1.0,  strokeWeight: 5    });
 
@@ -432,6 +311,8 @@ function SetMarker(){
 
     auxlat =Latitud;    auxlon =Longitud;
 
+    Hora_Gps=Fecha_Gps.substring(11,19);
+    Fecha_Gps=Fecha_Gps.substring(0,10);
     document.getElementById('fila_latitud').innerHTML  = Latitud;       document.getElementById('fila_longitud').innerHTML = Longitud;
     document.getElementById('fila_fecha').innerHTML    = Fecha_Gps;     document.getElementById('fila_hora').innerHTML     = Hora_Gps;
 
@@ -471,17 +352,17 @@ function Consulta_Real(){
 
 function Consulta_Historico(){
 
-    Fecha_Inicio_PHP = document.getElementById('Fecha_Inicio').value;
-    Fecha_Final_PHP = document.getElementById('Fecha_Final').value;
+    Fecha_Inicio_PHP = $('#Fecha_Inicio').DatePickerGetDate(true);
+    Fecha_Final_PHP = $('#Fecha_Final').DatePickerGetDate(true);
     Hora_Inicio_PHP = document.getElementById('Hora_Inicio').value;
     Hora_Final_PHP = document.getElementById('Hora_Final').value;
-
+    
     $.post( "ConsultaDbHistorico.php", { FechaInicio: Fecha_Inicio_PHP, FechaFinal: Fecha_Final_PHP, 
                                    HoraInicio:  Hora_Inicio_PHP,  HoraFinal:  Hora_Final_PHP        }).done(
 
     function( data ) {  Decodificar(data);   });
 
-    }
+ }
 
 function Decodificar(data){
 
@@ -541,12 +422,11 @@ function Decodificar(data){
         NumMark++;
         } // if no repetir
         } // FOR MARKER
+ }
 
-            } // fin funcion decodificar
+function Consulta_Calendario(){
 
-function Consulta_Real2(){
-
-$('#date_inicio').DatePicker({
+    $('#Fecha_Inicio').DatePicker({
     
     flat: true,
     date:  '',
@@ -555,52 +435,40 @@ $('#date_inicio').DatePicker({
     starts: 0,
     mode: 'single',
     view: 'days',
-    //onBeforeShow: function(){
-    //   $('#date34').DatePickerClear();
-    //    },
     onChange: function(formated, dates){ 
-
-        if ($('#date_inicio').DatePickerGetDate(true) != ""){
-
-            $('#date_inicio').DatePickerHide();    
-               document.getElementById('fila_latitud4').innerHTML  = $('#date_inicio').DatePickerGetDate(true);  
+        if ($('#Fecha_Inicio').DatePickerGetDate(true) != "")
+        {
+            $('#Fecha_Inicio').DatePickerHide();    
                Iniciar_date2();   
-            }
+        }
     }
-});
-$('#date_inicio').DatePickerClear();
-
-    }
+    });
+    $('#Fecha_Inicio').DatePickerClear();
+ }
 
 function Iniciar_date2(){
 
- $('#date_final').DatePicker({
+    $('#Fecha_Final').DatePicker({
     
     flat: true,
     date:  '',
-    current: $('#date_inicio').DatePickerGetDate(true),
+    current: $('#Fecha_Inicio').DatePickerGetDate(true),
     calendars: 1,
     starts: 0,
     mode: 'single',
     view: 'days',
     onChange: function(formated, dates){ 
 
-        if ($('#date_final').DatePickerGetDate(true) != ""){
+        if ($('#Fecha_Final').DatePickerGetDate(true) != ""){
 
-            $('#date_final').DatePickerHide();    
-               document.getElementById('fila_latitud44').innerHTML  = $('#date_final').DatePickerGetDate(true);  
+            $('#Fecha_Final').DatePickerHide();    
             }
     }
-});
-$('#date_final').DatePickerClear();
-      //  $('#date34').DatePickerHide();
+    });
+    $('#Fecha_Final').DatePickerClear();
+ }
 
-    }
-
-function Consulta_Real22(){   
-    }
-
- </script>
+</script>
 
 
 </body>
