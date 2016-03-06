@@ -19,7 +19,8 @@
     <title>Coordenadas Ticoll</title>
         
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" rel="stylesheet" type="text/css">
-    		
+    	<link rel="stylesheet" href="include/ui-1.10.0/ui-lightness/jquery-ui-1.10.0.custom.min.css" type="text/css" />
+        <link rel="stylesheet" href="jquery.ui.timepicker.css?v=0.3.3" type="text/css" />	
         <link rel="stylesheet" href="css/font-awesome.min.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/jquery.fancybox.css">
@@ -29,6 +30,8 @@
         <link rel="stylesheet" href="css/responsive.css">
     			
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+
+
 
 </head>
 	
@@ -179,8 +182,86 @@
 <input id="Boton_Real22" type="button" value="CONSULTAR CALENDARIO" onclick="Consulta_Calendario();" />
 <input id="Boton_Real23" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Historico();" />
 <input id="Boton_Real24" type="button" value="CONSULTAR REAL" onclick="Consulta_Real();" />
-<input type="time"       name="hora"        id="Hora_Inicio"        step="1"/>
-<input type="time"       name="hora"        id="Hora_Final"         step="1"/>
+<div>
+    <label>HORAS :</label>
+    <input type="text" style="width: 43px;  text-align:center" id="Tiempo_Hora1" value="5 PM">
+    , <label>MINUTOS:</label>
+    <input type="text" style="width: 23px;  text-align:center" id="Tiempo_Minuto1" value="00">
+    , <label>SEGUNDOS :</label>
+    <input type="text" style="width: 23px; text-align:center" id="Tiempo_Segundo1" value="00">
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#Tiempo_Hora1').timepicker({
+                showMinutes: false,
+                showPeriod: true,
+                showLeadingZero: false,
+                hourText: 'Horas',
+                rows: 4,
+                onClose: function() {
+                }
+            });
+
+            $('#Tiempo_Minuto1').timepicker({
+                showHours: false,
+                minutes: { interval: 1 },
+                rows: 6,
+                minuteText: 'Minutos',
+                onClose: function() {
+                }
+            });
+
+                $('#Tiempo_Segundo1').timepicker({
+                showHours: false,
+                minuteText: 'Segundos',
+                minutes: { interval: 1 },
+                rows: 6,
+                onClose: function() {
+                }
+            });
+        })
+    </script>
+</div>
+<div>
+    <label>HORAS :</label>
+    <input type="text" style="width: 43px;  text-align:center" id="Tiempo_Hora2" value="5 PM">
+    , <label>MINUTOS:</label>
+    <input type="text" style="width: 23px;  text-align:center" id="Tiempo_Minuto2" value="00">
+    , <label>SEGUNDOS :</label>
+    <input type="text" style="width: 23px; text-align:center" id="Tiempo_Segundo2" value="00">
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#Tiempo_Hora2').timepicker({
+                showMinutes: false,
+                showPeriod: true,
+                showLeadingZero: false,
+                hourText: 'Horas',
+                rows: 4,
+                onClose: function() {
+                }
+            });
+
+            $('#Tiempo_Minuto2').timepicker({
+                showHours: false,
+                minutes: { interval: 1 },
+                rows: 6,
+                minuteText: 'Minutos',
+                onClose: function() {
+                }
+            });
+
+                $('#Tiempo_Segundo2').timepicker({
+                showHours: false,
+                minuteText: 'Segundos',
+                minutes: { interval: 1 },
+                rows: 6,
+                onClose: function() {
+                }
+            });
+        })
+    </script>
+</div>
             </section>
 
                 <section id="contact"> <!--#contact-->
@@ -264,6 +345,8 @@
             <script src="js/eye.js"></script>
             <script src="js/utils.js"></script>
             <script src="js/layout.js?ver=1.0.2"></script>
+            <script src="include/ui-1.10.0/jquery.ui.core.min.js"></script>
+            <script src="jquery.ui.timepicker.js?v=0.3.3"></script>
 
 <script>
 
@@ -274,7 +357,7 @@ var Marker_Historico=[];    var Ruta_Real = [];         var Posicion_Real;      
 var Latitud;                var Fecha;                  var auxlat;                 var map;                    var NumMark;    
 var Longitud;               var Hora;                   var auxlon;                 var k;                      var Datos;
 var Latitudes_Historicas;   var Latitud_Historica;      var Fechas_Historicas;      var columnas;               var RealAgain=0;
-var Longitudes_Historicas;  var Longitud_Historica;     var Horas_Historicas;       
+var Longitudes_Historicas;  var Longitud_Historica;     var Horas_Historicas;       var Tiempo;      
 
 var PoliLinea_Real = new google.maps.Polyline({ path: Ruta_Real,   strokeColor: '#FFFF00',  strokeOpacity: 1.0,  strokeWeight: 5    });
 
@@ -355,14 +438,18 @@ function Consulta_Historico(){
 
     Fecha_Inicio_PHP = $('#Fecha_Inicio').DatePickerGetDate(true);
     Fecha_Final_PHP = $('#Fecha_Final').DatePickerGetDate(true);
-    Hora_Inicio_PHP = document.getElementById('Hora_Inicio').value;
-    Hora_Final_PHP = document.getElementById('Hora_Final').value;
+  
+    Tiempo = new Date(2016,10,10,$('#Tiempo_Hora1').timepicker('getHour'),$('#Tiempo_Minuto1').timepicker('getMinute'),$('#Tiempo_Segundo1').timepicker('getMinute'));  
+    Hora_Inicio_PHP=String(Tiempo).substring(16,24);
+
+    Tiempo = new Date(2016,10,10,$('#Tiempo_Hora2').timepicker('getHour'),$('#Tiempo_Minuto2').timepicker('getMinute'),$('#Tiempo_Segundo2').timepicker('getMinute'));  
+    Hora_Final_PHP=String(Tiempo).substring(16,24);
     
     $.post( "ConsultaDbHistorico.php", { FechaInicio: Fecha_Inicio_PHP, FechaFinal: Fecha_Final_PHP, 
                                    HoraInicio:  Hora_Inicio_PHP,  HoraFinal:  Hora_Final_PHP        }).done(
 
     function( data ) {  Decodificar(data);   });
-
+    
  }
 
 function Decodificar(data){
