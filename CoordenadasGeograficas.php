@@ -174,8 +174,9 @@
 <div id="googleMap"></div>
 <div id="Fecha_Inicio"></div>
 <div id="Fecha_Final"></div>
-<input id="Boton_Real2" type="button" value="CONSULTAR CALENDARIO" onclick="Consulta_Calendario();" />
-<input id="Boton_Real22" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Historico();" />
+<input id="Boton_Real22" type="button" value="CONSULTAR CALENDARIO" onclick="Consulta_Calendario();" />
+<input id="Boton_Real23" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Historico();" />
+<input id="Boton_Real24" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Real();" />
 <input type="time"       name="hora"        id="Hora_Inicio"        step="1"/>
 <input type="time"       name="hora"        id="Hora_Final"         step="1"/>
                 </div>
@@ -271,7 +272,7 @@ var Marker_Real;            var Ruta_Historica = [];    var Posicion_Historica; 
 var Marker_Historico=[];    var Ruta_Real = [];         var Posicion_Real;          var Fecha_Final_PHP;        var Hora_Final_PHP;         
 var Latitud;                var Fecha;                  var auxlat;                 var map;                    var NumMark;    
 var Longitud;               var Hora;                   var auxlon;                 var k;                      var Datos;
-var Latitudes_Historicas;   var Latitud_Historica;      var Fechas_Historicas;      var columnas;
+var Latitudes_Historicas;   var Latitud_Historica;      var Fechas_Historicas;      var columnas;               var RealAgain=0;
 var Longitudes_Historicas;  var Longitud_Historica;     var Horas_Historicas;       
 
 var PoliLinea_Real = new google.maps.Polyline({ path: Ruta_Real,   strokeColor: '#FFFF00',  strokeOpacity: 1.0,  strokeWeight: 5    });
@@ -295,7 +296,6 @@ var Icono_Historico ={
 map=new google.maps.Map(document.getElementById("googleMap"),mapOptions);
 
 PoliLinea_Real.setMap(map);
-
 function CargarDB(){    $('#result').load('ConsultaDB.php'); }
 
 function SetMarker(){
@@ -305,8 +305,9 @@ function SetMarker(){
 
     Posicion_Real=new google.maps.LatLng(Latitud,Longitud);
 
-    if (Latitud!=auxlat || Longitud!=auxlon ){
+    if (Latitud!=auxlat || Longitud!=auxlon || RealAgain==0 ){
     
+    RealAgain=1;
     if (Marker_Real != null) {        Marker_Real.setMap(null);        }
 
     auxlat =Latitud;    auxlon =Longitud;
@@ -341,12 +342,11 @@ function SetMarker(){
     } // SET MARKER
 
 function Consulta_Real(){
-
+    
+    RealAgain=0;
     PoliLinea_Historica.setMap(null);
     for (var l = 0; l <Marker_Historico.length; l++)    {   Marker_Historico[l].setMap(null);       }
-
     PoliLinea_Real.setMap(map);
-
     MarkerInterval = setInterval(function(){SetMarker()}, 1000);
     }
 
