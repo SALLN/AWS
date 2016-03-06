@@ -23,7 +23,7 @@ p {display: inline;}
 
 #fila_longitud,#fila_latitud,#fila_fecha,#fila_hora{           padding-left: 0.313em;           }
 
-#googleMap{		width:91.75em;		height:40.438em;	}
+#googleMap{ margin-left: 1em;  width:102em;		height:35.438em;	}
 
 #contenedor div{            float:left;           }
 
