@@ -171,15 +171,16 @@
                         </div>
                     </div>
 
-<div id="googleMap"></div>
+
+                </div>
+                <div id="googleMap"></div>
 <div id="Fecha_Inicio"></div>
 <div id="Fecha_Final"></div>
 <input id="Boton_Real22" type="button" value="CONSULTAR CALENDARIO" onclick="Consulta_Calendario();" />
 <input id="Boton_Real23" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Historico();" />
-<input id="Boton_Real24" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Real();" />
+<input id="Boton_Real24" type="button" value="CONSULTAR REAL" onclick="Consulta_Real();" />
 <input type="time"       name="hora"        id="Hora_Inicio"        step="1"/>
 <input type="time"       name="hora"        id="Hora_Final"         step="1"/>
-                </div>
             </section>
 
                 <section id="contact"> <!--#contact-->
@@ -436,7 +437,7 @@ function Consulta_Calendario(){
     mode: 'single',
     view: 'days',
     onChange: function(formated, dates){ 
-        if ($('#Fecha_Inicio').DatePickerGetDate(true) != "")
+        if ($('#Fecha_Inicio').DatePickerGetDate(true) != "" && $('#Fecha_Inicio').DatePickerGetDate(true).length==10)
         {
             $('#Fecha_Inicio').DatePickerHide();    
                Iniciar_date2();   
@@ -459,7 +460,7 @@ function Iniciar_date2(){
     view: 'days',
     onChange: function(formated, dates){ 
 
-        if ($('#Fecha_Final').DatePickerGetDate(true) != ""){
+        if ($('#Fecha_Final').DatePickerGetDate(true) != "" && $('#Fecha_Final').DatePickerGetDate(true).length==10){
 
             $('#Fecha_Final').DatePickerHide();    
             }
