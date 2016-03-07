@@ -342,8 +342,8 @@
 <div id="googleMap"></div>
 
 
-  <input class="btn btn-blue" id="Boton_Real24" type="button" value="TIEMPO REAL" onclick="Consulta_Real();" style="position: absolute; 
-            margin-top: -520px; margin-left: 490px; " />
+  <div class="btn btn-blue" id="Boton_Real24" type="button" value="TIEMPO REAL" onclick="Consulta_Real();" 
+  style="position: absolute; margin-top: -30px; margin-left: -662px; font-size: 10px; width: 40px; height: 30px; text-align: right; " ><h3 style="position: absolute; margin-left: -30px; font-size: 10px;"><strong>TIEMPO REAL</strong></h3></div>
 
 </section>
 
