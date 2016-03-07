@@ -60,8 +60,10 @@
                     <nav class="collapse navigation navbar-collapse navbar-right" role="navigation">
                         <ul id="nav" class="nav navbar-nav">
                             <li class="current"><a href="#home">Home</a></li>
+                            <li><a href="#service-bottom">Historico</a></li>
                             <li><a href="#service">Mapa</a></li>
                             <li><a href="#contact">Contact</a></li>
+                              
                         </ul>
                     </nav>
                     <!-- /main nav -->
@@ -117,102 +119,99 @@
             </div>
         </section>
         
-            <section id="service"> <!--#Mapa-->
+           
+<section id="service-bottom">
 
+                
+              
                 <div class="container">
-                    <div class="row">
 
-                        <div class="col-md-3 col-sm-10 wow fadeInLeft">
-                            <div class="media">
-                                <a href="#" class="pull-left">
-                                    <img src="img/icons/longi.jpg" class="media-object" alt="Monitor">
-                                </a>
-                                <div class="media-body">
-                                    <h3>Latitud</h3>
-                                    <p id="fila_latitud">00.00000</p>
-                                </div>
-                            </div>
+                    <div class="mobile-device">
+                       <img data-wow-delay="0.2s" class="img-responsive black  wow fadeInLeftBig" src="img/icons/map.png" alt="iPhone Black">
+                        <img data-wow-delay="0.5s" class="img-responsive white  wow fadeInLeftBig" src="img/icons/streed.png" alt="iPhone White">
+                    </div>
+
+                <div class="service-features wow fadeInRight">
+                    <h3>Conoce tu recorrido y ubicación histórica</h3>
+
+                   <ul>
+                    
+      <li>
+
+        <h5>FECHA INICIAL:</h5><h5 class="eso" id="Fecha_Inicio2" onmouseover="Calendario_Inicial();">0000-00-00</h5>
+        <div id="Fecha_Inicio" onmouseleave="Ocultar_Calendario1();" style="margin-left: 120px; margin-top: 3px; position: absolute;"></div>
+            
+            
+     </li>
+
+
+
+            <li>
+           
+        <h5 >FECHA FINAL:</h5><h5 class="eso" id="Fecha_Final2" onmouseover="Calendario_Final();">0000-00-00</h5>
+           <div id="Fecha_Final" onmouseleave="Ocultar_Calendario2();" style="margin-left: 150px; margin-top: 3px; position: absolute;"> </div>
+
+           </li>  
+
+
+    
+     
+
+                    <li>  
+                        <div> 
+
+                        <label>HORA:</label>
+                        <input type="text" style="width: 43px;  text-align:center" id="Tiempo_Hora1" value="5 PM">
+                        , <label>MINUTOS:</label>
+                        <input type="text" style="width: 23px;  text-align:center" id="Tiempo_Minuto1" value="00">
+                        , <label>SEGUNDOS:</label>
+                        <input type="text" style="width: 23px; text-align:center" id="Tiempo_Segundo1" value="00">
                         </div>
 
-                        <div class="col-md-3 col-sm-10 wow fadeInRight" data-wow-delay="0.2s">
-                            <div class="media">
-                                <a href="#" class="pull-left">
-                                    <img src="img/icons/longi.jpg" alt="Cog">
-                                </a>
-                                <div class="media-body">
-                                    <h3>Longitud</h3>
-                                    <p id="fila_longitud">-00.00000</p>
-                                </div>
-                            </div>
-                        </div>
+                    <li>
+                    
+                    <li>
+                    <div>
 
-                        <div class="col-md-3 col-sm-10 wow fadeInLeft">
-                            <div class="media">
-                                <a href="#" class="pull-left">
-                                    <img src="img/icons/fecha.jpg" alt="Ruler">
-                                </a>
-                                <div class="media-body">
-                                    <h3>Fecha</h3>
-                                    <p id="fila_fecha">0000-00-00</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3 col-sm-10 wow fadeInRight" data-wow-delay="0.2s">
-                            <div class="media">
-                                <a href="#" class="pull-left">
-                                    <img src="img/icons/hora.png" alt="Camera">
-                                </a>
-                                <div class="media-body">
-                                    <h3>Hora</h3>
-                                    <p id="fila_hora">00:00:00</p>
-                                </div>
-                            </div>
-                        </div>
+                                <label>HORA:</label>
+                                <input type="text" style="width: 43px;  text-align:center" id="Tiempo_Hora2" value="5 PM">
+                                , <label>MINUTOS:</label>
+                                <input type="text" style="width: 23px;  text-align:center" id="Tiempo_Minuto2" value="00">
+                                , <label>SEGUNDOS:</label>
+                                <input type="text" style="width: 23px; text-align:center" id="Tiempo_Segundo2" value="00">
                     </div>
 
 
+                    </li>
+
+                </ul>
+
                 </div>
+            </div>
+        
 
-<div id="googleMap"></div>
-<div class="DivTodo">
-	<div>
 
-		<h5 style="width:100px; margin-left: 50px; position: absolute;">FECHA INICIAL:</h5>
-		<h5 style="width:100px; margin-left: 140px; position: absolute;" id="Fecha_Inicio2" onmouseover="Calendario_Inicial();">0000-00-00</h5>
-		<h5 style="width:100px; margin-left: 315px; position: absolute;">FECHA FINAL:</h5>
-		<h5 style="width:100px; margin-left: 400px; position: absolute;" id="Fecha_Final2" onmouseover="Calendario_Final();">0000-00-00</h5>
-		<div id="Fecha_Inicio" onmouseleave="Ocultar_Calendario1();" style="margin-left: 40px; margin-top: 15px; position: absolute; background-color: red;"></div>
-		<div id="Fecha_Final" onmouseleave="Ocultar_Calendario2();" style="margin-left: 300px; margin-top: 15px; position: absolute; background-color: red;">	</div>
-	
-	</div>
 
-		<div style="position: absolute; margin-top: 10px; margin-left: 540px; background-color: red; width: 780px; height: 150px;">
+        </BR>
+       </BR>
 
-			<input id="Boton_Real23" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Historico();" />
-			<input id="Boton_Real24" type="button" value="CONSULTAR REAL" onclick="Consulta_Real();" />
+     </BR>
 
-					<div style="background-color: green; width: 600px;">
-					    <label>HORAS :</label>
-					    <input type="text" style="width: 43px;  text-align:center" id="Tiempo_Hora1" value="5 PM">
-					    , <label>MINUTOS:</label>
-					    <input type="text" style="width: 23px;  text-align:center" id="Tiempo_Minuto1" value="00">
-					    , <label>SEGUNDOS :</label>
-					    <input type="text" style="width: 23px; text-align:center" id="Tiempo_Segundo1" value="00">
-					</div>
+     </BR>
+     </BR>
 
-							<div style="background-color: green; width: 600px;">
+     </BR>
 
-							    <label>HORAS :</label>
-							    <input type="text" style="width: 43px;  text-align:center" id="Tiempo_Hora2" value="5 PM">
-							    , <label>MINUTOS:</label>
-							    <input type="text" style="width: 23px;  text-align:center" id="Tiempo_Minuto2" value="00">
-							    , <label>SEGUNDOS :</label>
-							    <input type="text" style="width: 23px; text-align:center" id="Tiempo_Segundo2" value="00">
-							</div>
-		</div>
-</div>
+     </BR>
+    </BR>
 
+     </BR>
+        <input class="btn btn-blue" id="Boton_Real23" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Historico();"/>
+        
+
+      <!--
+        #service-bottom
+        ========================== -->
 <script>
 	$(document).ready(function() {
 
@@ -273,7 +272,76 @@
     	});
  	});
 </script>
-            </section>
+
+
+</section>
+
+
+
+ <section id="service"> <!--#Mapa-->
+
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-3 col-sm-10 wow fadeInLeft">
+                            <div class="media">
+                                <a href="#" class="pull-left">
+                                    <img src="img/icons/longi.jpg" class="media-object" alt="Monitor">
+                                </a>
+                                <div class="media-body">
+                                    <h3>Latitud</h3>
+                                    <p id="fila_latitud">00.00000</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-10 wow fadeInRight" data-wow-delay="0.2s">
+                            <div class="media">
+                                <a href="#" class="pull-left">
+                                    <img src="img/icons/longi.jpg" alt="Cog">
+                                </a>
+                                <div class="media-body">
+                                    <h3>Longitud</h3>
+                                    <p id="fila_longitud">-00.00000</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-10 wow fadeInLeft">
+                            <div class="media">
+                                <a href="#" class="pull-left">
+                                    <img src="img/icons/fecha.jpg" alt="Ruler">
+                                </a>
+                                <div class="media-body">
+                                    <h3>Fecha</h3>
+                                    <p id="fila_fecha">0000-00-00</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-10 wow fadeInRight" data-wow-delay="0.2s">
+                            <div class="media">
+                                <a href="#" class="pull-left">
+                                    <img src="img/icons/hora.png" alt="Camera">
+                                </a>
+                                <div class="media-body">
+                                    <h3>Hora</h3>
+                                    <p id="fila_hora">00:00:00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+<div id="googleMap"></div>
+  
+
+  <input class="btn btn-blue" id="Boton_Real24" type="button" value="CONSULTAR TIEMPO REAL" onclick="Consulta_Real();"/>
+
+</section>
+
 
             <section id="contact"> <!--#contact-->
                     <div class="container">
@@ -447,6 +515,7 @@ function Consulta_Real(){
     for (var l = 0; l <Marker_Historico.length; l++)    {   Marker_Historico[l].setMap(null);       }
     PoliLinea_Real.setMap(map);
     MarkerInterval = setInterval(function(){SetMarker()}, 1000);
+    document.location.href='#service';
     }
 
 function Consulta_Historico(){
@@ -463,7 +532,8 @@ function Consulta_Historico(){
                                    HoraInicio:  Hora_Inicio_PHP,  HoraFinal:  Hora_Final_PHP        }).done(
 
     function( data ) {  Decodificar(data);   });
-    
+    document.location.href='#service';
+
  }
 
 function Decodificar(data){
