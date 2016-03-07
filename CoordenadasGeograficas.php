@@ -341,8 +341,7 @@
                 </div>
 
 <div id="googleMap"></div>
-  
-  </BR>
+
 
   <input class="btn btn-blue" id="Boton_Real24" type="button" value="CONSULTAR TIEMPO REAL" onclick="Consulta_Real();"/>
 
