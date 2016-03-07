@@ -7,9 +7,8 @@
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js"></script>
-    <link rel=StyleSheet href="css/encabezado.css" type="text/css">
 
-    <link rel="shortcut icon" href="taxi6.ico">
+    <link rel="shortcut icon" href="images/taxi6.ico">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,8 +18,9 @@
     <title>Coordenadas Ticoll</title>
         
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" rel="stylesheet" type="text/css">
-    	<link rel="stylesheet" href="include/ui-1.10.0/ui-lightness/jquery-ui-1.10.0.custom.min.css" type="text/css" />
-        <link rel="stylesheet" href="jquery.ui.timepicker.css?v=0.3.3" type="text/css" />	
+
+    	<link rel="stylesheet" href="css/jquery-ui-1.10.0.custom.min.css" type="text/css" />
+        <link rel="stylesheet" href="css/jquery.ui.timepicker.css?v=0.3.3" type="text/css" />	
         <link rel="stylesheet" href="css/font-awesome.min.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/jquery.fancybox.css">
@@ -28,11 +28,8 @@
         <link rel="stylesheet" href="css/animate.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/responsive.css">
+        <link rel="styleSheet" href="css/encabezado.css">
     			
-        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
-
-
-
 </head>
 	
 <body>
@@ -53,7 +50,7 @@
                     <!-- logo -->
                     <h1 class="navbar-brand">
                         <a href="#body">
-                            <img src="img/logo.png" alt="Kasper Logo">
+                            <img src="images/logo.png" alt="Kasper Logo">
                         </a>
                     </h1>
                     <!-- /logo -->
@@ -62,8 +59,10 @@
                     <nav class="collapse navigation navbar-collapse navbar-right" role="navigation">
                         <ul id="nav" class="nav navbar-nav">
                             <li class="current"><a href="#home">Home</a></li>
+                            <li><a href="#service-bottom">Historico</a></li>
                             <li><a href="#service">Mapa</a></li>
                             <li><a href="#contact">Contact</a></li>
+                              
                         </ul>
                     </nav>
                     <!-- /main nav -->
@@ -77,11 +76,10 @@
                     <li data-target="#home-carousel" data-slide-to="1"></li>
                     <li data-target="#home-carousel" data-slide-to="2"></li>
                 </ol>
-                <!--/.carousel-indicators-->
 
                 <div class="carousel-inner">
 
-                    <div class="item active"  style="background-image: url('img/slider/bg1.jpeg')" >
+                    <div class="item active"  style="background-image: url('images/bg1.jpeg')" >
                         <div class="carousel-caption">
                             <div class="animated bounceInRight">
                                 <h2>HELLO WORLD! <br>WE ARE TICOLL</h2>
@@ -90,7 +88,7 @@
                         </div>
                     </div>              
 
-                    <div class="item" style="background-image: url('img/slider/bg21.jpg')">                
+                    <div class="item" style="background-image: url('images/bg21.jpg')">                
                         <div class="carousel-caption">
                             <div class="animated bounceInDown">
                                 <h2>HELLO WORLD! <br>WE ARE TICOLL</h2>
@@ -99,7 +97,7 @@
                         </div>
                     </div>
 
-                    <div class="item" style="background-image: url('img/slider/bg3.jpg')">                 
+                    <div class="item" style="background-image: url('images/bg3.jpg')">                 
                          <div class="carousel-caption">
                             <div class="animated bounceInUp">
                                 <h2>HELLO WORLD! <br>WE ARE TICOLL</h2>
@@ -120,7 +118,171 @@
             </div>
         </section>
         
-            <section id="service"> <!--#Mapa-->
+           
+<section id="service-bottom">
+
+                
+              
+                <div class="container">
+
+                    <div class="mobile-device">
+                       <img data-wow-delay="0.2s" class="img-responsive black  wow fadeInLeftBig" src="images/map.png" alt="iPhone Black">
+                        <img data-wow-delay="0.5s" class="img-responsive white  wow fadeInLeftBig" src="images/streed.png" alt="iPhone White">
+                    </div>
+
+                <div class="service-features wow fadeInRight">
+                    <h3>Conoce tu recorrido y ubicación histórica</h3>
+
+                   <ul>
+                    
+      <li>
+
+        <h5>FECHA INICIAL:</h5><h5 class="eso" id="Fecha_Inicio2" onmouseover="Calendario_Inicial();">0000-00-00</h5>
+        <div id="Fecha_Inicio" onmouseleave="Ocultar_Calendario1();" style="margin-left: 120px; margin-top: 3px; position: absolute;"></div>
+            
+            
+     </li>
+
+
+
+            <li>
+           
+        <h5 >FECHA FINAL:</h5><h5 class="eso" id="Fecha_Final2" onmouseover="Calendario_Final();">0000-00-00</h5>
+           <div id="Fecha_Final" onmouseleave="Ocultar_Calendario2();" style="margin-left: 150px; margin-top: 3px; position: absolute;"> </div>
+
+           </li>  
+
+
+    
+     
+
+                    <li>  
+                        <div> 
+
+                        <label>HORA:</label>
+                        <input type="text" style="width: 43px;  text-align:center" id="Tiempo_Hora1" value="5 PM">
+                        , <label>MINUTOS:</label>
+                        <input type="text" style="width: 23px;  text-align:center" id="Tiempo_Minuto1" value="00">
+                        , <label>SEGUNDOS:</label>
+                        <input type="text" style="width: 23px; text-align:center" id="Tiempo_Segundo1" value="00">
+                        </div>
+
+                    <li>
+                    
+                    <li>
+                    <div>
+
+                                <label>HORA:</label>
+                                <input type="text" style="width: 43px;  text-align:center; " id="Tiempo_Hora2" value="5 PM">
+                                , <label>MINUTOS:</label>
+                                <input type="text" style="width: 23px;  text-align:center" id="Tiempo_Minuto2" value="00">
+                                , <label>SEGUNDOS:</label>
+                                <input type="text" style="width: 23px; text-align:center" id="Tiempo_Segundo2" value="00">
+                    </div>
+
+
+                    </li>
+
+                </ul>
+
+                </div>
+            </div>
+        
+
+
+
+        </BR>
+       </BR>
+
+     </BR>
+
+     </BR>
+     </BR>
+
+     </BR>
+
+     </BR>
+    </BR>
+    </BR>
+
+     </BR>
+    </BR>
+
+
+     </BR>
+        <input class="btn btn-blue" id="Boton_Real23" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Historico();"/>
+        
+
+      <!--
+        #service-bottom
+        ========================== -->
+<script>
+	$(document).ready(function() {
+
+    	$('#Tiempo_Hora1').timepicker({
+            showMinutes: false,
+            showPeriod: true,
+            showLeadingZero: false,
+            hourText: 'Horas',
+            rows: 4,
+            onClose: function() {
+            }
+    	});
+
+   	 	$('#Tiempo_Minuto1').timepicker({
+            showHours: false,
+            minutes: { interval: 1 },
+            rows: 6,
+            minuteText: 'Minutos',
+            onClose: function() {
+            }
+    	});
+
+    	$('#Tiempo_Segundo1').timepicker({
+            showHours: false,
+            minuteText: 'Segundos',
+            minutes: { interval: 1 },
+            rows: 6,
+            onClose: function() {
+            }
+    	});
+            	
+    	$('#Tiempo_Hora2').timepicker({
+            showMinutes: false,
+            showPeriod: true,
+            showLeadingZero: false,
+            hourText: 'Horas',
+            rows: 4,
+            onClose: function() {
+            }
+    	});
+		
+    	$('#Tiempo_Minuto2').timepicker({
+            showHours: false,
+            minutes: { interval: 1 },
+            rows: 6,
+            minuteText: 'Minutos',
+            onClose: function() {
+            }
+    	});
+
+    	$('#Tiempo_Segundo2').timepicker({
+            showHours: false,
+            minuteText: 'Segundos',
+            minutes: { interval: 1 },
+            rows: 6,
+            onClose: function() {
+            }
+    	});
+ 	});
+</script>
+
+
+</section>
+
+
+
+ <section id="service"> <!--#Mapa-->
 
                 <div class="container">
                     <div class="row">
@@ -128,7 +290,7 @@
                         <div class="col-md-3 col-sm-10 wow fadeInLeft">
                             <div class="media">
                                 <a href="#" class="pull-left">
-                                    <img src="img/icons/longi.jpg" class="media-object" alt="Monitor">
+                                    <img src="images/longi.jpg" class="media-object" alt="Monitor">
                                 </a>
                                 <div class="media-body">
                                     <h3>Latitud</h3>
@@ -140,7 +302,7 @@
                         <div class="col-md-3 col-sm-10 wow fadeInRight" data-wow-delay="0.2s">
                             <div class="media">
                                 <a href="#" class="pull-left">
-                                    <img src="img/icons/longi.jpg" alt="Cog">
+                                    <img src="images/longi.jpg" alt="Cog">
                                 </a>
                                 <div class="media-body">
                                     <h3>Longitud</h3>
@@ -152,7 +314,7 @@
                         <div class="col-md-3 col-sm-10 wow fadeInLeft">
                             <div class="media">
                                 <a href="#" class="pull-left">
-                                    <img src="img/icons/fecha.jpg" alt="Ruler">
+                                    <img src="images/fecha.jpg" alt="Ruler">
                                 </a>
                                 <div class="media-body">
                                     <h3>Fecha</h3>
@@ -164,7 +326,7 @@
                         <div class="col-md-3 col-sm-10 wow fadeInRight" data-wow-delay="0.2s">
                             <div class="media">
                                 <a href="#" class="pull-left">
-                                    <img src="img/icons/hora.png" alt="Camera">
+                                    <img src="images/hora.png" alt="Camera">
                                 </a>
                                 <div class="media-body">
                                     <h3>Hora</h3>
@@ -176,95 +338,17 @@
 
 
                 </div>
+
 <div id="googleMap"></div>
-<div id="Fecha_Inicio"></div>
-<div id="Fecha_Final"></div>
-<input id="Boton_Real22" type="button" value="CONSULTAR CALENDARIO" onclick="Consulta_Calendario();" />
-<input id="Boton_Real23" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Historico();" />
-<input id="Boton_Real24" type="button" value="CONSULTAR REAL" onclick="Consulta_Real();" />
-<div>
-    <label>HORAS :</label>
-    <input type="text" style="width: 43px;  text-align:center" id="Tiempo_Hora1" value="5 PM">
-    , <label>MINUTOS:</label>
-    <input type="text" style="width: 23px;  text-align:center" id="Tiempo_Minuto1" value="00">
-    , <label>SEGUNDOS :</label>
-    <input type="text" style="width: 23px; text-align:center" id="Tiempo_Segundo1" value="00">
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#Tiempo_Hora1').timepicker({
-                showMinutes: false,
-                showPeriod: true,
-                showLeadingZero: false,
-                hourText: 'Horas',
-                rows: 4,
-                onClose: function() {
-                }
-            });
 
-            $('#Tiempo_Minuto1').timepicker({
-                showHours: false,
-                minutes: { interval: 1 },
-                rows: 6,
-                minuteText: 'Minutos',
-                onClose: function() {
-                }
-            });
+  <div class="btn btn-blue" id="Boton_Real24" type="button" value="TIEMPO REAL" onclick="Consulta_Real();" 
+  style="position: absolute; margin-top: -30px; margin-left: -662px; font-size: 10px; width: 40px; height: 30px; text-align: right; " ><h3 style="position: absolute; margin-left: -30px; font-size: 10px;"><strong>TIEMPO REAL</strong></h3></div>
 
-                $('#Tiempo_Segundo1').timepicker({
-                showHours: false,
-                minuteText: 'Segundos',
-                minutes: { interval: 1 },
-                rows: 6,
-                onClose: function() {
-                }
-            });
-        })
-    </script>
-</div>
-<div>
-    <label>HORAS :</label>
-    <input type="text" style="width: 43px;  text-align:center" id="Tiempo_Hora2" value="5 PM">
-    , <label>MINUTOS:</label>
-    <input type="text" style="width: 23px;  text-align:center" id="Tiempo_Minuto2" value="00">
-    , <label>SEGUNDOS :</label>
-    <input type="text" style="width: 23px; text-align:center" id="Tiempo_Segundo2" value="00">
+</section>
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#Tiempo_Hora2').timepicker({
-                showMinutes: false,
-                showPeriod: true,
-                showLeadingZero: false,
-                hourText: 'Horas',
-                rows: 4,
-                onClose: function() {
-                }
-            });
 
-            $('#Tiempo_Minuto2').timepicker({
-                showHours: false,
-                minutes: { interval: 1 },
-                rows: 6,
-                minuteText: 'Minutos',
-                onClose: function() {
-                }
-            });
-
-                $('#Tiempo_Segundo2').timepicker({
-                showHours: false,
-                minuteText: 'Segundos',
-                minutes: { interval: 1 },
-                rows: 6,
-                onClose: function() {
-                }
-            });
-        })
-    </script>
-</div>
-            </section>
-
-                <section id="contact"> <!--#contact-->
+            <section id="contact"> <!--#contact-->
                     <div class="container">
                         <div class="row">
                             <div class="section-title text-center wow fadeInDown">
@@ -303,15 +387,15 @@
 
                          </div>
                     </div>
-                </section>
+            </section>
 
-        <footer id="footer" class="text-center">
+        	<footer id="footer" class="text-center">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
 
                         <div class="footer-logo wow fadeInDown">
-                            <img src="img/logo.png" alt="logo">
+                            <img src="images/logo.png" alt="logo">
                         </div>
 
                         <div class="footer-social wow fadeInUp">
@@ -327,10 +411,10 @@
                     </div>
                 </div>
             </div>
-        </footer>
+        	</footer>
 
         <!--#SCRIPT, DONDE ESTAN LAS FUNCIONES-->    
-            <script src="js/vendor/jquery-1.12.1.min.js"></script>
+            <script src="js/jquery-1.12.1.min.js"></script>
             <script src="js/bootstrap.min.js"></script>
             <script src="js/jquery.nav.js"></script>
             <script src="js/jquery.mixitup.min.js"></script>
@@ -345,41 +429,47 @@
             <script src="js/eye.js"></script>
             <script src="js/utils.js"></script>
             <script src="js/layout.js?ver=1.0.2"></script>
-            <script src="include/ui-1.10.0/jquery.ui.core.min.js"></script>
-            <script src="jquery.ui.timepicker.js?v=0.3.3"></script>
+            <script src="js/jquery.ui.core.min.js"></script>
+            <script src="js/jquery.ui.timepicker.js?v=0.3.3"></script>
+            <script src="js/modernizr-2.6.2.min.js"></script>
+
 
 <script>
 
 var myCenter=new google.maps.LatLng(parseFloat(Latitud_Gps),parseFloat(Longitud_Gps));
 
-var Marker_Real;            var Ruta_Historica = [];    var Posicion_Historica;     var Fecha_Inicio_PHP;       var Hora_Inicio_PHP;        
-var Marker_Historico=[];    var Ruta_Real = [];         var Posicion_Real;          var Fecha_Final_PHP;        var Hora_Final_PHP;         
-var Latitud;                var Fecha;                  var auxlat;                 var map;                    var NumMark;    
-var Longitud;               var Hora;                   var auxlon;                 var k;                      var Datos;
-var Latitudes_Historicas;   var Latitud_Historica;      var Fechas_Historicas;      var columnas;               var RealAgain=0;
-var Longitudes_Historicas;  var Longitud_Historica;     var Horas_Historicas;       var Tiempo;      
+ var Marker_Real;            var Ruta_Historica = [];    var Posicion_Historica;     var Fecha_Inicio_PHP;       var Hora_Inicio_PHP;        
+ var Marker_Historico=[];    var Ruta_Real = [];         var Posicion_Real;          var Fecha_Final_PHP;        var Hora_Final_PHP;         
+ var Latitud;                var Fecha;                  var auxlat;                 var map;                    var NumMark;    
+ var Longitud;               var Hora;                   var auxlon;                 var k;                      var Datos;
+ var Latitudes_Historicas;   var Latitud_Historica;      var Fechas_Historicas;      var columnas;               var RealAgain=0;
+ var Longitudes_Historicas;  var Longitud_Historica;     var Horas_Historicas;       var Tiempo;				 var CalSet=0;
+ var Calendario1=1;
+ var Calendario2=1;				       
 
-var PoliLinea_Real = new google.maps.Polyline({ path: Ruta_Real,   strokeColor: '#FFFF00',  strokeOpacity: 1.0,  strokeWeight: 5    });
+ var PoliLinea_Real = new google.maps.Polyline({ path: Ruta_Real,   strokeColor: '#FFFF00',  strokeOpacity: 1.0,  strokeWeight: 5    });
+ 
+ var PoliLinea_Historica = new google.maps.Polyline({ path: Ruta_Historica,  strokeColor: '#000000', strokeOpacity: 1.0, strokeWeight: 5 });
 
-var PoliLinea_Historica = new google.maps.Polyline({ path: Ruta_Historica,  strokeColor: '#000000', strokeOpacity: 1.0, strokeWeight: 5 });
+ var MarkerInterval = setInterval(function(){SetMarker()}, 1000);
+ var DbInterval =     setInterval(function(){CargarDB()}, 1000);
 
-var MarkerInterval = setInterval(function(){SetMarker()}, 1000);
-var DbInterval =     setInterval(function(){CargarDB()}, 1000);
+ var mapOptions ={       center : myCenter,      zoom : 16,      mapTypeId: google.maps.MapTypeId.ROADMAP,    disableDefaultUI: false    };
 
-var mapOptions ={       center : myCenter,      zoom : 16,      mapTypeId: google.maps.MapTypeId.ROADMAP,    disableDefaultUI: false    };
-
-var Icono_Historico ={
+ var Icono_Historico ={
                       path: google.maps.SymbolPath.CIRCLE,
                       scale: 5, //tamaño
                       strokeColor: '#000', //color del borde
                       strokeWeight: 2, //grosor del borde
                       fillColor: '#fff', //color de relleno
                       fillOpacity:1// opacidad del relleno
-                    }
+                      }
 
-map=new google.maps.Map(document.getElementById("googleMap"),mapOptions);
+ map=new google.maps.Map(document.getElementById("googleMap"),mapOptions);
 
-PoliLinea_Real.setMap(map);
+ PoliLinea_Real.setMap(map);
+
+
 function CargarDB(){    $('#result').load('ConsultaDB.php'); }
 
 function SetMarker(){
@@ -409,7 +499,7 @@ function SetMarker(){
                                 position:Posicion_Real,         
                                 //animation:google.maps.Animation.BOUNCE,
                                 map: map,
-                                icon: 'taxi2.png'
+                                icon: 'images/taxi2.png'
                                 //label: "999"
                              });
     /*   SEGUNDO VEHICULO
@@ -432,11 +522,11 @@ function Consulta_Real(){
     for (var l = 0; l <Marker_Historico.length; l++)    {   Marker_Historico[l].setMap(null);       }
     PoliLinea_Real.setMap(map);
     MarkerInterval = setInterval(function(){SetMarker()}, 1000);
+    document.location.href='#service';
     }
 
 function Consulta_Historico(){
 
-    Fecha_Inicio_PHP = $('#Fecha_Inicio').DatePickerGetDate(true);
     Fecha_Final_PHP = $('#Fecha_Final').DatePickerGetDate(true);
   
     Tiempo = new Date(2016,10,10,$('#Tiempo_Hora1').timepicker('getHour'),$('#Tiempo_Minuto1').timepicker('getMinute'),$('#Tiempo_Segundo1').timepicker('getMinute'));  
@@ -449,7 +539,8 @@ function Consulta_Historico(){
                                    HoraInicio:  Hora_Inicio_PHP,  HoraFinal:  Hora_Final_PHP        }).done(
 
     function( data ) {  Decodificar(data);   });
-    
+    document.location.href='#service';
+
  }
 
 function Decodificar(data){
@@ -512,29 +603,50 @@ function Decodificar(data){
         } // FOR MARKER
  }
 
-function Consulta_Calendario(){
+function Calendario_Inicial(){
 
-    $('#Fecha_Inicio').DatePicker({
-    
-    flat: true,
-    date:  '',
-    current: '2016-03-05',
-    calendars: 1,
-    starts: 0,
-    mode: 'single',
-    view: 'days',
-    onChange: function(formated, dates){ 
-        if ($('#Fecha_Inicio').DatePickerGetDate(true) != "" && $('#Fecha_Inicio').DatePickerGetDate(true).length==10)
-        {
-            $('#Fecha_Inicio').DatePickerHide();    
-               Iniciar_date2();   
-        }
-    }
-    });
-    $('#Fecha_Inicio').DatePickerClear();
+	if (Calendario1==1){
+		Calendario1=0;
+	    $('#Fecha_Inicio').DatePicker({
+	    
+	     flat: true,
+	     date:  '',
+	     current: '2016-03-05',
+	     calendars: 1,
+	     starts: 0,
+	     mode: 'single',
+	     view: 'days',
+	     onChange: function(formated, dates){ 
+	        if ($('#Fecha_Inicio').DatePickerGetDate(true) != "" && $('#Fecha_Inicio').DatePickerGetDate(true).length==10)
+	         {
+	            $('#Fecha_Inicio').DatePickerHide(); 
+	            Calendario1=1;   
+	            CalSet=1;
+    			Fecha_Inicio_PHP = $('#Fecha_Inicio').DatePickerGetDate(true);
+    			document.getElementById('Fecha_Inicio2').innerHTML  = Fecha_Inicio_PHP;  
+	        }
+	      }
+	    	});
+	}
+ 
  }
 
-function Iniciar_date2(){
+function Calendario_Final(){
+ 
+
+	try{
+		CalSet=0;
+		if ($('#Fecha_Inicio').DatePickerGetDate(true).length==10)
+		{
+			CalSet=1;
+		}
+	 }catch(err){
+		console.log("catch");
+		CalSet=0;
+	 };
+
+     if (Calendario2==1 && CalSet==1){
+	Calendario2=0;
 
     $('#Fecha_Final').DatePicker({
     
@@ -547,17 +659,29 @@ function Iniciar_date2(){
     view: 'days',
     onChange: function(formated, dates){ 
 
-        if ($('#Fecha_Final').DatePickerGetDate(true) != "" && $('#Fecha_Final').DatePickerGetDate(true).length==10){
+        if ($('#Fecha_Final').DatePickerGetDate(true) != "" && $('#Fecha_Final').DatePickerGetDate(true).length==10)
+         {
 
-            $('#Fecha_Final').DatePickerHide();    
-            }
+            $('#Fecha_Final').DatePickerHide(); 
+	            Calendario2=1;   
+    			Fecha_Final_PHP = $('#Fecha_Final').DatePickerGetDate(true);
+    			document.getElementById('Fecha_Final2').innerHTML  = Fecha_Final_PHP;  
+        }
     }
     });
-    $('#Fecha_Final').DatePickerClear();
+ }
+ }
+
+function Ocultar_Calendario1(){
+ 	$('#Fecha_Inicio').DatePickerHide();
+ 	Calendario1=1;
+  }
+
+function Ocultar_Calendario2(){
+ 	$('#Fecha_Final').DatePickerHide();
+ 	Calendario2=1;
  }
 
 </script>
-
-
 </body>
 </html>

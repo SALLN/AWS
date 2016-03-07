@@ -14,8 +14,8 @@ $longitud=$tablaDB['LONGITUD'];
 $fecha=$tablaDB['FECHA_HORA'];
 $id_vehiculo=$tablaDB['ID_VEHICULO'];
 
-mysql_query("INSERT INTO coordenadas2 (LATITUD,LONGITUD,HORA,FECHA,ID_VEHICULO) 
-VALUES ('$latitud','$longitud', '$fecha','$id_vehiculo')",$con_local);
+mysql_query("INSERT INTO coordenadas2 (LATITUD,LONGITUD,FECHA_HORA,ID_VEHICULO) 
+	VALUES ('$latitud','$longitud', '$fecha','$id_vehiculo')",$con_local);
 
 }
 ?>
