@@ -204,6 +204,11 @@
 
      </BR>
     </BR>
+    </BR>
+
+     </BR>
+    </BR>
+
 
      </BR>
         <input class="btn btn-blue" id="Boton_Real23" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Historico();"/>
@@ -337,6 +342,7 @@
 
 <div id="googleMap"></div>
   
+  </BR>
 
   <input class="btn btn-blue" id="Boton_Real24" type="button" value="CONSULTAR TIEMPO REAL" onclick="Consulta_Real();"/>
 
