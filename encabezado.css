@@ -23,6 +23,8 @@ h3 {display: inline;}
 
 .boton{	position:absolute; 	right: 5em;	 top: 11.25em;	}
 
+.DivTodo{ position: relative; width: 300px; background-color: red; margin-top: 200px; margin-left: 10px;}
+
 #fila_longitud,#fila_latitud,#fila_fecha,#fila_hora{           padding-left: 0.313em;           }
 
 #googleMap{		width:61.75em;		height:33.438em;	}

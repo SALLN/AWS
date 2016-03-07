@@ -19,7 +19,9 @@ p {display: inline;}
 
 .historicofinal{		position:absolute; 	right: 0.1em;	 top: 9.25em;	}
 
-.boton{	position:absolute; 	right: 5em;	 top: 11.25em;	}
+.boton{		position:absolute; 	right: 5em;	 top: 11.25em;	}
+
+.DivTodo{	 position: relative; width: 300px; background-color: red; margin-top: 20px; margin-left: 10px; border-bottom: 20px;	}
 
 #fila_longitud,#fila_latitud,#fila_fecha,#fila_hora{           padding-left: 0.313em;           }
 

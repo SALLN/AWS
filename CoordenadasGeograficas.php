@@ -7,7 +7,6 @@
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js"></script>
-    <link rel=StyleSheet href="css/encabezado.css" type="text/css">
 
     <link rel="shortcut icon" href="taxi6.ico">
 
@@ -28,11 +27,10 @@
         <link rel="stylesheet" href="css/animate.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/responsive.css">
+        <link rel="styleSheet" href="css/encabezado.css">
+
     			
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
-
-
-
 </head>
 	
 <body>
@@ -77,7 +75,6 @@
                     <li data-target="#home-carousel" data-slide-to="1"></li>
                     <li data-target="#home-carousel" data-slide-to="2"></li>
                 </ol>
-                <!--/.carousel-indicators-->
 
                 <div class="carousel-inner">
 
@@ -176,95 +173,109 @@
 
 
                 </div>
+
 <div id="googleMap"></div>
-<div id="Fecha_Inicio"></div>
-<div id="Fecha_Final"></div>
-<input id="Boton_Real22" type="button" value="CONSULTAR CALENDARIO" onclick="Consulta_Calendario();" />
-<input id="Boton_Real23" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Historico();" />
-<input id="Boton_Real24" type="button" value="CONSULTAR REAL" onclick="Consulta_Real();" />
-<div>
-    <label>HORAS :</label>
-    <input type="text" style="width: 43px;  text-align:center" id="Tiempo_Hora1" value="5 PM">
-    , <label>MINUTOS:</label>
-    <input type="text" style="width: 23px;  text-align:center" id="Tiempo_Minuto1" value="00">
-    , <label>SEGUNDOS :</label>
-    <input type="text" style="width: 23px; text-align:center" id="Tiempo_Segundo1" value="00">
+<div class="DivTodo">
+	<div>
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#Tiempo_Hora1').timepicker({
-                showMinutes: false,
-                showPeriod: true,
-                showLeadingZero: false,
-                hourText: 'Horas',
-                rows: 4,
-                onClose: function() {
-                }
-            });
+		<h5 style="width:100px; margin-left: 50px; position: absolute;">FECHA INICIAL:</h5>
+		<h5 style="width:100px; margin-left: 140px; position: absolute;" id="Fecha_Inicio2" onmouseover="Calendario_Inicial();">0000-00-00</h5>
+		<h5 style="width:100px; margin-left: 315px; position: absolute;">FECHA FINAL:</h5>
+		<h5 style="width:100px; margin-left: 400px; position: absolute;" id="Fecha_Final2" onmouseover="Calendario_Final();">0000-00-00</h5>
+		<div id="Fecha_Inicio" onmouseleave="Ocultar_Calendario1();" style="margin-left: 40px; margin-top: 15px; position: absolute; background-color: red;"></div>
+		<div id="Fecha_Final" onmouseleave="Ocultar_Calendario2();" style="margin-left: 300px; margin-top: 15px; position: absolute; background-color: red;">	</div>
+	
+	</div>
 
-            $('#Tiempo_Minuto1').timepicker({
-                showHours: false,
-                minutes: { interval: 1 },
-                rows: 6,
-                minuteText: 'Minutos',
-                onClose: function() {
-                }
-            });
+		<div style="position: absolute; margin-top: 10px; margin-left: 540px; background-color: red; width: 780px; height: 150px;">
 
-                $('#Tiempo_Segundo1').timepicker({
-                showHours: false,
-                minuteText: 'Segundos',
-                minutes: { interval: 1 },
-                rows: 6,
-                onClose: function() {
-                }
-            });
-        })
-    </script>
+			<input id="Boton_Real23" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Historico();" />
+			<input id="Boton_Real24" type="button" value="CONSULTAR REAL" onclick="Consulta_Real();" />
+
+					<div style="background-color: green; width: 600px;">
+					    <label>HORAS :</label>
+					    <input type="text" style="width: 43px;  text-align:center" id="Tiempo_Hora1" value="5 PM">
+					    , <label>MINUTOS:</label>
+					    <input type="text" style="width: 23px;  text-align:center" id="Tiempo_Minuto1" value="00">
+					    , <label>SEGUNDOS :</label>
+					    <input type="text" style="width: 23px; text-align:center" id="Tiempo_Segundo1" value="00">
+					</div>
+
+							<div style="background-color: green; width: 600px;">
+
+							    <label>HORAS :</label>
+							    <input type="text" style="width: 43px;  text-align:center" id="Tiempo_Hora2" value="5 PM">
+							    , <label>MINUTOS:</label>
+							    <input type="text" style="width: 23px;  text-align:center" id="Tiempo_Minuto2" value="00">
+							    , <label>SEGUNDOS :</label>
+							    <input type="text" style="width: 23px; text-align:center" id="Tiempo_Segundo2" value="00">
+							</div>
+		</div>
 </div>
-<div>
-    <label>HORAS :</label>
-    <input type="text" style="width: 43px;  text-align:center" id="Tiempo_Hora2" value="5 PM">
-    , <label>MINUTOS:</label>
-    <input type="text" style="width: 23px;  text-align:center" id="Tiempo_Minuto2" value="00">
-    , <label>SEGUNDOS :</label>
-    <input type="text" style="width: 23px; text-align:center" id="Tiempo_Segundo2" value="00">
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#Tiempo_Hora2').timepicker({
-                showMinutes: false,
-                showPeriod: true,
-                showLeadingZero: false,
-                hourText: 'Horas',
-                rows: 4,
-                onClose: function() {
-                }
-            });
+<script>
+	$(document).ready(function() {
 
-            $('#Tiempo_Minuto2').timepicker({
-                showHours: false,
-                minutes: { interval: 1 },
-                rows: 6,
-                minuteText: 'Minutos',
-                onClose: function() {
-                }
-            });
+    	$('#Tiempo_Hora1').timepicker({
+            showMinutes: false,
+            showPeriod: true,
+            showLeadingZero: false,
+            hourText: 'Horas',
+            rows: 4,
+            onClose: function() {
+            }
+    	});
 
-                $('#Tiempo_Segundo2').timepicker({
-                showHours: false,
-                minuteText: 'Segundos',
-                minutes: { interval: 1 },
-                rows: 6,
-                onClose: function() {
-                }
-            });
-        })
-    </script>
-</div>
+   	 	$('#Tiempo_Minuto1').timepicker({
+            showHours: false,
+            minutes: { interval: 1 },
+            rows: 6,
+            minuteText: 'Minutos',
+            onClose: function() {
+            }
+    	});
+
+    	$('#Tiempo_Segundo1').timepicker({
+            showHours: false,
+            minuteText: 'Segundos',
+            minutes: { interval: 1 },
+            rows: 6,
+            onClose: function() {
+            }
+    	});
+            	
+    	$('#Tiempo_Hora2').timepicker({
+            showMinutes: false,
+            showPeriod: true,
+            showLeadingZero: false,
+            hourText: 'Horas',
+            rows: 4,
+            onClose: function() {
+            }
+    	});
+		
+    	$('#Tiempo_Minuto2').timepicker({
+            showHours: false,
+            minutes: { interval: 1 },
+            rows: 6,
+            minuteText: 'Minutos',
+            onClose: function() {
+            }
+    	});
+
+    	$('#Tiempo_Segundo2').timepicker({
+            showHours: false,
+            minuteText: 'Segundos',
+            minutes: { interval: 1 },
+            rows: 6,
+            onClose: function() {
+            }
+    	});
+ 	});
+</script>
             </section>
 
-                <section id="contact"> <!--#contact-->
+            <section id="contact"> <!--#contact-->
                     <div class="container">
                         <div class="row">
                             <div class="section-title text-center wow fadeInDown">
@@ -303,9 +314,9 @@
 
                          </div>
                     </div>
-                </section>
+            </section>
 
-        <footer id="footer" class="text-center">
+        	<footer id="footer" class="text-center">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -327,7 +338,7 @@
                     </div>
                 </div>
             </div>
-        </footer>
+        	</footer>
 
         <!--#SCRIPT, DONDE ESTAN LAS FUNCIONES-->    
             <script src="js/vendor/jquery-1.12.1.min.js"></script>
@@ -352,34 +363,38 @@
 
 var myCenter=new google.maps.LatLng(parseFloat(Latitud_Gps),parseFloat(Longitud_Gps));
 
-var Marker_Real;            var Ruta_Historica = [];    var Posicion_Historica;     var Fecha_Inicio_PHP;       var Hora_Inicio_PHP;        
-var Marker_Historico=[];    var Ruta_Real = [];         var Posicion_Real;          var Fecha_Final_PHP;        var Hora_Final_PHP;         
-var Latitud;                var Fecha;                  var auxlat;                 var map;                    var NumMark;    
-var Longitud;               var Hora;                   var auxlon;                 var k;                      var Datos;
-var Latitudes_Historicas;   var Latitud_Historica;      var Fechas_Historicas;      var columnas;               var RealAgain=0;
-var Longitudes_Historicas;  var Longitud_Historica;     var Horas_Historicas;       var Tiempo;      
+ var Marker_Real;            var Ruta_Historica = [];    var Posicion_Historica;     var Fecha_Inicio_PHP;       var Hora_Inicio_PHP;        
+ var Marker_Historico=[];    var Ruta_Real = [];         var Posicion_Real;          var Fecha_Final_PHP;        var Hora_Final_PHP;         
+ var Latitud;                var Fecha;                  var auxlat;                 var map;                    var NumMark;    
+ var Longitud;               var Hora;                   var auxlon;                 var k;                      var Datos;
+ var Latitudes_Historicas;   var Latitud_Historica;      var Fechas_Historicas;      var columnas;               var RealAgain=0;
+ var Longitudes_Historicas;  var Longitud_Historica;     var Horas_Historicas;       var Tiempo;				 var CalSet=0;
+ var Calendario1=1;
+ var Calendario2=1;				       
 
-var PoliLinea_Real = new google.maps.Polyline({ path: Ruta_Real,   strokeColor: '#FFFF00',  strokeOpacity: 1.0,  strokeWeight: 5    });
+ var PoliLinea_Real = new google.maps.Polyline({ path: Ruta_Real,   strokeColor: '#FFFF00',  strokeOpacity: 1.0,  strokeWeight: 5    });
+ 
+ var PoliLinea_Historica = new google.maps.Polyline({ path: Ruta_Historica,  strokeColor: '#000000', strokeOpacity: 1.0, strokeWeight: 5 });
 
-var PoliLinea_Historica = new google.maps.Polyline({ path: Ruta_Historica,  strokeColor: '#000000', strokeOpacity: 1.0, strokeWeight: 5 });
+ var MarkerInterval = setInterval(function(){SetMarker()}, 1000);
+ var DbInterval =     setInterval(function(){CargarDB()}, 1000);
 
-var MarkerInterval = setInterval(function(){SetMarker()}, 1000);
-var DbInterval =     setInterval(function(){CargarDB()}, 1000);
+ var mapOptions ={       center : myCenter,      zoom : 16,      mapTypeId: google.maps.MapTypeId.ROADMAP,    disableDefaultUI: false    };
 
-var mapOptions ={       center : myCenter,      zoom : 16,      mapTypeId: google.maps.MapTypeId.ROADMAP,    disableDefaultUI: false    };
-
-var Icono_Historico ={
+ var Icono_Historico ={
                       path: google.maps.SymbolPath.CIRCLE,
                       scale: 5, //tamaño
                       strokeColor: '#000', //color del borde
                       strokeWeight: 2, //grosor del borde
                       fillColor: '#fff', //color de relleno
                       fillOpacity:1// opacidad del relleno
-                    }
+                      }
 
-map=new google.maps.Map(document.getElementById("googleMap"),mapOptions);
+ map=new google.maps.Map(document.getElementById("googleMap"),mapOptions);
 
-PoliLinea_Real.setMap(map);
+ PoliLinea_Real.setMap(map);
+
+
 function CargarDB(){    $('#result').load('ConsultaDB.php'); }
 
 function SetMarker(){
@@ -436,7 +451,6 @@ function Consulta_Real(){
 
 function Consulta_Historico(){
 
-    Fecha_Inicio_PHP = $('#Fecha_Inicio').DatePickerGetDate(true);
     Fecha_Final_PHP = $('#Fecha_Final').DatePickerGetDate(true);
   
     Tiempo = new Date(2016,10,10,$('#Tiempo_Hora1').timepicker('getHour'),$('#Tiempo_Minuto1').timepicker('getMinute'),$('#Tiempo_Segundo1').timepicker('getMinute'));  
@@ -512,29 +526,50 @@ function Decodificar(data){
         } // FOR MARKER
  }
 
-function Consulta_Calendario(){
+function Calendario_Inicial(){
 
-    $('#Fecha_Inicio').DatePicker({
-    
-    flat: true,
-    date:  '',
-    current: '2016-03-05',
-    calendars: 1,
-    starts: 0,
-    mode: 'single',
-    view: 'days',
-    onChange: function(formated, dates){ 
-        if ($('#Fecha_Inicio').DatePickerGetDate(true) != "" && $('#Fecha_Inicio').DatePickerGetDate(true).length==10)
-        {
-            $('#Fecha_Inicio').DatePickerHide();    
-               Iniciar_date2();   
-        }
-    }
-    });
-    $('#Fecha_Inicio').DatePickerClear();
+	if (Calendario1==1){
+		Calendario1=0;
+	    $('#Fecha_Inicio').DatePicker({
+	    
+	     flat: true,
+	     date:  '',
+	     current: '2016-03-05',
+	     calendars: 1,
+	     starts: 0,
+	     mode: 'single',
+	     view: 'days',
+	     onChange: function(formated, dates){ 
+	        if ($('#Fecha_Inicio').DatePickerGetDate(true) != "" && $('#Fecha_Inicio').DatePickerGetDate(true).length==10)
+	         {
+	            $('#Fecha_Inicio').DatePickerHide(); 
+	            Calendario1=1;   
+	            CalSet=1;
+    			Fecha_Inicio_PHP = $('#Fecha_Inicio').DatePickerGetDate(true);
+    			document.getElementById('Fecha_Inicio2').innerHTML  = Fecha_Inicio_PHP;  
+	        }
+	      }
+	    	});
+	}
+ 
  }
 
-function Iniciar_date2(){
+function Calendario_Final(){
+ 
+
+	try{
+		CalSet=0;
+		if ($('#Fecha_Inicio').DatePickerGetDate(true).length==10)
+		{
+			CalSet=1;
+		}
+	 }catch(err){
+		console.log("catch");
+		CalSet=0;
+	 };
+
+     if (Calendario2==1 && CalSet==1){
+	Calendario2=0;
 
     $('#Fecha_Final').DatePicker({
     
@@ -547,17 +582,29 @@ function Iniciar_date2(){
     view: 'days',
     onChange: function(formated, dates){ 
 
-        if ($('#Fecha_Final').DatePickerGetDate(true) != "" && $('#Fecha_Final').DatePickerGetDate(true).length==10){
+        if ($('#Fecha_Final').DatePickerGetDate(true) != "" && $('#Fecha_Final').DatePickerGetDate(true).length==10)
+         {
 
-            $('#Fecha_Final').DatePickerHide();    
-            }
+            $('#Fecha_Final').DatePickerHide(); 
+	            Calendario2=1;   
+    			Fecha_Final_PHP = $('#Fecha_Final').DatePickerGetDate(true);
+    			document.getElementById('Fecha_Final2').innerHTML  = Fecha_Final_PHP;  
+        }
     }
     });
-    $('#Fecha_Final').DatePickerClear();
+ }
+ }
+
+function Ocultar_Calendario1(){
+ 	$('#Fecha_Inicio').DatePickerHide();
+ 	Calendario1=1;
+  }
+
+function Ocultar_Calendario2(){
+ 	$('#Fecha_Final').DatePickerHide();
+ 	Calendario2=1;
  }
 
 </script>
-
-
 </body>
 </html>
