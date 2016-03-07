@@ -1,3 +1,3 @@
 <?php
-header('Location: AWS/CoordenadasGeograficas.php');
+header('Location: CoordenadasGeograficas.php');
 ?>
