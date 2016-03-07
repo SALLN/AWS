@@ -534,6 +534,7 @@ function Consulta_Historico(){
 
     Tiempo = new Date(2016,10,10,$('#Tiempo_Hora2').timepicker('getHour'),$('#Tiempo_Minuto2').timepicker('getMinute'),$('#Tiempo_Segundo2').timepicker('getMinute'));  
     Hora_Final_PHP=String(Tiempo).substring(16,24);
+    console.log(Fecha_Inicio_PHP+"-"+Fecha_Final_PHP+""+Hora_Inicio_PHP+""+Hora_Final_PHP);
     
     $.post( "ConsultaDbHistorico.php", { FechaInicio: Fecha_Inicio_PHP, FechaFinal: Fecha_Final_PHP, 
                                    HoraInicio:  Hora_Inicio_PHP,  HoraFinal:  Hora_Final_PHP        }).done(
