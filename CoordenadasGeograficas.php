@@ -8,7 +8,7 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js"></script>
 
-    <link rel="shortcut icon" href="taxi6.ico">
+    <link rel="shortcut icon" href="images/taxi6.ico">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,8 +18,9 @@
     <title>Coordenadas Ticoll</title>
         
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" rel="stylesheet" type="text/css">
-    	<link rel="stylesheet" href="include/ui-1.10.0/ui-lightness/jquery-ui-1.10.0.custom.min.css" type="text/css" />
-        <link rel="stylesheet" href="jquery.ui.timepicker.css?v=0.3.3" type="text/css" />	
+
+    	<link rel="stylesheet" href="css/jquery-ui-1.10.0.custom.min.css" type="text/css" />
+        <link rel="stylesheet" href="css/jquery.ui.timepicker.css?v=0.3.3" type="text/css" />	
         <link rel="stylesheet" href="css/font-awesome.min.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/jquery.fancybox.css">
@@ -28,9 +29,7 @@
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/responsive.css">
         <link rel="styleSheet" href="css/encabezado.css">
-
     			
-        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
 	
 <body>
@@ -51,7 +50,7 @@
                     <!-- logo -->
                     <h1 class="navbar-brand">
                         <a href="#body">
-                            <img src="img/logo.png" alt="Kasper Logo">
+                            <img src="images/logo.png" alt="Kasper Logo">
                         </a>
                     </h1>
                     <!-- /logo -->
@@ -80,7 +79,7 @@
 
                 <div class="carousel-inner">
 
-                    <div class="item active"  style="background-image: url('img/slider/bg1.jpeg')" >
+                    <div class="item active"  style="background-image: url('images/bg1.jpeg')" >
                         <div class="carousel-caption">
                             <div class="animated bounceInRight">
                                 <h2>HELLO WORLD! <br>WE ARE TICOLL</h2>
@@ -89,7 +88,7 @@
                         </div>
                     </div>              
 
-                    <div class="item" style="background-image: url('img/slider/bg21.jpg')">                
+                    <div class="item" style="background-image: url('images/bg21.jpg')">                
                         <div class="carousel-caption">
                             <div class="animated bounceInDown">
                                 <h2>HELLO WORLD! <br>WE ARE TICOLL</h2>
@@ -98,7 +97,7 @@
                         </div>
                     </div>
 
-                    <div class="item" style="background-image: url('img/slider/bg3.jpg')">                 
+                    <div class="item" style="background-image: url('images/bg3.jpg')">                 
                          <div class="carousel-caption">
                             <div class="animated bounceInUp">
                                 <h2>HELLO WORLD! <br>WE ARE TICOLL</h2>
@@ -127,8 +126,8 @@
                 <div class="container">
 
                     <div class="mobile-device">
-                       <img data-wow-delay="0.2s" class="img-responsive black  wow fadeInLeftBig" src="img/icons/map.png" alt="iPhone Black">
-                        <img data-wow-delay="0.5s" class="img-responsive white  wow fadeInLeftBig" src="img/icons/streed.png" alt="iPhone White">
+                       <img data-wow-delay="0.2s" class="img-responsive black  wow fadeInLeftBig" src="images/map.png" alt="iPhone Black">
+                        <img data-wow-delay="0.5s" class="img-responsive white  wow fadeInLeftBig" src="images/streed.png" alt="iPhone White">
                     </div>
 
                 <div class="service-features wow fadeInRight">
@@ -174,7 +173,7 @@
                     <div>
 
                                 <label>HORA:</label>
-                                <input type="text" style="width: 43px;  text-align:center" id="Tiempo_Hora2" value="5 PM">
+                                <input type="text" style="width: 43px;  text-align:center; " id="Tiempo_Hora2" value="5 PM">
                                 , <label>MINUTOS:</label>
                                 <input type="text" style="width: 23px;  text-align:center" id="Tiempo_Minuto2" value="00">
                                 , <label>SEGUNDOS:</label>
@@ -291,7 +290,7 @@
                         <div class="col-md-3 col-sm-10 wow fadeInLeft">
                             <div class="media">
                                 <a href="#" class="pull-left">
-                                    <img src="img/icons/longi.jpg" class="media-object" alt="Monitor">
+                                    <img src="images/longi.jpg" class="media-object" alt="Monitor">
                                 </a>
                                 <div class="media-body">
                                     <h3>Latitud</h3>
@@ -303,7 +302,7 @@
                         <div class="col-md-3 col-sm-10 wow fadeInRight" data-wow-delay="0.2s">
                             <div class="media">
                                 <a href="#" class="pull-left">
-                                    <img src="img/icons/longi.jpg" alt="Cog">
+                                    <img src="images/longi.jpg" alt="Cog">
                                 </a>
                                 <div class="media-body">
                                     <h3>Longitud</h3>
@@ -315,7 +314,7 @@
                         <div class="col-md-3 col-sm-10 wow fadeInLeft">
                             <div class="media">
                                 <a href="#" class="pull-left">
-                                    <img src="img/icons/fecha.jpg" alt="Ruler">
+                                    <img src="images/fecha.jpg" alt="Ruler">
                                 </a>
                                 <div class="media-body">
                                     <h3>Fecha</h3>
@@ -327,7 +326,7 @@
                         <div class="col-md-3 col-sm-10 wow fadeInRight" data-wow-delay="0.2s">
                             <div class="media">
                                 <a href="#" class="pull-left">
-                                    <img src="img/icons/hora.png" alt="Camera">
+                                    <img src="images/hora.png" alt="Camera">
                                 </a>
                                 <div class="media-body">
                                     <h3>Hora</h3>
@@ -343,7 +342,8 @@
 <div id="googleMap"></div>
 
 
-  <input class="btn btn-blue" id="Boton_Real24" type="button" value="CONSULTAR TIEMPO REAL" onclick="Consulta_Real();"/>
+  <input class="btn btn-blue" id="Boton_Real24" type="button" value="TIEMPO REAL" onclick="Consulta_Real();" style="position: absolute; 
+            margin-top: -520px; margin-left: 490px; " />
 
 </section>
 
@@ -395,7 +395,7 @@
                     <div class="col-lg-12">
 
                         <div class="footer-logo wow fadeInDown">
-                            <img src="img/logo.png" alt="logo">
+                            <img src="images/logo.png" alt="logo">
                         </div>
 
                         <div class="footer-social wow fadeInUp">
@@ -414,7 +414,7 @@
         	</footer>
 
         <!--#SCRIPT, DONDE ESTAN LAS FUNCIONES-->    
-            <script src="js/vendor/jquery-1.12.1.min.js"></script>
+            <script src="js/jquery-1.12.1.min.js"></script>
             <script src="js/bootstrap.min.js"></script>
             <script src="js/jquery.nav.js"></script>
             <script src="js/jquery.mixitup.min.js"></script>
@@ -429,8 +429,10 @@
             <script src="js/eye.js"></script>
             <script src="js/utils.js"></script>
             <script src="js/layout.js?ver=1.0.2"></script>
-            <script src="include/ui-1.10.0/jquery.ui.core.min.js"></script>
-            <script src="jquery.ui.timepicker.js?v=0.3.3"></script>
+            <script src="js/jquery.ui.core.min.js"></script>
+            <script src="js/jquery.ui.timepicker.js?v=0.3.3"></script>
+            <script src="js/modernizr-2.6.2.min.js"></script>
+
 
 <script>
 
@@ -497,7 +499,7 @@ function SetMarker(){
                                 position:Posicion_Real,         
                                 //animation:google.maps.Animation.BOUNCE,
                                 map: map,
-                                icon: 'taxi2.png'
+                                icon: 'images/taxi2.png'
                                 //label: "999"
                              });
     /*   SEGUNDO VEHICULO
