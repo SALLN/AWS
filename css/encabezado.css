@@ -27,6 +27,10 @@ p {display: inline;}
 
 #googleMap{ margin-left: 1em;  width:102em;		height:37.438em;	}
 
+#Boton_Real24{	font-size: 10px; width: 40px; height: 30px; text-align: right; 	}
+
+#autoc {        width: 175px; height: 25px; box-sizing: border-box; border-radius: 5px;  font-size: 15px; border-color: red; }
+
 #contenedor div{            float:left;           }
 
 #Boton_Real {	position:absolute; 	right: 1.3em;	 top: 2.25em;}

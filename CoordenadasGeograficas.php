@@ -6,7 +6,8 @@
     <link rel="stylesheet" media="screen" type="text/css" href="css/layout.css" />
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="http://maps.googleapis.com/maps/api/js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=drawing,places"></script>
+    
 
     <link rel="shortcut icon" href="images/taxi6.ico">
 
@@ -344,10 +345,11 @@
                 </div>
 
 <div id="googleMap"></div>
-
-
   <div class="btn btn-blue" id="Boton_Real24" type="button" value="TIEMPO REAL" onclick="Consulta_Real();" 
-  style="position: absolute; margin-top: -30px; margin-left: -662px; font-size: 10px; width: 40px; height: 30px; text-align: right; " ><h3 style="position: absolute; margin-left: -30px; font-size: 10px;"><strong>TIEMPO REAL</strong></h3></div>
+   ><h3 style="position: absolute; margin-left: -30px; font-size: 9.5px;"><strong>TIEMPO REAL</strong></h3></div>
+   <p class="auto"><input type="text" id="autoc"/></p>
+
+
 
 </section>
 
@@ -452,13 +454,30 @@ var myCenter=new google.maps.LatLng(parseFloat(Latitud_Gps),parseFloat(Longitud_
  var Icono_Historico ={
                       path: google.maps.SymbolPath.CIRCLE,
                       scale: 5, //tamaño
-                      strokeColor: '#000', //color del borde
+                      strokeColor: '#000000', //color del borde
                       strokeWeight: 2, //grosor del borde
-                      fillColor: '#fff', //color de relleno
+                      fillColor: '#FF0000', //color de relleno
                       fillOpacity:1// opacidad del relleno
                       }
 
  map=new google.maps.Map(document.getElementById("googleMap"),mapOptions);
+
+   map.controls[google.maps.ControlPosition.RIGHT_TOP].push(      document.getElementById('autoc'));
+
+   map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(      document.getElementById('Boton_Real24'));
+
+  var autocomplete = new google.maps.places.Autocomplete(
+      document.getElementById('autoc'));
+  autocomplete.bindTo('bounds', map);
+  autocomplete.addListener('place_changed', function() {
+    var place = autocomplete.getPlace();
+    if (place.geometry.viewport) {
+      map.fitBounds(place.geometry.viewport);
+    } else {
+      map.setCenter(place.geometry.location);
+      map.setZoom(17);
+    }
+  });
 
  PoliLinea_Real.setMap(map);
 
