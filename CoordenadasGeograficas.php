@@ -161,9 +161,9 @@
 
                         <label>HORA:</label>
                         <input type="text" style="width: 43px;  text-align:center" id="Tiempo_Hora1" value="5 PM">
-                        , <label>MINUTOS:</label>
+                        <label>MINUTOS:</label>
                         <input type="text" style="width: 23px;  text-align:center" id="Tiempo_Minuto1" value="00">
-                        , <label>SEGUNDOS:</label>
+                        <label>SEGUNDOS:</label>
                         <input type="text" style="width: 23px; text-align:center" id="Tiempo_Segundo1" value="00">
                         </div>
 
@@ -174,12 +174,18 @@
 
                                 <label>HORA:</label>
                                 <input type="text" style="width: 43px;  text-align:center; " id="Tiempo_Hora2" value="5 PM">
-                                , <label>MINUTOS:</label>
+                                <label>MINUTOS:</label>
                                 <input type="text" style="width: 23px;  text-align:center" id="Tiempo_Minuto2" value="00">
-                                , <label>SEGUNDOS:</label>
-                                <input type="text" style="width: 23px; text-align:center" id="Tiempo_Segundo2" value="00">
-                    </div>
 
+                                <label>SEGUNDOS:</label>
+                                <input type="text" style="width: 23px; text-align:center" id="Tiempo_Segundo2" value="00">
+
+
+                    </div>
+        </BR>
+
+                    <input type="button" style="width: 100px;  text-align:center; " id="Tiempo_Hora22" value="5 PM" onclick="ConsultaMarker()">
+                    <input type="text" style="width: 200px;  text-align:center; " id="Tiempo_Hora22" value="Metros a la redonda">
 
                     </li>
 
@@ -514,6 +520,27 @@ function SetMarker(){
     map.setCenter(Posicion_Real);
     } // if no repetir
     } // SET MARKER
+
+function ConsultaMarker(){
+
+    map.addListener('click', function(e) {
+    var LatitudMarker=String(e.latLng).substring(1,10);
+    var LongitudMarker=(String(e.latLng).split(",")[1].substring(1,String(e.latLng).split(",")[1].length)).substring(0,10);
+
+    google.maps.event.clearListeners(map, 'click');
+
+ });
+    document.location.href='#service';
+
+    $.post( "Marker_Hora.php", { LatitudMarker: LatitudMarker, LongitudMarker: LongitudMarker, 
+                                   Metros:  Hora_Inicio_PHP    }).done(
+
+    function( data ) {  
+    console.log(data);
+       });
+
+
+ }
 
 function Consulta_Real(){
     
