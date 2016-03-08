@@ -141,22 +141,13 @@
         <h5>FECHA INICIAL:</h5><h5 class="eso" id="Fecha_Inicio2" onmouseover="Calendario_Inicial();">0000-00-00</h5>
         <div id="Fecha_Inicio" onmouseleave="Ocultar_Calendario1();" style="margin-left: 120px; margin-top: 3px; position: absolute;"></div>
             
-            
      </li>
-
-
-
             <li>
            
         <h5 >FECHA FINAL:</h5><h5 class="eso" id="Fecha_Final2" onmouseover="Calendario_Final();">0000-00-00</h5>
            <div id="Fecha_Final" onmouseleave="Ocultar_Calendario2();" style="margin-left: 150px; margin-top: 3px; position: absolute;"> </div>
 
            </li>  
-
-
-    
-     
-
                     <li>  
                         <div> 
 
@@ -172,7 +163,6 @@
                     
                     <li>
                     <div>
-
                                 <h5>HORA:</h5>
                                 <input type="text" style="width: 48px;  text-align:center; background-color: #0f748f; border:none " id="Tiempo_Hora2" value="5 PM">
                                 <h5>MINUTOS:</h5>
@@ -180,8 +170,6 @@
 
                                 <h5>SEGUNDOS:</h5>
                                 <input type="text" style="width: 27px; text-align:center; background-color: #0f748f; border:none" id="Tiempo_Segundo2" value="00">
-
-
                     </div>
         </BR>
 
@@ -195,34 +183,8 @@
                 </div>
             </div>
         
+        </BR></BR></BR>   </BR>       </BR>     </BR>    </BR>   </BR>     </BR>     </BR>   </BR>   </BR>     </BR>   </BR>   </BR>
 
-
-
-        </BR>
-       </BR>
-
-     </BR>
-
-
-        </BR>
-       </BR>
-
-     </BR>
-
-     </BR>
-     </BR>
-
-     </BR>
-
-     </BR>
-    </BR>
-    </BR>
-
-     </BR>
-    </BR>
-
-
-     </BR>
         <input class="btn btn-blue" id="Boton_Real23" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Hora_Marker();"/>
         
 
@@ -291,9 +253,7 @@
 
 </section>
 
-
-
- <section id="service"> <!--#Mapa-->
+<section id="service"> <!--#Mapa-->
 
                 <div class="container">
                     <div class="row">
@@ -352,10 +312,8 @@
 
 <div id="googleMap"></div>
   <div class="btn btn-blue" id="Boton_Real24" type="button" value="TIEMPO REAL" onclick="Consulta_Real();" 
-   ><h3 style="position: absolute; margin-left: -30px; font-size: 9.5px;"><strong>TIEMPO REAL</strong></h3></div>
+   ><h3 style="position: absolute; margin-left: -30px; font-size: 12px;  text-align: center;  "><strong>TIEMPO REAL</strong></h3></div>
    <p class="auto"><input type="text" id="autoc"/></p>
-
-
 
 </section>
 
@@ -447,6 +405,13 @@ var myCenter=new google.maps.LatLng(parseFloat(Latitud_Gps),parseFloat(Longitud_
  var Longitudes_Historicas;  var Longitud_Historica;     var Horas_Historicas;       var Tiempo;				 var CalSet=0;
  var Calendario1=1;          var LatitudMarker_Hora;     var Metros_Redonda;         var vect;
  var Calendario2=1;	         var LongitudMarker_Hora;
+
+var apiKey = 'AIzaSyCF6NfbnvzeseQoQPP5Bh6iSHA3_fcHu1g';
+var drawingManager;
+var placeIdArray = [];
+var polylines = [];
+var snappedCoordinates = [];
+var pathValues = [];
  
  var PoliLinea_Real = new google.maps.Polyline({ path: Ruta_Real,   strokeColor: '#FFFF00',  strokeOpacity: 1.0,  strokeWeight: 5    });
  
@@ -470,10 +435,9 @@ var myCenter=new google.maps.LatLng(parseFloat(Latitud_Gps),parseFloat(Longitud_
 
    map.controls[google.maps.ControlPosition.RIGHT_TOP].push(      document.getElementById('autoc'));
 
-   map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(      document.getElementById('Boton_Real24'));
+   map.controls[google.maps.ControlPosition.TOP_CENTER].push(      document.getElementById('Boton_Real24'));
 
-  var autocomplete = new google.maps.places.Autocomplete(
-      document.getElementById('autoc'));
+  var autocomplete = new google.maps.places.Autocomplete(      document.getElementById('autoc'));
   autocomplete.bindTo('bounds', map);
   autocomplete.addListener('place_changed', function() {
     var place = autocomplete.getPlace();
