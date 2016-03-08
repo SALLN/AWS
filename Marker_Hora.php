@@ -8,7 +8,7 @@ mysql_select_db($db,$con) or die ("Problema al conectar con la DB");
 $Latitud_Marker=$_POST['LatitudMarker'];
 $Longitud_Marker=$_POST['LongitudMarker'];
 $MetrosRedonda=floatval($_POST['Metros']);
-$registro=mysql_query("SELECT LATITUD,LONGITUD,FECHA_HORA FROM coordenadas order by ID desc limit 10") or die("Problemas en consulta: ".mysql_error());
+$registro=mysql_query("SELECT LATITUD,LONGITUD,FECHA_HORA FROM coordenadas") or die("Problemas en consulta: ".mysql_error());
 
 
 while($reg=mysql_fetch_array($registro)){ 

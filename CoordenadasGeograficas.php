@@ -184,8 +184,8 @@
                     </div>
         </BR>
 
-                    <input type="button" style="width: 100px;  text-align:center; " id="Tiempo_Hora22" value="5 PM" onclick="ConsultaMarker()">
-                    <input type="text" style="width: 200px;  text-align:center; " id="Tiempo_Hora22" value="Metros a la redonda">
+                    <input type="button" style="width: 100px;  text-align:center;" value="Marker_Hora" onclick="ConsultaMarker()">
+                    <input type="text" style="width: 200px;  text-align:center; " id="Metros" placeholder="Metros a la redonda">
 
                     </li>
 
@@ -219,9 +219,7 @@
         <input class="btn btn-blue" id="Boton_Real23" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Historico();"/>
         
 
-      <!--
-        #service-bottom
-        ========================== -->
+      <!--        #service-bottom        ========================== -->
 <script>
 	$(document).ready(function() {
 
@@ -439,9 +437,9 @@ var myCenter=new google.maps.LatLng(parseFloat(Latitud_Gps),parseFloat(Longitud_
  var Longitud;               var Hora;                   var auxlon;                 var k;                      var Datos;
  var Latitudes_Historicas;   var Latitud_Historica;      var Fechas_Historicas;      var columnas;               var RealAgain=0;
  var Longitudes_Historicas;  var Longitud_Historica;     var Horas_Historicas;       var Tiempo;				 var CalSet=0;
- var Calendario1=1;
- var Calendario2=1;				       
-
+ var Calendario1=1;          var LatitudMarker_Hora;     var Metros_Redonda;
+ var Calendario2=1;	         var LongitudMarker_Hora;
+ 
  var PoliLinea_Real = new google.maps.Polyline({ path: Ruta_Real,   strokeColor: '#FFFF00',  strokeOpacity: 1.0,  strokeWeight: 5    });
  
  var PoliLinea_Historica = new google.maps.Polyline({ path: Ruta_Historica,  strokeColor: '#000000', strokeOpacity: 1.0, strokeWeight: 5 });
@@ -511,22 +509,84 @@ function SetMarker(){
     } // SET MARKER
 
 function ConsultaMarker(){
+    document.location.href='#service';
 
     map.addListener('click', function(e) {
-    var LatitudMarker=String(e.latLng).substring(1,10);
-    var LongitudMarker=(String(e.latLng).split(",")[1].substring(1,String(e.latLng).split(",")[1].length)).substring(0,10);
+    LatitudMarker_Hora=String(e.latLng).substring(1,10);
+    LongitudMarker_Hora=(String(e.latLng).split(",")[1].substring(1,String(e.latLng).split(",")[1].length)).substring(0,10);
+    Metros_Redonda=document.getElementById('Metros').value;
 
     google.maps.event.clearListeners(map, 'click');
 
- });
-    document.location.href='#service';
-
-    $.post( "Marker_Hora.php", { LatitudMarker: LatitudMarker, LongitudMarker: LongitudMarker, 
-                                   Metros:  Hora_Inicio_PHP    }).done(
+    $.post( "Marker_Hora.php", { LatitudMarker: LatitudMarker_Hora, LongitudMarker: LongitudMarker_Hora, 
+                                   Metros:  Metros_Redonda   }).done(
 
     function( data ) {  
+
     console.log(data);
+
+    Datos=data;
+    columnas=data.split("&");
+
+    Latitudes_Historicas=columnas[0].substring(1,columnas[0].length-1).split(",");
+
+    for (i = 0; i <Latitudes_Historicas.length; i++)     {  Latitudes_Historicas[i]=Latitudes_Historicas[i].substring(1,Latitudes_Historicas[i].length-1);  }
+
+    Longitudes_Historicas=columnas[1].substring(1,columnas[1].length-1).split(",");
+
+    for (i = 0; i <Longitudes_Historicas.length; i++) {     Longitudes_Historicas[i]=Longitudes_Historicas[i].substring(1,Longitudes_Historicas[i].length-1);    }
+
+    Fechas_Historicas=columnas[2].substring(1,columnas[2].length-1).split(",");
+
+    for (i = 0; i <Fechas_Historicas.length; i++) {     Fechas_Historicas[i]=Fechas_Historicas[i].substring(1,11);   }
+    
+    Horas_Historicas=columnas[3].substring(1,columnas[3].length-1).split(",");
+
+    for (i = 0; i <Horas_Historicas.length; i++) {      Horas_Historicas[i]=Horas_Historicas[i].substring(1,9);  }
+
+        k=0;
+        NumMark=0;
+    for(var i=0;i<Latitudes_Historicas.length;i++)
+        {
+            k++;
+
+        Latitud_Historica = parseFloat(Latitudes_Historicas[i]);
+        Longitud_Historica = parseFloat(Longitudes_Historicas[i]);
+        Posicion_Historica=new google.maps.LatLng(Latitud_Historica,Longitud_Historica);
+
+        if (Latitud_Historica!=auxlat || Longitud_Historica!=auxlon ){  
+
+        auxlat =Latitud_Historica;  auxlon =Longitud_Historica;
+
+        Ruta_Historica.push(Posicion_Historica);   
+        PoliLinea_Historica.setPath(Ruta_Historica);  
+
+        Marker_Historico[NumMark]=new google.maps.Marker({  
+                                    position:Posicion_Historica,        //animation:google.maps.Animation.DROP,
+                                    map: map,
+                                    title: Fechas_Historicas[i]+"--"+Horas_Historicas[i],
+                                    //animation:google.maps.Animation.BOUNCE, // SALTANDO
+                                    //draggable: true, // PERMITE ARRASTRARLOS
+                                    label: "1",
+                                    icon: Icono_Historico
+                                    //icon: 'taxi2.png'
+                                 });
+        map.setCenter(Posicion_Historica);
+        NumMark++;
+        } // if no repetir
+        } // FOR MARKER
+
+
+
+
+
+
        });
+
+
+
+ });
+
 
 
  }
