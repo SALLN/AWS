@@ -374,6 +374,7 @@ width: 11px;
 ============================================================*/
 
 #service-bottom {
+  color:white;
   background-color: #1f2021;
   padding-bottom: 0;
   position: relative;
@@ -410,7 +411,7 @@ h5 {display: inline;}
 
 .service-features {
   background-color: #0f748f;
-  height: 380px;
+  height: 400px;
   padding: 50px 0 50px 65px;
   position: absolute;
   right: 0;
