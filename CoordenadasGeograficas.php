@@ -58,10 +58,10 @@
                     <!-- main nav -->
                     <nav class="collapse navigation navbar-collapse navbar-right" role="navigation">
                         <ul id="nav" class="nav navbar-nav">
-                            <li class="current"><a href="#home">Home</a></li>
-                            <li><a href="#service-bottom">Historico</a></li>
+                            <li class="current"><a href="#home">Inicio</a></li>
+                            <li><a href="#service-bottom">Histórico</a></li>
                             <li><a href="#service">Mapa</a></li>
-                            <li><a href="#contact">Contact</a></li>
+                            <li><a href="#contact">Contacto</a></li>
                               
                         </ul>
                     </nav>
@@ -352,11 +352,10 @@
                     <div class="container">
                         <div class="row">
                             <div class="section-title text-center wow fadeInDown">
-                         <h2>Contact Us</h2>
-                         <p>Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Mauris blandit aliquet elit, eget tincidunt.</p>
+                         <h2>Contáctanos</h2>
+                         <p>Envia tu mensaje con tus requerimientos</p>
                          </div>
-                    
-                            <div class="col-md-8 col-sm-9 wow fadeInLeft">
+                            <div class="col-md-8 col-sm-8 wow fadeInLeft">
                             <div class="contact-form clearfix">
                             <form action="index.html" method="post">
                                 <div class="input-field">
@@ -368,19 +367,19 @@
                                 <div class="input-field message">
                                     <textarea name="message" class="form-control" placeholder="Your Message" required=""></textarea>
                                 </div>
-                                <input type="submit" class="btn btn-blue pull-right" value="SEND MESSAGE" id="msg-submit">
+                                <input type="submit" class="btn btn-blue pull-right" value="Enviar" id="msg-submit">
                             </form>
                          </div> <!-- end .contact-form -->
                          </div> <!-- .col-md-8 -->
 
                          <div class="col-md-4 col-sm-3 wow fadeInRight">
                         <div class="contact-details">
-                            <span>GET IN TOUCH</span>
+                            <span>Llámanos!</span>
                             <p>+00 123.456.789 <br> <br> +00 123.456.789</p>
                         </div> <!-- end .contact-details -->
 
                         <div class="contact-details">
-                            <span>GET IN TOUCH</span>
+                            <span>Llámanos!</span>
                             <p>+00 123.456.789 <br> <br> +00 123.456.789</p>
                         </div> <!-- end .contact-details -->
                          </div> <!-- .col-md-4 -->
@@ -396,16 +395,6 @@
 
                         <div class="footer-logo wow fadeInDown">
                             <img src="images/logo.png" alt="logo">
-                        </div>
-
-                        <div class="footer-social wow fadeInUp">
-                            <h3>We are social</h3>
-                            <ul class="text-center list-inline">
-                                <li><a href="http://goo.gl/RqhEjP"><i class="fa fa-facebook fa-lg"></i></a></li>
-                                <li><a href="http://goo.gl/hUfpSB"><i class="fa fa-twitter fa-lg"></i></a></li>
-                                <li><a href="http://goo.gl/r4xzR4"><i class="fa fa-google-plus fa-lg"></i></a></li>
-                                <li><a href="http://goo.gl/k9zAy5"><i class="fa fa-dribbble fa-lg"></i></a></li>
-                            </ul>
                         </div>
 
                     </div>
