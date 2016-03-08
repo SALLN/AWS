@@ -51,7 +51,7 @@
                     <!-- logo -->
                     <h1 class="navbar-brand">
                         <a href="#body">
-                            <img src="images/logo.png" alt="Kasper Logo">
+                            <img src="images/iconoprueba.png" alt="Kasper Logo">
                         </a>
                     </h1>
                     <!-- /logo -->
@@ -160,12 +160,12 @@
                     <li>  
                         <div> 
 
-                        <label>HORA:</label>
-                        <input type="text" style="width: 43px;  text-align:center" id="Tiempo_Hora1" value="5 PM">
-                        <label>MINUTOS:</label>
-                        <input type="text" style="width: 23px;  text-align:center" id="Tiempo_Minuto1" value="00">
-                        <label>SEGUNDOS:</label>
-                        <input type="text" style="width: 23px; text-align:center" id="Tiempo_Segundo1" value="00">
+                        <h5>HORA:</h5>
+                        <input type="text" style="width: 48px;  text-align:center; background-color: #0f748f; border:none" id="Tiempo_Hora1" value="5 PM">
+                        <h5>MINUTOS:</h5>
+                        <input type="text" style="width: 27px;  text-align:center; background-color: #0f748f; border:none" id="Tiempo_Minuto1" value="00">
+                        <h5>SEGUNDOS:</h5>
+                        <input type="text" style="width: 27px; text-align:center; background-color: #0f748f; border:none"  id="Tiempo_Segundo1" value="00">
                         </div>
 
                     <li>
@@ -173,20 +173,20 @@
                     <li>
                     <div>
 
-                                <label>HORA:</label>
-                                <input type="text" style="width: 43px;  text-align:center; " id="Tiempo_Hora2" value="5 PM">
-                                <label>MINUTOS:</label>
-                                <input type="text" style="width: 23px;  text-align:center" id="Tiempo_Minuto2" value="00">
+                                <h5>HORA:</h5>
+                                <input type="text" style="width: 48px;  text-align:center; background-color: #0f748f; border:none " id="Tiempo_Hora2" value="5 PM">
+                                <h5>MINUTOS:</h5>
+                                <input type="text" style="width: 27px;  text-align:center; background-color: #0f748f; border:none" id="Tiempo_Minuto2" value="00">
 
-                                <label>SEGUNDOS:</label>
-                                <input type="text" style="width: 23px; text-align:center" id="Tiempo_Segundo2" value="00">
+                                <h5>SEGUNDOS:</h5>
+                                <input type="text" style="width: 27px; text-align:center; background-color: #0f748f; border:none" id="Tiempo_Segundo2" value="00">
 
 
                     </div>
         </BR>
 
-                    <input type="button" style="width: 100px;  text-align:center;" value="Marker_Hora" onclick="Consulta_Marker_Hora()">
-                    <input type="text" style="width: 200px;  text-align:center; " id="Metros" placeholder="Metros a la redonda">
+                    <input type="button" class="btn btn-blue" value="Ubicar Marker" onclick="Consulta_Marker_Hora()">
+                    <input type="text" style="width: 250px;  text-align:center; background-color: #0f748f; border:none;color:white " id="Metros" placeholder="Digite los metros a la redonda">
 
                     </li>
 
@@ -196,6 +196,12 @@
             </div>
         
 
+
+
+        </BR>
+       </BR>
+
+     </BR>
 
 
         </BR>
@@ -400,7 +406,7 @@
                     <div class="col-lg-12">
 
                         <div class="footer-logo wow fadeInDown">
-                            <img src="images/logo.png" alt="logo">
+                            <img src="images/iconoprueba.png" alt="logo">
                         </div>
 
                     </div>
