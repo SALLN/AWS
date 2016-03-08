@@ -15,7 +15,7 @@
     <meta name="keywords" content="one page, business template, single page, onepage, responsive, parallax, creative, business, html5, css3, css3 animation">
     <meta charset="utf-8">
 
-    <title>Coordenadas Ticoll</title>
+    <title>Ticoll</title>
         
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" rel="stylesheet" type="text/css">
 
@@ -82,8 +82,8 @@
                     <div class="item active"  style="background-image: url('images/bg1.jpeg')" >
                         <div class="carousel-caption">
                             <div class="animated bounceInRight">
-                                <h2>HELLO WORLD! <br>WE ARE TICOLL</h2>
-                                <p>ACA QUE VAMOS A PONER? 1</p>
+                                <h2>Hola Mundo! <br>Somos ticoll</h2>
+                                <p>¿Quieres ver el recorrido de tu vehículo en tiempo real?</p>
                             </div>
                         </div>
                     </div>              
@@ -91,8 +91,8 @@
                     <div class="item" style="background-image: url('images/bg21.jpg')">                
                         <div class="carousel-caption">
                             <div class="animated bounceInDown">
-                                <h2>HELLO WORLD! <br>WE ARE TICOLL</h2>
-                                <p>ACA QUE VAMOS A PONER? 2</p>
+                                <h2>Hola Mundo! <br>Somos ticoll</h2>
+                                <p>¿Deseas conocer tu recorrido histórico? </p>
                             </div>
                         </div>
                     </div>
@@ -100,8 +100,8 @@
                     <div class="item" style="background-image: url('images/bg3.jpg')">                 
                          <div class="carousel-caption">
                             <div class="animated bounceInUp">
-                                <h2>HELLO WORLD! <br>WE ARE TICOLL</h2>
-                                <p>ACA QUE VAMOS A PONER? 3</p>
+                                <h2>Hola Mundo! <br>Somos ticoll</h2>
+                                <p>...Y somos la solución!!!</p>
                             </div>
                         </div>
                     </div>
