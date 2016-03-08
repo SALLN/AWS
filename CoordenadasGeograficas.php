@@ -50,7 +50,7 @@
                     <!-- logo -->
                     <h1 class="navbar-brand">
                         <a href="#body">
-                            <img src="images/logo.png" alt="Kasper Logo">
+                            <img src="images/ticoll.png" alt="Kasper Logo">
                         </a>
                     </h1>
                     <!-- /logo -->
@@ -398,7 +398,7 @@
                     <div class="col-lg-12">
 
                         <div class="footer-logo wow fadeInDown">
-                            <img src="images/logo.png" alt="logo">
+                            <img src="images/ticoll.png" alt="logo">
                         </div>
 
                     </div>
