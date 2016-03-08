@@ -27,9 +27,9 @@ p {display: inline;}
 
 #googleMap{ margin-left: 1em;  width:102em;		height:37.438em;	}
 
-#bar {        width: 240px;        background-color: rgba(255, 255, 255, 0.75);        margin: 8px;        padding: 4px;        border-radius: 4px;      }
+#Boton_Real24{	font-size: 10px; width: 40px; height: 30px; text-align: right; 	}
 
-#autoc {        width: 100%;        box-sizing: border-box;      }
+#autoc {        width: 175px; height: 25px; box-sizing: border-box; border-radius: 5px;  font-size: 15px; border-color: red; }
 
 #contenedor div{            float:left;           }
 

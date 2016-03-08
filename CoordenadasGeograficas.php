@@ -345,12 +345,11 @@
                 </div>
 
 <div id="googleMap"></div>
-    <div id="bar">
-      <p class="auto"><input type="text" id="autoc"/></p>
-    </div>
-
   <div class="btn btn-blue" id="Boton_Real24" type="button" value="TIEMPO REAL" onclick="Consulta_Real();" 
-  style="position: absolute; margin-top: -30px; margin-left: -662px; font-size: 10px; width: 40px; height: 30px; text-align: right; " ><h3 style="position: absolute; margin-left: -30px; font-size: 10px;"><strong>TIEMPO REAL</strong></h3></div>
+   ><h3 style="position: absolute; margin-left: -30px; font-size: 9.5px;"><strong>TIEMPO REAL</strong></h3></div>
+   <p class="auto"><input type="text" id="autoc"/></p>
+
+
 
 </section>
 
@@ -463,8 +462,10 @@ var myCenter=new google.maps.LatLng(parseFloat(Latitud_Gps),parseFloat(Longitud_
 
  map=new google.maps.Map(document.getElementById("googleMap"),mapOptions);
 
-   map.controls[google.maps.ControlPosition.RIGHT_TOP].push(
-      document.getElementById('bar'));
+   map.controls[google.maps.ControlPosition.RIGHT_TOP].push(      document.getElementById('autoc'));
+
+   map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(      document.getElementById('Boton_Real24'));
+
   var autocomplete = new google.maps.places.Autocomplete(
       document.getElementById('autoc'));
   autocomplete.bindTo('bounds', map);

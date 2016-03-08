@@ -37,8 +37,7 @@
     </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?libraries=drawing,places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=drawing,places"></script>
     <script>
 var apiKey = 'AIzaSyCF6NfbnvzeseQoQPP5Bh6iSHA3_fcHu1g';
 
@@ -57,11 +56,10 @@ function initialize() {
 
   // Adds a Places search box. Searching for a place will center the map on that
   // location.
-  map.controls[google.maps.ControlPosition.RIGHT_TOP].push(
-      document.getElementById('bar'));
-  var autocomplete = new google.maps.places.Autocomplete(
-      document.getElementById('autoc'));
+  map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('bar'));
+  var autocomplete = new google.maps.places.Autocomplete(  document.getElementById('autoc'));
   autocomplete.bindTo('bounds', map);
+
   autocomplete.addListener('place_changed', function() {
     var place = autocomplete.getPlace();
     if (place.geometry.viewport) {
