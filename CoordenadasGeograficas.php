@@ -530,7 +530,7 @@ function SetMarker(){
 
     */  
     map.setCenter(Posicion_Real);
-    } // if no repetir
+    } // if no repetirj
 
  } // SET MARKER
 
