@@ -6,7 +6,7 @@
     <link rel="stylesheet" media="screen" type="text/css" href="css/layout.css" />
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="http://maps.googleapis.com/maps/api/js"></script>
+    <!-- <script src="http://maps.googleapis.com/maps/api/js"></script> -->
 
     <link rel="shortcut icon" href="images/taxi6.ico">
 
@@ -29,6 +29,61 @@
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/responsive.css">
         <link rel="styleSheet" href="css/encabezado.css">
+
+
+<!-- CSS PARA EL SEARCH BOX  -->
+
+ <style>
+     
+       }
+      .controls {
+        margin-top: 10px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: 32px;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      }
+
+      #pac-input {
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 300px;
+      }
+
+      #pac-input:focus {
+        border-color: #4d90fe;
+      }
+
+      .pac-container {
+        font-family: Roboto;
+      }
+
+      #type-selector {
+        color: #fff;
+        background-color: #4d90fe;
+        padding: 5px 11px 0px 11px;
+      }
+
+      #type-selector label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+      }
+      #target {
+        width: 345px;
+      }
+    </style>
+
+ 
+
     			
 </head>
 	
@@ -217,7 +272,13 @@
         #service-bottom
         ========================== -->
 <script>
+
+
+//time picker
+
+
 	$(document).ready(function() {
+
 
     	$('#Tiempo_Hora1').timepicker({
             showMinutes: false,
@@ -339,6 +400,7 @@
 
                 </div>
 
+<input id="pac-input" class="controls" type="text" placeholder="Search Box">
 <div id="googleMap"></div>
 
 
@@ -422,8 +484,17 @@
             <script src="js/jquery.ui.timepicker.js?v=0.3.3"></script>
             <script src="js/modernizr-2.6.2.min.js"></script>
 
-
+             <!-- SEARCH BOX -->
+             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFsXAxxjJ9kx9jhHa0df5LUSNIkE4Njk0&libraries=places&callback=initAutocomplete"
+         async defer></script>
+          
+               
 <script>
+
+ //map=new google.maps.Map(document.getElementById("googleMap"),mapOptions);
+
+
+function initAutocomplete() {
 
 var myCenter=new google.maps.LatLng(parseFloat(Latitud_Gps),parseFloat(Longitud_Gps));
 
@@ -432,9 +503,9 @@ var myCenter=new google.maps.LatLng(parseFloat(Latitud_Gps),parseFloat(Longitud_
  var Latitud;                var Fecha;                  var auxlat;                 var map;                    var NumMark;    
  var Longitud;               var Hora;                   var auxlon;                 var k;                      var Datos;
  var Latitudes_Historicas;   var Latitud_Historica;      var Fechas_Historicas;      var columnas;               var RealAgain=0;
- var Longitudes_Historicas;  var Longitud_Historica;     var Horas_Historicas;       var Tiempo;				 var CalSet=0;
+ var Longitudes_Historicas;  var Longitud_Historica;     var Horas_Historicas;       var Tiempo;                 var CalSet=0;
  var Calendario1=1;
- var Calendario2=1;				       
+ var Calendario2=1;                    
 
  var PoliLinea_Real = new google.maps.Polyline({ path: Ruta_Real,   strokeColor: '#FFFF00',  strokeOpacity: 1.0,  strokeWeight: 5    });
  
@@ -454,7 +525,71 @@ var myCenter=new google.maps.LatLng(parseFloat(Latitud_Gps),parseFloat(Longitud_
                       fillOpacity:1// opacidad del relleno
                       }
 
- map=new google.maps.Map(document.getElementById("googleMap"),mapOptions);
+
+
+        var map = new google.maps.Map(document.getElementById('googleMap'),mapOptions);
+
+
+
+//SEARCH BOX
+
+// Create the search box and link it to the UI element.
+        var input = document.getElementById('pac-input');
+        var searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
+
+        var markers = [];
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
+
+          if (places.length == 0) {
+            return;
+          }
+
+          // Clear out the old markers.
+          markers.forEach(function(marker) {
+            marker.setMap(null);
+          });
+          markers = [];
+
+          // For each place, get the icon, name and location.
+          var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            var icon = {
+              url: place.icon,
+              size: new google.maps.Size(71, 71),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(25, 25)
+            };
+
+            // Create a marker for each place.
+            markers.push(new google.maps.Marker({
+              map: map,
+              icon: icon,
+              title: place.name,
+              position: place.geometry.location
+            }));
+
+            if (place.geometry.viewport) {
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+          });
+          map.fitBounds(bounds);
+        });
+
+
+
 
  PoliLinea_Real.setMap(map);
 
@@ -503,6 +638,7 @@ function SetMarker(){
     map.setCenter(Posicion_Real);
     } // if no repetir
     } // SET MARKER
+
 
 function Consulta_Real(){
     
@@ -589,88 +725,11 @@ function Decodificar(data){
         map.setCenter(Posicion_Historica);
         NumMark++;
         } // if no repetir
-        } // FOR MARKER
+      } // FOR MARKER
  }
-
-function Calendario_Inicial(){
-
-	if (Calendario1==1){
-		Calendario1=0;
-	    $('#Fecha_Inicio').DatePicker({
-	    
-	     flat: true,
-	     date:  '',
-	     current: '2016-03-05',
-	     calendars: 1,
-	     starts: 0,
-	     mode: 'single',
-	     view: 'days',
-	     onChange: function(formated, dates){ 
-	        if ($('#Fecha_Inicio').DatePickerGetDate(true) != "" && $('#Fecha_Inicio').DatePickerGetDate(true).length==10)
-	         {
-	            $('#Fecha_Inicio').DatePickerHide(); 
-	            Calendario1=1;   
-	            CalSet=1;
-    			Fecha_Inicio_PHP = $('#Fecha_Inicio').DatePickerGetDate(true);
-    			document.getElementById('Fecha_Inicio2').innerHTML  = Fecha_Inicio_PHP;  
-	        }
-	      }
-	    	});
-	}
- 
- }
-
-function Calendario_Final(){
- 
-
-	try{
-		CalSet=0;
-		if ($('#Fecha_Inicio').DatePickerGetDate(true).length==10)
-		{
-			CalSet=1;
-		}
-	 }catch(err){
-		console.log("catch");
-		CalSet=0;
-	 };
-
-     if (Calendario2==1 && CalSet==1){
-	Calendario2=0;
-
-    $('#Fecha_Final').DatePicker({
-    
-    flat: true,
-    date:  '',
-    current: $('#Fecha_Inicio').DatePickerGetDate(true),
-    calendars: 1,
-    starts: 0,
-    mode: 'single',
-    view: 'days',
-    onChange: function(formated, dates){ 
-
-        if ($('#Fecha_Final').DatePickerGetDate(true) != "" && $('#Fecha_Final').DatePickerGetDate(true).length==10)
-         {
-
-            $('#Fecha_Final').DatePickerHide(); 
-	            Calendario2=1;   
-    			Fecha_Final_PHP = $('#Fecha_Final').DatePickerGetDate(true);
-    			document.getElementById('Fecha_Final2').innerHTML  = Fecha_Final_PHP;  
-        }
-    }
-    });
- }
- }
-
-function Ocultar_Calendario1(){
- 	$('#Fecha_Inicio').DatePickerHide();
- 	Calendario1=1;
-  }
-
-function Ocultar_Calendario2(){
- 	$('#Fecha_Final').DatePickerHide();
- 	Calendario2=1;
- }
+}
 
 </script>
+
 </body>
 </html>
