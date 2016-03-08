@@ -410,6 +410,7 @@ h5 {display: inline;}
 }
 
 .service-features {
+  color: white; 
   background-color: #0f748f;
   height: 400px;
   padding: 50px 0 50px 65px;
