@@ -359,13 +359,13 @@
                             <div class="contact-form clearfix">
                             <form action="index.html" method="post">
                                 <div class="input-field">
-                                    <input type="text" class="form-control" name="name" placeholder="Your Name" required="">
+                                    <input type="text" class="form-control" name="name" placeholder="Nombre" required="">
                                 </div>
                                 <div class="input-field">
-                                    <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+                                    <input type="email" class="form-control" name="email" placeholder="Email" required="">
                                 </div>
                                 <div class="input-field message">
-                                    <textarea name="message" class="form-control" placeholder="Your Message" required=""></textarea>
+                                    <textarea name="message" class="form-control" placeholder="Mensaje" required=""></textarea>
                                 </div>
                                 <input type="submit" class="btn btn-blue pull-right" value="Enviar" id="msg-submit">
                             </form>
