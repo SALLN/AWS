@@ -871,14 +871,14 @@ figcaption.mask span {
 ============================================================*/
 
 .contact-form .input-field {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 .contact-form .form-control {
   border: 1px solid #dbdbdb;
   padding: 20px;
   border-radius: 0;
-  height: 58px;
+  height: 43px;
   box-shadow: none;
 }
 
@@ -896,7 +896,7 @@ figcaption.mask span {
 }
 
 .contact-details {
-  margin-bottom: 90px;
+  margin-bottom: 80px;
 }
 
 .contact-details > span {
