@@ -37,10 +37,18 @@
     </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?libraries=drawing,places"></script>
-    <script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=drawing,places"></script>
 
+  </head>
+
+  <body>
+    <div id="map"></div>
+    <div id="bar">
+      <p class="auto"><input type="text" id="autoc"/></p>
+      <p><a id="clear" href="#">Click here</a> to clear map.</p>
+    </div>
+
+<script>
 var apiKey = 'AIzaSyCF6NfbnvzeseQoQPP5Bh6iSHA3_fcHu1g';
 var map;
 var drawingManager;
@@ -50,7 +58,6 @@ var snappedCoordinates = [];
 var pathValues = [];
 
 
-function initialize() {
 
   var mapOptions = {    zoom: 17,    center: {lat: -33.8667, lng: 151.1955}  };
 
@@ -58,18 +65,7 @@ function initialize() {
 
   // Adds a Places search box. Searching for a place will center the map on that
   // location.
-  map.controls[google.maps.ControlPosition.RIGHT_TOP].push(      document.getElementById('bar'));
-  var autocomplete = new google.maps.places.Autocomplete(      document.getElementById('autoc'));
-  autocomplete.bindTo('bounds', map);
-  autocomplete.addListener('place_changed', function() {
-    var place = autocomplete.getPlace();
-    if (place.geometry.viewport) {
-      map.fitBounds(place.geometry.viewport);
-    } else {
-      map.setCenter(place.geometry.location);
-      map.setZoom(17);
-    }
-  });
+
 
   // Enables the polyline drawing control. Click on the map to start drawing a
   // polyline. Each click will add a new vertice. Double-click to stop drawing.
@@ -127,21 +123,14 @@ function initialize() {
   });
 
 
-}
 
 
   
 
-$(window).load(initialize);
 
-    </script>
-  </head>
 
-  <body>
-    <div id="map"></div>
-    <div id="bar">
-      <p class="auto"><input type="text" id="autoc"/></p>
-      <p><a id="clear" href="#">Click here</a> to clear map.</p>
-    </div>
+</script>
+
+
   </body>
 </html>
