@@ -522,8 +522,8 @@ function Consulta_Marker_Hora(){
     map.addListener('click', function(e) {
     Marker_Real.setMap(null);
 
-    LatitudMarker_Hora=String(e.latLng).substring(1,10);
-    LongitudMarker_Hora=(String(e.latLng).split(",")[1].substring(1,String(e.latLng).split(",")[1].length)).substring(0,10);
+    LatitudMarker_Hora=e.latLng.lat();
+    LongitudMarker_Hora=e.latLng.lng();
     Metros_Redonda=document.getElementById('Metros').value;
     
     map.setCenter(new google.maps.LatLng(parseFloat(LatitudMarker_Hora),parseFloat(LongitudMarker_Hora)));
