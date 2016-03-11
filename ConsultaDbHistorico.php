@@ -11,23 +11,16 @@ $fecha_end=$_POST['FechaFinal']." ".$_POST['HoraFinal'];
 $registro=mysql_query("SELECT LATITUD,LONGITUD,FECHA_HORA FROM coordenadas 
 						where FECHA_HORA between  '$fecha_start' and '$fecha_end'						
  						order by  ID asc") or die("Problemas en consulta: ".mysql_error());
-
-
+$tabla=array();
+$i=0;
 while($reg=mysql_fetch_array($registro)){  
 
-$lati2[]=$reg['LATITUD']; 	
-$longi2[]=$reg['LONGITUD'];
-$fechat2[]=substr($reg['FECHA_HORA'],0,10);
-$horat2[]=substr($reg['FECHA_HORA'],11,18);
-
+	$tabla[$i]=$reg;
+	$i++;
 }
 
-  print_r(json_encode($lati2));  echo "&";
-  
-  print_r(json_encode($longi2));  echo "&";
+echo json_encode($tabla);
 
-  print_r(json_encode($fechat2));  echo "&";
 
-  print_r(json_encode($horat2));
   
 ?>
