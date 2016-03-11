@@ -51,7 +51,11 @@
                     <!-- logo -->
                     <h1 class="navbar-brand">
                         <a href="#body">
+<<<<<<< HEAD
                             <img src="images/iconoprueba1.png" alt="Kasper Logo">
+=======
+                            <img src="images/iconoprueba.png" alt="Kasper Logo">
+>>>>>>> refs/remotes/origin/master
                         </a>
                     </h1>
                     <!-- /logo -->
@@ -160,12 +164,21 @@
                     <li>  
                         <div> 
 
+<<<<<<< HEAD
                         <label>HORA:</label>
                         <input type="text" style="width: 43px;  text-align:center;background-color: #0f748f;border:none" id="Tiempo_Hora1" value="5 PM">
                         <label>MINUTOS:</label>
                         <input type="text" style="width: 23px;  text-align:center;background-color: #0f748f;border:none" id="Tiempo_Minuto1" value="00">
                         <label>SEGUNDOS:</label>
                         <input type="text" style="width: 23px; text-align:center;background-color: #0f748f;border:none;" id="Tiempo_Segundo1" value="00">
+=======
+                        <h5>HORA:</h5>
+                        <input type="text" style="width: 48px;  text-align:center; background-color: #0f748f; border:none" id="Tiempo_Hora1" value="5 PM">
+                        <h5>MINUTOS:</h5>
+                        <input type="text" style="width: 27px;  text-align:center; background-color: #0f748f; border:none" id="Tiempo_Minuto1" value="00">
+                        <h5>SEGUNDOS:</h5>
+                        <input type="text" style="width: 27px; text-align:center; background-color: #0f748f; border:none"  id="Tiempo_Segundo1" value="00">
+>>>>>>> refs/remotes/origin/master
                         </div>
 
                     <li>
@@ -173,6 +186,7 @@
                     <li>
                     <div>
 
+<<<<<<< HEAD
                                 <label>HORA:</label>
                                 <input type="text" style="width: 43px;  text-align:center;background-color: #0f748f;border:none " id="Tiempo_Hora2" value="5 PM">
                                 <label>MINUTOS:</label>
@@ -180,13 +194,27 @@
 
                                 <label>SEGUNDOS:</label>
                                 <input type="text" style="width: 23px; text-align:center;background-color: #0f748f;border:none" id="Tiempo_Segundo2" value="00">
+=======
+                                <h5>HORA:</h5>
+                                <input type="text" style="width: 48px;  text-align:center; background-color: #0f748f; border:none " id="Tiempo_Hora2" value="5 PM">
+                                <h5>MINUTOS:</h5>
+                                <input type="text" style="width: 27px;  text-align:center; background-color: #0f748f; border:none" id="Tiempo_Minuto2" value="00">
+
+                                <h5>SEGUNDOS:</h5>
+                                <input type="text" style="width: 27px; text-align:center; background-color: #0f748f; border:none" id="Tiempo_Segundo2" value="00">
+>>>>>>> refs/remotes/origin/master
 
 
                     </div>
         </BR>
 
+<<<<<<< HEAD
                     <input type="button" class="btn btn-blue " value="Ubicar Marker" onclick="Consulta_Marker_Hora()">
                     <input type="text" style="width: 250px;  text-align:center; background-color: #0f748f;border:none " id="Metros" placeholder="Digite metros a la redonda">
+=======
+                    <input type="button" class="btn btn-blue" value="Ubicar Marker" onclick="Consulta_Marker_Hora()">
+                    <input type="text" style="width: 250px;  text-align:center; background-color: #0f748f; border:none;color:white " id="Metros" placeholder="Digite los metros a la redonda">
+>>>>>>> refs/remotes/origin/master
 
                     </li>
 
@@ -200,6 +228,12 @@
 
 
  </BR>
+       </BR>
+
+     </BR>
+
+
+        </BR>
        </BR>
 
      </BR>
@@ -407,7 +441,11 @@
                     <div class="col-lg-12">
 
                         <div class="footer-logo wow fadeInDown">
+<<<<<<< HEAD
                             <img src="images/iconoprueba1.png" alt="logo">
+=======
+                            <img src="images/iconoprueba.png" alt="logo">
+>>>>>>> refs/remotes/origin/master
                         </div>
 
                     </div>
