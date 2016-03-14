@@ -185,7 +185,10 @@
                     </div>
         </BR>
 
-                    <input type="button" style="width: 100px;  text-align:center;" value="Marker_Hora" onclick="Consulta_Marker_Hora()">
+<input type="checkbox" style="width: 100px; text-align:center" id="markerfecha" onclick="Unido=!Unido;">
+
+                    <input type="button" style="width: 100px;  text-align:center;" value="Marker_Hora" onclick="		Consulta_Marker_Hora()">
+
                     <input type="text" style="width: 200px;  text-align:center; " id="Metros" placeholder="Metros a la redonda">
 
                     </li>
@@ -371,7 +374,7 @@
                                     <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
                                 </div>
                                 <div class="input-field message">
-                                    <textarea name="message" class="form-control" placeholder="Your Message" required=""></textarea>
+                                    <textarea name="message" class="form-control" placeholder="Your Message" required></textarea>
                                 </div>
                                 <input type="submit" class="btn btn-blue pull-right" value="Enviar" id="msg-submit">
                             </form>
@@ -439,7 +442,7 @@ var myCenter=new google.maps.LatLng(parseFloat(Latitud_Gps),parseFloat(Longitud_
  var Longitud;               var Hora;                   var auxlon;                 var i;                      var Datos;
  var Latitudes_Historicas;   var Latitud_Historica;      var Fechas_Historicas;      var columnas;               var RealAgain=0;
  var Longitudes_Historicas;  var Longitud_Historica;     var Horas_Historicas;       var Tiempo;				 var CalSet=0;
- var Calendario1=1;          var LatitudMarker_Hora;     var Metros_Redonda;         var vect;
+ var Calendario1=1;          var LatitudMarker_Hora;     var Metros_Redonda;         var vect; var markerfecha;
  var Calendario2=1;	         var LongitudMarker_Hora;
  
  var PoliLinea_Real = new google.maps.Polyline({ path: Ruta_Real,   strokeColor: '#FFFF00',  strokeOpacity: 1.0,  strokeWeight: 5    });
@@ -559,9 +562,25 @@ function Consulta_Marker_Hora(){
     map.setCenter(new google.maps.LatLng(parseFloat(LatitudMarker_Hora),parseFloat(LongitudMarker_Hora)));
 
     google.maps.event.clearListeners(map, 'click');
+	
+//	if( $('.micheckbox').prop('checked') ) {
+  //  alert('Seleccionado');
+//}
+	markerfecha=document.getElementById("markerfecha").checked;
+	//var unido=false;
+	if(markerfecha) {	
+	
+	Fecha_Inicio_PHP = $('#Fecha_Final').DatePickerGetDate(true);
+    Fecha_Final_PHP = $('#Fecha_Final').DatePickerGetDate(true);
+  
+    Tiempo = new Date(2016,10,10,$('#Tiempo_Hora1').timepicker('getHour'),$('#Tiempo_Minuto1').timepicker('getMinute'),$('#Tiempo_Segundo1').timepicker('getMinute'));  
+    Hora_Inicio_PHP=String(Tiempo).substring(16,24);
 
-    $.post( "Marker_Hora.php", { LatitudMarker: LatitudMarker_Hora, LongitudMarker: LongitudMarker_Hora, 
-                                   Metros:  Metros_Redonda   }).done(
+    Tiempo = new Date(2016,10,10,$('#Tiempo_Hora2').timepicker('getHour'),$('#Tiempo_Minuto2').timepicker('getMinute'),$('#Tiempo_Segundo2').timepicker('getMinute'));  
+    Hora_Final_PHP=String(Tiempo).substring(16,24);
+
+   $.post( "Marker_Hora_fecha.php", { FechaInicio: Fecha_Inicio_PHP, FechaFinal: Fecha_Final_PHP, HoraInicio: Hora_Inicio_PHP,  HoraFinal:  Hora_Final_PHP, LatitudMarker: LatitudMarker_Hora, LongitudMarker: LongitudMarker_Hora, 
+                                   Metros:  Metros_Redonda    }).done(
     function( data ) {  
 
      var mat = Deco(data);
@@ -594,8 +613,47 @@ function Consulta_Marker_Hora(){
         } // if no repetir
      } // FOR MARKER
     }); // }.FUNCTION   (.DONE
- }); // }.LISTENER  ).LISTENER
+	 	 
+}
 
+	else{
+$.post( "Marker_Hora.php", {  LatitudMarker: LatitudMarker_Hora, LongitudMarker: LongitudMarker_Hora, 
+                                   Metros:  Metros_Redonda   }).done(
+    function( data ) {  
+
+     var mat = Deco(data);
+    
+        
+        NumMark=0;
+     for(i=0;i<mat[0].length;i++)
+        {
+
+        Latitud_Historica = parseFloat(mat[0][i]);
+        Longitud_Historica = parseFloat(mat[1][i]);
+        Posicion_Historica=new google.maps.LatLng(Latitud_Historica,Longitud_Historica);
+
+        if (Latitud_Historica!=auxlat || Longitud_Historica!=auxlon ){  
+
+        auxlat =Latitud_Historica;  auxlon =Longitud_Historica;
+
+        Marker_Marker_Hora[NumMark]=new google.maps.Marker({  
+                                    position:Posicion_Historica,        //animation:google.maps.Animation.DROP,
+                                    map: map,
+                                    title: mat[2][i]+"--"+mat[3][i],
+                                    //animation:google.maps.Animation.BOUNCE, // SALTANDO
+                                    //draggable: true, // PERMITE ARRASTRARLOS
+                                    label: "1",
+                                    icon: Icono_Historico
+                                    //icon: 'taxi2.png'
+                                 });
+        
+        NumMark++;
+        } // if no repetir
+     } // FOR MARKER
+    }); // }.FUNCTION   (.DONE	
+ 
+ }		
+});// }.LISTENER  ).LISTENER  
  } // CONSULTAMARKER
 
 function Consulta_Hora_Marker(){
@@ -608,8 +666,11 @@ function Consulta_Hora_Marker(){
 
     document.location.href='#service';
 
+	Fecha_Inicio_PHP = $('#Fecha_Inicio').DatePickerGetDate(true);
     Fecha_Final_PHP = $('#Fecha_Final').DatePickerGetDate(true);
-  
+	
+	//cole dale pa ve, prueba si en el php estas recibiendo bien
+	
     Tiempo = new Date(2016,10,10,$('#Tiempo_Hora1').timepicker('getHour'),$('#Tiempo_Minuto1').timepicker('getMinute'),$('#Tiempo_Segundo1').timepicker('getMinute'));  
     Hora_Inicio_PHP=String(Tiempo).substring(16,24);
 
