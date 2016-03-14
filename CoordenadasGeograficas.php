@@ -562,10 +562,7 @@ function Consulta_Marker_Hora(){
     map.setCenter(new google.maps.LatLng(parseFloat(LatitudMarker_Hora),parseFloat(LongitudMarker_Hora)));
 
     google.maps.event.clearListeners(map, 'click');
-	
-//	if( $('.micheckbox').prop('checked') ) {
-  //  alert('Seleccionado');
-//}
+
 	markerfecha=document.getElementById("markerfecha").checked;
 	//var unido=false;
 	if(markerfecha) {	
