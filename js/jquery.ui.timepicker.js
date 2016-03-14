@@ -1,3 +1,43 @@
+/*
+ * jQuery UI Timepicker
+ *
+ * Copyright 2010-2013, Francois Gelinas
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://fgelinas.com/code/timepicker
+ *
+ * Depends:
+ *	jquery.ui.core.js
+ *  jquery.ui.position.js (only if position settings are used)
+ *
+ * Change version 0.1.0 - moved the t-rex up here
+ *
+                                                  ____
+       ___                                      .-~. /_"-._
+      `-._~-.                                  / /_ "~o\  :Y
+          \  \                                / : \~x.  ` ')
+           ]  Y                              /  |  Y< ~-.__j
+          /   !                        _.--~T : l  l<  /.-~
+         /   /                 ____.--~ .   ` l /~\ \<|Y
+        /   /             .-~~"        /| .    ',-~\ \L|
+       /   /             /     .^   \ Y~Y \.^>/l_   "--'
+      /   Y           .-"(  .  l__  j_j l_/ /~_.-~    .
+     Y    l          /    \  )    ~~~." / `/"~ / \.__/l_
+     |     \     _.-"      ~-{__     l  :  l._Z~-.___.--~
+     |      ~---~           /   ~~"---\_  ' __[>
+     l  .                _.^   ___     _>-y~
+      \  \     .      .-~   .-~   ~>--"  /
+       \  ~---"            /     ./  _.-'
+        "-.,_____.,_  _.--~\     _.-~
+                    ~~     (   _}       -Row
+                           `. ~(
+                             )  \
+                            /,`--'~\--'~\
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                             ->T-Rex<-
+*/
+
 (function ($) {
 
     $.extend($.ui, { timepicker: { version: "0.3.3"} });
@@ -632,10 +672,10 @@
                 // after the picker html is appended bind the click & double click events (faster in IE this way
                 // then letting the browser interpret the inline events)
                 // yes I know, duplicate code, sorry
-    /*                .find('.ui-timepicker-minute-cell')
+/*                .find('.ui-timepicker-minute-cell')
                     .bind("click", { fromDoubleClick:false }, $.proxy($.timepicker.selectMinutes, this))
                     .bind("dblclick", { fromDoubleClick:true }, $.proxy($.timepicker.selectMinutes, this));
-    */
+*/
 
         },
 
@@ -1452,4 +1492,5 @@
     // Workaround for #4055
     // Add another global to avoid noConflict issues with inline event handlers
     window['TP_jQuery_' + tpuuid] = $;
+
 })(jQuery);

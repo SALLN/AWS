@@ -19,11 +19,17 @@ p {display: inline;}
 
 .historicofinal{		position:absolute; 	right: 0.1em;	 top: 9.25em;	}
 
-.boton{	position:absolute; 	right: 5em;	 top: 11.25em;	}
+.boton{		position:absolute; 	right: 5em;	 top: 11.25em;	}
+
+.DivTodo{	 position: relative; width: 300px; background-color: red; margin-top: 20px; margin-left: 10px; border-bottom: 20px;	}
 
 #fila_longitud,#fila_latitud,#fila_fecha,#fila_hora{           padding-left: 0.313em;           }
 
-#googleMap{ margin-left: 1em;  width:102em;		height:35.438em;	}
+#googleMap{ margin-left: 1em;  width:98%;		height:37.438em;	}
+
+#Boton_Real24{	font-size: 12px; width: 90px; height: 30px; text-align: center;	}
+
+#autoc {        width: 175px; height: 25px; box-sizing: border-box; border-radius: 5px;  font-size: 15px; border-color: red; }
 
 #contenedor div{            float:left;           }
 
