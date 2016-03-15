@@ -5,10 +5,18 @@ include("conexionmysql_aws.php");
 $con=mysql_connect($host,$user,$pw) or die ("Problemas al conectar");
 mysql_select_db($db,$con) or die ("Problema al conectar con la DB");
 
+$fecha_start=$_POST['FechaInicio']." ".$_POST['HoraInicio'];
+$fecha_end=$_POST['FechaFinal']." ".$_POST['HoraFinal'];
+
+echo $fecha_start;
+echo $fecha_end;
+
+$MetrosRedonda=floatval($_POST['Metros']);
 $Latitud_Marker=$_POST['LatitudMarker'];
 $Longitud_Marker=$_POST['LongitudMarker'];
-$MetrosRedonda=floatval($_POST['Metros']);
-$registro=mysql_query("SELECT LATITUD,LONGITUD,FECHA_HORA FROM coordenadas") or die("Problemas en consulta: ".mysql_error());
+
+$registro=mysql_query("SELECT LATITUD,LONGITUD,FECHA_HORA FROM coordenadas where FECHA_HORA between  '$fecha_start' and '$fecha_end' ") or die("Problemas en consulta: ".mysql_error());
+
 
 while($reg=mysql_fetch_array($registro)){ 
 
