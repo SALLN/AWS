@@ -1,3 +1,16 @@
+<?php
+session_start();
+include 'INICIAR_SESION/serv.php';
+
+if(isset($_SESSION['user'])) {?>
+<!DOCTYPE html>
+
+<?php
+}else{
+    echo '<script> window.location="inicio_sesion.php"; </script>';
+}
+?>
+
 <!DOCTYPE html>
  <html lang="en" class="no-js">
 <head>
@@ -63,6 +76,7 @@
                             <li><a href="#service-bottom">Histórico</a></li>
                             <li><a href="#service">Mapa</a></li>
                             <li><a href="#contact">Contacto</a></li>
+                            <li><a href="INICIAR_SESION/logout.php">Salir</a><li>
                               
                         </ul>
                     </nav>
@@ -624,7 +638,7 @@ function Consulta_Hora_Marker(){
 
 function Calendario_Inicial(){
 
-	if (Calendario1==1){
+    if (Calendario1==1){
 		Calendario1=0;
 	    $('#Fecha_Inicio').DatePicker({
 	    
@@ -665,7 +679,6 @@ function Calendario_Final(){
 
      if (Calendario2==1 && CalSet==1){
 	Calendario2=0;
-
     $('#Fecha_Final').DatePicker({
     
     flat: true,
@@ -676,10 +689,8 @@ function Calendario_Final(){
     mode: 'single',
     view: 'days',
     onChange: function(formated, dates){ 
-
         if ($('#Fecha_Final').DatePickerGetDate(true) != "" && $('#Fecha_Final').DatePickerGetDate(true).length==10)
          {
-
             $('#Fecha_Final').DatePickerHide(); 
 	            Calendario2=1;   
     			Fecha_Final_PHP = $('#Fecha_Final').DatePickerGetDate(true);
@@ -694,12 +705,10 @@ function Ocultar_Calendario1(){
  	$('#Fecha_Inicio').DatePickerHide();
  	Calendario1=1;
   }
-
 function Ocultar_Calendario2(){
  	$('#Fecha_Final').DatePickerHide();
  	Calendario2=1;
  }
-
 </script>
 </body>
 </html>
