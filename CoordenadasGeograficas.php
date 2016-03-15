@@ -666,7 +666,7 @@ function( data ) {
     NumMark=0;
     
     
-if(Snap){
+if(!Snap){
         PoliLinea_Historica.setMap(map);
 
  for(i in Tabla){
