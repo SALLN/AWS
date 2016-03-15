@@ -8,6 +8,8 @@ mysql_select_db($db,$con) or die ("Problema al conectar con la DB");
 $fecha_start=$_POST['FechaInicio']." ".$_POST['HoraInicio'];
 $fecha_end=$_POST['FechaFinal']." ".$_POST['HoraFinal'];
 
+echo $fecha_start;
+
 $registro=mysql_query("SELECT LATITUD,LONGITUD,FECHA_HORA FROM coordenadas 
 						where FECHA_HORA between  '$fecha_start' and '$fecha_end'						
  						order by  ID asc") or die("Problemas en consulta: ".mysql_error());

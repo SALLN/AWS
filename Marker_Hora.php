@@ -10,7 +10,6 @@ $Longitud_Marker=$_POST['LongitudMarker'];
 $MetrosRedonda=floatval($_POST['Metros']);
 $registro=mysql_query("SELECT LATITUD,LONGITUD,FECHA_HORA FROM coordenadas") or die("Problemas en consulta: ".mysql_error());
 
-
 while($reg=mysql_fetch_array($registro)){ 
 
 $Dif_Latitud=abs(floatval($Latitud_Marker)-floatval($reg['LATITUD']));
