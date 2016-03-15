@@ -7,7 +7,7 @@
 ?>
 <!DOCTYPE html>
 <html>
-<link href="INICIAR_SESION/pre.css"
+<link href="css/InicioSesion.css"
       rel="stylesheet" type="text/css">
 <head>
 	<title>login Admin</title>
