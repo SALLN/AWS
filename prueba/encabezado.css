@@ -1,0 +1,43 @@
+@charset "utf-8";
+/* CSS Document */
+
+html,body {           margin: 0em;           font-family: 'Times New Roman', cursive, Georgia, Serif;     font-size: 1em;
+    
+                  -webkit-text-size-adjust: 1em;     -ms-text-size-adjust: 1em;            }
+  
+h3 {display: inline;}
+
+									/* 		.CLASS  #ID    	*/
+
+.cabecera{           background-color: #FEEF00;           color:black;           padding:1.25em 0.5em;           }
+
+.imagen_taxi{           position:absolute;           top:0.625em;           right:0.313em;           }
+
+.titulo{           margin: 0em;           top: 0.313em;           font-size:3em;           }
+
+.parametros{           padding-left: 9.375em;           }
+
+.historicoinicio{		position:absolute; 	right: 0.1em;	 top: 7.25em;	}
+
+.historicofinal{		position:absolute; 	right: 0.1em;	 top: 9.25em;	}
+
+.boton{	position:absolute; 	right: 5em;	 top: 11.25em;	}
+
+#fila_longitud,#fila_latitud,#fila_fecha,#fila_hora{           padding-left: 0.313em;           }
+
+#googleMap{		width:61.75em;		height:33.438em;	}
+
+#contenedor div{            float:left;           }
+
+#Boton_Real {	position:absolute; 	right: 1.3em;	 top: 2.25em;}
+
+/*
+10px=0.625em
+20px=1.25em
+5px=0.313em
+150px=9.375em
+8px=0.5em
+535px=33.438em
+940px=58.75em
+*/
+
