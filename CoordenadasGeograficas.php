@@ -12,15 +12,15 @@ if(isset($_SESSION['user'])) {?>
 ?>
 
 <!DOCTYPE html>
- <html lang="en" class="no-js">
+<html lang="en" class="no-js">
 <head>
 
     <link rel="stylesheet" media="screen" type="text/css" href="css/datepicker.css" />
     <link rel="stylesheet" media="screen" type="text/css" href="css/layout.css" />
 
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=drawing,places"></script>
-    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDULHVVSQ-vjy1ScgiJU0hPuKb-IRt6bmw&libraries=drawing,places"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
 
     <link rel="shortcut icon" href="images/taxi6.ico">
 
@@ -30,9 +30,29 @@ if(isset($_SESSION['user'])) {?>
     <meta charset="utf-8">
 
     <title>Ticoll</title>
+
+        <!--#SCRIPT, DONDE ESTAN LAS FUNCIONES-->  
+
+        <script src="js/jquery-1.12.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.nav.js"></script>
+        <script src="js/jquery.mixitup.min.js"></script>
+        <script src="js/jquery.fancybox.pack.js"></script>
+        <script src="js/jquery.parallax-1.1.3.js"></script>
+        <script src="js/jquery.appear.js"></script>
+        <script src="js/jquery-countTo.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/wow.min.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/datepicker.js"></script>
+        <script src="js/eye.js"></script>
+        <script src="js/utils.js"></script>
+        <script src="js/layout.js?ver=1.0.2"></script>
+        <script src="js/jquery.ui.core.min.js"></script>
+        <script src="js/jquery.ui.timepicker.js?v=0.3.3"></script>
+        <script src="js/modernizr-2.6.2.min.js"></script>
         
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" rel="stylesheet" type="text/css">
-
     	<link rel="stylesheet" href="css/jquery-ui-1.10.0.custom.min.css" type="text/css" />
         <link rel="stylesheet" href="css/jquery.ui.timepicker.css?v=0.3.3" type="text/css" />	
         <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -143,7 +163,7 @@ if(isset($_SESSION['user'])) {?>
                     <div class="mobile-device">
                        <img data-wow-delay="0.2s" class="img-responsive black  wow fadeInLeftBig" src="images/map.png" alt="iPhone Black">
                         <img data-wow-delay="0.5s" class="img-responsive white  wow fadeInLeftBig" src="images/streed.png" alt="iPhone White">
-                    </div>
+                	</div>
 
                 <div class="service-features wow fadeInRight">
                     <h3>Conoce tu recorrido y ubicación histórica</h3>
@@ -166,9 +186,9 @@ if(isset($_SESSION['user'])) {?>
                         <div> 
 
                         <h5>HORA:</h5>
-                        <input type="text" style="width: 48px;  text-align:center; background-color: #0f748f; border:none" id="Tiempo_Hora1" value="5 PM">
+                        <input type="text" style="width: 48px;  text-align:center; background-color: #0f748f; border:none" id="Tiempo_Hora1" value="12 PM">
                         <h5>MINUTOS:</h5>
-                        <input type="text" style="width: 27px;  text-align:center; background-color: #0f748f; border:none" id="Tiempo_Minuto1" value="00">
+                        <input type="text" style="width: 27px;  text-align:center; background-color: #0f748f; border:none" id="Tiempo_Minuto1" value="21">
                         <h5>SEGUNDOS:</h5>
                         <input type="text" style="width: 27px; text-align:center; background-color: #0f748f; border:none"  id="Tiempo_Segundo1" value="00">
                         </div>
@@ -178,9 +198,9 @@ if(isset($_SESSION['user'])) {?>
                     <li>
                     <div>
                                 <h5>HORA:</h5>
-                                <input type="text" style="width: 48px;  text-align:center; background-color: #0f748f; border:none " id="Tiempo_Hora2" value="5 PM">
+                                <input type="text" style="width: 48px;  text-align:center; background-color: #0f748f; border:none " id="Tiempo_Hora2" value="12 PM">
                                 <h5>MINUTOS:</h5>
-                                <input type="text" style="width: 27px;  text-align:center; background-color: #0f748f; border:none" id="Tiempo_Minuto2" value="00">
+                                <input type="text" style="width: 27px;  text-align:center; background-color: #0f748f; border:none" id="Tiempo_Minuto2" value="23">
 
                                 <h5>SEGUNDOS:</h5>
                                 <input type="text" style="width: 27px; text-align:center; background-color: #0f748f; border:none" id="Tiempo_Segundo2" value="00">
@@ -189,6 +209,14 @@ if(isset($_SESSION['user'])) {?>
 
                     <input type="button" class="btn btn-blue" value="Ubicar Marker" onclick="Consulta_Marker_Hora()">
                     <input type="text" style="width: 250px;  text-align:center; background-color: #0f748f; border:none;color:white " id="Metros" placeholder="Digite los metros a la redonda">
+                    
+                    <div style="margin-top:15px;">
+                    <input type="checkbox" style="width: 100px; text-align:center" id="markerfecha2" onclick="Snap=!Snap;">
+                    <h3 id="Pulsalo">Snap</h3>
+                    <input type="checkbox" style="width: 100px; text-align:center" id="markerfecha" onclick="Unido=!Unido;">
+                    <h3 id="Pulsalo2">Combinar</h3>
+                    </div>
+                    
 
                     </li>
 
@@ -203,68 +231,66 @@ if(isset($_SESSION['user'])) {?>
         
 
       <!--        #service-bottom        ========================== -->
-<script>
-	$(document).ready(function() {
+	<script>
+		$(document).ready(function() {
 
-    	$('#Tiempo_Hora1').timepicker({
-            showMinutes: false,
-            showPeriod: true,
-            showLeadingZero: false,
-            hourText: 'Horas',
-            rows: 4,
-            onClose: function() {
-            }
-    	});
+	    	$('#Tiempo_Hora1').timepicker({
+	            showMinutes: false,
+	            showPeriod: true,
+	            showLeadingZero: false,
+	            hourText: 'Horas',
+	            rows: 4,
+	            onClose: function() {
+	            }
+	    	});
 
-   	 	$('#Tiempo_Minuto1').timepicker({
-            showHours: false,
-            minutes: { interval: 1 },
-            rows: 6,
-            minuteText: 'Minutos',
-            onClose: function() {
-            }
-    	});
+	   	 	$('#Tiempo_Minuto1').timepicker({
+	            showHours: false,
+	            minutes: { interval: 1 },
+	            rows: 6,
+	            minuteText: 'Minutos',
+	            onClose: function() {
+	            }
+	    	});
 
-    	$('#Tiempo_Segundo1').timepicker({
-            showHours: false,
-            minuteText: 'Segundos',
-            minutes: { interval: 1 },
-            rows: 6,
-            onClose: function() {
-            }
-    	});
-            	
-    	$('#Tiempo_Hora2').timepicker({
-            showMinutes: false,
-            showPeriod: true,
-            showLeadingZero: false,
-            hourText: 'Horas',
-            rows: 4,
-            onClose: function() {
-            }
-    	});
-		
-    	$('#Tiempo_Minuto2').timepicker({
-            showHours: false,
-            minutes: { interval: 1 },
-            rows: 6,
-            minuteText: 'Minutos',
-            onClose: function() {
-            }
-    	});
+	    	$('#Tiempo_Segundo1').timepicker({
+	            showHours: false,
+	            minuteText: 'Segundos',
+	            minutes: { interval: 1 },
+	            rows: 6,
+	            onClose: function() {
+	            }
+	    	});
+	            	
+	    	$('#Tiempo_Hora2').timepicker({
+	            showMinutes: false,
+	            showPeriod: true,
+	            showLeadingZero: false,
+	            hourText: 'Horas',
+	            rows: 4,
+	            onClose: function() {
+	            }
+	    	});
+			
+	    	$('#Tiempo_Minuto2').timepicker({
+	            showHours: false,
+	            minutes: { interval: 1 },
+	            rows: 6,
+	            minuteText: 'Minutos',
+	            onClose: function() {
+	            }
+	    	});
 
-    	$('#Tiempo_Segundo2').timepicker({
-            showHours: false,
-            minuteText: 'Segundos',
-            minutes: { interval: 1 },
-            rows: 6,
-            onClose: function() {
-            }
-    	});
- 	});
-</script>
-
-
+	    	$('#Tiempo_Segundo2').timepicker({
+	            showHours: false,
+	            minuteText: 'Segundos',
+	            minutes: { interval: 1 },
+	            rows: 6,
+	            onClose: function() {
+	            }
+	    	});
+	 	});
+	</script>
 </section>
 
 <section id="service"> <!--#Mapa-->
@@ -331,7 +357,6 @@ if(isset($_SESSION['user'])) {?>
 
 </section>
 
-
             <section id="contact"> <!--#contact-->
                     <div class="container">
                         <div class="row">
@@ -385,59 +410,34 @@ if(isset($_SESSION['user'])) {?>
                 </div>
             </div>
         	</footer>
-
-        <!--#SCRIPT, DONDE ESTAN LAS FUNCIONES-->    
-            <script src="js/jquery-1.12.1.min.js"></script>
-            <script src="js/bootstrap.min.js"></script>
-            <script src="js/jquery.nav.js"></script>
-            <script src="js/jquery.mixitup.min.js"></script>
-            <script src="js/jquery.fancybox.pack.js"></script>
-            <script src="js/jquery.parallax-1.1.3.js"></script>
-            <script src="js/jquery.appear.js"></script>
-            <script src="js/jquery-countTo.js"></script>
-            <script src="js/owl.carousel.min.js"></script>
-            <script src="js/wow.min.js"></script>
-            <script src="js/main.js"></script>
-            <script src="js/datepicker.js"></script>
-            <script src="js/eye.js"></script>
-            <script src="js/utils.js"></script>
-            <script src="js/layout.js?ver=1.0.2"></script>
-            <script src="js/jquery.ui.core.min.js"></script>
-            <script src="js/jquery.ui.timepicker.js?v=0.3.3"></script>
-            <script src="js/modernizr-2.6.2.min.js"></script>
-
 <script>
 
 var myCenter=new google.maps.LatLng(parseFloat(Latitud_Gps),parseFloat(Longitud_Gps));
 
  var Marker_Real;            var Ruta_Historica = [];    var Posicion_Historica;     var Fecha_Inicio_PHP;       var Hora_Inicio_PHP;        
  var Marker_Marker_Hora=[];  var Ruta_Real = [];         var Posicion_Real;          var Fecha_Final_PHP;        var Hora_Final_PHP;         
- var Marker_Hora_Marker=[];
+ var Marker_Hora_Marker=[];  var vect;                   var Metros_Redonda;         var Tabla;                  var latlng;
  var Latitud;                var Fecha;                  var auxlat;                 var map;                    var NumMark;    
  var Longitud;               var Hora;                   var auxlon;                 var i;                      var Datos;
  var Latitudes_Historicas;   var Latitud_Historica;      var Fechas_Historicas;      var columnas;               var RealAgain=0;
  var Longitudes_Historicas;  var Longitud_Historica;     var Horas_Historicas;       var Tiempo;				 var CalSet=0;
- var Calendario1=1;          var LatitudMarker_Hora;     var Metros_Redonda;         var vect;
- var Calendario2=1;	         var LongitudMarker_Hora;
+ var Calendario1=1;          var LatitudMarker_Hora;     var Snap=false;             var drawingManager;         var Ruta_Snap = [];       
+ var Calendario2=1;	         var LongitudMarker_Hora;    var Unido=false;
 
 var apiKey = 'AIzaSyCF6NfbnvzeseQoQPP5Bh6iSHA3_fcHu1g';
-var drawingManager;
-var placeIdArray = [];
-var polylines = [];
-var snappedCoordinates = [];
-var pathValues = [];
-var Tabla;
- 
- var PoliLinea_Real = new google.maps.Polyline({ path: Ruta_Real,   strokeColor: '#FFFF00',  strokeOpacity: 1.0,  strokeWeight: 5    });
- 
- var PoliLinea_Historica = new google.maps.Polyline({ path: Ruta_Historica,  strokeColor: '#000000', strokeOpacity: 1.0, strokeWeight: 5 });
+    
+var PoliLinea_Snap = new google.maps.Polyline({    path: Ruta_Snap,    strokeColor: 'black',    strokeWeight: 3   });
 
- var MarkerInterval = setInterval(function(){SetMarker()}, 1000);
- var DbInterval =     setInterval(function(){CargarDB()}, 1000);
+var PoliLinea_Real = new google.maps.Polyline({ path: Ruta_Real,   strokeColor: '#FFFF00',  strokeOpacity: 1.0,  strokeWeight: 5    });
 
- var mapOptions ={       center : myCenter,      zoom : 16,      mapTypeId: google.maps.MapTypeId.ROADMAP,    disableDefaultUI: false    };
+var PoliLinea_Historica = new google.maps.Polyline({ path: Ruta_Historica,  strokeColor: '#000000', strokeOpacity: 1.0, strokeWeight: 5 });
 
- var Icono_Historico ={
+var MarkerInterval = setInterval(function(){SetMarker()}, 1000);
+var DbInterval =     setInterval(function(){CargarDB()}, 1000);
+
+var mapOptions ={       center : myCenter,      zoom : 16,      mapTypeId: google.maps.MapTypeId.ROADMAP,    disableDefaultUI: false    };
+
+var Icono_Historico ={
                       path: google.maps.SymbolPath.CIRCLE,
                       scale: 5, //tamaño
                       strokeColor: '#000000', //color del borde
@@ -456,15 +456,12 @@ var Tabla;
   autocomplete.bindTo('bounds', map);
   autocomplete.addListener('place_changed', function() {
     var place = autocomplete.getPlace();
-    if (place.geometry.viewport) {
-      map.fitBounds(place.geometry.viewport);
-    } else {
-      map.setCenter(place.geometry.location);
-      map.setZoom(17);
-    }
+    if (place.geometry.viewport) {      map.fitBounds(place.geometry.viewport);    } 
+    else {       map.setCenter(place.geometry.location);       map.setZoom(17);    }
   });
 
  PoliLinea_Real.setMap(map);
+
 
 function CargarDB(){    $('#result').load('ConsultaDB.php'); }
 
@@ -513,11 +510,10 @@ function SetMarker(){
  } // SET MARKER
 
 function Consulta_Real(){
+    LimpiarMapa();
     var l
     RealAgain=0;
-    PoliLinea_Historica.setMap(null);
-    for (i = 0; i <Marker_Hora_Marker.length; i++)    {   Marker_Hora_Marker[i].setMap(null);       }
-    for (i = 0; i <Marker_Marker_Hora.length; i++)    {   Marker_Marker_Hora[i].setMap(null);       }
+
     PoliLinea_Real.setMap(map);
     MarkerInterval = setInterval(function(){SetMarker()}, 1000);
     document.location.href='#service';
@@ -540,13 +536,25 @@ function Consulta_Marker_Hora(){
     LatitudMarker_Hora=e.latLng.lat();
     LongitudMarker_Hora=e.latLng.lng();
     Metros_Redonda=document.getElementById('Metros').value;
-    
+
     map.setCenter(new google.maps.LatLng(parseFloat(LatitudMarker_Hora),parseFloat(LongitudMarker_Hora)));
 
     google.maps.event.clearListeners(map, 'click');
+        
+        
+       if(Unido){
+   	console.log("entra en el if");
+	Fecha_Inicio_PHP = $('#Fecha_Inicio').DatePickerGetDate(true);
+    Fecha_Final_PHP = $('#Fecha_Final').DatePickerGetDate(true);
 
-    $.post( "Marker_Hora.php", { LatitudMarker: LatitudMarker_Hora, LongitudMarker: LongitudMarker_Hora, 
-                                   Metros:  Metros_Redonda   }).done(
+    Tiempo = new Date(2016,10,10,$('#Tiempo_Hora1').timepicker('getHour'),$('#Tiempo_Minuto1').timepicker('getMinute'),$('#Tiempo_Segundo1').timepicker('getMinute'));  
+    Hora_Inicio_PHP=String(Tiempo).substring(16,24);
+
+    Tiempo = new Date(2016,10,10,$('#Tiempo_Hora2').timepicker('getHour'),$('#Tiempo_Minuto2').timepicker('getMinute'),$('#Tiempo_Segundo2').timepicker('getMinute'));  
+    Hora_Final_PHP=String(Tiempo).substring(16,24);	
+
+$.post("Marker_Hora_fecha.php", {FechaFinal: Fecha_Final_PHP, FechaInicio: Fecha_Inicio_PHP,HoraInicio: Hora_Inicio_PHP,  HoraFinal: Hora_Final_PHP , LatitudMarker: LatitudMarker_Hora, LongitudMarker: LongitudMarker_Hora, Metros:  Metros_Redonda   }).done(
+	
     function( data ) {  
 
      Tabla = JSON.parse(data);
@@ -577,68 +585,146 @@ function Consulta_Marker_Hora(){
         NumMark++;
         } // if no repetir
      } // FOR MARKER
-    }); // }.FUNCTION   (.DONE
- }); // }.LISTENER  ).LISTENER
+	
+	}); // }.FUNCTION   (.DONE
 
- } // CONSULTAMARKER
+	
+	
+	}
+        else{
+        
+console.log("entra en el else");
+    $.post( "Marker_Hora.php", { LatitudMarker: LatitudMarker_Hora, LongitudMarker: LongitudMarker_Hora, 
+                       Metros:  Metros_Redonda   }).done(
+    function( data ) {  
+
+    Tabla = JSON.parse(data);
+
+    NumMark=0;
+    for(i in Tabla)
+    {
+
+    Latitud_Historica = parseFloat(Tabla[i].LATITUD);
+    Longitud_Historica = parseFloat(Tabla[i].LONGITUD);
+    Posicion_Historica=new google.maps.LatLng(Latitud_Historica,Longitud_Historica);
+
+    if (Latitud_Historica!=auxlat || Longitud_Historica!=auxlon ){  
+
+    auxlat =Latitud_Historica;  auxlon =Longitud_Historica;
+
+    Marker_Marker_Hora[NumMark]=new google.maps.Marker({  
+                        position:Posicion_Historica,        //animation:google.maps.Animation.DROP,
+                        map: map,
+                        title: Tabla[i].FECHA_HORA,
+                        //animation:google.maps.Animation.BOUNCE, // SALTANDO
+                        //draggable: true, // PERMITE ARRASTRARLOS
+                        label: "1",
+                        icon: Icono_Historico
+                        //icon: 'taxi2.png'
+                     });
+
+    NumMark++;
+    } // if no repetir
+    } // FOR MARKER
+    }); // }.FUNCTION   (.DONE
+        
+    }
+        
+    }); // }.LISTENER  ).LISTENER
+
+} // CONSULTAMARKER
 
 function Consulta_Hora_Marker(){
-
-    for (i = 0; i <Marker_Marker_Hora.length; i++)    {   Marker_Marker_Hora[i].setMap(null);       }
-    Marker_Real.setMap(null);
-    PoliLinea_Real.setMap(null);
-    PoliLinea_Historica.setMap(map);
-    clearInterval(MarkerInterval);
-
-    document.location.href='#service';
-
-    Fecha_Final_PHP = $('#Fecha_Final').DatePickerGetDate(true);
-  
-    Tiempo = new Date(2016,10,10,$('#Tiempo_Hora1').timepicker('getHour'),$('#Tiempo_Minuto1').timepicker('getMinute'),$('#Tiempo_Segundo1').timepicker('getMinute'));  
-    Hora_Inicio_PHP=String(Tiempo).substring(16,24);
-
-    Tiempo = new Date(2016,10,10,$('#Tiempo_Hora2').timepicker('getHour'),$('#Tiempo_Minuto2').timepicker('getMinute'),$('#Tiempo_Segundo2').timepicker('getMinute'));  
-    Hora_Final_PHP=String(Tiempo).substring(16,24);
     
-    $.post( "ConsultaDbHistorico.php", { FechaInicio: Fecha_Inicio_PHP, FechaFinal: Fecha_Final_PHP, 
-                                   HoraInicio:  Hora_Inicio_PHP,  HoraFinal:  Hora_Final_PHP        }).done(
-
-    function( data ) { 
-
-       Tabla = JSON.parse(data);
+    Ruta_Historica=[];
+    Ruta_Snap = [];
     
-        NumMark=0;
-     for(i in Tabla){
+LimpiarMapa();
 
-        Latitud_Historica = parseFloat(Tabla[i].LATITUD);
-        Longitud_Historica = parseFloat(Tabla[i].LONGITUD);
-        Posicion_Historica=new google.maps.LatLng(Latitud_Historica,Longitud_Historica);
 
-        if (Latitud_Historica!=auxlat || Longitud_Historica!=auxlon ){  
+clearInterval(MarkerInterval);
 
-        auxlat =Latitud_Historica;  auxlon =Longitud_Historica;
 
-        Ruta_Historica.push(Posicion_Historica);   
-        PoliLinea_Historica.setPath(Ruta_Historica);  
+document.location.href='#service';
 
-        Marker_Hora_Marker[NumMark]=new google.maps.Marker({  
-                                    position:Posicion_Historica,
-                                    map: map,
-                                    title: Tabla[i].FECHA_HORA,
-                                    label: "1",
-                                    icon: Icono_Historico
-                                 });
-        map.setCenter(Posicion_Historica);
-        NumMark++;
-        } // if no repetir
-     } // FOR MARKER 
-    });
+Fecha_Inicio_PHP = $('#Fecha_Inicio').DatePickerGetDate(true);
+Fecha_Final_PHP = $('#Fecha_Final').DatePickerGetDate(true);
 
- }
+Tiempo = new Date(2016,10,10,$('#Tiempo_Hora1').timepicker('getHour'),$('#Tiempo_Minuto1').timepicker('getMinute'),$('#Tiempo_Segundo1').timepicker('getMinute'));  
+Hora_Inicio_PHP=String(Tiempo).substring(16,24);
+
+Tiempo = new Date(2016,10,10,$('#Tiempo_Hora2').timepicker('getHour'),$('#Tiempo_Minuto2').timepicker('getMinute'),$('#Tiempo_Segundo2').timepicker('getMinute'));  
+Hora_Final_PHP=String(Tiempo).substring(16,24);
+
+$.post( "ConsultaDbHistorico.php", { FechaInicio: Fecha_Inicio_PHP, FechaFinal: Fecha_Final_PHP, 
+                               HoraInicio:  Hora_Inicio_PHP,  HoraFinal:  Hora_Final_PHP        }).done(
+
+function( data ) { 
+   Tabla = JSON.parse(data);
+    NumMark=0;
+    
+    
+if(Snap){
+        PoliLinea_Historica.setMap(map);
+
+ for(i in Tabla){
+    Latitud_Historica = parseFloat(Tabla[i].LATITUD);
+    Longitud_Historica = parseFloat(Tabla[i].LONGITUD);
+    Posicion_Historica=new google.maps.LatLng(Latitud_Historica,Longitud_Historica);
+     
+    if (Latitud_Historica!=auxlat || Longitud_Historica!=auxlon ){  
+
+    auxlat =Latitud_Historica;  auxlon =Longitud_Historica;
+
+    Ruta_Historica.push(Posicion_Historica);  
+
+    PoliLinea_Historica.setPath(Ruta_Historica);  
+
+    Marker_Hora_Marker[NumMark]=new google.maps.Marker({  
+                                position:Posicion_Historica,
+                                map: map,
+                                title: Tabla[i].FECHA_HORA,
+                                label: "1",
+                                icon: Icono_Historico
+                             });
+    map.setCenter(Posicion_Historica);
+    NumMark++;
+    } // if no repetir
+ } // FOR MARKER 
+}
+else{
+     LimpiarMapa();
+     PoliLinea_Snap.setMap(map);
+ for(i in Tabla){
+    Ruta_Snap.push(Tabla[i].LATITUD+","+Tabla[i].LONGITUD);
+    }
+  $.get('https://roads.googleapis.com/v1/snapToRoads', {
+    interpolate: true,
+    key: apiKey,
+    path: Ruta_Snap.join('|')
+   }, 
+  function(data) {
+  Ruta_Snap=[];
+
+   for (var i = 0; i < data.snappedPoints.length; i++) {
+    latlng = new google.maps.LatLng(
+    data.snappedPoints[i].location.latitude,
+    data.snappedPoints[i].location.longitude);
+    Ruta_Snap.push(latlng);
+   }
+   map.setCenter(latlng);
+   PoliLinea_Snap.setPath(Ruta_Snap);  
+
+   }); 
+} // ELSE
+    
+});
+
+} // FUNCION
 
 function Calendario_Inicial(){
 
-    if (Calendario1==1){
+    	if (Calendario1==1){
 		Calendario1=0;
 	    $('#Fecha_Inicio').DatePicker({
 	    
@@ -679,6 +765,7 @@ function Calendario_Final(){
 
      if (Calendario2==1 && CalSet==1){
 	Calendario2=0;
+
     $('#Fecha_Final').DatePicker({
     
     flat: true,
@@ -689,8 +776,10 @@ function Calendario_Final(){
     mode: 'single',
     view: 'days',
     onChange: function(formated, dates){ 
+
         if ($('#Fecha_Final').DatePickerGetDate(true) != "" && $('#Fecha_Final').DatePickerGetDate(true).length==10)
          {
+
             $('#Fecha_Final').DatePickerHide(); 
 	            Calendario2=1;   
     			Fecha_Final_PHP = $('#Fecha_Final').DatePickerGetDate(true);
@@ -705,10 +794,24 @@ function Ocultar_Calendario1(){
  	$('#Fecha_Inicio').DatePickerHide();
  	Calendario1=1;
   }
+
 function Ocultar_Calendario2(){
  	$('#Fecha_Final').DatePickerHide();
  	Calendario2=1;
  }
+    
+function LimpiarMapa(){
+    
+    PoliLinea_Historica.setMap(null);
+    PoliLinea_Snap.setMap(null);
+    PoliLinea_Real.setMap(null);
+    Marker_Real.setMap(null);
+    
+    for (i in Marker_Hora_Marker)    {   Marker_Hora_Marker[i].setMap(null);       }
+    for (i in Marker_Marker_Hora)    {   Marker_Marker_Hora[i].setMap(null);       }
+    
+}
+
 </script>
 </body>
 </html>
