@@ -12,15 +12,16 @@ if(isset($_SESSION['user'])) {?>
 ?>
 
 <!DOCTYPE html>
- <html lang="en" class="no-js">
+<html lang="en" class="no-js">
 <head>
 
     <link rel="stylesheet" media="screen" type="text/css" href="css/datepicker.css" />
     <link rel="stylesheet" media="screen" type="text/css" href="css/layout.css" />
 
+    
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDULHVVSQ-vjy1ScgiJU0hPuKb-IRt6bmw&libraries=drawing,places"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    
+
 
     <link rel="shortcut icon" href="images/taxi6.ico">
 
@@ -30,9 +31,29 @@ if(isset($_SESSION['user'])) {?>
     <meta charset="utf-8">
 
     <title>Ticoll</title>
+
+        <!--#SCRIPT, DONDE ESTAN LAS FUNCIONES-->  
+
+        <script src="js/jquery-1.12.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.nav.js"></script>
+        <script src="js/jquery.mixitup.min.js"></script>
+        <script src="js/jquery.fancybox.pack.js"></script>
+        <script src="js/jquery.parallax-1.1.3.js"></script>
+        <script src="js/jquery.appear.js"></script>
+        <script src="js/jquery-countTo.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/wow.min.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/datepicker.js"></script>
+        <script src="js/eye.js"></script>
+        <script src="js/utils.js"></script>
+        <script src="js/layout.js?ver=1.0.2"></script>
+        <script src="js/jquery.ui.core.min.js"></script>
+        <script src="js/jquery.ui.timepicker.js?v=0.3.3"></script>
+        <script src="js/modernizr-2.6.2.min.js"></script>
         
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" rel="stylesheet" type="text/css">
-
     	<link rel="stylesheet" href="css/jquery-ui-1.10.0.custom.min.css" type="text/css" />
         <link rel="stylesheet" href="css/jquery.ui.timepicker.css?v=0.3.3" type="text/css" />	
         <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -143,7 +164,7 @@ if(isset($_SESSION['user'])) {?>
                     <div class="mobile-device">
                        <img data-wow-delay="0.2s" class="img-responsive black  wow fadeInLeftBig" src="images/map.png" alt="iPhone Black">
                         <img data-wow-delay="0.5s" class="img-responsive white  wow fadeInLeftBig" src="images/streed.png" alt="iPhone White">
-                    </div>
+                	</div>
 
                 <div class="service-features wow fadeInRight">
                     <h3>Conoce tu recorrido y ubicación histórica</h3>
@@ -166,9 +187,9 @@ if(isset($_SESSION['user'])) {?>
                         <div> 
 
                         <h5>HORA:</h5>
-                        <input type="text" style="width: 48px;  text-align:center; background-color: #0f748f; border:none" id="Tiempo_Hora1" value="5 PM">
+                        <input type="text" style="width: 48px;  text-align:center; background-color: #0f748f; border:none" id="Tiempo_Hora1" value="12 PM">
                         <h5>MINUTOS:</h5>
-                        <input type="text" style="width: 27px;  text-align:center; background-color: #0f748f; border:none" id="Tiempo_Minuto1" value="00">
+                        <input type="text" style="width: 27px;  text-align:center; background-color: #0f748f; border:none" id="Tiempo_Minuto1" value="21">
                         <h5>SEGUNDOS:</h5>
                         <input type="text" style="width: 27px; text-align:center; background-color: #0f748f; border:none"  id="Tiempo_Segundo1" value="00">
                         </div>
@@ -178,9 +199,9 @@ if(isset($_SESSION['user'])) {?>
                     <li>
                     <div>
                                 <h5>HORA:</h5>
-                                <input type="text" style="width: 48px;  text-align:center; background-color: #0f748f; border:none " id="Tiempo_Hora2" value="5 PM">
+                                <input type="text" style="width: 48px;  text-align:center; background-color: #0f748f; border:none " id="Tiempo_Hora2" value="12 PM">
                                 <h5>MINUTOS:</h5>
-                                <input type="text" style="width: 27px;  text-align:center; background-color: #0f748f; border:none" id="Tiempo_Minuto2" value="00">
+                                <input type="text" style="width: 27px;  text-align:center; background-color: #0f748f; border:none" id="Tiempo_Minuto2" value="23">
 
                                 <h5>SEGUNDOS:</h5>
                                 <input type="text" style="width: 27px; text-align:center; background-color: #0f748f; border:none" id="Tiempo_Segundo2" value="00">
@@ -190,11 +211,13 @@ if(isset($_SESSION['user'])) {?>
                     <input type="button" class="btn btn-blue" value="Ubicar Marker" onclick="Consulta_Marker_Hora()">
                     <input type="text" style="width: 250px;  text-align:center; background-color: #0f748f; border:none;color:white " id="Metros" placeholder="Digite los metros a la redonda">
                     
-                                        <div style="margin-top:15px;">
+                    <div style="margin-top:15px;">
                     <input type="checkbox" style="width: 100px; text-align:center" id="markerfecha2" onclick="Snap=!Snap;">
                     <h3 id="Pulsalo">Snap</h3>
                     <input type="checkbox" style="width: 100px; text-align:center" id="markerfecha" onclick="Unido=!Unido;">
                     <h3 id="Pulsalo2">Combinar</h3>
+                    </div>
+                    
 
                     </li>
 
@@ -209,68 +232,66 @@ if(isset($_SESSION['user'])) {?>
         
 
       <!--        #service-bottom        ========================== -->
-<script>
-	$(document).ready(function() {
+	<script>
+		$(document).ready(function() {
 
-    	$('#Tiempo_Hora1').timepicker({
-            showMinutes: false,
-            showPeriod: true,
-            showLeadingZero: false,
-            hourText: 'Horas',
-            rows: 4,
-            onClose: function() {
-            }
-    	});
+	    	$('#Tiempo_Hora1').timepicker({
+	            showMinutes: false,
+	            showPeriod: true,
+	            showLeadingZero: false,
+	            hourText: 'Horas',
+	            rows: 4,
+	            onClose: function() {
+	            }
+	    	});
 
-   	 	$('#Tiempo_Minuto1').timepicker({
-            showHours: false,
-            minutes: { interval: 1 },
-            rows: 6,
-            minuteText: 'Minutos',
-            onClose: function() {
-            }
-    	});
+	   	 	$('#Tiempo_Minuto1').timepicker({
+	            showHours: false,
+	            minutes: { interval: 1 },
+	            rows: 6,
+	            minuteText: 'Minutos',
+	            onClose: function() {
+	            }
+	    	});
 
-    	$('#Tiempo_Segundo1').timepicker({
-            showHours: false,
-            minuteText: 'Segundos',
-            minutes: { interval: 1 },
-            rows: 6,
-            onClose: function() {
-            }
-    	});
-            	
-    	$('#Tiempo_Hora2').timepicker({
-            showMinutes: false,
-            showPeriod: true,
-            showLeadingZero: false,
-            hourText: 'Horas',
-            rows: 4,
-            onClose: function() {
-            }
-    	});
-		
-    	$('#Tiempo_Minuto2').timepicker({
-            showHours: false,
-            minutes: { interval: 1 },
-            rows: 6,
-            minuteText: 'Minutos',
-            onClose: function() {
-            }
-    	});
+	    	$('#Tiempo_Segundo1').timepicker({
+	            showHours: false,
+	            minuteText: 'Segundos',
+	            minutes: { interval: 1 },
+	            rows: 6,
+	            onClose: function() {
+	            }
+	    	});
+	            	
+	    	$('#Tiempo_Hora2').timepicker({
+	            showMinutes: false,
+	            showPeriod: true,
+	            showLeadingZero: false,
+	            hourText: 'Horas',
+	            rows: 4,
+	            onClose: function() {
+	            }
+	    	});
+			
+	    	$('#Tiempo_Minuto2').timepicker({
+	            showHours: false,
+	            minutes: { interval: 1 },
+	            rows: 6,
+	            minuteText: 'Minutos',
+	            onClose: function() {
+	            }
+	    	});
 
-    	$('#Tiempo_Segundo2').timepicker({
-            showHours: false,
-            minuteText: 'Segundos',
-            minutes: { interval: 1 },
-            rows: 6,
-            onClose: function() {
-            }
-    	});
- 	});
-</script>
-
-
+	    	$('#Tiempo_Segundo2').timepicker({
+	            showHours: false,
+	            minuteText: 'Segundos',
+	            minutes: { interval: 1 },
+	            rows: 6,
+	            onClose: function() {
+	            }
+	    	});
+	 	});
+	</script>
 </section>
 
 <section id="service"> <!--#Mapa-->
@@ -337,7 +358,6 @@ if(isset($_SESSION['user'])) {?>
 
 </section>
 
-
             <section id="contact"> <!--#contact-->
                     <div class="container">
                         <div class="row">
@@ -391,27 +411,6 @@ if(isset($_SESSION['user'])) {?>
                 </div>
             </div>
         	</footer>
-
-        <!--#SCRIPT, DONDE ESTAN LAS FUNCIONES-->    
-            <script src="js/jquery-1.12.1.min.js"></script>
-            <script src="js/bootstrap.min.js"></script>
-            <script src="js/jquery.nav.js"></script>
-            <script src="js/jquery.mixitup.min.js"></script>
-            <script src="js/jquery.fancybox.pack.js"></script>
-            <script src="js/jquery.parallax-1.1.3.js"></script>
-            <script src="js/jquery.appear.js"></script>
-            <script src="js/jquery-countTo.js"></script>
-            <script src="js/owl.carousel.min.js"></script>
-            <script src="js/wow.min.js"></script>
-            <script src="js/main.js"></script>
-            <script src="js/datepicker.js"></script>
-            <script src="js/eye.js"></script>
-            <script src="js/utils.js"></script>
-            <script src="js/layout.js?ver=1.0.2"></script>
-            <script src="js/jquery.ui.core.min.js"></script>
-            <script src="js/jquery.ui.timepicker.js?v=0.3.3"></script>
-            <script src="js/modernizr-2.6.2.min.js"></script>
-
 <script>
 
 var myCenter=new google.maps.LatLng(parseFloat(Latitud_Gps),parseFloat(Longitud_Gps));

@@ -2,13 +2,12 @@
 	session_start();
 	include 'INICIAR_SESION/serv.php';
 	if(isset($_SESSION['user'])){
-	echo '<script> window.location="coordenadasgeograficas.php"; </script>';
+	echo '<script> window.location="CoordenadasGeograficas.php"; </script>';
 	}
 ?>
 <!DOCTYPE html>
 <html>
-<link href="css/InicioSesion.css"
-      rel="stylesheet" type="text/css">
+
 <head>
 	<title>login Admin</title>
 	<meta charset="utf-8">
