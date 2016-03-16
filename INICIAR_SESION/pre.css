@@ -1,0 +1,26 @@
+*= GENERAL STYLES
+--------------------------------------------------------*/
+body {
+    background: #efefef;
+    font-family: 'Open Sans', sans-serif;
+    color: #777;
+}
+ 
+a {
+    color: #f58220;
+    font-weight: 400;
+}
+ 
+span {
+    font-weight: 300;
+    color: #f58220;
+}
+ 
+#welcome {
+    width: 500px;
+    padding: 30px;
+    background: #fff;
+    margin: 160px auto 0;
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.13);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,.13);
+    box-shadow: 0 1px 3px rgba(0,0,0,.13);
