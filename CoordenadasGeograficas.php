@@ -154,6 +154,7 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="inicio_sesion.
 
     <div class="service-features wow fadeInRight"><h3>Conoce tu recorrido y ubicación histórica</h3><ul>
 
+<ul>
     <li>
     <h5>FECHA INICIAL:</h5><h5 class="eso" id="Fecha_Inicio2" onmouseover="Calendario_Inicial();">0000-00-00</h5>
     <div id="Fecha_Inicio" onmouseleave="Ocultar_Calendario1();" style="margin-left: 120px; margin-top: 3px; position: absolute;"></div>
@@ -179,6 +180,7 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="inicio_sesion.
     <input type="text" style="width: 27px;  text-align:center; background-color: #0f748f; border:none" id="Tiempo_Minuto2" value="25">
     </li>
 
+</ul>
     </BR>
 
     <input class="btn btn-blue" id="Boton_Real23" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Hora_Marker();"/>
@@ -188,18 +190,15 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="inicio_sesion.
     <input type="button" class="btn btn-blue" value="Ubicar Marker" onclick="Consulta_Marker_Hora()">
     <input type="text" id="Metros" placeholder="Digite los metros a la redonda">
 
-<li>
+
     
-     <div style="margin-top:15px"> 
+    <div style="margin-top:15px"> 
     <input type="checkbox" id="markerfecha2"  onclick="Snap=!Snap;">
     <h3 id="Pulsalo">Snap</h3> 
     
     <h3 id="Pulsalo2" class="eso1">Combinar</h3>
     <input type="checkbox" id="markerfecha" onclick="Unido=!Unido;">
     </div>
-
-</li>
-
 
 
 </div>
