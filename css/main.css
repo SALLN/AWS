@@ -405,19 +405,26 @@ width: 11px;
 
 h5 {display: inline;}
 
+
 .eso{
   padding-left: 5px;
 }
 
+.eso1{
+  padding-left: 150px;
+}
+
+
+
 .service-features {
   color: white; 
   background-color: #0f748f;
-  height: 450px;
+  height: 500px;
   padding: 50px 0 50px 65px;
   position: absolute;
   right: 0;
   top: 18%;
-  width: 45%;
+  width: 50%;
 }
 
 .service-features h3 {

@@ -1,0 +1,52 @@
+<html>
+
+<head>
+
+<script language="JavaScript"><!--
+function prompts(form) {
+  opener.userid = form.userid.value;
+  opener.password = form.password.value;
+  opener.done();
+  self.close();
+  return false;
+
+}
+
+function cancel() {
+ self.close();
+  return false;
+}
+
+
+//--></script>
+
+</head>
+
+<body onLoad="document.myform.userid.focus()">
+
+
+
+<div id="contenedor">
+
+</div>
+
+
+<div id="contenedor1">
+
+</div>	
+
+<form name="myForm" onReset="cancel()" method="post" action="SaveUsers.php">
+Userid: <input type="text" name="userid" id="userid">
+<br>
+Password: <input type="password" name="password" id="password">
+<br>
+<input type="submit" value="  ok  "> <input type="reset" value="  cancel  ">
+</form>
+
+
+<!--  Iba en el form  -->
+<!--onSubmit="return prompts(this)"-->
+
+</body>
+
+</html>

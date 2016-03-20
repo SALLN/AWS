@@ -154,6 +154,7 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="inicio_sesion.
 
     <div class="service-features wow fadeInRight"><h3>Conoce tu recorrido y ubicación histórica</h3><ul>
 
+<ul>
     <li>
     <h5>FECHA INICIAL:</h5><h5 class="eso" id="Fecha_Inicio2" onmouseover="Calendario_Inicial();">0000-00-00</h5>
     <div id="Fecha_Inicio" onmouseleave="Ocultar_Calendario1();" style="margin-left: 120px; margin-top: 3px; position: absolute;"></div>
@@ -165,42 +166,43 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="inicio_sesion.
     </li>  
     <li>
 
-    <div> 
-    <h5>HORA:</h5>
+    <li> 
+    <h5>HORA INICIAL :</h5>
     <input type="text" style="width: 48px;  text-align:center; background-color: #0f748f; border:none" id="Tiempo_Hora1" value="12 AM">
-    <h5>MINUTOS:</h5>
+    <h5>:</h5>
     <input type="text" style="width: 27px;  text-align:center; background-color: #0f748f; border:none" id="Tiempo_Minuto1" value="21">
-    <h5>SEGUNDOS:</h5>
-    <input type="text" style="width: 27px; text-align:center; background-color: #0f748f; border:none"  id="Tiempo_Segundo1" value="00">
-    </div>
+    </li>
 
     <li>
-    <div>
-    <h5>HORA:</h5>
+    <h5>HORA FINAL :</h5>
     <input type="text" style="width: 48px;  text-align:center; background-color: #0f748f; border:none " id="Tiempo_Hora2" value="12 AM">
-    <h5>MINUTOS:</h5>
+    <h5>:</h5>
     <input type="text" style="width: 27px;  text-align:center; background-color: #0f748f; border:none" id="Tiempo_Minuto2" value="25">
-    <h5>SEGUNDOS:</h5>
-    <input type="text" style="width: 27px; text-align:center; background-color: #0f748f; border:none" id="Tiempo_Segundo2" value="00">
-    </div>
+    </li>
 
+</ul>
     </BR>
+
+    <input class="btn btn-blue" id="Boton_Real23" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Hora_Marker();"/>
+
+     </BR></BR>
 
     <input type="button" class="btn btn-blue" value="Ubicar Marker" onclick="Consulta_Marker_Hora()">
     <input type="text" id="Metros" placeholder="Digite los metros a la redonda">
 
-    <div style="margin-top:15px;">
-    <input type="checkbox" style="width: 100px; text-align:center" id="markerfecha2" onclick="Snap=!Snap;">
-    <h3 id="Pulsalo">Snap</h3>
-    <input type="checkbox" style="width: 100px; text-align:center" id="markerfecha" onclick="Unido=!Unido;">
-    <h3 id="Pulsalo2">Combinar</h3>
-    </li>
+
+    
+    <div style="margin-top:15px"> 
+    <input type="checkbox" id="markerfecha2"  onclick="Snap=!Snap;">
+    <h3 id="Pulsalo">Snap</h3> 
+    
+    <h3 id="Pulsalo2" class="eso1">Combinar</h3>
+    <input type="checkbox" id="markerfecha" onclick="Unido=!Unido;">
     </div>
+
+
 </div>
 
-</BR></BR></BR></BR></BR></BR></BR></BR></BR></BR></BR></BR></BR></BR></BR>
-
-<input class="btn btn-blue" id="Boton_Real23" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Hora_Marker();"/>
 
 <script>	$(document).ready(function() {
 
@@ -223,14 +225,6 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="inicio_sesion.
             }
     	});
 
-    	$('#Tiempo_Segundo1').timepicker({
-            showHours: false,
-            minuteText: 'Segundos',
-            minutes: { interval: 1 },
-            rows: 6,
-            onClose: function() {
-            }
-    	});
             	
     	$('#Tiempo_Hora2').timepicker({
             showMinutes: false,
@@ -251,14 +245,6 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="inicio_sesion.
             }
     	});
 
-    	$('#Tiempo_Segundo2').timepicker({
-            showHours: false,
-            minuteText: 'Segundos',
-            minutes: { interval: 1 },
-            rows: 6,
-            onClose: function() {
-            }
-    	});
  	});   </script>
 
 </section>      <!------------#service-bottom------------------>
@@ -790,10 +776,10 @@ function ObtenerDateTime(){
     Fecha_Inicio_PHP = $('#Fecha_Inicio').DatePickerGetDate(true);
     Fecha_Final_PHP = $('#Fecha_Final').DatePickerGetDate(true);
 
-    Tiempo = new Date(2016,10,10,$('#Tiempo_Hora1').timepicker('getHour'),$('#Tiempo_Minuto1').timepicker('getMinute'),$('#Tiempo_Segundo1').timepicker('getMinute'));  
+    Tiempo = new Date(2016,10,10,$('#Tiempo_Hora1').timepicker('getHour'),$('#Tiempo_Minuto1').timepicker('getMinute'));  
     Hora_Inicio_PHP=String(Tiempo).substring(16,24);
 
-    Tiempo = new Date(2016,10,10,$('#Tiempo_Hora2').timepicker('getHour'),$('#Tiempo_Minuto2').timepicker('getMinute'),$('#Tiempo_Segundo2').timepicker('getMinute'));  
+    Tiempo = new Date(2016,10,10,$('#Tiempo_Hora2').timepicker('getHour'),$('#Tiempo_Minuto2').timepicker('getMinute'));  
     Hora_Final_PHP=String(Tiempo).substring(16,24);	
 }
     

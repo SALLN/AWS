@@ -24,6 +24,48 @@
 				<h3 class="h1" style="color:Black">Contraseña</h3><input type="password" class="form-control" name="pw" autocomplete="off" required><br><br>
 				<input type="submit" class="btn btn-success" name="login" value="Ingresar">
 			</form>
+<br>
+
+            <a onClick="promptForTwo(); return false;" href="inicio_sesion.php">Registrate Aquí!</a>
+
+
 		</div>
+
+
+
+
+<script type="text/javascript">
+
+
+
+var userid = '';
+var password = '';
+var windowReference;
+
+function promptForTwo() {
+  var w = 480, h = 340;
+
+  if (window.screen) {
+    w = screen.availWidth;
+    h = screen.availHeight;
+  }
+
+  var popW = 300, popH = 150;
+  var leftPos = (w-popW)/2, topPos = (h-popH)/2;
+
+  window.open('popup.htm','windowName','width=' + popW + ',height=' + popH + ',top=' + topPos + ',left=' + leftPos);
+
+
+}
+
+function done() {
+  alert('userid = ' + userid + '\npassword = ' + password);
+
+}
+
+
+
+</script>
+
 </body>
 </html>
