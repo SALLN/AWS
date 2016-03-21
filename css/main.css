@@ -393,13 +393,14 @@ width: 11px;
 }
 
 .mobile-device .black {
-  left: 98px;
+  left: -3%;
   z-index: 2;
 }
 
 .mobile-device .white {
-  bottom: -62px;
-  z-index: 1;
+  top: 250px;
+  left:-240px;
+  z-index: 2;
 }
 
 
@@ -424,7 +425,7 @@ h5 {display: inline;}
   position: absolute;
   right: 0;
   top: 18%;
-  width: 50%;
+  width: 70%;
 }
 
 .service-features h3 {
