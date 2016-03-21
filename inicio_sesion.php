@@ -50,7 +50,7 @@ function promptForTwo() {
     h = screen.availHeight;
   }
 
-  var popW = 300, popH = 150;
+  var popW = 400, popH = 220;
   var leftPos = (w-popW)/2, topPos = (h-popH)/2;
 
   window.open('popup.htm','windowName','width=' + popW + ',height=' + popH + ',top=' + topPos + ',left=' + leftPos);
