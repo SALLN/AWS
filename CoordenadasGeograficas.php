@@ -838,10 +838,9 @@ function LimpiarMapa(){
     
     PoliLinea_Historica.setMap(null);
     PoliLinea_Snap.setMap(null);
-    //PoliLinea_Real.setMap(null);
-    //Marker_Real.setMap(null);
-    for (i in Marker_Real)           {   Marker_Real[i].setMap(null);              }
     for (i in PoliLinea_Real)        {   PoliLinea_Real[i].setMap(null);       }
+
+    for (i in Marker_Real)           {   Marker_Real[i].setMap(null);              }
     for (i in Marker_Hora_Marker)    {   Marker_Hora_Marker[i].setMap(null);       }
     for (i in Marker_Marker_Hora)    {   Marker_Marker_Hora[i].setMap(null);       }
     for (i in Marker_Snap)           {   Marker_Snap[i].setMap(null);              }
