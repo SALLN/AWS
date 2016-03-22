@@ -181,7 +181,7 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
 </ul>
     </BR>
 
-    <input class="btn btn-blue" id="Boton_Real23" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Hora_Marker();"/>
+    <input class="btn btn-blue" id="Boton_Real23" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Hora_Marker_Copia();"/>
 
      </BR></BR>
     
@@ -195,7 +195,7 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
     <input type="checkbox" id="markerfecha2"  onclick="Snap=!Snap;">
     <h3 id="Pulsalo">Snap</h3> 
     
-    <h3 id="Pulsalo2" class="eso1">Combinar</h3>
+    <h3 id="Pulsalo2">Combinar</h3>
     <input type="checkbox" id="markerfecha" onclick="Combinar=!Combinar;">
     </div>
 
@@ -207,7 +207,7 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
 </div>
 
 
-</section>      <!------------#service-bottom------------------>
+</section>      <!--#service-bottom-->
 
 <section id="service"> <!--#Mapa-->
 
@@ -334,23 +334,25 @@ var Marker_Real=[];         var Ruta_Historica = [];    var Posicion_Historica; 
 var Marker_Marker_Hora=[];  var Ruta_Real = [];         var Posicion_Real=[];       var Fecha_Final_PHP;        var Hora_Final_PHP;         
 var Marker_Hora_Marker=[];  var vect;                   var Metros_Redonda;         var Tabla;                  var latlng;
 var Latitud;                var Fecha;                  var auxlat;                 var map;                    var NumMark;    
-var Longitud;               var Hora;                   var auxlon;                 var i;                      var Datos;
-var Latitudes_Historicas;   var Latitud_Historica;      var Fechas_Historicas;      var columnas;               var RealAgain=[];
+var Longitud;               var Hora;                   var auxlon;                 var i;                     
+var Latitudes_Historicas;   var Latitud_Historica;      var Fechas_Historicas;      var RealAgain=[];
 var Longitudes_Historicas;  var Longitud_Historica;     var Horas_Historicas;       var Tiempo;	                var CalSet=0;
 var Calendario1=1;          var LatitudMarker_Hora;     var Snap=false;             var drawingManager;         var Ruta_Snap = [];       
 var Calendario2=1;	        var LongitudMarker_Hora;    var Combinar=false;         var NumMarkerSnap=0;        var Ruta_Snap_Aux = [];
 var Tabla_Residuo;          var cont=0;                 var Ent=0;                  var Res;                    var t=0;      
 var Tabla_Entero;           var p=0;
 var Tabla_Long;             var Marker_Snap=[];
-
+var Tabla_Usuarios; 
 var LatAux=[];
 var LonAux=[];
+var Marker_Hora_Marker_Varios=[];
+var PoliLinea_Historica=[];
+var PoliLinea_Real = [];
+var Cont_Historico;
+var Checkes=[];
+
 var apiKey = 'AIzaSyCF6NfbnvzeseQoQPP5Bh6iSHA3_fcHu1g';
     
-var PoliLinea_Historica = new google.maps.Polyline({ path: Ruta_Historica,  strokeColor: '#000000', strokeOpacity: 1.0, strokeWeight: 5 });
-
-var PoliLinea_Real = [];
-
 var PoliLinea_Snap = new google.maps.Polyline({    path: Ruta_Snap,    strokeColor: 'black',    strokeWeight: 3   });
 
 var MarkerInterval = setInterval(function(){SetMarkerVarios()}, 1000);
@@ -389,7 +391,7 @@ $('#Tiempo_Minuto2').timepicker({   showHours: false,      minutes: { interval: 
     
 var iCnt=0;
 var contst=0;
-var Checkes=[];
+
 var yavisto=true;
 var Anti=true;
 var arran=false;
@@ -400,34 +402,41 @@ function CargarVehiculos(){
     if(Anti){
         Anti=false;
         $.post("MySQL/Vehicles_User.php",function( data ) {  
-            Tabla = JSON.parse(data);
-            for (i in Tabla){                CrearCheck();            }
+            Tabla_Usuarios = JSON.parse(data);
+            for (i in Tabla_Usuarios){                CrearCheck();            }
         });
         
     }else {        if(!yavisto){            CrearCheck();        }    }
-}
+ }
     
 function CrearCheck(){
         
     if (yavisto){
         
-        RealAgain[oi]=0;
-        Ruta_Real[oi]=[];
-        PoliLinea_Real[oi] = new google.maps.Polyline({ path: Ruta_Real[oi],  strokeColor: '#FFFF00',  strokeOpacity: 1.0,  strokeWeight: 5    });
-        PoliLinea_Real[oi].setMap(map);
-        oi++;
+
+    RealAgain[oi]=0;
+    Ruta_Real[oi]=[];
+    Ruta_Historica[oi]=[];
+    Marker_Hora_Marker_Varios[oi]=[];
         
-if (iCnt == 0) {
+    PoliLinea_Real[oi] = new google.maps.Polyline({ path: Ruta_Real[oi],  strokeColor: '#FFFF00',  strokeOpacity: 1.0,  strokeWeight: 5    });
+    PoliLinea_Historica[oi] = new google.maps.Polyline({ path: Ruta_Historica[oi],  strokeColor: '#000000', strokeOpacity: 1.0, strokeWeight: 5 });
+    
+    PoliLinea_Real[oi].setMap(map);
+    PoliLinea_Historica[oi].setMap(map);
+    oi++;
+        
+    if (iCnt == 0) {
     contst=0;
     iCnt=1;
-var divSubmit = $(document.createElement('div'));
-$(divSubmit).append('<input type=button onclick="SeleccionVehiculos()" id="Seleccionar" value=Seleccionar style=margin-top:30px; />');
-$('#btAdd').after("<br>");
-$('#btAdd').after(divSubmit);
-}
+    var divSubmit = $(document.createElement('div'));
+    $(divSubmit).append('<input type=button onclick="SeleccionVehiculos()" id="Seleccionar" value=Seleccionar style=margin-top:30px; />');
+    $('#btAdd').after("<br>");
+    $('#btAdd').after(divSubmit);
+ }
   
         Checkes[contst]=false;
-        var texto=Tabla[contst].ID_VEHICULO;
+        var texto=Tabla_Usuarios[contst].ID_VEHICULO;
         var divSubmit = $(document.createElement('div'));
         
         $(divSubmit).append('<input type=checkbox onclick="Checkes['+contst+']=!Checkes['+contst+'];" id=Check'+contst+' style=position:absolute;margin-left:-20px;cursor:pointer;/>'+'<h5 id=H'+contst+' style=position:absolute;color:white;cursor:default;>'+texto+'</h5>');
@@ -441,7 +450,7 @@ $('#btAdd').after(divSubmit);
         document.getElementById("Seleccionar").style.display = 'inline';
         for (i=0;i<contst;i++){ document.getElementById("Check"+i).style.display = 'inline'; document.getElementById("H"+i).style.display = 'inline';    }
     }
-}    
+ }    
     
 function SeleccionVehiculos(){
     
@@ -453,12 +462,12 @@ function SeleccionVehiculos(){
     
     for (i=0;i<contst;i++){ document.getElementById("Check"+i).style.display = 'none'; document.getElementById("H"+i).style.display = 'none';    }
     SetMarkerVarios();
-}
+ }
 
 function SetMarkerVarios(){
     
     if(arran){
-        $.post("MySQL/MarkerReal_Vehiculos.php", {Users: Tabla, Marcas: Checkes  }).done(
+        $.post("MySQL/MarkerReal_Vehiculos.php", {Users: Tabla_Usuarios, Marcas: Checkes  }).done(
             
         function( data ) {   
 
@@ -500,7 +509,7 @@ function SetMarkerVarios(){
             }
         })
     }
-}
+ }
 
 function Consulta_Real(){
     
@@ -508,7 +517,7 @@ function Consulta_Real(){
     for (i in PoliLinea_Real)        {   PoliLinea_Real[i].setMap(map); RealAgain[i]=0;       }
     MarkerInterval = setInterval(function(){SetMarkerVarios()}, 1000);
     document.location.href='#service';
-}
+ }
 
 function Consulta_Marker_Hora(){
 
@@ -586,14 +595,11 @@ function Consulta_Marker_Hora(){
     auxlat =Latitud_Historica;  auxlon =Longitud_Historica;
 
     Marker_Marker_Hora[NumMark]=new google.maps.Marker({  
-                        position:Posicion_Historica,        //animation:google.maps.Animation.DROP,
+                        position:Posicion_Historica,      
                         map: map,
                         title: Tabla[i].FECHA_HORA,
-                        //animation:google.maps.Animation.BOUNCE, // SALTANDO
-                        //draggable: true, // PERMITE ARRASTRARLOS
                         label: "1",
                         icon: Icono_Historico
-                        //icon: 'taxi2.png'
                      });
 
     NumMark++;
@@ -604,12 +610,12 @@ function Consulta_Marker_Hora(){
     }
     
     }); // }.LISTENER  ).LISTENER
-} // CONSULTAMARKER_HORA
+ } // CONSULTAMARKER_HORA
+
+function Consulta_Hora_Marker_Copia(){ // dada la fecha, dar los markers
     
-function Consulta_Hora_Marker(){
-    
-    Ruta_Historica=[];
-    Ruta_Snap = [];
+    Cont_Historico=-1;
+    //Ruta_Snap = [];
     LimpiarMapa();
     
     clearInterval(MarkerInterval);
@@ -617,52 +623,66 @@ function Consulta_Hora_Marker(){
     
     ObtenerDateTime();
 
-    $.post( "MySQL/ConsultaDbHistorico.php", { FechaInicio: Fecha_Inicio_PHP, FechaFinal: Fecha_Final_PHP,
-                                        HoraInicio:  Hora_Inicio_PHP,  HoraFinal:  Hora_Final_PHP        }).done(
+    Consulta_hora_Marker_Copia_Graficar();
+ } // FUNCION
+  
+function Consulta_hora_Marker_Copia_Graficar(){
+    Cont_Historico++;
+
+    if (Cont_Historico<Tabla_Usuarios.length){
+    if (Checkes[Cont_Historico]){
+    $.post( "MySQL/ConsultaDbHistorico_Varios.php", { FechaInicio: Fecha_Inicio_PHP, FechaFinal: Fecha_Final_PHP,
+                                               HoraInicio:  Hora_Inicio_PHP,  HoraFinal:  Hora_Final_PHP,
+                                               Vehiculo: Tabla_Usuarios[Cont_Historico].ID_VEHICULO        }).done(
         
         function( data ) { 
-
             Tabla = JSON.parse(data);
             NumMark=0;
-
             if(!Snap){
-                PoliLinea_Historica.setMap(map);
+                PoliLinea_Historica[Cont_Historico].setMap(map);
                 
                 for(i in Tabla){
-                    
                     Latitud_Historica = parseFloat(Tabla[i].LATITUD);
                     Longitud_Historica = parseFloat(Tabla[i].LONGITUD);
                     Posicion_Historica=new google.maps.LatLng(Latitud_Historica,Longitud_Historica);
                     
-                    if (Latitud_Historica!=auxlat || Longitud_Historica!=auxlon ){  
+                  //  if (Latitud_Historica!=auxlat || Longitud_Historica!=auxlon ){  
 
-    auxlat =Latitud_Historica;  auxlon =Longitud_Historica;
+    //auxlat =Latitud_Historica;  auxlon =Longitud_Historica;
 
-    Ruta_Historica.push(Posicion_Historica);  
+    Ruta_Historica[Cont_Historico].push(Posicion_Historica);  
 
-    PoliLinea_Historica.setPath(Ruta_Historica);  
+    PoliLinea_Historica[Cont_Historico].setPath(Ruta_Historica[Cont_Historico]);  
+                    
 
-    Marker_Hora_Marker[NumMark]=new google.maps.Marker({  
+    Marker_Hora_Marker_Varios[Cont_Historico][NumMark++]=new google.maps.Marker({  
                                 position:Posicion_Historica,
                                 map: map,
                                 title: Tabla[i].FECHA_HORA,
                                 icon: Icono_Historico
                              });
     map.setCenter(Posicion_Historica);
-    NumMark++;
-    } // if no repetir
+   // } // if no repetir
+                    
+                    
+                    
                 } // FOR MARKER 
                 
             }else{
                 LimpiarMapa();
                 Historico_Snap();
             } // ELSE
-        });
-} // FUNCION
-    
+            
+            Consulta_hora_Marker_Copia_Graficar();
+        });                                          
+
+        }else{           Consulta_hora_Marker_Copia_Graficar();             }
+    }
+ }    
+
 function Historico_Snap(){
     
-if(t==0){
+    if(t==0){
     
     PoliLinea_Snap.setMap(map);
     NumMarkerSnap=0;
@@ -673,7 +693,7 @@ if(t==0){
     Tabla_Residuo = Tabla_Long%100;
     
     if(Tabla_Residuo>0) Tabla_Entero++;
-}
+    }
     t=1;
     Ent++;
     
@@ -687,11 +707,11 @@ if(t==0){
     p=p+100;
     
     $.get('https://roads.googleapis.com/v1/snapToRoads', {
-interpolate: true,
-key: apiKey,
-path: Ruta_Snap_Aux.join('|')
+    interpolate: true,
+    key: apiKey,
+    path: Ruta_Snap_Aux.join('|')
 
-},function(data) {
+    },function(data) {
         
         for (i = 0; i < data.snappedPoints.length; i++) {
             
@@ -711,7 +731,7 @@ path: Ruta_Snap_Aux.join('|')
         
         if(cont==Tabla_Entero)     {        PoliLinea_Snap.setPath(Ruta_Snap); t=0;    }else{  Historico_Snap(); }
     }); 
-}
+ }
     
 function Calendario_Inicial(){
 
@@ -737,9 +757,7 @@ function Calendario_Inicial(){
 	        }
 	      }
 	    	});
-	}
- 
- }
+             }}
 
 function Calendario_Final(){
  
@@ -793,29 +811,28 @@ function Ocultar_Calendario2(){
     
 function LimpiarMapa(){
     
-    PoliLinea_Historica.setMap(null);
+    for (i in Marker_Hora_Marker_Varios){     for (j in Marker_Hora_Marker_Varios[i]){    Marker_Hora_Marker_Varios[i][j].setMap(null);   }      }
     PoliLinea_Snap.setMap(null);
     for (i in PoliLinea_Real)        {   PoliLinea_Real[i].setMap(null);       }
+    for (i in PoliLinea_Historica)   {   PoliLinea_Historica[i].setMap(null);  }
 
-    for (i in Marker_Real)           {   Marker_Real[i].setMap(null);              }
-    for (i in Marker_Hora_Marker)    {   Marker_Hora_Marker[i].setMap(null);       }
-    for (i in Marker_Marker_Hora)    {   Marker_Marker_Hora[i].setMap(null);       }
-    for (i in Marker_Snap)           {   Marker_Snap[i].setMap(null);              }
-    
+    for (i in Marker_Real)           {   Marker_Real[i].setMap(null);          }
+    for (i in Marker_Hora_Marker)    {   Marker_Hora_Marker[i].setMap(null);   }
+    for (i in Marker_Marker_Hora)    {   Marker_Marker_Hora[i].setMap(null);   }
+    for (i in Marker_Snap)           {   Marker_Snap[i].setMap(null);          }
 }
         
 function ObtenerDateTime(){
     
     Fecha_Inicio_PHP = $('#Fecha_Inicio').DatePickerGetDate(true);
     Fecha_Final_PHP = $('#Fecha_Final').DatePickerGetDate(true);
-
     Tiempo = new Date(2016,10,10,$('#Tiempo_Hora1').timepicker('getHour'),$('#Tiempo_Minuto1').timepicker('getMinute'));  
     Hora_Inicio_PHP=String(Tiempo).substring(16,24);
-
     Tiempo = new Date(2016,10,10,$('#Tiempo_Hora2').timepicker('getHour'),$('#Tiempo_Minuto2').timepicker('getMinute'));  
     Hora_Final_PHP=String(Tiempo).substring(16,24);	
-}
- /*   
+ }
+  
+/*    
 function SetMarker(){
 
     $('#result').load('ConsultaDB.php');
@@ -852,7 +869,59 @@ function SetMarker(){
     } // if no repetir
 
  } // SET MARKER
- */
+function Consulta_Hora_Marker(){ // dada la fecha, dar los markers
+    
+    for (i in Ruta_Historica){   Ruta_Historica[i]=[]   };
+    //Ruta_Snap = [];
+    LimpiarMapa();
+    
+    clearInterval(MarkerInterval);
+    document.location.href='#service';
+    
+    ObtenerDateTime();
+
+    $.post( "MySQL/ConsultaDbHistorico.php", { FechaInicio: Fecha_Inicio_PHP, FechaFinal: Fecha_Final_PHP,
+                                        HoraInicio:  Hora_Inicio_PHP,  HoraFinal:  Hora_Final_PHP        }).done(
+        
+        function( data ) { 
+
+            Tabla = JSON.parse(data);
+            NumMark=0;
+
+            if(!Snap){
+                PoliLinea_Historica.setMap(map);
+                
+                for(i in Tabla){
+                    
+                    Latitud_Historica = parseFloat(Tabla[i].LATITUD);
+                    Longitud_Historica = parseFloat(Tabla[i].LONGITUD);
+                    Posicion_Historica=new google.maps.LatLng(Latitud_Historica,Longitud_Historica);
+                    
+                    if (Latitud_Historica!=auxlat || Longitud_Historica!=auxlon ){  
+
+    auxlat =Latitud_Historica;  auxlon =Longitud_Historica;
+
+    Ruta_Historica.push(Posicion_Historica);  
+
+    PoliLinea_Historica.setPath(Ruta_Historica);  
+
+    Marker_Hora_Marker[NumMark++]=new google.maps.Marker({  
+                                position:Posicion_Historica,
+                                map: map,
+                                title: Tabla[i].FECHA_HORA,
+                                icon: Icono_Historico
+                             });
+    map.setCenter(Posicion_Historica);
+    } // if no repetir
+                } // FOR MARKER 
+                
+            }else{
+                LimpiarMapa();
+                Historico_Snap();
+            } // ELSE
+        });
+ } // FUNCION
+*/
     
 </script>
 </body>
