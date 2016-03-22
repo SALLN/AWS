@@ -11,22 +11,24 @@
 </head>
 <body>
 		<?php
-			include 'serv.php';
+			include '../MySQL/ConexionMySQL.php';
 			if(isset($_POST['login'])){
 				$usuario = $_POST['user'];
 				$pw = $_POST['pw'];
-				$log = mysql_query("SELECT * FROM admin WHERE user='$usuario' AND pw='$pw'");
-				if (mysql_num_rows($log)>0) {
-					$row = mysql_fetch_array($log);
+				$consulta = mysql_query("SELECT * FROM admin WHERE user='$usuario' AND pw='$pw'");
+				if (mysql_num_rows($consulta)>0) {
+					$row = mysql_fetch_array($consulta);
 					$_SESSION["user"] = $row['user']; 
 				  	echo 'Iniciando sesión para '.$_SESSION['user'].' <p>';
 					echo '<script> window.location="../CoordenadasGeograficas.php"; </script>';
 				}
 				else{
 					echo '<script> alert("Usuario o contraseña incorrectos.");</script>';
-					echo '<script> window.location="../inicio_sesion.php"; </script>';
+					echo '<script> window.location="inicio_sesion.php"; </script>';
 				}
 			}
+            mysql_free_result($consulta);
+            mysql_close($conexion);
 		?>	
 </body>
 </html>

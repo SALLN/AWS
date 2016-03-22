@@ -2,7 +2,7 @@
 session_start();
 session_destroy();
 echo 'Cerraste sesión';
-echo '<script> window.location="../inicio_sesion.php"; </script>';
+echo '<script> window.location="inicio_sesion.php"; </script>';
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,6 +11,6 @@ echo '<script> window.location="../inicio_sesion.php"; </script>';
 	<meta charset="utf-8">
 </head>
 <body>
-<script language="javascript">location.href = "../inicio_sesion.php";</script>
+<script language="javascript">location.href = "inicio_sesion.php";</script>
 </body>
 </html>
