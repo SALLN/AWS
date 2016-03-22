@@ -11,7 +11,6 @@ $con=mysql_connect($host,$user,$pw) or die ("Problemas al conectar");
 mysql_select_db($db,$con) or die ("Problema al conectar con la DB"); 
 
 $q=mysql_query("SELECT * FROM admin WHERE user='$_POST[userid]'",$con);
-$p=mysql_query("SELECT * FROM admin WHERE pw='$_POST[password]'",$con); 
 
 if (isset($_POST['userid']) && !empty($_POST['userid']) && isset($_POST['password']) && !empty($_POST['password']) && (preg_match("/^[a-zA-Z0-9\-_]+$/",$usuario)) && 
 (preg_match("/^[a-zA-Z0-9\-_]+$/",$contrasena)) && (mysql_num_rows($q)==0) && (mysql_num_rows($p)==0) ){
@@ -40,10 +39,10 @@ if(  ($_POST['userid']=="") || ($_POST['password']=="")  ){
    
 }
 
-if(  (mysql_num_rows($q)!=0) || (mysql_num_rows($p)!=0) ){
+if(  (mysql_num_rows($q)!=0) ){
 
     echo "<script type='text/javascript'>";
-    echo "alert('El nombre de usuario o contraseña ya existe')"; 
+    echo "alert('El nombre de usuario  ya existe')"; 
     echo "</script> ";
 
     echo "<script type='text/javascript'>";
