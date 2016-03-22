@@ -1,7 +1,6 @@
 <?php
 session_start();
-include 'INICIAR_SESION/serv.php';
-if(!isset($_SESSION['user'])) {   echo '<script> window.location="inicio_sesion.php"; </script>';   }
+if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION/inicio_sesion.php"; </script>';   }
 ?>
 
 <!DOCTYPE html>
@@ -265,7 +264,6 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="inicio_sesion.
     </div>
 </div> <!--LATITUD LONGITUD ARRIBA DEL MAPA-->
 
-<div id="result"><?php include("ConsultaDB.php"); ?></div> 
 <div id="googleMap"></div>
 <div class="btn btn-blue" id="Boton_Real24" type="button" value="TIEMPO REAL" onclick="Consulta_Real();">
 <h3 style="position: absolute; margin-left: -30px; font-size: 12px;  text-align: center;  "><strong>TIEMPO REAL</strong></h3></div>
@@ -357,7 +355,7 @@ var PoliLinea_Snap = new google.maps.Polyline({    path: Ruta_Snap,    strokeCol
 
 var MarkerInterval = setInterval(function(){SetMarkerVarios()}, 1000);
 
-var myCenter=new google.maps.LatLng(parseFloat(Latitud_Gps),parseFloat(Longitud_Gps));
+var myCenter=new google.maps.LatLng(parseFloat("11.01934"),parseFloat("-74.85142"));
 
 var mapOptions ={       center : myCenter,      zoom : 16,      mapTypeId: google.maps.MapTypeId.ROADMAP,    disableDefaultUI: false    };
 
@@ -384,10 +382,10 @@ if (place.geometry.viewport) {      map.fitBounds(place.geometry.viewport);    }
 else {       map.setCenter(place.geometry.location);       map.setZoom(17);    }
 });
 
-$('#Tiempo_Hora1').timepicker  ({            showMinutes: false,            showPeriod: true,            rows: 4    	});
-$('#Tiempo_Minuto1').timepicker({            showHours: false,              minutes: { interval: 1 },    rows: 6    	});
-$('#Tiempo_Hora2').timepicker  ({            showMinutes: false,            showPeriod: true,            rows: 4    	});
-$('#Tiempo_Minuto2').timepicker({            showHours: false,              minutes: { interval: 1 },    rows: 6    	});
+$('#Tiempo_Hora1').timepicker  ({   showMinutes: false,    showPeriod: true,            rows: 4    	});
+$('#Tiempo_Minuto1').timepicker({   showHours: false,      minutes: { interval: 1 },    rows: 6    	});
+$('#Tiempo_Hora2').timepicker  ({   showMinutes: false,    showPeriod: true,            rows: 4    	});
+$('#Tiempo_Minuto2').timepicker({   showHours: false,      minutes: { interval: 1 },    rows: 6    	});
     
 var iCnt=0;
 var contst=0;
@@ -401,7 +399,7 @@ function CargarVehiculos(){
 
     if(Anti){
         Anti=false;
-        $.post("Vehicles_User.php",function( data ) {  
+        $.post("MySQL/Vehicles_User.php",function( data ) {  
             Tabla = JSON.parse(data);
             for (i in Tabla){                CrearCheck();            }
         });
@@ -460,7 +458,7 @@ function SeleccionVehiculos(){
 function SetMarkerVarios(){
     
     if(arran){
-        $.post("MarkerReal_Vehiculos.php", {Users: Tabla, Marcas: Checkes  }).done(
+        $.post("MySQL/MarkerReal_Vehiculos.php", {Users: Tabla, Marcas: Checkes  }).done(
             
         function( data ) {   
 
@@ -532,7 +530,7 @@ function Consulta_Marker_Hora(){
             
             ObtenerDateTime();
             
-            $.post("Marker_Hora_fecha.php", {FechaFinal: Fecha_Final_PHP, FechaInicio: Fecha_Inicio_PHP,HoraInicio: Hora_Inicio_PHP,  HoraFinal: Hora_Final_PHP , LatitudMarker: LatitudMarker_Hora, LongitudMarker: LongitudMarker_Hora, Metros:  Metros_Redonda   }).done(
+            $.post("MySQL/Marker_Hora_fecha.php", {FechaFinal: Fecha_Final_PHP, FechaInicio: Fecha_Inicio_PHP,HoraInicio: Hora_Inicio_PHP,  HoraFinal: Hora_Final_PHP , LatitudMarker: LatitudMarker_Hora, LongitudMarker: LongitudMarker_Hora, Metros:  Metros_Redonda   }).done(
                 
                 function( data ) {  
 
@@ -569,7 +567,7 @@ function Consulta_Marker_Hora(){
         
         }else{
         
-    $.post( "Marker_Hora.php", { LatitudMarker: LatitudMarker_Hora, LongitudMarker: LongitudMarker_Hora, 
+    $.post( "MySQL/Marker_Hora.php", { LatitudMarker: LatitudMarker_Hora, LongitudMarker: LongitudMarker_Hora, 
                        Metros:  Metros_Redonda   }).done(
     function( data ) {  
 
@@ -619,7 +617,7 @@ function Consulta_Hora_Marker(){
     
     ObtenerDateTime();
 
-    $.post( "ConsultaDbHistorico.php", { FechaInicio: Fecha_Inicio_PHP, FechaFinal: Fecha_Final_PHP,
+    $.post( "MySQL/ConsultaDbHistorico.php", { FechaInicio: Fecha_Inicio_PHP, FechaFinal: Fecha_Final_PHP,
                                         HoraInicio:  Hora_Inicio_PHP,  HoraFinal:  Hora_Final_PHP        }).done(
         
         function( data ) { 
@@ -817,7 +815,7 @@ function ObtenerDateTime(){
     Tiempo = new Date(2016,10,10,$('#Tiempo_Hora2').timepicker('getHour'),$('#Tiempo_Minuto2').timepicker('getMinute'));  
     Hora_Final_PHP=String(Tiempo).substring(16,24);	
 }
-    
+ /*   
 function SetMarker(){
 
     $('#result').load('ConsultaDB.php');
@@ -854,7 +852,7 @@ function SetMarker(){
     } // if no repetir
 
  } // SET MARKER
- 
+ */
     
 </script>
 </body>
