@@ -2,6 +2,28 @@
 
 <head>
 
+<meta charset="utf-8">
+
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script>
+  $(function() {
+    $( document ).tooltip();
+  });
+  </script>
+  <style>
+  label {
+    display: inline-block;
+    width: 5em;
+  }
+  </style>
+
+
+
+
 <script language="JavaScript"><!--
 function prompts(form) {
   opener.userid = form.userid.value;
@@ -24,23 +46,16 @@ function cancel() {
 
 <body onLoad="document.myform.userid.focus()">
 
-
-
-<div id="contenedor">
-
-</div>
-
-
-<div id="contenedor1">
-
-</div>	
+<h3 align="center">Registro de Usuarios</h3>
+<br>
 
 <form name="myForm" onReset="cancel()" method="post" action="SaveUsers.php">
-Userid: <input type="text" name="userid" id="userid">
-<br>
-Password: <input type="password" name="password" id="password">
-<br>
-<input type="submit" value="  ok  "> <input type="reset" value="  cancel  ">
+
+Username: <input type="text" name="userid" id="userid" title="Solo se aceptan caracteres alfanúmericos, guión medio y bajo.">
+<br><br>
+Password: <input type="password" name="password" id="password" title="Solo se aceptan caracteres alfanúmericos, guión medio y bajo.">
+<br><br><br>
+<input type="submit" value=" ok " style="margin-left:70px" >  <input type="reset" value="  Cancel " style="margin-left:100px" >
 </form>
 
 
