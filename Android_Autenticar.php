@@ -9,4 +9,6 @@ if (count(mysql_fetch_array($consulta)[id])!=0)
 
 {echo "OK";}
 else{    echo "NO";}
+mysql_free_result($consulta);
+mysql_close($conexion);
 ?>
