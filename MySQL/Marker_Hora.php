@@ -1,18 +1,15 @@
 <?php
 
-include("conexionmysql_aws.php");
-
-$con=mysql_connect($host,$user,$pw) or die ("Problemas al conectar");
-mysql_select_db($db,$con) or die ("Problema al conectar con la DB");
+include("ConexionMySQL.php");
 
 $Latitud_Marker=$_POST['LatitudMarker'];
 $Longitud_Marker=$_POST['LongitudMarker'];
 $MetrosRedonda=floatval($_POST['Metros']);
-$registro=mysql_query("SELECT LATITUD,LONGITUD,FECHA_HORA FROM coordenadas") or die("Problemas en consulta: ".mysql_error());
+$consulta=mysql_query("SELECT LATITUD,LONGITUD,FECHA_HORA FROM coordenadas") or die("Problemas en consulta: ".mysql_error());
 
 $tabla=array();
 $i=0;
-while($reg=mysql_fetch_array($registro)){ 
+while($reg=mysql_fetch_array($consulta)){ 
 
 $Dif_Latitud=abs(floatval($Latitud_Marker)-floatval($reg['LATITUD']));
 $Dif_Longitud=abs(floatval($Longitud_Marker)-floatval($reg['LONGITUD']));
@@ -26,6 +23,7 @@ $i++;
 }
 
 echo json_encode($tabla);
-
+mysql_free_result($consulta);
+mysql_close($conexion);
   
 ?>

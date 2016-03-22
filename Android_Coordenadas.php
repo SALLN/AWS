@@ -1,6 +1,6 @@
 <?php
 
-include("conexionmysql_aws.php");
+include("MySQL/conexionmysql_aws.php");
 
    $con = mysql_connect($host,$user,$pw) or die("problemas al conectar con mysql");
    mysql_select_db($db,$con) or die("Problemas la seleccionar con database");
