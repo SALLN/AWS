@@ -179,7 +179,6 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="inicio_sesion.
     <h5>:</h5>
     <input type="text" style="width: 27px;  text-align:center; background-color: #0f748f; border:none" id="Tiempo_Minuto2" value="25">
     </li>
-
 </ul>
     </BR>
 
@@ -208,49 +207,6 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="inicio_sesion.
 
 </div>
 
-
-<script>	$(document).ready(function() {
-
-    	$('#Tiempo_Hora1').timepicker({
-            showMinutes: false,
-            showPeriod: true,
-            showLeadingZero: false,
-            hourText: 'Horas',
-            rows: 4,
-            onClose: function() {
-            }
-    	});
-
-   	 	$('#Tiempo_Minuto1').timepicker({
-            showHours: false,
-            minutes: { interval: 1 },
-            rows: 6,
-            minuteText: 'Minutos',
-            onClose: function() {
-            }
-    	});
-
-            	
-    	$('#Tiempo_Hora2').timepicker({
-            showMinutes: false,
-            showPeriod: true,
-            showLeadingZero: false,
-            hourText: 'Horas',
-            rows: 4,
-            onClose: function() {
-            }
-    	});
-		
-    	$('#Tiempo_Minuto2').timepicker({
-            showHours: false,
-            minutes: { interval: 1 },
-            rows: 6,
-            minuteText: 'Minutos',
-            onClose: function() {
-            }
-    	});
-
- 	});   </script>
 
 </section>      <!------------#service-bottom------------------>
 
@@ -375,7 +331,7 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="inicio_sesion.
 </footer>
 
 <script>
-
+ 	
 var Marker_Real=[];         var Ruta_Historica = [];    var Posicion_Historica;     var Fecha_Inicio_PHP;       var Hora_Inicio_PHP;        
 var Marker_Marker_Hora=[];  var Ruta_Real = [];         var Posicion_Real=[];       var Fecha_Final_PHP;        var Hora_Final_PHP;         
 var Marker_Hora_Marker=[];  var vect;                   var Metros_Redonda;         var Tabla;                  var latlng;
@@ -428,7 +384,10 @@ if (place.geometry.viewport) {      map.fitBounds(place.geometry.viewport);    }
 else {       map.setCenter(place.geometry.location);       map.setZoom(17);    }
 });
 
-//PoliLinea_Real.setMap(map);
+$('#Tiempo_Hora1').timepicker  ({            showMinutes: false,            showPeriod: true,            rows: 4    	});
+$('#Tiempo_Minuto1').timepicker({            showHours: false,              minutes: { interval: 1 },    rows: 6    	});
+$('#Tiempo_Hora2').timepicker  ({            showMinutes: false,            showPeriod: true,            rows: 4    	});
+$('#Tiempo_Minuto2').timepicker({            showHours: false,              minutes: { interval: 1 },    rows: 6    	});
     
 var iCnt=0;
 var contst=0;
