@@ -50,7 +50,7 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
     <script src="js/jquery.ui.core.min.js"></script>
     <script src="js/jquery.ui.timepicker.js?v=0.3.3"></script>
     <script src="js/modernizr-2.6.2.min.js"></script>
-    			    <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel.js"></script>
+    <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel.js"></script>
 
 </head>
 	
@@ -380,7 +380,7 @@ map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementBy
 
 map.controls[google.maps.ControlPosition.TOP_CENTER].push( document.getElementById('Boton_Real24'));
     
-map.controls[google.maps.ControlPosition.LEFT_CENTER].push(  document.getElementById('seleccion'));
+map.controls[google.maps.ControlPosition.LEFT_TOP].push(  document.getElementById('seleccion'));
 
 var autocomplete = new google.maps.places.Autocomplete(    document.getElementById('autoc'));
 autocomplete.bindTo('bounds', map);
@@ -591,7 +591,7 @@ function Consulta_Marker_Hora_Copia_Graficar(){
     
         if(Combinar){
                 
-    $.post("MySQL/Marker_Hora_fecha_Varios.php", {FechaFinal: Fecha_Final_PHP, FechaInicio: Fecha_Inicio_PHP,HoraInicio: Hora_Inicio_PHP,  HoraFinal: Hora_Final_PHP , LatitudMarker: LatitudMarker_Hora, LongitudMarker: LongitudMarker_Hora, Metros:  Metros_Redonda, Vehiculo: Tabla_Usuarios[Cont_Historico].ID_VEHICULO   }).done(
+    $.post("MySQL/Marker_Hora_Fecha.php", {FechaFinal: Fecha_Final_PHP, FechaInicio: Fecha_Inicio_PHP,HoraInicio: Hora_Inicio_PHP,  HoraFinal: Hora_Final_PHP , LatitudMarker: LatitudMarker_Hora, LongitudMarker: LongitudMarker_Hora, Metros:  Metros_Redonda, Vehiculo: Tabla_Usuarios[Cont_Historico].ID_VEHICULO   }).done(
                 
     function( data ) {  
 
@@ -618,7 +618,7 @@ function Consulta_Marker_Hora_Copia_Graficar(){
         }
         else{
         
-    $.post( "MySQL/Marker_Hora_Varios.php", { LatitudMarker: LatitudMarker_Hora, LongitudMarker: LongitudMarker_Hora, 
+    $.post( "MySQL/Marker_Hora.php", { LatitudMarker: LatitudMarker_Hora, LongitudMarker: LongitudMarker_Hora, 
                        Metros:  Metros_Redonda, Vehiculo: Tabla_Usuarios[Cont_Historico].ID_VEHICULO   }).done(
     function( data ) {  
 
@@ -650,7 +650,7 @@ function Consulta_hora_Marker_Copia_Graficar(){
 
     if (Cont_Historico<Tabla_Usuarios.length){
     if (Checkes[Cont_Historico]){
-    $.post( "MySQL/ConsultaDbHistorico_Varios.php", { FechaInicio: Fecha_Inicio_PHP, FechaFinal: Fecha_Final_PHP,
+    $.post( "MySQL/ConsultaDbHistorico.php", { FechaInicio: Fecha_Inicio_PHP, FechaFinal: Fecha_Final_PHP,
                                                HoraInicio:  Hora_Inicio_PHP,  HoraFinal:  Hora_Final_PHP,
                                                Vehiculo: Tabla_Usuarios[Cont_Historico].ID_VEHICULO        }).done(
         
@@ -880,18 +880,18 @@ function LimpiarMapa(){
  }
         
 function ObtenerDateTime(){
-    /*
+
     Fecha_Inicio_PHP = $('#Fecha_Inicio').DatePickerGetDate(true);
     Fecha_Final_PHP = $('#Fecha_Final').DatePickerGetDate(true);
     Tiempo = new Date(2016,10,10,$('#Tiempo_Hora1').timepicker('getHour'),$('#Tiempo_Minuto1').timepicker('getMinute'));  
     Hora_Inicio_PHP=String(Tiempo).substring(16,24);
     Tiempo = new Date(2016,10,10,$('#Tiempo_Hora2').timepicker('getHour'),$('#Tiempo_Minuto2').timepicker('getMinute'));  
     Hora_Final_PHP=String(Tiempo).substring(16,24);	
-    */
-    Fecha_Inicio_PHP="2016-03-05";
-    Fecha_Final_PHP="2016-03-05";
-    Hora_Inicio_PHP="01:00:00";
-    Hora_Final_PHP="10:00:00";
+
+    //Fecha_Inicio_PHP="2016-03-05";
+    //Fecha_Final_PHP="2016-03-05";
+    //Hora_Inicio_PHP="01:00:00";
+    //Hora_Final_PHP="10:00:00";
  }
       
 </script>
