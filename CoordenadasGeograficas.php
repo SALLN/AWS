@@ -102,7 +102,7 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
 
     <div class="carousel-inner">
 
-        <div class="item active"  style="background-image: url('images/bg1.jpeg')" >
+        <div class="item active"  style="background-image: url('images/bg1.jpg')" >
         <div class="carousel-caption">
         <div class="animated bounceInRight">
         <h2>Hola Mundo! <br>Somos ticoll</h2>
@@ -111,7 +111,7 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
         </div>
         </div>              
 
-        <div class="item" style="background-image: url('images/bg21.jpg')">                
+        <div class="item" style="background-image: url('images/bg21.jpeg')">                
         <div class="carousel-caption">
         <div class="animated bounceInDown">
         <h2>Hola Mundo! <br>Somos ticoll</h2>

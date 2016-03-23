@@ -9,6 +9,11 @@
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   <link rel="stylesheet" href="/resources/demos/style.css">
+
+<link href="../css/registro.css"
+      rel="stylesheet" type="text/css">
+
+
   <script>
   $(function() {
     $( document ).tooltip();
@@ -44,7 +49,9 @@ function cancel() {
 
 </head>
 
-<body onLoad="document.myform.userid.focus()">
+<body onLoad="document.myform.userid.focus()" BACKGROUND="fondo16.jpg">
+
+ <div id="window"> 
 
 <h3 align="center">Registro de Usuarios</h3>
 <br>
@@ -55,9 +62,10 @@ Username: <input type="text" name="userid" id="userid" title="Solo se aceptan ca
 <br><br>
 Password: <input type="password" name="password" id="password" title="Solo se aceptan caracteres alfanúmericos, guión medio y bajo.">
 <br><br><br>
-<input type="submit" value=" ok " style="margin-left:70px" >  <input type="reset" value="  Cancel " style="margin-left:100px" >
+<input type="submit" value="Registrar" style="margin-left:30px" id="botones-popup" >  <input type="reset" value="Cancelar" style="margin-left:100px" id="botones-popup">
 </form>
-
+ 
+ </div>
 
 </body>
 
