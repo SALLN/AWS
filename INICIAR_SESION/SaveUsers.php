@@ -16,7 +16,7 @@ if (isset($_POST['userid']) && !empty($_POST['userid']) && isset($_POST['passwor
 
 $r=mysql_query("INSERT INTO admin(user,pw) VALUES ('$usuario','$contrasena')");
 
-$s=mysql_query("CREATE TABLE $usuario(ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, LATITUD VARCHAR(20), LONGITUD VARCHAR(20), FECHA_HORA VARCHAR(20),  ID_VEHICULO VARCHAR(20) )");
+$s=mysql_query("CREATE TABLE $usuario(ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, LATITUD VARCHAR(20), LONGITUD VARCHAR(20), FECHA_HORA datetime,  ID_VEHICULO VARCHAR(20) )");
 
 echo "<script type='text/javascript'>";
 echo "window.close();";
