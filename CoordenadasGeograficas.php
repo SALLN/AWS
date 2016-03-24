@@ -157,54 +157,43 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
 
 <ul>
     <li>
-    <h5>FECHA INICIAL:</h5><h5 class="eso" id="Fecha_Inicio2" onmouseover="Calendario_Inicial();">0000-00-00</h5>
-    <div id="Fecha_Inicio" onmouseleave="Ocultar_Calendario1();" style="margin-left: 120px; margin-top: 3px; position: absolute;"></div>
+    <h5 style="font-size:13px;">FECHA INICIAL :</h5>
+    <h5 class="eso" id="Fecha_Inicio2" onmouseover="Calendario_Inicial();">0000-00-00</h5>
+    <div id="Fecha_Inicio" onmouseleave="Ocultar_Calendario1();" ></div>
+         
+    <input type="text"  id="Tiempo_Hora1" value="12 AM">:
+    <input type="text"  id="Tiempo_Minuto1" value="00">
     </li>
-
+<BR>
     <li>
-    <h5 >FECHA FINAL:</h5><h5 class="eso" id="Fecha_Final2" onmouseover="Calendario_Final();">0000-00-00</h5>
-    <div id="Fecha_Final" onmouseleave="Ocultar_Calendario2();" style="margin-left: 150px; margin-top: 3px; position: absolute;"> </div>
-    </li>  
-    <li>
-
-    <li> 
-    <h5>HORA INICIAL :</h5>
-    <input type="text" style="width: 48px;  text-align:center; background-color: #0f748f; border:none" id="Tiempo_Hora1" value="12 AM">
-    <h5>:</h5>
-    <input type="text" style="width: 27px;  text-align:center; background-color: #0f748f; border:none" id="Tiempo_Minuto1" value="21">
-    </li>
-
-    <li>
-    <h5>HORA FINAL :</h5>
-    <input type="text" style="width: 48px;  text-align:center; background-color: #0f748f; border:none " id="Tiempo_Hora2" value="12 AM">
-    <h5>:</h5>
-    <input type="text" style="width: 27px;  text-align:center; background-color: #0f748f; border:none" id="Tiempo_Minuto2" value="25">
-    </li>
-</ul>
-    </BR>
-
-    <input class="btn btn-blue" id="Boton_Real23" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Hora_Marker();"/>
-
-     </BR></BR>
+    <h5 style="font-size:13px;">FECHA FINAL &nbsp :</h5>
+    <h5 class="eso" id="Fecha_Final2" onmouseover="Calendario_Final();">0000-00-00</h5>
+    <div id="Fecha_Final" onmouseleave="Ocultar_Calendario2();"></div>
     
-
-    <input type="button" class="btn btn-blue" value="Ubicar Marker" onclick="Consulta_Marker_Hora()">
-    <input type="text" id="Metros" placeholder="Digite los metros a la redonda">
-
-
-    
-    <div style="margin-top:15px"> 
-    <input type="checkbox" id="markerfecha2"  onclick="Snap=!Snap;">
-    <h3 id="Pulsalo">Snap</h3> 
+    <input type="text"  id="Tiempo_Hora2" value="12 AM">:
+    <input type="text"  id="Tiempo_Minuto2" value="00">
+    </li> 
+<BR><BR>    
+    <li>
+    <input id="Boton_Real23" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Hora_Marker();"/>
+    </li>
+<BR><BR>
+    <li>
+    <input type="button" id="Ubicar" value="UBICAR MARKER" onclick="Consulta_Marker_Hora()">
+    <input type="text" id="Metros" placeholder="Digite metros a la redonda">
+    <!--<input type="checkbox" id="markerfecha2"  onclick="Snap=!Snap;"><h3 id="Pulsalo">Snap</h3> -->
+    </li>
     
     <h3 id="Pulsalo2">Combinar</h3>
     <input type="checkbox" id="markerfecha" onclick="Combinar=!Combinar;">
+
+    <div id="ListaCheckBoxes">
+    <input type="button" id="btAdd" value="Cargar Vehiculos" onclick="CargarVehiculos()"/>
     </div>
 
-        <div id="ListaCheckBoxes" >
-    <input type="button" id="btAdd" value="Cargar Vehiculos" onclick="CargarVehiculos()"  />
-        <div id="contenedor"></div>
-    </div>
+</ul>
+
+
 
 </div>
 
@@ -282,8 +271,8 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
     <div class="row">
 
     <div class="section-title text-center wow fadeInDown">
-    <h2>Contáctanos</h2>
-    <p>Envia tu mensaje con tus requerimientos</p>
+    <h2>Contáctanos</h2><BR>
+    <h4>Envia tus mensaje con tus requerimientos</h4>
     </div>
     
     <div class="col-md-8 col-sm-8 wow fadeInLeft">
@@ -296,23 +285,18 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
     <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
     </div>
     <div class="input-field message">
-    <textarea name="message" class="form-control" placeholder="Your Message" required=""></textarea>
+    <textarea name="message" id="mensaje" placeholder="Your Message" required=""></textarea>
     </div>
     <input type="submit" class="btn btn-blue pull-right" value="Enviar" id="msg-submit">
     </form>
     </div> <!-- end .contact-form -->
     </div> <!-- .col-md-8 -->
 
-    <div class="col-md-4 col-sm-3 wow fadeInRight">
     <div class="contact-details">
-    <span>Llámanos!</span>
-    <p>+00 123.456.789 <br> <br> +00 123.456.789</p>
+    <br><br><br><br><br><br><h4>Llámanos!</h4><br><br><br>
+    <p>+57 301-442-3053 <br> <br> +57 300-757-9899</p>
     </div> <!-- end .contact-details -->
-    <div class="contact-details">
-    <span>Llámanos!</span>
-    <p>+00 123.456.789 <br> <br> +00 123.456.789</p>
-    </div> <!-- end .contact-details -->
-    </div> <!-- .col-md-4 -->
+
 
     </div>
     </div>
@@ -474,7 +458,6 @@ function SeleccionVehiculos(){
 
 function SetMarkerVarios(){
     
-    console.log("Si entra");
     Posicion=[];
     
     $.post("MySQL/MarkerReal_Vehiculos.php", {Users: Tabla_Usuarios, Marcas: Checkes  }).done(
@@ -551,8 +534,6 @@ function Consulta_Hora_Marker_Graficar(){
     if (Cont_Historico<Tabla_Usuarios.length){
     if (Checkes[Cont_Historico]){
 
-        console.log("FI: "+Fecha_Inicio_PHP+" FF: "+Fecha_Final_PHP+" HI: "+Hora_Inicio_PHP+" HF: "+Hora_Final_PHP);
-        
     $.post( "MySQL/ConsultaDbHistorico.php", { FechaInicio: Fecha_Inicio_PHP, FechaFinal: Fecha_Final_PHP,
                                                HoraInicio:  Hora_Inicio_PHP,  HoraFinal:  Hora_Final_PHP,
                                                Vehiculo: Tabla_Usuarios[Cont_Historico].ID_VEHICULO        }).done(
