@@ -154,7 +154,10 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
     </div>
 
     <div class="service-features wow fadeInRight"><h3>Conoce tu recorrido y ubicación histórica</h3><ul>
-
+        
+    <h2 onmouseover="Desp2()">Inicio</h2>
+   
+<!--
 <ul>
     <li>
     <h5 style="font-size:13px;">FECHA INICIAL :</h5>
@@ -181,18 +184,22 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
     <li>
     <input type="button" id="Ubicar" value="UBICAR MARKER" onclick="Consulta_Marker_Hora()">
     <input type="text" id="Metros" placeholder="Digite metros a la redonda">
-    <!--<input type="checkbox" id="markerfecha2"  onclick="Snap=!Snap;"><h3 id="Pulsalo">Snap</h3> -->
-    </li>
-    
+<!--<input type="checkbox" id="markerfecha2"  onclick="Snap=!Snap;"><h3 id="Pulsalo">Snap</h3> -->
+
+<!--
+
+</li>
+<BR><BR>    
+    <li>
     <h3 id="Pulsalo2">Combinar</h3>
     <input type="checkbox" id="markerfecha" onclick="Combinar=!Combinar;">
-
+</li>
     <div id="ListaCheckBoxes">
     <input type="button" id="btAdd" value="Cargar Vehiculos" onclick="CargarVehiculos()"/>
     </div>
 
 </ul>
-
+-->
 
 
 </div>
@@ -255,12 +262,55 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
     </div>
 </div> <!--LATITUD LONGITUD ARRIBA DEL MAPA-->
 
+        
+ <div id="divmenu" class="AnimacionDerecha" .onmouseleave="OcultarHistoricos()" >
+        
+    <div id="ListaCheckBoxes">
+    <input type="button" id="btAdd" value="Cargar Vehiculos" onclick="CargarVehiculos()"/>
+    </div>
+        
+    <div style="display:block;margin: 20px 0px 0px -170px;">
+     <h5 class="TextoHistorico">FECHA INICIAL :</h5>
+     <h5 id="Fecha_Inicio2" onmouseover="Calendario_Inicial();" class="TextoHistorico">0000-00-00</h5>
+     <div id="Fecha_Inicio" onmouseleave="Ocultar_Calendario1();" ></div>
+     <input type="text"  id="Tiempo_Hora1" value="12 AM" class="TextoHistorico">:
+     <input type="text"  id="Tiempo_Minuto1" value="00" class="TextoHistorico">
+
+    </div>
+
+   <div style="display:inline-block;margin: 15px 0px 0px -170px;">
+    <h5 class="TextoHistorico">FECHA FINAL &nbsp :</h5>
+    <h5 id="Fecha_Final2" onmouseover="Calendario_Final();" class="TextoHistorico">0000-00-00</h5>
+    <div id="Fecha_Final" onmouseleave="Ocultar_Calendario2();"></div>
+    <input type="text"  id="Tiempo_Hora2" value="12 AM" class="TextoHistorico">:
+    <input type="text"  id="Tiempo_Minuto2" value="00" class="TextoHistorico" >
+   </div>   
+
+   <div style="display:block;margin: 15px 0px 0px -170px;">    
+        <input id="Boton_Real23" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Hora_Marker()"/>
+   </div>
+        
+   <div style="display:block;margin: 15px 0px 0px -180px;">   
+        <input type="text" id="Metros" placeholder="Digite metros a la redonda">
+        <!--<input type="checkbox" id="markerfecha2"  onclick="Snap=!Snap;"><h3 id="Pulsalo">Snap</h3> -->
+   </div>
+     
+   <div style="display:block;margin: 15px 0px 0px -170px;">     
+       <input type="button" id="Ubicar" value="UBICAR MARKER" onclick="Consulta_Marker_Hora(),OcultarHistoricos()">
+   </div>
+    
+   <div style="display:inline-block;margin: 15px 0px 0px -170px;">     
+        <h4 id="Pulsalo2">Combinar</h4>
+        <input type="checkbox" id="markerfecha" onclick="Combinar=!Combinar;">
+   </div>
+ </div>
+         
 <div id="googleMap"></div>
-<div class="btn btn-blue" id="Boton_Real24" type="button" value="TIEMPO REAL" onclick="Consulta_Real();">
-<h3 style="position: absolute; margin-left: -30px; font-size: 12px;  text-align: center;  "><strong>TIEMPO REAL</strong></h3></div>
+    <input type="button" id="Boton_Real24" value="TIEMPO REAL" onclick="Consulta_Real();">
 <p class="auto"><input type="text" id="autoc"/></p>
     
     <select id="seleccion" onChange="Centrar()"><option>Centrar Mapa</option></select>
+    <input type="button" id="btHist" value="Historico" onclick="MenuHistorico()">
 
 </section>
 
@@ -355,6 +405,8 @@ map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementBy
 map.controls[google.maps.ControlPosition.TOP_CENTER].push( document.getElementById('Boton_Real24'));
     
 map.controls[google.maps.ControlPosition.LEFT_TOP].push(  document.getElementById('seleccion'));
+    
+map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(  document.getElementById('btHist'));    
 
 var autocomplete = new google.maps.places.Autocomplete(    document.getElementById('autoc'));
 autocomplete.bindTo('bounds', map);
@@ -368,6 +420,21 @@ $('#Tiempo_Hora1').timepicker  ({   showMinutes: false,    showPeriod: true,    
 $('#Tiempo_Minuto1').timepicker({   showHours: false,      minutes: { interval: 1 },    rows: 6    	});
 $('#Tiempo_Hora2').timepicker  ({   showMinutes: false,    showPeriod: true,            rows: 4    	});
 $('#Tiempo_Minuto2').timepicker({   showHours: false,      minutes: { interval: 1 },    rows: 6    	});
+    
+
+function MenuHistorico(){
+
+    document.getElementById("divmenu").style="animation-duration:2s;animation-name:bounceInRight;";
+    document.getElementById("divmenu").style.display = 'inline-block';
+
+}
+    
+function OcultarHistoricos(){
+        
+        document.getElementById("divmenu").style="animation-duration:1s;animation-name:Steven;";
+        document.getElementById("divmenu").style.display = 'inline-block';
+        setTimeout(function(){ document.getElementById("divmenu").style.display = 'none'; }, 800);
+}
     
 function Centrar(){
     for (i in Tabla_Usuarios){
@@ -412,7 +479,7 @@ function CrearCheck(){
     Solicitar_Vehiculos=false;
 
     var divSubmit = $(document.createElement('div'));
-    $(divSubmit).append('<input type=button onclick="SeleccionVehiculos()" id="Seleccionar" value=Seleccionar style=margin-top:30px; />');
+    $(divSubmit).append('<input type=button onclick="SeleccionVehiculos()" id="Seleccionar" value=Seleccionar />');
     $('#btAdd').after("<br>");
     $('#btAdd').after(divSubmit);
  }
@@ -521,11 +588,14 @@ function Consulta_Hora_Marker(){
     LimpiarMapa();
     
     clearInterval(MarkerInterval);
-    document.location.href='#service';
     
-    ObtenerDateTime();
+    var msj=ObtenerDateTime();
+    console.log("el mensaje es: " +msj);
+    if(msj!="Error"){
+        console.log("si entra al error");
     Posicion=[];
     Consulta_Hora_Marker_Graficar();
+    }
  }
 
 function Consulta_Hora_Marker_Graficar(){
@@ -696,8 +766,6 @@ function Consulta_Marker_Hora_Graficar(){
  
 function LimpiarMapa(){
 
-    PoliLinea_Snap.setMap(null);
-
     for (i in Marker_Real)           {   Marker_Real[i].setMap(null);          }
     for (i in Marker_Hora_Marker){     for (j in Marker_Hora_Marker[i]){    Marker_Hora_Marker[i][j].setMap(null);   }      }
     for (i in Marker_Marker_Hora){     for (j in Marker_Marker_Hora[i]){    Marker_Marker_Hora[i][j].setMap(null);   }      }
@@ -709,14 +777,15 @@ function LimpiarMapa(){
  }
         
 function ObtenerDateTime(){
-
+    
+try{
     Fecha_Inicio_PHP = $('#Fecha_Inicio').DatePickerGetDate(true);
     Fecha_Final_PHP = $('#Fecha_Final').DatePickerGetDate(true);
     Tiempo = new Date(2016,10,10,$('#Tiempo_Hora1').timepicker('getHour'),$('#Tiempo_Minuto1').timepicker('getMinute'));  
     Hora_Inicio_PHP=String(Tiempo).substring(16,24);
     Tiempo = new Date(2016,10,10,$('#Tiempo_Hora2').timepicker('getHour'),$('#Tiempo_Minuto2').timepicker('getMinute'));  
     Hora_Final_PHP=String(Tiempo).substring(16,24);	
-
+}catch(err){ return "Error";}
     //Fecha_Inicio_PHP="2016-03-05";
     //Fecha_Final_PHP="2016-03-05";
     //Hora_Inicio_PHP="01:00:00";
