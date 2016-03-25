@@ -632,6 +632,9 @@ Copyright (c) 2013 Daniel Eden
   animation-name: bounceInLeft;
 }
 
+
+
+
 @-webkit-keyframes bounceInRight {
   0% {
     opacity: 0;
@@ -664,17 +667,11 @@ Copyright (c) 2013 Daniel Eden
     transform: translateX(2000px);
   }
 
-  60% {
+  50% {
     opacity: 1;
     -webkit-transform: translateX(-30px);
     -ms-transform: translateX(-30px);
     transform: translateX(-30px);
-  }
-
-  80% {
-    -webkit-transform: translateX(10px);
-    -ms-transform: translateX(10px);
-    transform: translateX(10px);
   }
 
   100% {
@@ -688,6 +685,54 @@ Copyright (c) 2013 Daniel Eden
   -webkit-animation-name: bounceInRight;
   animation-name: bounceInRight;
 }
+
+@-webkit-keyframes Steven {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    -ms-transform: translateX(0);
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 1;
+    -webkit-transform: translateX(-300px);
+    -ms-transform: translateX(-300px);
+    transform: translateX(-300px);
+  }
+  100% {
+    -webkit-transform: translateX(1000px);
+    -ms-transform: translateX(1000px);
+    transform: translateX(1000px);
+  }
+}
+
+@keyframes Steven {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    -ms-transform: translateX(0);
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 1;
+    -webkit-transform: translateX(-300px);
+    -ms-transform: translateX(-300px);
+    transform: translateX(-300px);
+  }
+  100% {
+    -webkit-transform: translateX(1000px);
+    -ms-transform: translateX(1000px);
+    transform: translateX(1000px);
+  }
+}
+
+.Steven {
+  -webkit-animation-name: Steven;
+  animation-name: Steven;
+}
+
+
+
 
 @-webkit-keyframes bounceInUp {
   0% {
