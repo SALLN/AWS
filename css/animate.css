@@ -632,9 +632,6 @@ Copyright (c) 2013 Daniel Eden
   animation-name: bounceInLeft;
 }
 
-
-
-
 @-webkit-keyframes bounceInRight {
   0% {
     opacity: 0;
@@ -730,9 +727,6 @@ Copyright (c) 2013 Daniel Eden
   -webkit-animation-name: Steven;
   animation-name: Steven;
 }
-
-
-
 
 @-webkit-keyframes bounceInUp {
   0% {
@@ -2845,8 +2839,6 @@ Copyright (c) 2013 Daniel Eden
   animation-name: hinge;
 }
 
-/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
-
 @-webkit-keyframes rollIn {
   0% {
     opacity: 0;
@@ -2881,8 +2873,6 @@ Copyright (c) 2013 Daniel Eden
   -webkit-animation-name: rollIn;
   animation-name: rollIn;
 }
-
-/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
 
 @-webkit-keyframes rollOut {
   0% {
