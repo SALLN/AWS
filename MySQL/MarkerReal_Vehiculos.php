@@ -18,12 +18,14 @@ if($Marcados[$i]=="true"){
    $query.="(	SELECT LATITUD  FROM $_SESSION[user]    WHERE ID_VEHICULO='".$Usuarios[$i][0]."'	ORDER BY ID DESC LIMIT 1) ";
    $query.=$union;
    $query.="(	SELECT LONGITUD  FROM $_SESSION[user]    WHERE ID_VEHICULO='".$Usuarios[$i][0]."'	ORDER BY ID DESC LIMIT 1) ";
+   $query.=$union;
+   $query.="(	SELECT FECHA_HORA  FROM $_SESSION[user]    WHERE ID_VEHICULO='".$Usuarios[$i][0]."'	ORDER BY ID DESC LIMIT 1) ";
    $toco=true;
    }
 
 }
 
-$consulta=mysql_query($query) or die("Problemas en consulta: ".mysql_error());
+$consulta=mysql_query($query) or die("Empty");
 $i=0;
 while($reg=mysql_fetch_array($consulta)){  
 
