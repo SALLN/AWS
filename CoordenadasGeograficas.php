@@ -80,7 +80,6 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
                 <nav class="collapse navigation navbar-collapse navbar-right" role="navigation">
                     <ul id="nav" class="nav navbar-nav">
                         <li class="current"><a href="#home">Inicio</a></li>
-                        <li><a href="#Historico_Boton">Histórico</a></li>
                         <li><a href="#service">Mapa</a></li>
                         <li><a href="#contact">Contacto</a></li>
                         <li><a href="INICIAR_SESION/logout.php">Salir</a><li>
@@ -143,69 +142,6 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
 
     </div>
 </section>
-           
-<section id="Historico_Boton">
-              
-<div class="container">
-
-    <div class="mobile-device">
-    <img data-wow-delay="0.5s" class="img-responsive black  wow fadeInLeftBig" src="images/map.png" alt="iPhone Black">
-    <img data-wow-delay="0.2s" class="img-responsive white  wow fadeInLeftBig" src="images/streed.png" alt="iPhone White">
-    </div>
-
-    <div class="service-features wow fadeInRight"><h3>Conoce tu recorrido y ubicación histórica</h3><ul>
-        
-    <h2 onmouseover="Desp2()">Inicio</h2>
-   
-<!--
-<ul>
-    <li>
-    <h5 style="font-size:13px;">FECHA INICIAL :</h5>
-    <h5 class="eso" id="Fecha_Inicio2" onmouseover="Calendario_Inicial();">0000-00-00</h5>
-    <div id="Fecha_Inicio" onmouseleave="Ocultar_Calendario1();" ></div>
-         
-    <input type="text"  id="Tiempo_Hora1" value="12 AM">:
-    <input type="text"  id="Tiempo_Minuto1" value="00">
-    </li>
-<BR>
-    <li>
-    <h5 style="font-size:13px;">FECHA FINAL &nbsp :</h5>
-    <h5 class="eso" id="Fecha_Final2" onmouseover="Calendario_Final();">0000-00-00</h5>
-    <div id="Fecha_Final" onmouseleave="Ocultar_Calendario2();"></div>
-    
-    <input type="text"  id="Tiempo_Hora2" value="12 AM">:
-    <input type="text"  id="Tiempo_Minuto2" value="00">
-    </li> 
-<BR><BR>    
-    <li>
-    <input id="Boton_Real23" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Hora_Marker();"/>
-    </li>
-<BR><BR>
-    <li>
-    <input type="button" id="Ubicar" value="UBICAR MARKER" onclick="Consulta_Marker_Hora()">
-    <input type="text" id="Metros" placeholder="Digite metros a la redonda">
-<!--<input type="checkbox" id="markerfecha2"  onclick="Snap=!Snap;"><h3 id="Pulsalo">Snap</h3> -->
-
-<!--
-
-</li>
-<BR><BR>    
-    <li>
-    <h3 id="Pulsalo2">Combinar</h3>
-    <input type="checkbox" id="markerfecha" onclick="Combinar=!Combinar;">
-</li>
-    <div id="ListaCheckBoxes">
-    <input type="button" id="btAdd" value="Cargar Vehiculos" onclick="CargarVehiculos()"/>
-    </div>
-
-</ul>
--->
-
-
-</div>
-
-
-</section>      <!--#service-bottom-->
 
 <section id="service"> <!--#Mapa-->
 
@@ -263,7 +199,7 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
 </div> <!--LATITUD LONGITUD ARRIBA DEL MAPA-->
 
         
- <div id="divmenu" class="AnimacionDerecha" .onmouseleave="OcultarHistoricos()" >
+ <div id="divmenu" class="AnimacionDerecha" onmouseleave="OcultarHistoricos()" >
         
     <div id="ListaCheckBoxes">
     <input type="button" id="btAdd" value="Cargar Vehiculos" onclick="CargarVehiculos()"/>
@@ -287,12 +223,12 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
    </div>   
 
    <div style="display:block;margin: 15px 0px 0px -170px;">    
-        <input id="Boton_Real23" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Hora_Marker()"/>
+        <input id="Boton_Real23" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Hora_Marker(),OcultarHistoricos()"/>
    </div>
         
    <div style="display:block;margin: 15px 0px 0px -180px;">   
         <input type="text" id="Metros" placeholder="Digite metros a la redonda">
-        <!--<input type="checkbox" id="markerfecha2"  onclick="Snap=!Snap;"><h3 id="Pulsalo">Snap</h3> -->
+        <input type="checkbox" id="markerfecha2"  onclick="Snap=!Snap;"><h3 id="Pulsalo">Snap</h3> 
    </div>
      
    <div style="display:block;margin: 15px 0px 0px -170px;">     
@@ -376,8 +312,11 @@ var LonMarker_Hora;             var Ruta_Historica=[];          var Fecha_Hora; 
 var Metros_Redonda;             var Ruta_Real=[];               var Posicion=[];        var Calendario2=1;          var i;
 var Solicitar_Despliegue=true;  var Tabla_Usuarios;             var MarkerInterval;     var Mapa_Centrado;          var RealAgain=[];
 var Solicitar_Vehiculos=true;   var Tabla;                      var Seleccionado;       var map;                    var Checkes=[];       
-var drawingManager;             var Tiempo;                     var Combinar=false;     var CalSet=0;
-
+var drawingManager;             var Tiempo;                     var Combinar=false;     var CalSet=0;               var Hide_Hist=true;
+    
+    var latlng;var Snap=false;var Ruta_Snap=[];var Ruta_Snap_Aux=[];var NumMarkerSnap=0; 
+var Ent=0;var Res;var t=0;var Tabla_Residuo;var cont=0;var Tabla_Entero;var Cont_Snap=0;var Tabla_Long;var Marker_Snap=[];
+var PoliLinea_Snap = new google.maps.Polyline({    path: Ruta_Snap,    strokeColor: 'black',    strokeWeight: 3   });
 var apiKey = 'AIzaSyCF6NfbnvzeseQoQPP5Bh6iSHA3_fcHu1g';
 
 var Select = document.getElementById("seleccion");
@@ -423,17 +362,19 @@ $('#Tiempo_Minuto2').timepicker({   showHours: false,      minutes: { interval: 
     
 
 function MenuHistorico(){
-
+    Hide_Hist=false;
     document.getElementById("divmenu").style="animation-duration:2s;animation-name:bounceInRight;";
     document.getElementById("divmenu").style.display = 'inline-block';
 
 }
     
 function OcultarHistoricos(){
-        
+        if (!Hide_Hist){
         document.getElementById("divmenu").style="animation-duration:1s;animation-name:Steven;";
         document.getElementById("divmenu").style.display = 'inline-block';
         setTimeout(function(){ document.getElementById("divmenu").style.display = 'none'; }, 800);
+        }
+        Hide_Hist=true;
 }
     
 function Centrar(){
@@ -582,7 +523,6 @@ function Consulta_Real(){
  }
     
 function Consulta_Hora_Marker(){ 
-    
     Cont_Historico=-1;
     //Ruta_Snap = [];
     LimpiarMapa();
@@ -590,9 +530,7 @@ function Consulta_Hora_Marker(){
     clearInterval(MarkerInterval);
     
     var msj=ObtenerDateTime();
-    console.log("el mensaje es: " +msj);
     if(msj!="Error"){
-        console.log("si entra al error");
     Posicion=[];
     Consulta_Hora_Marker_Graficar();
     }
@@ -695,7 +633,7 @@ function Consulta_Marker_Hora(){
     google.maps.event.clearListeners(map, 'click');
     
     ObtenerDateTime();
- Posicion=[];
+    Posicion=[];
     Consulta_Marker_Hora_Graficar()
         
     }); // }.LISTENER  ).LISTENER
@@ -868,10 +806,8 @@ function Ocultar_Calendario2(){
  	Calendario2=1;
  }
    
-/*         
-var Ent=0;var Res;var t=0;var Tabla_Residuo;var cont=0;var Tabla_Entero;var Cont_Snap=0;var Tabla_Long;var Marker_Snap=[];
-var PoliLinea_Snap = new google.maps.Polyline({    path: Ruta_Snap,    strokeColor: 'black',    strokeWeight: 3   });
-function Historico_Snap(){
+
+/*function Historico_Snap(){
     
     if(t==0){
     
@@ -923,11 +859,10 @@ function Historico_Snap(){
         if(cont==Tabla_Entero)     {        PoliLinea_Snap.setPath(Ruta_Snap); t=0;    }else{  Historico_Snap(); }
     }); 
  }
-  
+  */
 
 
-           var latlng;var Snap=false;var Ruta_Snap=[];var Ruta_Snap_Aux=[];var NumMarkerSnap=0; 
-*/
+
     
 </script>
 </body>
