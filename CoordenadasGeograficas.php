@@ -199,7 +199,9 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
 
         
  <div id="divmenu" class="AnimacionDerecha">
-        
+    
+    <input type="button" id="Cerrar" value="X" onclick="OcultarHistoricos()">
+     
     <div id="ListaCheckBoxes">
     <input type="button" id="btAdd" value="Cargar Vehiculos" onclick="CargarVehiculos()"/>
     </div>
@@ -312,8 +314,13 @@ var Metros_Redonda;             var Ruta_Real=[];               var Posicion=[];
 var Solicitar_Despliegue=true;  var Tabla_Usuarios;             var MarkerInterval;     var Mapa_Centrado;          var RealAgain=[];
 var Solicitar_Vehiculos=true;   var Tabla;                      var Seleccionado;       var map;                    var Checkes=[];       
 var drawingManager;             var Tiempo;                     var Combinar=false;     var CalSet=0;               var Hide_Hist=true;
-var Tabla_Historico=[];    
-    
+var Tabla_Historico=[];
+var Recargar_Vehiculos=true;
+var Tabla_Select=[];    
+var Icono_Historico =[];
+
+var Colores={0:'red',1:'blue',2:'magenta',3:'coral',4:'green',5:'cyan',6:'darkgoldenrod',7:'darkorange',8:'darkslateblue'};    
+
 var apiKey = 'AIzaSyCF6NfbnvzeseQoQPP5Bh6iSHA3_fcHu1g';
 
 var Select = document.getElementById("seleccion");
@@ -325,14 +332,6 @@ var mapOptions ={
                 center : myCenter,
                 zoom : 16,
                 disableDefaultUI: false    };
-
-var Icono_Historico ={
-                      path: google.maps.SymbolPath.CIRCLE,
-                      scale: 5,
-                      strokeColor: '#000000',
-                      strokeWeight: 2,
-                      fillColor: '#FF0000',
-                      fillOpacity:1  }
 
 map=new google.maps.Map(document.getElementById("googleMap"),mapOptions);
 
@@ -382,7 +381,8 @@ function Centrar(){
  }
     
 function CargarVehiculos(){
-
+    
+    clearInterval(MarkerInterval);
     if(Solicitar_Vehiculos){
         Cont_Vehiculos=0;
         $.post("MySQL/Vehicles_User.php",function( data ) {  
@@ -397,8 +397,16 @@ function CrearCheck(){
         
     if (Solicitar_Despliegue){
         
+    Icono_Historico[Cont_Vehiculos]={
+                      path: google.maps.SymbolPath.CIRCLE,
+                      scale: 5,
+                      strokeColor: '#000000',
+                      strokeWeight: 2,
+                      fillColor: Colores[Cont_Vehiculos],
+                      fillOpacity:1  }
+        
     RealAgain[Cont_Vehiculos]=0;
-    
+    Tabla_Select[Cont_Vehiculos]=false;
     //Ruta_Snap[Cont_Vehiculos]=[];
     Ruta_Real[Cont_Vehiculos]=[];
     Ruta_Historica[Cont_Vehiculos]=[];
@@ -442,24 +450,26 @@ function CrearCheck(){
     
 function SeleccionVehiculos(){
     
-    clearInterval(MarkerInterval);
-    MarkerInterval = setInterval(function(){SetMarkerVarios()}, 1000);
+    LimpiarMapa();
+    Recargar_Vehiculos=true;
+    MarkerInterval = setInterval(function(){SetMarkerVarios()}, 2000);
     Solicitar_Despliegue=false;
     document.getElementById("Seleccionar").style.display = 'none';
     
     for (i in Checkes){
         
-        if(Checkes[i])
+        if(Checkes[i] && !Tabla_Select[i])
             {
         var option = document.createElement("option");
         option.text = Tabla_Usuarios[i].ID_VEHICULO;
-        option.style="font-weight: bold;";
+        option.style="font-weight: bold;color:"+Colores[i];
         Select.add(option);
+        Tabla_Select[i]=true;
             }
     }
     
     for (i=0;i<Cont_CrearHTML;i++){ document.getElementById("Check"+i).style.display = 'none'; document.getElementById("H"+i).style.display = 'none';    }
-    SetMarkerVarios();
+    //SetMarkerVarios();
  }
 
 function SetMarkerVarios(){
@@ -487,8 +497,8 @@ function SetMarkerVarios(){
 document.getElementById('fila_latitud').innerHTML  = Latitud;   document.getElementById('fila_fecha').innerHTML    = Fecha_Hora.substring(0,10);   
 document.getElementById('fila_longitud').innerHTML = Longitud;  document.getElementById('fila_hora').innerHTML     = Fecha_Hora.substring(11,19);
 }
-                    if (Latitud!=LatAux[i] || Longitud!=LonAux[i] || RealAgain[i]==0 ){ 
-                        
+                    if (Latitud!=LatAux[i] || Longitud!=LonAux[i] || RealAgain[i]==0 || Recargar_Vehiculos ){ 
+                        console.log("Entra con: "+Tabla_Usuarios[i].ID_VEHICULO);
                         LatAux[i] =Latitud;    LonAux[i] =Longitud;
                         RealAgain[i]=1;
                         
@@ -504,19 +514,23 @@ document.getElementById('fila_longitud').innerHTML = Longitud;  document.getElem
                             labelAnchor: new google.maps.Point(17,9 ),
                             labelClass: "labels",
                             labelStyle: {opacity: 1},
-                            icon: Icono_Historico
+                            icon: Icono_Historico[i]
                         });
                     }
                 }
             }
+                                    Recargar_Vehiculos=false;
+
         });
 }
 
 function Consulta_Real(){
     
     LimpiarMapa();
+    OcultarHistoricos();
     for (i in PoliLinea_Real)        {   PoliLinea_Real[i].setMap(map); RealAgain[i]=0;       }
-    MarkerInterval = setInterval(function(){SetMarkerVarios()}, 5000);
+    clearInterval(MarkerInterval);
+    MarkerInterval = setInterval(function(){SetMarkerVarios()}, 2000);
     document.location.href='#service';
  }
     
@@ -569,7 +583,7 @@ function Consulta_Hora_Marker_Graficar(){
                 labelClass: "labels",
                 labelStyle: {opacity: 1},
                 title:Tabla_Historico[Cont_Historico][i].FECHA_HORA,
-                icon: Icono_Historico
+                icon: Icono_Historico[Cont_Historico]
                 });
                 
             }else if(i==Tabla_Historico[Cont_Historico].length-1){
@@ -583,7 +597,7 @@ function Consulta_Hora_Marker_Graficar(){
                 labelClass: "labels",
                 labelStyle: {opacity: 1},
                 title:Tabla_Historico[Cont_Historico][i].FECHA_HORA,
-                icon: Icono_Historico
+                icon: Icono_Historico[Cont_Historico]
                 });
                 
             }else{
@@ -592,7 +606,7 @@ function Consulta_Hora_Marker_Graficar(){
                 position:Posicion[Cont_Historico],
                 map: map,
                 title: Tabla_Historico[Cont_Historico][i].FECHA_HORA,
-                icon: Icono_Historico
+                icon: Icono_Historico[Cont_Historico]
                 });
             }
             
@@ -659,7 +673,7 @@ function Consulta_Marker_Hora_Graficar(){
             position:Posicion[Cont_Historico],        
             map: map,
             title: Tabla[i].FECHA_HORA,
-            icon: Icono_Historico,
+            icon: Icono_Historico[Cont_Historico]
             });
         
         }
@@ -685,7 +699,7 @@ function Consulta_Marker_Hora_Graficar(){
                         position:Posicion[Cont_Historico],      
                         map: map,
                         title: Tabla[i].FECHA_HORA,
-                        icon: Icono_Historico,
+                        icon: Icono_Historico[Cont_Historico]
     });}
     Consulta_Marker_Hora_Graficar();
     }); 
