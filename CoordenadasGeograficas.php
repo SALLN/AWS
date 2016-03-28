@@ -29,7 +29,6 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="styleSheet" href="css/encabezado.css">
     
-    
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDULHVVSQ-vjy1ScgiJU0hPuKb-IRt6bmw&libraries=geometry,drawing,places"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="js/jquery-1.12.1.min.js"></script>
@@ -199,7 +198,7 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
 </div> <!--LATITUD LONGITUD ARRIBA DEL MAPA-->
 
         
- <div id="divmenu" class="AnimacionDerecha" onmouseleave="OcultarHistoricos()" >
+ <div id="divmenu" class="AnimacionDerecha">
         
     <div id="ListaCheckBoxes">
     <input type="button" id="btAdd" value="Cargar Vehiculos" onclick="CargarVehiculos()"/>
@@ -228,7 +227,7 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
         
    <div style="display:block;margin: 15px 0px 0px -180px;">   
         <input type="text" id="Metros" placeholder="Digite metros a la redonda">
-        <input type="checkbox" id="markerfecha2"  onclick="Snap=!Snap;"><h3 id="Pulsalo">Snap</h3> 
+        <!--<input type="checkbox" id="markerfecha2"  onclick="Snap=!Snap;"><h3 id="Pulsalo">Snap</h3> -->
    </div>
      
    <div style="display:block;margin: 15px 0px 0px -170px;">     
@@ -313,10 +312,8 @@ var Metros_Redonda;             var Ruta_Real=[];               var Posicion=[];
 var Solicitar_Despliegue=true;  var Tabla_Usuarios;             var MarkerInterval;     var Mapa_Centrado;          var RealAgain=[];
 var Solicitar_Vehiculos=true;   var Tabla;                      var Seleccionado;       var map;                    var Checkes=[];       
 var drawingManager;             var Tiempo;                     var Combinar=false;     var CalSet=0;               var Hide_Hist=true;
+var Tabla_Historico=[];    
     
-    var latlng;var Snap=false;var Ruta_Snap=[];var Ruta_Snap_Aux=[];var NumMarkerSnap=0; 
-var Ent=0;var Res;var t=0;var Tabla_Residuo;var cont=0;var Tabla_Entero;var Cont_Snap=0;var Tabla_Long;var Marker_Snap=[];
-var PoliLinea_Snap = new google.maps.Polyline({    path: Ruta_Snap,    strokeColor: 'black',    strokeWeight: 3   });
 var apiKey = 'AIzaSyCF6NfbnvzeseQoQPP5Bh6iSHA3_fcHu1g';
 
 var Select = document.getElementById("seleccion");
@@ -401,13 +398,14 @@ function CrearCheck(){
     if (Solicitar_Despliegue){
         
     RealAgain[Cont_Vehiculos]=0;
-        
+    
+    //Ruta_Snap[Cont_Vehiculos]=[];
     Ruta_Real[Cont_Vehiculos]=[];
     Ruta_Historica[Cont_Vehiculos]=[];
         
     Marker_Hora_Marker[Cont_Vehiculos]=[];
     Marker_Marker_Hora[Cont_Vehiculos]=[]; 
-        
+    //PoliLinea_Snap[Cont_Vehiculos] = new google.maps.Polyline({ path: Ruta_Snap[Cont_Vehiculos],    strokeColor: 'black',    strokeWeight: 3   });
     PoliLinea_Real[Cont_Vehiculos] = new google.maps.Polyline({ path: Ruta_Real[Cont_Vehiculos],  strokeColor: '#FFFF00',  strokeOpacity: 1.0,  strokeWeight: 5    });
     PoliLinea_Historica[Cont_Vehiculos] = new google.maps.Polyline({ path: Ruta_Historica[Cont_Vehiculos],  strokeColor: '#000000', strokeOpacity: 1.0, strokeWeight: 5 });
     
@@ -518,7 +516,7 @@ function Consulta_Real(){
     
     LimpiarMapa();
     for (i in PoliLinea_Real)        {   PoliLinea_Real[i].setMap(map); RealAgain[i]=0;       }
-    MarkerInterval = setInterval(function(){SetMarkerVarios()}, 1000);
+    MarkerInterval = setInterval(function(){SetMarkerVarios()}, 5000);
     document.location.href='#service';
  }
     
@@ -547,16 +545,14 @@ function Consulta_Hora_Marker_Graficar(){
                                                Vehiculo: Tabla_Usuarios[Cont_Historico].ID_VEHICULO        }).done(
         
     function( data ) { 
-        Tabla = JSON.parse(data);
+        Tabla_Historico[Cont_Historico] = JSON.parse(data);
         Cont_Markers=0;
-
-        //if(!Snap){ SIN SNAP
-
+        //if(!Snap){ 
             PoliLinea_Historica[Cont_Historico].setMap(map);
 
-        for(i in Tabla){
-            Latitud_Historica = parseFloat(Tabla[i].LATITUD);
-            Longitud_Historica = parseFloat(Tabla[i].LONGITUD);
+        for(i in Tabla_Historico[Cont_Historico]){
+            Latitud_Historica = parseFloat(Tabla_Historico[Cont_Historico][i].LATITUD);
+            Longitud_Historica = parseFloat(Tabla_Historico[Cont_Historico][i].LONGITUD);
             Posicion[Cont_Historico]=new google.maps.LatLng(Latitud_Historica,Longitud_Historica);
 
             Ruta_Historica[Cont_Historico].push(Posicion[Cont_Historico]); 
@@ -572,11 +568,11 @@ function Consulta_Hora_Marker_Graficar(){
                 labelAnchor: new google.maps.Point(17,9 ),
                 labelClass: "labels",
                 labelStyle: {opacity: 1},
-                title:Tabla[i].FECHA_HORA,
+                title:Tabla_Historico[Cont_Historico][i].FECHA_HORA,
                 icon: Icono_Historico
                 });
                 
-            }else if(i==Tabla.length-1){
+            }else if(i==Tabla_Historico[Cont_Historico].length-1){
                 
                 Marker_Hora_Marker[Cont_Historico][Cont_Markers++]= new MarkerWithLabel({
                 position: Posicion[Cont_Historico],
@@ -586,7 +582,7 @@ function Consulta_Hora_Marker_Graficar(){
                 labelAnchor: new google.maps.Point(17,9 ),
                 labelClass: "labels",
                 labelStyle: {opacity: 1},
-                title:Tabla[i].FECHA_HORA,
+                title:Tabla_Historico[Cont_Historico][i].FECHA_HORA,
                 icon: Icono_Historico
                 });
                 
@@ -595,24 +591,22 @@ function Consulta_Hora_Marker_Graficar(){
                 Marker_Hora_Marker[Cont_Historico][Cont_Markers++]=new google.maps.Marker({  
                 position:Posicion[Cont_Historico],
                 map: map,
-                title: Tabla[i].FECHA_HORA,
+                title: Tabla_Historico[Cont_Historico][i].FECHA_HORA,
                 icon: Icono_Historico
                 });
             }
             
         } // FOR MARKER 
 
-/* SIN SNAP
-        }else{
-            LimpiarMapa();
-            Historico_Snap();
-        } // ELSE
-*/  
+        //}else{          //Historico_Snap(Cont_Historico);        } 
+  
         Consulta_Hora_Marker_Graficar();
     });                                          
 
     }else{           Consulta_Hora_Marker_Graficar();             }
  }
+    
+  //if(Cont_Historico==Tabla_Usuarios.length-1){  Historico_Snap();}
  } 
  
 function Consulta_Marker_Hora(){
@@ -724,10 +718,7 @@ try{
     Tiempo = new Date(2016,10,10,$('#Tiempo_Hora2').timepicker('getHour'),$('#Tiempo_Minuto2').timepicker('getMinute'));  
     Hora_Final_PHP=String(Tiempo).substring(16,24);	
 }catch(err){ return "Error";}
-    //Fecha_Inicio_PHP="2016-03-05";
-    //Fecha_Final_PHP="2016-03-05";
-    //Hora_Inicio_PHP="01:00:00";
-    //Hora_Final_PHP="10:00:00";
+
  }
   
 function Calendario_Inicial(){
@@ -805,22 +796,30 @@ function Ocultar_Calendario2(){
  	$('#Fecha_Final').DatePickerHide();
  	Calendario2=1;
  }
-   
-
-/*function Historico_Snap(){
     
-    if(t==0){
     
-    PoliLinea_Snap.setMap(map);
+/*    
+var Ruta_Snap=[];var PoliLinea_Snap = [];
+var latlng;var Snap=false;var Ruta_Snap_Aux=[];var NumMarkerSnap=0; 
+var Ent=0;var Res;var t=0;var Tabla_Residuo;
+var cont=[];cont[0]=0;cont[1]=0;var Tabla_Entero;var Cont_Snap=0;var Tabla_Long;var Marker_Snap=[];
+var Cont_Aux=100;    var Contador=0;
+function Historico_Snap(){
+    console.log(Contador);
+    
+    if(t==0 || Contador!=Cont_Aux){
+    
+    PoliLinea_Snap[Contador].setMap(map);
     NumMarkerSnap=0;
     Cont_Snap=0;
     Ent=0;
-    Tabla_Long    = Tabla.length;
+    Tabla_Long    = Tabla_Historico[Contador].length;
     Tabla_Entero  = parseInt(Tabla_Long/100);
     Tabla_Residuo = Tabla_Long%100;
     
     if(Tabla_Residuo>0) Tabla_Entero++;
     }
+    Cont_Aux=Contador;
     t=1;
     Ent++;
     
@@ -829,7 +828,10 @@ function Ocultar_Calendario2(){
     
     Ruta_Snap_Aux=[];
     
-    for(i=0;i<Res;i++){    Ruta_Snap_Aux.push(Tabla[i+Cont_Snap].LATITUD+","+Tabla[i+Cont_Snap].LONGITUD);     }
+    for(i=0;i<Res;i++){
+        console.log("se mete");
+        Ruta_Snap_Aux.push(Tabla_Historico[Contador][i+Cont_Snap].LATITUD+","+Tabla_Historico[Contador][i+Cont_Snap].LONGITUD);
+    }
     
     Cont_Snap=Cont_Snap+100;
     
@@ -849,17 +851,27 @@ function Ocultar_Calendario2(){
                 icon: Icono_Historico,  
                 title: String(NumMarkerSnap)    
             });
-            Ruta_Snap.push(latlng);
+            Ruta_Snap[Contador].push(latlng);
             NumMarkerSnap++;
         }
         
         map.setCenter(latlng);
-        cont++
-        
-        if(cont==Tabla_Entero)     {        PoliLinea_Snap.setPath(Ruta_Snap); t=0;    }else{  Historico_Snap(); }
+        cont[Contador]++;
+        console.log("el cont es: "+cont[Contador]+"  y el conthis es: "+Contador+" el tablaentero es: "+Tabla_Entero);
+        if(cont[Contador]==Tabla_Entero)     
+        {
+            PoliLinea_Snap[Contador].setPath(Ruta_Snap[Contador]);
+            Contador++;
+            t=0;
+            if(Contador!=Tabla_Usuarios.length-1){
+            Historico_Snap(); 
+            }
+        }else{
+            Historico_Snap(); 
+        }
     }); 
  }
-  */
+*/  
 
 
 
