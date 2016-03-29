@@ -208,7 +208,7 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
         
     <div style="display:block;margin: 20px 0px 0px -170px;">
      <h5 class="TextoHistorico">FECHA INICIAL :</h5>
-     <h5 id="Fecha_Inicio2" onmouseover="Calendario_Inicial();" class="TextoHistorico">0000-00-00</h5>
+     <h5 id="Fecha_Inicio2" onmouseover="Mostrar_Calendario1();" class="TextoHistorico">0000-00-00</h5>
      <div id="Fecha_Inicio" onmouseleave="Ocultar_Calendario1();" ></div>
      <input type="text"  id="Tiempo_Hora1" value="12 AM" class="TextoHistorico">:
      <input type="text"  id="Tiempo_Minuto1" value="00" class="TextoHistorico">
@@ -217,7 +217,7 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
 
    <div style="display:inline-block;margin: 15px 0px 0px -170px;">
     <h5 class="TextoHistorico">FECHA FINAL &nbsp :</h5>
-    <h5 id="Fecha_Final2" onmouseover="Calendario_Final();" class="TextoHistorico">0000-00-00</h5>
+    <h5 id="Fecha_Final2" onmouseover="Mostrar_Calendario2();" class="TextoHistorico">0000-00-00</h5>
     <div id="Fecha_Final" onmouseleave="Ocultar_Calendario2();"></div>
     <input type="text"  id="Tiempo_Hora2" value="12 AM" class="TextoHistorico">:
     <input type="text"  id="Tiempo_Minuto2" value="00" class="TextoHistorico" >
@@ -789,7 +789,7 @@ try{
 
  }
   
-function Calendario_Inicial(){
+function Mostrar_Calendario1(){
 
     	if (Calendario1==1){
 		Calendario1=0;
@@ -797,7 +797,7 @@ function Calendario_Inicial(){
 	    
 	     flat: true,
 	     date:  '',
-	     current: '2016-03-05',
+	     current: '2016-03-29',
 	     calendars: 1,
 	     starts: 0,
 	     mode: 'single',
@@ -820,27 +820,19 @@ function Calendario_Inicial(){
             });
              }}
 
-function Calendario_Final(){
+function Mostrar_Calendario2(){
  
 
-	try{
-		CalSet=0;
-		if ($('#Fecha_Inicio').DatePickerGetDate(true).length==10)
-		{
-			CalSet=1;
-		}
-	 }catch(err){
-		CalSet=0;
-	 };
 
-     if (Calendario2==1 && CalSet==1){
+
+     if (Calendario2==1){
 	Calendario2=0;
 
     $('#Fecha_Final').DatePicker({
     
     flat: true,
     date:  '',
-    current: $('#Fecha_Inicio').DatePickerGetDate(true),
+    current: '2016-03-29',
     calendars: 1,
     starts: 0,
     mode: 'single',
@@ -946,9 +938,6 @@ function Historico_Snap(){
     }); 
  }
 */  
-
-
-
     
 </script>
 </body>
