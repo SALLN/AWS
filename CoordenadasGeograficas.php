@@ -415,7 +415,7 @@ function CrearCheck(){
     //Ruta_Snap[Cont_Vehiculos]=[];
     Ruta_Real[Cont_Vehiculos]=[];
     Ruta_Historica[Cont_Vehiculos]=[];
-        
+    
     Marker_Hora_Marker[Cont_Vehiculos]=[];
     Marker_Marker_Hora[Cont_Vehiculos]=[]; 
     //PoliLinea_Snap[Cont_Vehiculos] = new google.maps.Polyline({ path: Ruta_Snap[Cont_Vehiculos],    strokeColor: 'black',    strokeWeight: 3   });
@@ -536,7 +536,6 @@ function Consulta_Real(){
     for (i in PoliLinea_Real)        {   PoliLinea_Real[i].setMap(map); RealAgain[i]=0;       }
     clearInterval(MarkerInterval);
     MarkerInterval = setInterval(function(){SetMarkerVarios()}, 2000);
-    document.location.href='#service';
  }
     
 function Consulta_Hora_Marker(){ 
@@ -546,17 +545,13 @@ function Consulta_Hora_Marker(){
     
     clearInterval(MarkerInterval);
 
+    year=parseInt(Fecha_Inicio_PHP.substring(0, 4));
+    month=parseInt(Fecha_Inicio_PHP.substring(5, 7));
+    day=parseInt(Fecha_Inicio_PHP.substring(8, 10));
 
-       year=parseInt(Fecha_Inicio_PHP.substring(0, 4));
-        month=parseInt(Fecha_Inicio_PHP.substring(5, 7));
-        day=parseInt(Fecha_Inicio_PHP.substring(8, 10));
-
-        year1=parseInt(Fecha_Final_PHP.substring(0, 4));
-        month1=parseInt(Fecha_Final_PHP.substring(5, 7));
-        day1=parseInt(Fecha_Final_PHP.substring(8, 10));
-    
-    
-  
+    year1=parseInt(Fecha_Final_PHP.substring(0, 4));
+    month1=parseInt(Fecha_Final_PHP.substring(5, 7));
+    day1=parseInt(Fecha_Final_PHP.substring(8, 10));
 
     var msj=ObtenerDateTime();
     if(msj!="Error" && year==year1 && month==month1 && day<day1){
@@ -572,13 +567,13 @@ function Consulta_Hora_Marker(){
     Consulta_Hora_Marker_Graficar();
     }
     if (msj!="Error" && year==year1 && month==month1 && day==day1 && hour>hour1){
-    alert("La hora final es anterior a la inicial");
+    alert("La hora final está antes de la inicial");
     }
     if(msj!="Error" && year==year1 && month>month1){
-    alert("La fecha final es anterior a la inicial")
+    alert("La fecha final está antes de la inicial")
     }
     if(msj!="Error" && year==year1 && month==month1 && day>day1){
-    alert("La fecha final es anterior a la inicial")
+    alert("La fecha final está antes de la inicial")
     }
 
 
@@ -668,7 +663,6 @@ function Consulta_Marker_Hora(){
     Cont_Historico=-1;
     LimpiarMapa();
     clearInterval(MarkerInterval);
-    document.location.href='#service';
 
     map.addListener('click', function(e) {
 
@@ -683,11 +677,9 @@ function Consulta_Marker_Hora(){
     ObtenerDateTime();
     Posicion=[];
 
-
-
     Consulta_Marker_Hora_Graficar()
         
-    }); // }.LISTENER  ).LISTENER
+    }); 
  }
 
 function Consulta_Marker_Hora_Graficar(){
@@ -768,10 +760,8 @@ function LimpiarMapa(){
 function ObtenerDateTime(){
     
 try{
-    Fecha_Inicio_PHP = $('#Fecha_Inicio').DatePickerGetDate(true);
-    Fecha_Final_PHP = $('#Fecha_Final').DatePickerGetDate(true);
-    Tiempo = new Date(2016,10,10,$('#Tiempo_Hora1').timepicker('getHour'),$('#Tiempo_Minuto1').timepicker('getMinute'));  
     
+    Tiempo = new Date(2016,10,10,$('#Tiempo_Hora1').timepicker('getHour'),$('#Tiempo_Minuto1').timepicker('getMinute'));  
     Hora_Inicio_PHP=String(Tiempo).substring(16,24);
 
     hour=parseInt(String(Tiempo).substring(16,18));
@@ -781,12 +771,11 @@ try{
     Tiempo = new Date(2016,10,10,$('#Tiempo_Hora2').timepicker('getHour'),$('#Tiempo_Minuto2').timepicker('getMinute'));  
     Hora_Final_PHP=String(Tiempo).substring(16,24);	
 
-     hour1=parseInt(String(Tiempo).substring(16,18));
-     min1=parseInt(String(Tiempo).substring(19,21));
-
+    hour1=parseInt(String(Tiempo).substring(16,18));
+    min1=parseInt(String(Tiempo).substring(19,21));
 
 }catch(err){ return "Error";}
-
+    
  }
   
 function Mostrar_Calendario1(){
@@ -862,8 +851,8 @@ function Ocultar_Calendario2(){
  	$('#Fecha_Final').DatePickerHide();
  	Calendario2=1;
  }
-    
-    
+
+
 /*    
 var Ruta_Snap=[];var PoliLinea_Snap = [];
 var latlng;var Snap=false;var Ruta_Snap_Aux=[];var NumMarkerSnap=0; 
