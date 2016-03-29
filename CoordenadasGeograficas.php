@@ -679,7 +679,7 @@ function Consulta_Marker_Hora(){
 
     Consulta_Marker_Hora_Graficar()
         
-    }); // }.LISTENER  ).LISTENER
+    }); 
  }
 
 function Consulta_Marker_Hora_Graficar(){
