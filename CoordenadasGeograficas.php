@@ -538,7 +538,11 @@ function Consulta_Real(){
     MarkerInterval = setInterval(function(){SetMarkerVarios()}, 2000);
  }
     
-function Consulta_Hora_Marker(){ 
+function Consulta_Hora_Marker(){
+    
+    for (i in Ruta_Historica){  Ruta_Historica[i]=[];  };
+    
+
     Cont_Historico=-1;
     //Ruta_Snap = [];
     LimpiarMapa();
