@@ -243,6 +243,11 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
  </div>
          
 <div id="googleMap"></div>
+
+<h1 id="prueba"></h1>
+<h1 id="prueba1"></h1>
+
+
     <input type="button" id="Boton_Real24" value="TIEMPO REAL" onclick="Consulta_Real();">
 <p class="auto"><input type="text" id="autoc"/></p>
     
@@ -314,8 +319,8 @@ var Metros_Redonda;             var Ruta_Real=[];               var Posicion=[];
 var Solicitar_Despliegue=true;  var Tabla_Usuarios;             var MarkerInterval;     var Mapa_Centrado;          var RealAgain=[];
 var Solicitar_Vehiculos=true;   var Tabla;                      var Seleccionado;       var map;                    var Checkes=[];       
 var drawingManager;             var Tiempo;                     var Combinar=false;     var CalSet=0;               var Hide_Hist=true;
-var Tabla_Historico=[];
-var Recargar_Vehiculos=true;
+var Tabla_Historico=[];         var year; var month; var day; var year1; var month1; var day1;
+var Recargar_Vehiculos=true;    var hour; var min; var hour1; var min1;
 var Tabla_Select=[];    
 var Icono_Historico =[];
 
@@ -540,16 +545,49 @@ function Consulta_Hora_Marker(){
     LimpiarMapa();
     
     clearInterval(MarkerInterval);
+
+
+       year=parseInt(Fecha_Inicio_PHP.substring(0, 4));
+        month=parseInt(Fecha_Inicio_PHP.substring(5, 7));
+        day=parseInt(Fecha_Inicio_PHP.substring(8, 10));
+
+        year1=parseInt(Fecha_Final_PHP.substring(0, 4));
+        month1=parseInt(Fecha_Final_PHP.substring(5, 7));
+        day1=parseInt(Fecha_Final_PHP.substring(8, 10));
     
+    
+  
+
     var msj=ObtenerDateTime();
-    if(msj!="Error"){
+    if(msj!="Error" && year==year1 && month==month1 && day<day1){
     Posicion=[];
     Consulta_Hora_Marker_Graficar();
+    }
+    if(msj!="Error" && year==year1 && month<month1){
+    Posicion=[];
+    Consulta_Hora_Marker_Graficar();
+    }
+    if (msj!="Error" && year==year1 && month==month1 && day==day1 && hour<=hour1){
+    Posicion=[];
+    Consulta_Hora_Marker_Graficar();
+    }
+    if (msj!="Error" && year==year1 && month==month1 && day==day1 && hour>hour1){
+    alert("La hora final es anterior a la inicial");
+    }
+    if(msj!="Error" && year==year1 && month>month1){
+    alert("La fecha final es anterior a la inicial")
+    }
+    if(msj!="Error" && year==year1 && month==month1 && day>day1){
+    alert("La fecha final es anterior a la inicial")
     }
  }
 
 function Consulta_Hora_Marker_Graficar(){
     Cont_Historico++;
+
+
+
+
 
     if (Cont_Historico<Tabla_Usuarios.length){
     if (Checkes[Cont_Historico]){
@@ -642,6 +680,9 @@ function Consulta_Marker_Hora(){
     
     ObtenerDateTime();
     Posicion=[];
+
+
+
     Consulta_Marker_Hora_Graficar()
         
     }); // }.LISTENER  ).LISTENER
@@ -728,9 +769,20 @@ try{
     Fecha_Inicio_PHP = $('#Fecha_Inicio').DatePickerGetDate(true);
     Fecha_Final_PHP = $('#Fecha_Final').DatePickerGetDate(true);
     Tiempo = new Date(2016,10,10,$('#Tiempo_Hora1').timepicker('getHour'),$('#Tiempo_Minuto1').timepicker('getMinute'));  
+    
     Hora_Inicio_PHP=String(Tiempo).substring(16,24);
+
+    hour=parseInt(String(Tiempo).substring(16,18));
+    min=parseInt(String(Tiempo).substring(19,21));
+
+
     Tiempo = new Date(2016,10,10,$('#Tiempo_Hora2').timepicker('getHour'),$('#Tiempo_Minuto2').timepicker('getMinute'));  
     Hora_Final_PHP=String(Tiempo).substring(16,24);	
+
+     hour1=parseInt(String(Tiempo).substring(16,18));
+     min1=parseInt(String(Tiempo).substring(19,21));
+
+
 }catch(err){ return "Error";}
 
  }
@@ -756,9 +808,14 @@ function Calendario_Inicial(){
 	            CalSet=1;
     			Fecha_Inicio_PHP = $('#Fecha_Inicio').DatePickerGetDate(true);
     			document.getElementById('Fecha_Inicio2').innerHTML  = Fecha_Inicio_PHP;  
-	        }
-	      }
-	    	});
+
+        
+
+
+              
+ }
+          }
+            });
              }}
 
 function Calendario_Final(){
@@ -795,7 +852,8 @@ function Calendario_Final(){
 	            Calendario2=1;   
     			Fecha_Final_PHP = $('#Fecha_Final').DatePickerGetDate(true);
     			document.getElementById('Fecha_Final2').innerHTML  = Fecha_Final_PHP;  
-        }
+               
+      }
     }
     });
  }
