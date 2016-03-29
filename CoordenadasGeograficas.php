@@ -577,7 +577,6 @@ function Consulta_Hora_Marker(){
     if(msj!="Error" && year==year1 && month>month1){
     alert("La fecha final es anterior a la inicial")
     }
-    
     if(msj!="Error" && year==year1 && month==month1 && day>day1){
     alert("La fecha final es anterior a la inicial")
     }
