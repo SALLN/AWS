@@ -144,7 +144,7 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
 
 <section id="service"> <!--#Mapa-->
 
-<div class="container">
+ <div class="container">
     <div class="row">
 
         <div class="col-md-3 col-sm-10 wow fadeInLeft">
@@ -195,7 +195,7 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
             </div>
         </div>
     </div>
-</div> <!--LATITUD LONGITUD ARRIBA DEL MAPA-->
+ </div> <!--LATITUD LONGITUD ARRIBA DEL MAPA-->
 
         
  <div id="divmenu" class="AnimacionDerecha">
@@ -242,19 +242,13 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
    </div>
  </div>
          
-<div id="googleMap"></div>
-
-<h1 id="prueba"></h1>
-<h1 id="prueba1"></h1>
-
-
-    <input type="button" id="Boton_Real24" value="TIEMPO REAL" onclick="Consulta_Real();">
-<p class="auto"><input type="text" id="autoc"/></p>
+ <div id="googleMap"></div>
+ <input type="button" id="Boton_Real24" value="TIEMPO REAL" onclick="Consulta_Real();">
+ <p class="auto"><input type="text" id="autoc"/></p>
     
     <select id="seleccion" onChange="Centrar()"><option>Centrar Mapa</option></select>
     <input type="button" id="btHist" value="Historico" onclick="MenuHistorico()">
-
-</section>
+ </section>
 
 <section id="contact"> <!--#contact-->
         
@@ -292,7 +286,7 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
 
     </div>
     </div>
-</section>
+ </section>
 
 <footer id="footer" class="text-center">
     <div class="container">
@@ -306,7 +300,7 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
             </div>
         </div>
     </div>
-</footer>
+ </footer>
 
 <script>
 
@@ -323,6 +317,7 @@ var Tabla_Historico=[];         var year; var month; var day; var year1; var mon
 var Recargar_Vehiculos=true;    var hour; var min; var hour1; var min1;
 var Tabla_Select=[];    
 var Icono_Historico =[];
+var Distancia_Recorrida;
 
 var Colores={0:'red',1:'blue',2:'magenta',3:'coral',4:'green',5:'cyan',6:'darkgoldenrod',7:'darkorange',8:'darkslateblue'};    
 
@@ -342,7 +337,7 @@ map=new google.maps.Map(document.getElementById("googleMap"),mapOptions);
 
 map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('autoc'));
 
-map.controls[google.maps.ControlPosition.TOP_CENTER].push( document.getElementById('Boton_Real24'));
+map.controls[google.maps.ControlPosition.RIGHT_CENTER].push( document.getElementById('Boton_Real24'));
     
 map.controls[google.maps.ControlPosition.LEFT_TOP].push(  document.getElementById('seleccion'));
     
@@ -355,6 +350,29 @@ var place = autocomplete.getPlace();
 if (place.geometry.viewport) {      map.fitBounds(place.geometry.viewport);    } 
 else {       map.setCenter(place.geometry.location);       map.setZoom(17);    }
 });
+
+
+
+
+google.maps.LatLng.prototype.kmTo = function(a){
+    var e = Math, ra = e.PI/180;
+    var b = this.lat() * ra, c = a.lat() * ra, d = b - c;
+    var g = this.lng() * ra - a.lng() * ra;
+    var f = 2 * e.asin(e.sqrt(e.pow(e.sin(d/2), 2) + e.cos(b) * e.cos
+    (c) * e.pow(e.sin(g/2), 2)));
+    return f * 6378.137;
+    }
+
+    google.maps.Polyline.prototype.inKm = function(n){
+    var a = this.getPath(n), len = a.getLength(), dist = 0;
+    for (var i=0; i < len-1; i++) {
+       dist += a.getAt(i).kmTo(a.getAt(i+1));
+    }
+    return dist;
+    }
+
+
+
 
 $('#Tiempo_Hora1').timepicker  ({   showMinutes: false,    showPeriod: true,            rows: 4    	});
 $('#Tiempo_Minuto1').timepicker({   showHours: false,      minutes: { interval: 1 },    rows: 6    	});
@@ -384,7 +402,7 @@ function Centrar(){
         if(Tabla_Usuarios[i].ID_VEHICULO==document.getElementById('seleccion').value){map.setCenter(Posicion[i]); Seleccionado=i;}
     }
  }
-    
+   
 function CargarVehiculos(){
     
     clearInterval(MarkerInterval);
@@ -542,13 +560,14 @@ function Consulta_Hora_Marker(){
     
     for (i in Ruta_Historica){  Ruta_Historica[i]=[];  };
     
+    
 
     Cont_Historico=-1;
     //Ruta_Snap = [];
     LimpiarMapa();
     
     clearInterval(MarkerInterval);
-
+/*
     year=parseInt(Fecha_Inicio_PHP.substring(0, 4));
     month=parseInt(Fecha_Inicio_PHP.substring(5, 7));
     day=parseInt(Fecha_Inicio_PHP.substring(8, 10));
@@ -556,8 +575,10 @@ function Consulta_Hora_Marker(){
     year1=parseInt(Fecha_Final_PHP.substring(0, 4));
     month1=parseInt(Fecha_Final_PHP.substring(5, 7));
     day1=parseInt(Fecha_Final_PHP.substring(8, 10));
-
+*/
     var msj=ObtenerDateTime();
+Consulta_Hora_Marker_Graficar();
+/*
     if(msj!="Error" && year==year1 && month==month1 && day<day1){
     Posicion=[];
     Consulta_Hora_Marker_Graficar();
@@ -579,16 +600,13 @@ function Consulta_Hora_Marker(){
     if(msj!="Error" && year==year1 && month==month1 && day>day1){
     alert("La fecha final está antes de la inicial")
     }
-
+*/
 
  }
 
 function Consulta_Hora_Marker_Graficar(){
+
     Cont_Historico++;
-
-
-
-
 
     if (Cont_Historico<Tabla_Usuarios.length){
     if (Checkes[Cont_Historico]){
@@ -601,7 +619,7 @@ function Consulta_Hora_Marker_Graficar(){
         Tabla_Historico[Cont_Historico] = JSON.parse(data);
         Cont_Markers=0;
         //if(!Snap){ 
-            PoliLinea_Historica[Cont_Historico].setMap(map);
+        PoliLinea_Historica[Cont_Historico].setMap(map);
 
         for(i in Tabla_Historico[Cont_Historico]){
             Latitud_Historica = parseFloat(Tabla_Historico[Cont_Historico][i].LATITUD);
@@ -649,7 +667,7 @@ function Consulta_Hora_Marker_Graficar(){
                 });
             }
             
-        } // FOR MARKER 
+        }  
 
         //}else{          //Historico_Snap(Cont_Historico);        } 
   
@@ -659,9 +677,14 @@ function Consulta_Hora_Marker_Graficar(){
     }else{           Consulta_Hora_Marker_Graficar();             }
  }
     
-  //if(Cont_Historico==Tabla_Usuarios.length-1){  Historico_Snap();}
+    if(Cont_Historico==Tabla_Usuarios.length-1){    Distancia_KM();    /*Historico_Snap();*/    }
  } 
- 
+function Distancia_KM(){
+
+   Distancia_Recorrida = PoliLinea_Historica[1].inKm();
+   console.log(Distancia_Recorrida);
+
+} 
 function Consulta_Marker_Hora(){
  
     Cont_Historico=-1;
@@ -779,6 +802,11 @@ try{
     min1=parseInt(String(Tiempo).substring(19,21));
 
 }catch(err){ return "Error";}
+
+Fecha_Inicio_PHP='2016-03-25';
+Fecha_Final_PHP='2016-03-25';
+Hora_Inicio_PHP='10:02:00';
+Hora_Final_PHP='10:05:00'
     
  }
   

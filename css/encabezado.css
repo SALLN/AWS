@@ -35,6 +35,7 @@ p {display: inline;}
     cursor: pointer;
     border: 1px solid transparent;
     font-weight: bold;
+    margin-bottom: 5px;
 }
 #Boton_Real24:hover{
     color:rebeccapurple;
