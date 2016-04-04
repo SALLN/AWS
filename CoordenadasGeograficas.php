@@ -320,7 +320,7 @@ var Solicitar_Despliegue=true;  var Tabla_Usuarios;             var MarkerInterv
 var Solicitar_Vehiculos=true;   var Tabla;                      var Seleccionado;       var map;                    var Checkes=[];       
 var drawingManager;             var Tiempo;                     var Combinar=false;     var CalSet=0;               var Hide_Hist=true;
 var Tabla_Historico=[];         var year; var month; var day; var year1; var month1; var day1;
-var Recargar_Vehiculos=true;    var hour; var min; var hour1; var min1;
+var Recargar_Vehiculos=true;    var hour; var min; var hour1; var min1; 
 var Tabla_Select=[];    
 var Icono_Historico =[];
 
@@ -547,16 +547,15 @@ function Consulta_Hora_Marker(){
     clearInterval(MarkerInterval);
 
 
-       year=parseInt(Fecha_Inicio_PHP.substring(0, 4));
-        month=parseInt(Fecha_Inicio_PHP.substring(5, 7));
-        day=parseInt(Fecha_Inicio_PHP.substring(8, 10));
+    year=parseInt(Fecha_Inicio_PHP.substring(0, 4));
+     month=parseInt(Fecha_Inicio_PHP.substring(5, 7));
+     day=parseInt(Fecha_Inicio_PHP.substring(8, 10));
 
-        year1=parseInt(Fecha_Final_PHP.substring(0, 4));
-        month1=parseInt(Fecha_Final_PHP.substring(5, 7));
-        day1=parseInt(Fecha_Final_PHP.substring(8, 10));
-    
-    
-  //culquier cambio
+    year1=parseInt(Fecha_Final_PHP.substring(0, 4));
+    month1=parseInt(Fecha_Final_PHP.substring(5, 7));
+    day1=parseInt(Fecha_Final_PHP.substring(8, 10));
+
+  
 
     var msj=ObtenerDateTime();
     if(msj!="Error" && year==year1 && month==month1 && day<day1){
@@ -572,13 +571,13 @@ function Consulta_Hora_Marker(){
     Consulta_Hora_Marker_Graficar();
     }
     if (msj!="Error" && year==year1 && month==month1 && day==day1 && hour>hour1){
-    alert("La hora final es anterior a la inicial");
+    alert("La hora final debe ser posterior a la inicial");
     }
     if(msj!="Error" && year==year1 && month>month1){
-    alert("La fecha final es anterior a la inicial")
+    alert("La fecha final debe ser posterior a la inicial")
     }
     if(msj!="Error" && year==year1 && month==month1 && day>day1){
-    alert("La fecha final es anterior a la inicial")
+    alert("La fecha final debe ser posterior a la inicial")
     }
  }
 
