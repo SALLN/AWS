@@ -33,6 +33,8 @@ session_start();
     
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDULHVVSQ-vjy1ScgiJU0hPuKb-IRt6bmw&libraries=geometry,drawing,places"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    
+    <script src="js/graphs.js"></script>
     <script src="js/jquery-1.12.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.nav.js"></script>
@@ -51,6 +53,7 @@ session_start();
     <script src="js/jquery.ui.core.min.js"></script>
     <script src="js/jquery.ui.timepicker.js?v=0.3.3"></script>
     <script src="js/modernizr-2.6.2.min.js"></script>
+    
     <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel.js"></script>
 
 </head>
@@ -238,17 +241,28 @@ session_start();
         <h4 id="Pulsalo2">Combinar</h4>
         <input type="checkbox" id="markerfecha" onclick="Combinar=!Combinar;">
    </div>
+     
+       <div style="display:block;margin: 15px 0px 0px 0px;">     
+       <input type="button" id="Distancia_Recorrida" value="Distancia Recorrida" onclick="MostrarDistancia(),OcultarHistoricos()">
+   </div> 
  </div>
          
  <div id="googleMap"></div>
  <input type="button" id="Boton_Real24" value="TIEMPO REAL" onclick="Consulta_Real();">
  <p class="auto"><input type="text" id="autoc"/></p>
     
-    <select id="seleccion" onChange="Centrar()"><option>Centrar Mapa</option></select>
-    <input type="button" id="btHist" value="Historico" onclick="MenuHistorico()">
-        <div id="ListaCheckBoxes">
-    <input type="button" id="btAdd" value="Cargar Vehiculos" onclick="CargarVehiculos()"/>
+ <select id="seleccion" onChange="Centrar()"><option>Centrar Mapa</option></select>
+ <input type="button" id="btHist" value="Historico" onclick="MostrarHistoricos()">
+ 
+ <div id="ListaCheckBoxes">
+ <input type="button" id="btAdd" value="Cargar Vehiculos" onclick="CargarVehiculos()"/>
+ </div>
+    
+<div id="MenuDistancia">
+    <input type="button" id="Cerrar_Distancia" value="X" onclick="OcultarDistancia()">
+    <div id="divGraph" style="margin:20px 20px;"></div>
     </div>
+    
  </section>
 
 <section id="contact"> <!--#contact-->
@@ -319,6 +333,7 @@ var Recargar_Vehiculos=true;    var hour; var min; var hour1; var min1;
 var Tabla_Select=[];    
 var Icono_Historico =[];
 var Distancia_Recorrida;
+var Hide_Dist=true;
 
 var Colores={0:'red',1:'blue',2:'magenta',3:'coral',4:'green',5:'cyan',6:'darkgoldenrod',7:'darkorange',8:'darkslateblue'};    
 
@@ -377,22 +392,7 @@ $('#Tiempo_Hora2').timepicker  ({   showMinutes: false,    showPeriod: true,    
 $('#Tiempo_Minuto2').timepicker({   showHours: false,      minutes: { interval: 1 },    rows: 6    	});
     
 
-function MenuHistorico(){
-    Hide_Hist=false;
-    document.getElementById("divmenu").style="animation-duration:2s;animation-name:bounceInRight;";
-    document.getElementById("divmenu").style.display = 'inline-block';
-
-}
-    
-function OcultarHistoricos(){
-        if (!Hide_Hist){
-        document.getElementById("divmenu").style="animation-duration:1s;animation-name:Steven;";
-        document.getElementById("divmenu").style.display = 'inline-block';
-        setTimeout(function(){ document.getElementById("divmenu").style.display = 'none'; }, 800);
-        }
-        Hide_Hist=true;
-}
-    
+  
 function Centrar(){
     for (i in Tabla_Usuarios){
         Mapa_Centrado=true;
@@ -833,6 +833,40 @@ Hora_Inicio_PHP='10:02:00';
 Hora_Final_PHP='10:05:00'
     
  }
+    
+function MostrarDistancia(){
+        Hide_Dist=false;
+    document.getElementById("MenuDistancia").style="animation-duration:2s;animation-name:bounceInRight;";
+    document.getElementById("MenuDistancia").style.display = 'inline-block';
+    DiagramaBarras();
+    
+} 
+    
+function OcultarDistancia(){
+        
+        if (!Hide_Dist){
+        document.getElementById("MenuDistancia").style="animation-duration:1s;animation-name:Steven;";
+        document.getElementById("MenuDistancia").style.display = 'inline-block';
+        setTimeout(function(){ document.getElementById("MenuDistancia").style.display = 'none'; }, 800);
+        }
+        Hide_Dist=true;
+    }
+    
+function MostrarHistoricos(){
+    Hide_Hist=false;
+    document.getElementById("divmenu").style="animation-duration:2s;animation-name:bounceInRight;";
+    document.getElementById("divmenu").style.display = 'inline-block';
+
+}
+    
+function OcultarHistoricos(){
+        if (!Hide_Hist){
+        document.getElementById("divmenu").style="animation-duration:1s;animation-name:Steven;";
+        document.getElementById("divmenu").style.display = 'inline-block';
+        setTimeout(function(){ document.getElementById("divmenu").style.display = 'none'; }, 800);
+        }
+        Hide_Hist=true;
+}
   
 function Mostrar_Calendario1(){
 
@@ -864,6 +898,11 @@ function Mostrar_Calendario1(){
           }
             });
              }}
+    
+function Ocultar_Calendario1(){
+ 	$('#Fecha_Inicio').DatePickerHide();
+ 	Calendario1=1;
+  }    
 
 function Mostrar_Calendario2(){
 
@@ -895,16 +934,36 @@ function Mostrar_Calendario2(){
  }
  }
 
-function Ocultar_Calendario1(){
- 	$('#Fecha_Inicio').DatePickerHide();
- 	Calendario1=1;
-  }
-
 function Ocultar_Calendario2(){
  	$('#Fecha_Final').DatePickerHide();
  	Calendario2=1;
  }
 
+function DiagramaBarras(){
+    
+    var graph = new BAR_GRAPH('hBar');  // hBar: Horizontal   vBar:Vertical
+    graph.values = "300,100";
+    graph.labels = Tabla_Usuarios;
+    graph.showValues = 2; // 0:% only   -  1: abs & %   -   2:abs only    - ninguno
+    graph.barWidth = 15; // ANCHO DE LAS BARRAS
+    graph.barLength = 2; // LARGO DE LAS BARRAS
+    graph.labelSize = 20;// SIZE NOMBRES
+    graph.absValuesSize = 20;// SIZE VALORES
+    graph.percValuesSize = 0;
+    graph.graphPadding = 5;
+    graph.graphBGColor = 'red';
+    graph.graphBorder = '10px solid darkmagenta';
+    graph.barColors = 'green';
+    graph.barBGColor = 'blue';
+    graph.barBorder = '2px outset white';
+    graph.labelColor = 'white';
+    graph.labelBGColor = 'black';
+    graph.labelBorder = '1px solid white';
+    graph.absValuesColor = 'cyan';
+    graph.absValuesBGColor = 'magenta';
+    graph.absValuesBorder = '2px groove white';
+    document.getElementById('divGraph').innerHTML = graph.create();
+}    
 
 /*    
 var Ruta_Snap=[];var PoliLinea_Snap = [];
