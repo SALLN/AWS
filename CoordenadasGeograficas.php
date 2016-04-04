@@ -1,9 +1,7 @@
-
 <?php
 session_start();
-//if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION/inicio_sesion.php"; </script>';   }
+if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION/inicio_sesion.php"; </script>';   }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en" class="no-js">
@@ -146,7 +144,7 @@ session_start();
 
 <section id="service"> <!--#Mapa-->
 
- <div class="container">
+<div class="container">
     <div class="row">
 
         <div class="col-md-3 col-sm-10 wow fadeInLeft">
@@ -197,59 +195,66 @@ session_start();
             </div>
         </div>
     </div>
- </div> <!--LATITUD LONGITUD ARRIBA DEL MAPA-->
+</div> <!--LATITUD LONGITUD ARRIBA DEL MAPA-->
 
         
  <div id="divmenu" class="AnimacionDerecha">
     
     <input type="button" id="Cerrar" value="X" onclick="OcultarHistoricos()">
+     
+    <div id="ListaCheckBoxes">
+    <input type="button" id="btAdd" value="Cargar Vehiculos" onclick="CargarVehiculos()"/>
+    </div>
         
-    <div style="display:block;margin: 20px 0px 0px 0px;">
+    <div style="display:block;margin: 20px 0px 0px -170px;">
      <h5 class="TextoHistorico">FECHA INICIAL :</h5>
-     <h5 id="Fecha_Inicio2" onmouseover="Mostrar_Calendario1();" class="TextoHistorico">0000-00-00</h5>
+     <h5 id="Fecha_Inicio2" onmouseover="Calendario_Inicial();" class="TextoHistorico">0000-00-00</h5>
      <div id="Fecha_Inicio" onmouseleave="Ocultar_Calendario1();" ></div>
      <input type="text"  id="Tiempo_Hora1" value="12 AM" class="TextoHistorico">:
      <input type="text"  id="Tiempo_Minuto1" value="00" class="TextoHistorico">
 
     </div>
 
-   <div style="display:inline-block;margin: 15px 0px 0px 0px;">
+   <div style="display:inline-block;margin: 15px 0px 0px -170px;">
     <h5 class="TextoHistorico">FECHA FINAL &nbsp :</h5>
-    <h5 id="Fecha_Final2" onmouseover="Mostrar_Calendario2();" class="TextoHistorico">0000-00-00</h5>
+    <h5 id="Fecha_Final2" onmouseover="Calendario_Final();" class="TextoHistorico">0000-00-00</h5>
     <div id="Fecha_Final" onmouseleave="Ocultar_Calendario2();"></div>
     <input type="text"  id="Tiempo_Hora2" value="12 AM" class="TextoHistorico">:
     <input type="text"  id="Tiempo_Minuto2" value="00" class="TextoHistorico" >
    </div>   
 
-   <div style="display:block;margin: 15px 0px 0px 0px;">    
+   <div style="display:block;margin: 15px 0px 0px -170px;">    
         <input id="Boton_Real23" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Hora_Marker(),OcultarHistoricos()"/>
    </div>
         
-   <div style="display:block;margin: 15px 0px 0px -10px;">   
+   <div style="display:block;margin: 15px 0px 0px -180px;">   
         <input type="text" id="Metros" placeholder="Digite metros a la redonda">
         <!--<input type="checkbox" id="markerfecha2"  onclick="Snap=!Snap;"><h3 id="Pulsalo">Snap</h3> -->
    </div>
      
-   <div style="display:block;margin: 15px 0px 0px 0px;">     
+   <div style="display:block;margin: 15px 0px 0px -170px;">     
        <input type="button" id="Ubicar" value="UBICAR MARKER" onclick="Consulta_Marker_Hora(),OcultarHistoricos()">
    </div>
     
-   <div style="display:inline-block;margin: 15px 0px 0px 0px;">     
+   <div style="display:inline-block;margin: 15px 0px 0px -170px;">     
         <h4 id="Pulsalo2">Combinar</h4>
         <input type="checkbox" id="markerfecha" onclick="Combinar=!Combinar;">
    </div>
  </div>
          
- <div id="googleMap"></div>
- <input type="button" id="Boton_Real24" value="TIEMPO REAL" onclick="Consulta_Real();">
- <p class="auto"><input type="text" id="autoc"/></p>
+<div id="googleMap"></div>
+
+<h1 id="prueba"></h1>
+<h1 id="prueba1"></h1>
+
+
+    <input type="button" id="Boton_Real24" value="TIEMPO REAL" onclick="Consulta_Real();">
+<p class="auto"><input type="text" id="autoc"/></p>
     
     <select id="seleccion" onChange="Centrar()"><option>Centrar Mapa</option></select>
     <input type="button" id="btHist" value="Historico" onclick="MenuHistorico()">
-        <div id="ListaCheckBoxes">
-    <input type="button" id="btAdd" value="Cargar Vehiculos" onclick="CargarVehiculos()"/>
-    </div>
- </section>
+
+</section>
 
 <section id="contact"> <!--#contact-->
         
@@ -287,7 +292,7 @@ session_start();
 
     </div>
     </div>
- </section>
+</section>
 
 <footer id="footer" class="text-center">
     <div class="container">
@@ -301,7 +306,7 @@ session_start();
             </div>
         </div>
     </div>
- </footer>
+</footer>
 
 <script>
 
@@ -315,10 +320,9 @@ var Solicitar_Despliegue=true;  var Tabla_Usuarios;             var MarkerInterv
 var Solicitar_Vehiculos=true;   var Tabla;                      var Seleccionado;       var map;                    var Checkes=[];       
 var drawingManager;             var Tiempo;                     var Combinar=false;     var CalSet=0;               var Hide_Hist=true;
 var Tabla_Historico=[];         var year; var month; var day; var year1; var month1; var day1;
-var Recargar_Vehiculos=true;    var hour; var min; var hour1; var min1;
+var Recargar_Vehiculos=true;    var hour; var min; var hour1; var min1; 
 var Tabla_Select=[];    
 var Icono_Historico =[];
-var Distancia_Recorrida;
 
 var Colores={0:'red',1:'blue',2:'magenta',3:'coral',4:'green',5:'cyan',6:'darkgoldenrod',7:'darkorange',8:'darkslateblue'};    
 
@@ -338,13 +342,11 @@ map=new google.maps.Map(document.getElementById("googleMap"),mapOptions);
 
 map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('autoc'));
 
-map.controls[google.maps.ControlPosition.RIGHT_CENTER].push( document.getElementById('Boton_Real24'));
+map.controls[google.maps.ControlPosition.TOP_CENTER].push( document.getElementById('Boton_Real24'));
     
 map.controls[google.maps.ControlPosition.LEFT_TOP].push(  document.getElementById('seleccion'));
     
-map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(  document.getElementById('btHist'));   
-    
-map.controls[google.maps.ControlPosition.LEFT_CENTER].push(  document.getElementById('ListaCheckBoxes'));   
+map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(  document.getElementById('btHist'));    
 
 var autocomplete = new google.maps.places.Autocomplete(    document.getElementById('autoc'));
 autocomplete.bindTo('bounds', map);
@@ -353,23 +355,6 @@ var place = autocomplete.getPlace();
 if (place.geometry.viewport) {      map.fitBounds(place.geometry.viewport);    } 
 else {       map.setCenter(place.geometry.location);       map.setZoom(17);    }
 });
-
-google.maps.LatLng.prototype.kmTo = function(a){
-    var e = Math, ra = e.PI/180;
-    var b = this.lat() * ra, c = a.lat() * ra, d = b - c;
-    var g = this.lng() * ra - a.lng() * ra;
-    var f = 2 * e.asin(e.sqrt(e.pow(e.sin(d/2), 2) + e.cos(b) * e.cos
-    (c) * e.pow(e.sin(g/2), 2)));
-    return f * 6378.137;
-    }
-
-google.maps.Polyline.prototype.inKm = function(n){
-    var a = this.getPath(n), len = a.getLength(), dist = 0;
-    for (var i=0; i < len-1; i++) {
-       dist += a.getAt(i).kmTo(a.getAt(i+1));
-    }
-    return dist;
-    }
 
 $('#Tiempo_Hora1').timepicker  ({   showMinutes: false,    showPeriod: true,            rows: 4    	});
 $('#Tiempo_Minuto1').timepicker({   showHours: false,      minutes: { interval: 1 },    rows: 6    	});
@@ -399,9 +384,9 @@ function Centrar(){
         if(Tabla_Usuarios[i].ID_VEHICULO==document.getElementById('seleccion').value){map.setCenter(Posicion[i]); Seleccionado=i;}
     }
  }
-   
+    
 function CargarVehiculos(){
-    document.getElementById("ListaCheckBoxes").style.height ='auto';
+    
     clearInterval(MarkerInterval);
     if(Solicitar_Vehiculos){
         Cont_Vehiculos=0;
@@ -430,7 +415,7 @@ function CrearCheck(){
     //Ruta_Snap[Cont_Vehiculos]=[];
     Ruta_Real[Cont_Vehiculos]=[];
     Ruta_Historica[Cont_Vehiculos]=[];
-    
+        
     Marker_Hora_Marker[Cont_Vehiculos]=[];
     Marker_Marker_Hora[Cont_Vehiculos]=[]; 
     //PoliLinea_Snap[Cont_Vehiculos] = new google.maps.Polyline({ path: Ruta_Snap[Cont_Vehiculos],    strokeColor: 'black',    strokeWeight: 3   });
@@ -455,7 +440,7 @@ function CrearCheck(){
         var texto=Tabla_Usuarios[Cont_CrearHTML].ID_VEHICULO;
         var divSubmit = $(document.createElement('div'));
         
-        $(divSubmit).append('<input type=checkbox onclick="Checkes['+Cont_CrearHTML+']=!Checkes['+Cont_CrearHTML+'];" id=Check'+Cont_CrearHTML+' style=position:absolute;margin-left:-30px;cursor:pointer;/>'+'<h5 id=H'+Cont_CrearHTML+' style=position:absolute;color:white;cursor:default;margin-left:-14px;margin-top:1px;>'+texto+'</h5>');
+        $(divSubmit).append('<input type=checkbox onclick="Checkes['+Cont_CrearHTML+']=!Checkes['+Cont_CrearHTML+'];" id=Check'+Cont_CrearHTML+' style=position:absolute;margin-left:-20px;cursor:pointer;/>'+'<h5 id=H'+Cont_CrearHTML+' style=position:absolute;color:white;cursor:default;>'+texto+'</h5>');
         
         Cont_CrearHTML++;
         $('#btAdd').after(divSubmit);
@@ -490,7 +475,6 @@ function SeleccionVehiculos(){
     
     for (i=0;i<Cont_CrearHTML;i++){ document.getElementById("Check"+i).style.display = 'none'; document.getElementById("H"+i).style.display = 'none';    }
     //SetMarkerVarios();
-    document.getElementById("ListaCheckBoxes").style.height ='1px';
  }
 
 function SetMarkerVarios(){
@@ -552,29 +536,28 @@ function Consulta_Real(){
     for (i in PoliLinea_Real)        {   PoliLinea_Real[i].setMap(map); RealAgain[i]=0;       }
     clearInterval(MarkerInterval);
     MarkerInterval = setInterval(function(){SetMarkerVarios()}, 2000);
+    document.location.href='#service';
  }
     
-function Consulta_Hora_Marker(){
-    
-    for (i in Ruta_Historica){  Ruta_Historica[i]=[];  };
-
+function Consulta_Hora_Marker(){ 
     Cont_Historico=-1;
     //Ruta_Snap = [];
     LimpiarMapa();
     
     clearInterval(MarkerInterval);
-/*
+
+
     year=parseInt(Fecha_Inicio_PHP.substring(0, 4));
-    month=parseInt(Fecha_Inicio_PHP.substring(5, 7));
-    day=parseInt(Fecha_Inicio_PHP.substring(8, 10));
+     month=parseInt(Fecha_Inicio_PHP.substring(5, 7));
+     day=parseInt(Fecha_Inicio_PHP.substring(8, 10));
 
     year1=parseInt(Fecha_Final_PHP.substring(0, 4));
     month1=parseInt(Fecha_Final_PHP.substring(5, 7));
     day1=parseInt(Fecha_Final_PHP.substring(8, 10));
-*/
+
+  
+
     var msj=ObtenerDateTime();
-Consulta_Hora_Marker_Graficar();
-/*
     if(msj!="Error" && year==year1 && month==month1 && day<day1){
     Posicion=[];
     Consulta_Hora_Marker_Graficar();
@@ -588,21 +571,22 @@ Consulta_Hora_Marker_Graficar();
     Consulta_Hora_Marker_Graficar();
     }
     if (msj!="Error" && year==year1 && month==month1 && day==day1 && hour>hour1){
-    alert("La hora final está antes de la inicial");
+    alert("La hora final debe ser posterior a la inicial");
     }
     if(msj!="Error" && year==year1 && month>month1){
-    alert("La fecha final está antes de la inicial")
+    alert("La fecha final debe ser posterior a la inicial")
     }
     if(msj!="Error" && year==year1 && month==month1 && day>day1){
-    alert("La fecha final está antes de la inicial")
+    alert("La fecha final debe ser posterior a la inicial")
     }
-*/
-
  }
 
 function Consulta_Hora_Marker_Graficar(){
-
     Cont_Historico++;
+
+
+
+
 
     if (Cont_Historico<Tabla_Usuarios.length){
     if (Checkes[Cont_Historico]){
@@ -615,7 +599,7 @@ function Consulta_Hora_Marker_Graficar(){
         Tabla_Historico[Cont_Historico] = JSON.parse(data);
         Cont_Markers=0;
         //if(!Snap){ 
-        PoliLinea_Historica[Cont_Historico].setMap(map);
+            PoliLinea_Historica[Cont_Historico].setMap(map);
 
         for(i in Tabla_Historico[Cont_Historico]){
             Latitud_Historica = parseFloat(Tabla_Historico[Cont_Historico][i].LATITUD);
@@ -663,7 +647,7 @@ function Consulta_Hora_Marker_Graficar(){
                 });
             }
             
-        }  
+        } // FOR MARKER 
 
         //}else{          //Historico_Snap(Cont_Historico);        } 
   
@@ -673,47 +657,15 @@ function Consulta_Hora_Marker_Graficar(){
     }else{           Consulta_Hora_Marker_Graficar();             }
  }
     
-    //if(Cont_Historico==Tabla_Usuarios.length-1){    Distancia_KM();    /*Historico_Snap();*/    }
+  //if(Cont_Historico==Tabla_Usuarios.length-1){  Historico_Snap();}
  } 
-    
-function Distancia_KM(){
-    
-    Cont_Historico++;
-
-    if (Cont_Historico<Tabla_Usuarios.length){
-    if (Checkes[Cont_Historico]){
-
-    $.post( "MySQL/ConsultaDbHistorico.php", { FechaInicio: Fecha_Inicio_PHP, FechaFinal: Fecha_Final_PHP,
-                                               HoraInicio:  Hora_Inicio_PHP,  HoraFinal:  Hora_Final_PHP,
-                                               Vehiculo: Tabla_Usuarios[Cont_Historico].ID_VEHICULO        }).done(
-        
-    function( data ) { 
-        Tabla_Historico[Cont_Historico] = JSON.parse(data);
-
-        for(i in Tabla_Historico[Cont_Historico]){
-
-            Posicion[Cont_Historico]=new google.maps.LatLng(parseFloat(Tabla_Historico[Cont_Historico][i].LATITUD),parseFloat(Tabla_Historico[Cont_Historico][i].LONGITUD));
-            
-            Ruta_Historica[Cont_Historico].push(Posicion[Cont_Historico]); 
-            PoliLinea_Historica[Cont_Historico].setPath(Ruta_Historica[Cont_Historico]);
-        }  
-        Distancia_KM();
-    });                                          
-
-    }else{           Distancia_KM();             }
- }
-    
-
-   Distancia_Recorrida = PoliLinea_Historica[1].inKm();
-   console.log(Distancia_Recorrida);
-
-} 
-    
+ 
 function Consulta_Marker_Hora(){
  
     Cont_Historico=-1;
     LimpiarMapa();
     clearInterval(MarkerInterval);
+    document.location.href='#service';
 
     map.addListener('click', function(e) {
 
@@ -728,9 +680,11 @@ function Consulta_Marker_Hora(){
     ObtenerDateTime();
     Posicion=[];
 
+
+
     Consulta_Marker_Hora_Graficar()
         
-    }); 
+    }); // }.LISTENER  ).LISTENER
  }
 
 function Consulta_Marker_Hora_Graficar(){
@@ -811,8 +765,10 @@ function LimpiarMapa(){
 function ObtenerDateTime(){
     
 try{
-    
+    Fecha_Inicio_PHP = $('#Fecha_Inicio').DatePickerGetDate(true);
+    Fecha_Final_PHP = $('#Fecha_Final').DatePickerGetDate(true);
     Tiempo = new Date(2016,10,10,$('#Tiempo_Hora1').timepicker('getHour'),$('#Tiempo_Minuto1').timepicker('getMinute'));  
+    
     Hora_Inicio_PHP=String(Tiempo).substring(16,24);
 
     hour=parseInt(String(Tiempo).substring(16,18));
@@ -822,19 +778,15 @@ try{
     Tiempo = new Date(2016,10,10,$('#Tiempo_Hora2').timepicker('getHour'),$('#Tiempo_Minuto2').timepicker('getMinute'));  
     Hora_Final_PHP=String(Tiempo).substring(16,24);	
 
-    hour1=parseInt(String(Tiempo).substring(16,18));
-    min1=parseInt(String(Tiempo).substring(19,21));
+     hour1=parseInt(String(Tiempo).substring(16,18));
+     min1=parseInt(String(Tiempo).substring(19,21));
+
 
 }catch(err){ return "Error";}
 
-Fecha_Inicio_PHP='2016-03-25';
-Fecha_Final_PHP='2016-03-25';
-Hora_Inicio_PHP='10:02:00';
-Hora_Final_PHP='10:05:00'
-    
  }
   
-function Mostrar_Calendario1(){
+function Calendario_Inicial(){
 
     	if (Calendario1==1){
 		Calendario1=0;
@@ -842,7 +794,7 @@ function Mostrar_Calendario1(){
 	    
 	     flat: true,
 	     date:  '',
-	     current: '2016-03-29',
+	     current: '2016-03-05',
 	     calendars: 1,
 	     starts: 0,
 	     mode: 'single',
@@ -865,16 +817,27 @@ function Mostrar_Calendario1(){
             });
              }}
 
-function Mostrar_Calendario2(){
+function Calendario_Final(){
+ 
 
-    if (Calendario2==1){
+	try{
+		CalSet=0;
+		if ($('#Fecha_Inicio').DatePickerGetDate(true).length==10)
+		{
+			CalSet=1;
+		}
+	 }catch(err){
+		CalSet=0;
+	 };
+
+     if (Calendario2==1 && CalSet==1){
 	Calendario2=0;
 
     $('#Fecha_Final').DatePicker({
     
     flat: true,
     date:  '',
-    current: '2016-03-29',
+    current: $('#Fecha_Inicio').DatePickerGetDate(true),
     calendars: 1,
     starts: 0,
     mode: 'single',
@@ -904,8 +867,8 @@ function Ocultar_Calendario2(){
  	$('#Fecha_Final').DatePickerHide();
  	Calendario2=1;
  }
-
-
+    
+    
 /*    
 var Ruta_Snap=[];var PoliLinea_Snap = [];
 var latlng;var Snap=false;var Ruta_Snap_Aux=[];var NumMarkerSnap=0; 
@@ -980,6 +943,9 @@ function Historico_Snap(){
     }); 
  }
 */  
+
+
+
     
 </script>
 </body>

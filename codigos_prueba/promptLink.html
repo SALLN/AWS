@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Prueba</title>
+	<meta charset="utf-8">
+
+</head>
+<body>
+
+
+<a onClick="registro(); return false;" href="inicio_sesion.php">Registrate Aquí!</a>
+
+
+<div id="us">
+
+</div>
+
+
+<div id="pw">
+
+</div>
+
+
+<script language="JavaScript">
+
+
+function registro(){
+
+var user = prompt("Please enter your username");
+var password = prompt("Please enter your password");
+
+if (user != null) {
+    document.getElementById("us").innerHTML =
+    "Hello " + user + "! How are you today?";
+}
+
+if (password != null) {
+    document.getElementById("pw").innerHTML =
+    "Tu Contraseña es: " + password;
+}
+
+
+} 
+
+</script>
+
+
+</body>
+</html>	

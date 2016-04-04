@@ -35,7 +35,6 @@ p {display: inline;}
     cursor: pointer;
     border: 1px solid transparent;
     font-weight: bold;
-    margin-bottom: 5px;
 }
 #Boton_Real24:hover{
     color:rebeccapurple;
@@ -87,8 +86,8 @@ p {display: inline;}
 #ListaCheckBoxes {
     position: absolute;
     display:inline-block;
-    background-color: black;
-    z-index: 10;
+    margin-top:10px;
+    margin-left:70px;
 }
 
 .labels {
@@ -179,12 +178,12 @@ p {display: inline;}
 
 #divmenu {
     background-color:black;
-    width:260px;
+    width:440px;
     height:230px;
     position:absolute;
     display: none;
     z-index: 10;
-    margin-left:29.6%; /*400*/
+    margin-left:220px;
     margin-top:110px;
 }
 
@@ -277,7 +276,7 @@ p {display: inline;}
 }
 
 #Cerrar {
-    margin-left: -130px;
+    margin-left: -220px;
     position: absolute;
     background-color: #00c7fc;
     color: white;
