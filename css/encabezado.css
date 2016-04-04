@@ -180,7 +180,7 @@ p {display: inline;}
 #divmenu {
     background-color:black;
     width:260px;
-    height:230px;
+    height:270px;
     position:absolute;
     display: none;
     z-index: 10;
@@ -286,5 +286,37 @@ p {display: inline;}
     cursor: pointer;
     border: 1px solid transparent;
     font-weight: bold;
-    float: left;
+}
+
+#Distancia_Recorrida {
+        height:20px;
+    background-color: #00c7fc;
+    color: white;
+    display: inline-block;
+    padding:0 15px;
+    font-size: 13px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid transparent;
+    font-weight: bold;
+}
+
+#MenuDistancia {
+    background-color:black;
+    position:absolute;
+    display: none;
+    z-index: 10;
+    margin-left:20%; /*400*/
+    margin-top:-350px;
+}
+
+#Cerrar_Distancia {
+    background-color: #00c7fc;
+    color: white;
+    display: inline-block;
+    font-size: 13px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    font-weight: bold;
+    float:left;
 }
