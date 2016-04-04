@@ -556,7 +556,7 @@ function Consulta_Hora_Marker(){
         day1=parseInt(Fecha_Final_PHP.substring(8, 10));
     
     
-  
+  //culquier cambio
 
     var msj=ObtenerDateTime();
     if(msj!="Error" && year==year1 && month==month1 && day<day1){
