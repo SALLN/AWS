@@ -1,7 +1,6 @@
-
 <?php
 session_start();
-//if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION/inicio_sesion.php"; </script>';   }
+if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION/inicio_sesion.php"; </script>';   }
 ?>
 
 
@@ -105,7 +104,7 @@ session_start();
 
     <div class="carousel-inner">
 
-        <div class="item active"  style="background-image: url('images/bg1.jpg')" >
+        <div class="item active"  style="background-image: url('images/bg21.jpeg')" >
         <div class="carousel-caption">
         <div class="animated bounceInRight">
         <h2>Hola Mundo! <br>Somos ticoll</h2>
@@ -114,7 +113,7 @@ session_start();
         </div>
         </div>              
 
-        <div class="item" style="background-image: url('images/bg21.jpeg')">                
+        <div class="item" style="background-image: url('images/bg1.jpg')">                
         <div class="carousel-caption">
         <div class="animated bounceInDown">
         <h2>Hola Mundo! <br>Somos ticoll</h2>
@@ -210,16 +209,16 @@ session_start();
     <div style="display:block;margin: 20px 0px 0px 0px;">
      <h5 class="TextoHistorico">FECHA INICIAL :</h5>
      <h5 id="Fecha_Inicio2" onmouseover="Mostrar_Calendario1();" class="TextoHistorico">0000-00-00</h5>
-     <div id="Fecha_Inicio" onmouseleave="Ocultar_Calendario1();" ></div>
+     <div style="margin:2px" id="Fecha_Inicio" onmouseleave="Ocultar_Calendario1();" ></div>
      <input type="text"  id="Tiempo_Hora1" value="12 AM" class="TextoHistorico">:
      <input type="text"  id="Tiempo_Minuto1" value="00" class="TextoHistorico">
 
     </div>
 
-   <div style="display:inline-block;margin: 15px 0px 0px 0px;">
+   <div style="display:block;margin: 15px 0px 0px 0px;">
     <h5 class="TextoHistorico">FECHA FINAL &nbsp :</h5>
     <h5 id="Fecha_Final2" onmouseover="Mostrar_Calendario2();" class="TextoHistorico">0000-00-00</h5>
-    <div id="Fecha_Final" onmouseleave="Ocultar_Calendario2();"></div>
+    <div  id="Fecha_Final" onmouseleave="Ocultar_Calendario2();"></div>
     <input type="text"  id="Tiempo_Hora2" value="12 AM" class="TextoHistorico">:
     <input type="text"  id="Tiempo_Minuto2" value="00" class="TextoHistorico" >
    </div>   
@@ -248,7 +247,7 @@ session_start();
  </div>
          
  <div id="googleMap"></div>
- <input type="button" id="Boton_Real24" value="TIEMPO REAL" onclick="Consulta_Real();">
+ <input type="button" id="Boton_Real24" value="Tiempo Real" onclick="Consulta_Real();">
  <p class="auto"><input type="text" id="autoc"/></p>
     
  <select id="seleccion" onChange="Centrar()"><option>Centrar Mapa</option></select>
@@ -261,6 +260,7 @@ session_start();
 <div id="MenuDistancia">
     <input type="button" id="Cerrar_Distancia" value="X" onclick="OcultarDistancia()">
     <div id="divGraph" style="margin:20px 20px;"></div>
+
     </div>
     
  </section>
@@ -563,7 +563,11 @@ function Consulta_Hora_Marker(){
     LimpiarMapa();
     
     clearInterval(MarkerInterval);
-/*
+
+    if(msj!="Error" && typeof(Fecha_Inicio_PHP)==='undefined' && typeof(Fecha_Final_PHP)==='undefined'){
+    alert("No se permiten fechas en blanco")
+    }
+
     year=parseInt(Fecha_Inicio_PHP.substring(0, 4));
     month=parseInt(Fecha_Inicio_PHP.substring(5, 7));
     day=parseInt(Fecha_Inicio_PHP.substring(8, 10));
@@ -571,32 +575,39 @@ function Consulta_Hora_Marker(){
     year1=parseInt(Fecha_Final_PHP.substring(0, 4));
     month1=parseInt(Fecha_Final_PHP.substring(5, 7));
     day1=parseInt(Fecha_Final_PHP.substring(8, 10));
-*/
+
     var msj=ObtenerDateTime();
 Consulta_Hora_Marker_Graficar();
-/*
-    if(msj!="Error" && year==year1 && month==month1 && day<day1){
+    
+    
+    if(msj!="Error" && year>year1 && month==month1){
+    alert("La hora final está antes de la inicial")
+    }
+    if(msj!="Error" && year>year1 && month!=month1){
+    alert("La hora final está antes de la inicial")
+    }
+    if(msj!="Error" && year<=year1 && month==month1 && day<day1){
     Posicion=[];
     Consulta_Hora_Marker_Graficar();
     }
-    if(msj!="Error" && year==year1 && month<month1){
+    if(msj!="Error" && year<=year1 && month<month1){
     Posicion=[];
     Consulta_Hora_Marker_Graficar();
     }
-    if (msj!="Error" && year==year1 && month==month1 && day==day1 && hour<=hour1){
+    if (msj!="Error" && year<=year1 && month==month1 && day==day1 && hour<=hour1){
     Posicion=[];
     Consulta_Hora_Marker_Graficar();
     }
-    if (msj!="Error" && year==year1 && month==month1 && day==day1 && hour>hour1){
+    if (msj!="Error" && year<=year1 && month==month1 && day==day1 && hour>hour1){
     alert("La hora final está antes de la inicial");
     }
-    if(msj!="Error" && year==year1 && month>month1){
+    if(msj!="Error" && year<=year1 && month>month1){
     alert("La fecha final está antes de la inicial")
     }
-    if(msj!="Error" && year==year1 && month==month1 && day>day1){
+    if(msj!="Error" && year<=year1 && month==month1 && day>day1){
     alert("La fecha final está antes de la inicial")
     }
-*/
+
 
  }
 
@@ -614,6 +625,12 @@ function Consulta_Hora_Marker_Graficar(){
     function( data ) { 
         Tabla_Historico[Cont_Historico] = JSON.parse(data);
         Cont_Markers=0;
+
+         if (typeof(PoliLinea_Historica[Cont_Historico])==='undefined'){
+ 
+             alert("Su consulta es vacía")
+         }else{
+
         //if(!Snap){ 
         PoliLinea_Historica[Cont_Historico].setMap(map);
 
@@ -663,6 +680,7 @@ function Consulta_Hora_Marker_Graficar(){
                 });
             }
             
+        }
         }  
 
         //}else{          //Historico_Snap(Cont_Historico);        } 
@@ -747,6 +765,9 @@ function Consulta_Marker_Hora_Graficar(){
     function( data ) {  
 
      Tabla = JSON.parse(data);
+
+
+
      Cont_Markers=0;
      for(i in Tabla)
         {
