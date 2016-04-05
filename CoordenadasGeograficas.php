@@ -698,7 +698,6 @@ function Consulta_Hora_Marker_Graficar(){
  
 function Distancia_KM(){
     Cont_Distancia++;
-console.log("entra distancia");
     if (Cont_Distancia<Tabla_Usuarios.length){
     if (Checkes[Cont_Distancia]){
 
@@ -724,8 +723,7 @@ console.log("entra distancia");
 
     }else{ Distancias_Recorridas.push(0);          Distancia_KM();             }
  }
-  if (Cont_Distancia==Tabla_Usuarios.length){ DiagramaBarras(); console.log("solo llega el ultimo");}  
-  // console.log(Distancia_Recorrida);
+  if (Cont_Distancia==Tabla_Usuarios.length){ DiagramaBarras();}  
 
 } 
     
@@ -849,16 +847,16 @@ try{
     min1=parseInt(String(Tiempo).substring(19,21));
 
 }catch(err){ return "Error";}
-/*
-Fecha_Inicio_PHP='2016-03-25';
-Fecha_Final_PHP='2016-03-25';
+
+Fecha_Inicio_PHP='2016-03-10';
+Fecha_Final_PHP='2016-03-30';
 Hora_Inicio_PHP='10:02:00';
 Hora_Final_PHP='10:05:00'
-*/    
+    
  }
-    
+
 function MostrarDistancia(){
-    
+
     Hide_Dist=false;
     document.getElementById("MenuDistancia").style="animation-duration:2s;animation-name:bounceInRight;";
     document.getElementById("MenuDistancia").style.display = 'inline-block';
@@ -866,9 +864,9 @@ function MostrarDistancia(){
     Distancia_KM();
     
 } 
-    
+
 function OcultarDistancia(){
-        
+
         if (!Hide_Dist){
         document.getElementById("MenuDistancia").style="animation-duration:1s;animation-name:Steven;";
         document.getElementById("MenuDistancia").style.display = 'inline-block';
@@ -876,14 +874,14 @@ function OcultarDistancia(){
         }
         Hide_Dist=true;
     }
-    
+
 function MostrarHistoricos(){
     Hide_Hist=false;
     document.getElementById("divmenu").style="animation-duration:2s;animation-name:bounceInRight;";
     document.getElementById("divmenu").style.display = 'inline-block';
 
 }
-    
+
 function OcultarHistoricos(){
         if (!Hide_Hist){
         document.getElementById("divmenu").style="animation-duration:1s;animation-name:Steven;";
@@ -965,7 +963,6 @@ function Ocultar_Calendario2(){
  }
 
 function DiagramaBarras(){
-    
     var Nombres=[];
     for (i in Tabla_Usuarios){Nombres.push(Tabla_Usuarios[i].ID_VEHICULO);}
     
@@ -991,6 +988,10 @@ function DiagramaBarras(){
     graph.absValuesBGColor = 'magenta';
     graph.absValuesBorder = '2px groove white';
     document.getElementById('divGraph').innerHTML = graph.create();
+    
+    var izqmarg = 661 - document.getElementById('MenuDistancia').clientWidth;
+    document.getElementById('MenuDistancia').style.marginLeft =  izqmarg + "px";
+
 }    
 
 /*    
