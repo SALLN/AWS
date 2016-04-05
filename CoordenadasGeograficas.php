@@ -1,7 +1,7 @@
 
 <?php
 session_start();
-//if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION/inicio_sesion.php"; </script>';   }
+if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION/inicio_sesion.php"; </script>';   }
 ?>
 
 
@@ -334,6 +334,10 @@ var Tabla_Select=[];
 var Icono_Historico =[];
 var Distancia_Recorrida;
 var Hide_Dist=true;
+var Cont_Distancia=-1;  var Tabla_Distancias=[];
+var Tabla_Distancia=[];
+var Distancias_Recorridas=[];    
+   
 
 var Colores={0:'red',1:'blue',2:'magenta',3:'coral',4:'green',5:'cyan',6:'darkgoldenrod',7:'darkorange',8:'darkslateblue'};    
 
@@ -390,7 +394,6 @@ $('#Tiempo_Hora1').timepicker  ({   showMinutes: false,    showPeriod: true,    
 $('#Tiempo_Minuto1').timepicker({   showHours: false,      minutes: { interval: 1 },    rows: 6    	});
 $('#Tiempo_Hora2').timepicker  ({   showMinutes: false,    showPeriod: true,            rows: 4    	});
 $('#Tiempo_Minuto2').timepicker({   showHours: false,      minutes: { interval: 1 },    rows: 6    	});
-    
 
   
 function Centrar(){
@@ -519,7 +522,6 @@ document.getElementById('fila_latitud').innerHTML  = Latitud;   document.getElem
 document.getElementById('fila_longitud').innerHTML = Longitud;  document.getElementById('fila_hora').innerHTML     = Fecha_Hora.substring(11,19);
 }
                     if (Latitud!=LatAux[i] || Longitud!=LonAux[i] || RealAgain[i]==0 || Recargar_Vehiculos ){ 
-                        console.log("Entra con: "+Tabla_Usuarios[i].ID_VEHICULO);
                         LatAux[i] =Latitud;    LonAux[i] =Longitud;
                         RealAgain[i]=1;
                         
@@ -675,37 +677,37 @@ function Consulta_Hora_Marker_Graficar(){
     
     //if(Cont_Historico==Tabla_Usuarios.length-1){    Distancia_KM();    /*Historico_Snap();*/    }
  } 
-    
+ 
 function Distancia_KM(){
-    
-    Cont_Historico++;
-
-    if (Cont_Historico<Tabla_Usuarios.length){
-    if (Checkes[Cont_Historico]){
+    Cont_Distancia++;
+console.log("entra distancia");
+    if (Cont_Distancia<Tabla_Usuarios.length){
+    if (Checkes[Cont_Distancia]){
 
     $.post( "MySQL/ConsultaDbHistorico.php", { FechaInicio: Fecha_Inicio_PHP, FechaFinal: Fecha_Final_PHP,
                                                HoraInicio:  Hora_Inicio_PHP,  HoraFinal:  Hora_Final_PHP,
-                                               Vehiculo: Tabla_Usuarios[Cont_Historico].ID_VEHICULO        }).done(
+                                               Vehiculo: Tabla_Usuarios[Cont_Distancia].ID_VEHICULO        }).done(
         
-    function( data ) { 
-        Tabla_Historico[Cont_Historico] = JSON.parse(data);
+    function( data ) {
+        
+        Tabla_Distancia[Cont_Distancia] = JSON.parse(data);
 
-        for(i in Tabla_Historico[Cont_Historico]){
+        for(i in Tabla_Distancia[Cont_Distancia]){
 
-            Posicion[Cont_Historico]=new google.maps.LatLng(parseFloat(Tabla_Historico[Cont_Historico][i].LATITUD),parseFloat(Tabla_Historico[Cont_Historico][i].LONGITUD));
+            Posicion[Cont_Distancia]=new google.maps.LatLng(parseFloat(Tabla_Distancia[Cont_Distancia][i].LATITUD),parseFloat(Tabla_Distancia[Cont_Distancia][i].LONGITUD));
             
-            Ruta_Historica[Cont_Historico].push(Posicion[Cont_Historico]); 
-            PoliLinea_Historica[Cont_Historico].setPath(Ruta_Historica[Cont_Historico]);
-        }  
+            Ruta_Historica[Cont_Distancia].push(Posicion[Cont_Distancia]); 
+            PoliLinea_Historica[Cont_Distancia].setPath(Ruta_Historica[Cont_Distancia]);
+        } 
+
+        Distancias_Recorridas.push(PoliLinea_Historica[Cont_Distancia].inKm().toFixed(5));
         Distancia_KM();
     });                                          
 
-    }else{           Distancia_KM();             }
+    }else{ Distancias_Recorridas.push(0);          Distancia_KM();             }
  }
-    
-
-   Distancia_Recorrida = PoliLinea_Historica[1].inKm();
-   console.log(Distancia_Recorrida);
+  if (Cont_Distancia==Tabla_Usuarios.length){ DiagramaBarras(); console.log("solo llega el ultimo");}  
+  // console.log(Distancia_Recorrida);
 
 } 
     
@@ -826,19 +828,21 @@ try{
     min1=parseInt(String(Tiempo).substring(19,21));
 
 }catch(err){ return "Error";}
-
+/*
 Fecha_Inicio_PHP='2016-03-25';
 Fecha_Final_PHP='2016-03-25';
 Hora_Inicio_PHP='10:02:00';
 Hora_Final_PHP='10:05:00'
-    
+*/    
  }
     
 function MostrarDistancia(){
-        Hide_Dist=false;
+    
+    Hide_Dist=false;
     document.getElementById("MenuDistancia").style="animation-duration:2s;animation-name:bounceInRight;";
     document.getElementById("MenuDistancia").style.display = 'inline-block';
-    DiagramaBarras();
+    ObtenerDateTime();
+    Distancia_KM();
     
 } 
     
@@ -941,9 +945,12 @@ function Ocultar_Calendario2(){
 
 function DiagramaBarras(){
     
+    var Nombres=[];
+    for (i in Tabla_Usuarios){Nombres.push(Tabla_Usuarios[i].ID_VEHICULO);}
+    
     var graph = new BAR_GRAPH('hBar');  // hBar: Horizontal   vBar:Vertical
-    graph.values = "300,100";
-    graph.labels = Tabla_Usuarios;
+    graph.values = Distancias_Recorridas;
+    graph.labels = Nombres;
     graph.showValues = 2; // 0:% only   -  1: abs & %   -   2:abs only    - ninguno
     graph.barWidth = 15; // ANCHO DE LAS BARRAS
     graph.barLength = 2; // LARGO DE LAS BARRAS
