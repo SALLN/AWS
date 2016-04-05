@@ -579,7 +579,6 @@ function Consulta_Hora_Marker(){
     day1=parseInt(Fecha_Final_PHP.substring(8, 10));
 
     var msj=ObtenerDateTime();
-Consulta_Hora_Marker_Graficar();
     
     
     if(msj!="Error" && year>year1 && month==month1){
@@ -628,9 +627,9 @@ function Consulta_Hora_Marker_Graficar(){
         Tabla_Historico[Cont_Historico] = JSON.parse(data);
         Cont_Markers=0;
 
-         if (typeof(PoliLinea_Historica[Cont_Historico])==='undefined'){
+         if (Tabla_Historico[Cont_Historico].length==0){
  
-             alert("Su consulta es vacía")
+             alert("La consulta del ID: " + Tabla_Usuarios[Cont_Historico].ID_VEHICULO + ", está vacia");
          }else{
 
         //if(!Snap){ 
@@ -852,7 +851,8 @@ Fecha_Inicio_PHP='2016-03-10';
 Fecha_Final_PHP='2016-03-30';
 Hora_Inicio_PHP='10:02:00';
 Hora_Final_PHP='10:05:00'
-*/    
+*///    
+
  }
 
 function MostrarDistancia(){
