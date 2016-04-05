@@ -847,12 +847,12 @@ try{
     min1=parseInt(String(Tiempo).substring(19,21));
 
 }catch(err){ return "Error";}
-
+/*
 Fecha_Inicio_PHP='2016-03-10';
 Fecha_Final_PHP='2016-03-30';
 Hora_Inicio_PHP='10:02:00';
 Hora_Final_PHP='10:05:00'
-    
+*/    
  }
 
 function MostrarDistancia(){
