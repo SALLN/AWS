@@ -760,11 +760,7 @@ function Consulta_Marker_Hora_Graficar(){
         if(Combinar){
                 
     $.post("MySQL/Marker_Hora_fecha.php", {FechaFinal: Fecha_Final_PHP, FechaInicio: Fecha_Inicio_PHP,HoraInicio: Hora_Inicio_PHP,  HoraFinal: Hora_Final_PHP , LatitudMarker: LatMarker_Hora, LongitudMarker: LonMarker_Hora, Metros:  Metros_Redonda, Vehiculo: Tabla_Usuarios[Cont_Historico].ID_VEHICULO   }).done(
-<<<<<<< HEAD
-                   
-=======
-                
->>>>>>> refs/remotes/origin/master
+
     function( data ) {  
 
      Tabla = JSON.parse(data);
