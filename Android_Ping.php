@@ -7,6 +7,7 @@ $Servidores=split('&',$_POST['Servidores']);
 $Retardos=split('&',$_POST['Retardos']);
 $Jitters=split('&',$_POST['Jitters']);
 
+$Longitud=count($Retardos);
 for ($i = 1; $i < $Longitud ; $i++) {
 
 $consulta=mysql_query("INSERT INTO ping (DELAY,JITTER,SERVER,DATETIME) VALUES('$Retardos[$i]','$Jitters[$i]','$Servidores[$i]','$Fechas[$i]')");
