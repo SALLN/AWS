@@ -8,18 +8,17 @@ $Retardos=split('&',$_POST['Retardos']);
 $Jitters=split('&',$_POST['Jitters']);
 $Tipo=$_POST['Tipo'];
 $Realizacion=$_POST['Realizacion'];
-//$ipOrigen=$_POST['ipOrigen'];
-/*
+$ipOrigen=$_SERVER['REMOTE_ADDR'];
+
 $Longitud=count($Retardos);
 for ($i = 1; $i < $Longitud ; $i++) {
 
-$consulta=mysql_query("INSERT INTO ping (idRealizacion,tipoPrueba,fecha,ipOrigen,ipDestino,delay,jitter) VALUES('$Realizacion','$Tipo','$Fechas[$i]','$ipOrigen','$Servidores[$i]','$Retardos[$i]','$Jitters[$i]')");
+$consulta=mysql_query("INSERT INTO data (idRealizacion,tipoPrueba,fecha,ipOrigen,ipDestino,delay,jitter) VALUES('$Realizacion','$Tipo','$Fechas[$i]','$ipOrigen','$Servidores','$Retardos[$i]','$Jitters[$i]')");
 mysql_free_result($consulta);
 }
 
 mysql_close($conexion);
-*/
-echo $_SERVER['REMOTE_ADDR']."okk";
+
 echo "Guardado Satisfactoriamente";
 
 ?>
