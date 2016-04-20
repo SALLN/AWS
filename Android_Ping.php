@@ -19,7 +19,7 @@ mysql_free_result($consulta);
 
 mysql_close($conexion);
 */
-echo $_POST['REMOTE_ADDR']."okk";
+echo $_SERVER['REMOTE_ADDR']."okk";
 echo "Guardado Satisfactoriamente";
 
 ?>
