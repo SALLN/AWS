@@ -3,8 +3,9 @@ import time
 from datetime import*
 from socket import*
 
-Ipv4 = '172.31.44.227'
-port =55056
+#Ipv4 = '172.31.44.227'
+Ipv4 = '192.168.0.15'
+port =80
 serverSocket= socket(AF_INET,SOCK_DGRAM) 
 serverSocket.bind((Ipv4,port))
 while True:
