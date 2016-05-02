@@ -21,7 +21,7 @@ socket_bind($socket, '172.31.44.227', 55056);
 $from = '';
 $port = 55056;
 //do{
-socket_recvfrom($socket, $buf, 12, 0, $from, $port);
+socket_recvfrom($socket, $buf, 200, 0, $from, $port);
 $datos=$buf;
 echo "Se recibió $buf desde la dirección remota $from y el puerto remoto $port" ;
     $s1=strpos($datos,"&");    $s2=strpos($datos,"#");    $tim=strpos($datos,"+");    $latlon=strpos($datos,"-");
