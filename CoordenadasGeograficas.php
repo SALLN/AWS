@@ -198,6 +198,19 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
                 </div>
             </div>
         </div>
+        
+        <div class="col-md-3 col-sm-10 wow fadeInRight" data-wow-delay="0.2s">
+            <div class="media">
+                <a href="#" class="pull-left">
+                    <img src="images/hora.png" alt="Camera">
+                </a>
+                <div class="media-body">
+                    <h3>Peso</h3>
+                    <p id="peso">00:00:00</p>
+                </div>
+            </div>
+        </div>
+        
     </div>
  </div> <!--LATITUD LONGITUD ARRIBA DEL MAPA-->
 
@@ -329,7 +342,7 @@ var Solicitar_Despliegue=true;  var Tabla_Usuarios;             var MarkerInterv
 var Solicitar_Vehiculos=true;   var Tabla;                      var Seleccionado;       var map;                    var Checkes=[];       
 var drawingManager;             var Tiempo;                     var Combinar=false;     var CalSet=0;               var Hide_Hist=true;
 var Tabla_Historico=[];         var year; var month; var day; var year1; var month1; var day1;
-var Recargar_Vehiculos=true;    var hour; var min; var hour1; var min1;
+var Recargar_Vehiculos=true;    var hour; var min; var hour1; var min1; var peso;
 var Tabla_Select=[];    
 var Icono_Historico =[];
 var Distancia_Recorrida;
@@ -515,11 +528,14 @@ function SetMarkerVarios(){
                     Latitud = parseFloat(Tabla2[Cont_Join++].LATITUD);
                     Longitud = parseFloat(Tabla2[Cont_Join++].LATITUD);
                     Fecha_Hora=Tabla2[Cont_Join++].LATITUD;
+                    peso=Tabla2[Cont_Join++].LATITUD;
                     Posicion[i]=new google.maps.LatLng(Latitud,Longitud);
                     
                     if (Mapa_Centrado && Seleccionado==i){
 document.getElementById('fila_latitud').innerHTML  = Latitud;   document.getElementById('fila_fecha').innerHTML    = Fecha_Hora.substring(0,10);   
 document.getElementById('fila_longitud').innerHTML = Longitud;  document.getElementById('fila_hora').innerHTML     = Fecha_Hora.substring(11,19);
+                        
+document.getElementById('peso').innerHTML= peso;
 }
                     if (Latitud!=LatAux[i] || Longitud!=LonAux[i] || RealAgain[i]==0 || Recargar_Vehiculos ){ 
                         LatAux[i] =Latitud;    LonAux[i] =Longitud;
