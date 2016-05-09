@@ -15,17 +15,17 @@
 	<meta charset="utf-8">
 
 </head>
-<body BACKGROUND="fondo16.jpg" >
+<body BACKGROUND="fondo.png" >
 
 	<div id="welcome">
 		<h1 style="color:white"> Bienvenido a Ticoll </h1>
-			<h4 style="color:white">Por favor inicie sesión</h4>
+			<h4 style="color:white">Por favor inicie sesión</h4><br>
 			<form method="post" action="validar.php">
-				<h3 class="h1" style="color:white">Usuario</h3><input type="text" name="user" autocomplete="off" required><br><br>
+				<h3 class="h1" style="color:white">Usuario</h3><input type="text" name="user" autocomplete="off" required><br>
 				<h3 class="h1" style="color:white">Contraseña</h3><input type="password" name="pw" autocomplete="off" required><br><br><br>
 				<input type="submit" class="btn btn-success" name="login" value="Ingresar">
 			</form>
-           <br><br><br>
+           <br><br>
 
             <input type ='button' value = 'Registrate aquí!' onclick="promptForTwo(); return false;"/> 
             <!--<a onClick="promptForTwo(); return false;" href="inicio_sesion.php">REGISTRATE AQUI!</a>-->
