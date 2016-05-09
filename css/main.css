@@ -373,7 +373,7 @@ width: 11px;
     Service Bottom
 ============================================================*/
 
-#service-bottom {
+#Historico_Boton {
   color: white;
   background-color: #1f2021;
   padding-bottom: 0;
@@ -393,31 +393,38 @@ width: 11px;
 }
 
 .mobile-device .black {
-  left: 98px;
+  left: -3%;
   z-index: 2;
 }
 
 .mobile-device .white {
-  bottom: -62px;
-  z-index: 1;
+  top: 250px;
+  left:-240px;
+  z-index: 2;
 }
 
 
 h5 {display: inline;}
 
+
 .eso{
   padding-left: 5px;
+    font-size:13px;
 }
+
+
+
+
 
 .service-features {
   color: white; 
   background-color: #0f748f;
-  height: 400px;
+  height: 500px;
   padding: 50px 0 50px 65px;
   position: absolute;
   right: 0;
   top: 18%;
-  width: 45%;
+  width: 70%;
 }
 
 .service-features h3 {
@@ -914,12 +921,12 @@ figcaption.mask span {
 ============================================================*/
 
 #footer {
-    background-color: #121116;
-    padding: 115px 0 35px;
+    background-color: #000000;
+    padding: 15px 15px;
 }
 
 .footer-logo {
-    margin-bottom: 45px;
+    margin-bottom: 35px;
 }
 
 .footer-social {
