@@ -306,7 +306,7 @@ p {display: inline;}
     position:absolute;
     display: none;
     z-index: 10;
-    margin-left:20%; /*400*/
+    margin-left:185px;
     margin-top:-350px;
 }
 

@@ -198,6 +198,19 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
                 </div>
             </div>
         </div>
+        
+        <div class="col-md-3 col-sm-10 wow fadeInRight" data-wow-delay="0.2s">
+            <div class="media">
+                <a href="#" class="pull-left">
+                    <img src="images/hora.png" alt="Camera">
+                </a>
+                <div class="media-body">
+                    <h3>Peso</h3>
+                    <p id="peso">00:00:00</p>
+                </div>
+            </div>
+        </div>
+        
     </div>
  </div> <!--LATITUD LONGITUD ARRIBA DEL MAPA-->
 
@@ -340,11 +353,15 @@ var Solicitar_Despliegue=true;  var Tabla_Usuarios;             var MarkerInterv
 var Solicitar_Vehiculos=true;   var Tabla;                      var Seleccionado;       var map;                    var Checkes=[];       
 var drawingManager;             var Tiempo;                     var Combinar=false;     var CalSet=0;               var Hide_Hist=true;
 var Tabla_Historico=[];         var year; var month; var day; var year1; var month1; var day1;
-var Recargar_Vehiculos=true;    var hour; var min; var hour1; var min1;
+var Recargar_Vehiculos=true;    var hour; var min; var hour1; var min1; var peso;
 var Tabla_Select=[];    
 var Icono_Historico =[];
 var Distancia_Recorrida;
 var Hide_Dist=true;
+var Cont_Distancia=-1;  var Tabla_Distancias=[];
+var Tabla_Distancia=[];
+var Distancias_Recorridas=[];    
+   
 
 var Colores={0:'red',1:'blue',2:'magenta',3:'coral',4:'green',5:'cyan',6:'darkgoldenrod',7:'darkorange',8:'darkslateblue'};    
 
@@ -401,7 +418,6 @@ $('#Tiempo_Hora1').timepicker  ({   showMinutes: false,    showPeriod: true,    
 $('#Tiempo_Minuto1').timepicker({   showHours: false,      minutes: { interval: 1 },    rows: 6    	});
 $('#Tiempo_Hora2').timepicker  ({   showMinutes: false,    showPeriod: true,            rows: 4    	});
 $('#Tiempo_Minuto2').timepicker({   showHours: false,      minutes: { interval: 1 },    rows: 6    	});
-    
 
   
 function Centrar(){
@@ -410,7 +426,7 @@ function Centrar(){
         if(Tabla_Usuarios[i].ID_VEHICULO==document.getElementById('seleccion').value){map.setCenter(Posicion[i]); Seleccionado=i;}
     }
  }
-   
+     
 function CargarVehiculos(){
     document.getElementById("ListaCheckBoxes").style.height ='auto';
     clearInterval(MarkerInterval);
@@ -523,14 +539,16 @@ function SetMarkerVarios(){
                     Latitud = parseFloat(Tabla2[Cont_Join++].LATITUD);
                     Longitud = parseFloat(Tabla2[Cont_Join++].LATITUD);
                     Fecha_Hora=Tabla2[Cont_Join++].LATITUD;
+                    peso=Tabla2[Cont_Join++].LATITUD;
                     Posicion[i]=new google.maps.LatLng(Latitud,Longitud);
                     
                     if (Mapa_Centrado && Seleccionado==i){
 document.getElementById('fila_latitud').innerHTML  = Latitud;   document.getElementById('fila_fecha').innerHTML    = Fecha_Hora.substring(0,10);   
 document.getElementById('fila_longitud').innerHTML = Longitud;  document.getElementById('fila_hora').innerHTML     = Fecha_Hora.substring(11,19);
+                        
+document.getElementById('peso').innerHTML= peso;
 }
                     if (Latitud!=LatAux[i] || Longitud!=LonAux[i] || RealAgain[i]==0 || Recargar_Vehiculos ){ 
-                        console.log("Entra con: "+Tabla_Usuarios[i].ID_VEHICULO);
                         LatAux[i] =Latitud;    LonAux[i] =Longitud;
                         RealAgain[i]=1;
                         
@@ -624,7 +642,6 @@ function Consulta_Hora_Marker(){
     day1=parseInt(Fecha_Final_PHP.substring(8, 10));
 
     var msj=ObtenerDateTime();
-Consulta_Hora_Marker_Graficar();
     
     
     if(msj!="Error" && year>year1 && month==month1){
@@ -678,9 +695,9 @@ function Consulta_Hora_Marker_Graficar(){
         Tabla_Historico[Cont_Historico] = JSON.parse(data);
         Cont_Markers=0;
 
-         if (typeof(PoliLinea_Historica[Cont_Historico])==='undefined'){
+         if (Tabla_Historico[Cont_Historico].length==0){
  
-             alert("Su consulta es vacía")
+             alert("La consulta del ID: " + Tabla_Usuarios[Cont_Historico].ID_VEHICULO + ", está vacia");
          }else{
 
         //if(!Snap){ 
@@ -745,37 +762,35 @@ function Consulta_Hora_Marker_Graficar(){
     
     //if(Cont_Historico==Tabla_Usuarios.length-1){    Distancia_KM();    /*Historico_Snap();*/    }
  } 
-    
+ 
 function Distancia_KM(){
-    
-    Cont_Historico++;
-
-    if (Cont_Historico<Tabla_Usuarios.length){
-    if (Checkes[Cont_Historico]){
+    Cont_Distancia++;
+    if (Cont_Distancia<Tabla_Usuarios.length){
+    if (Checkes[Cont_Distancia]){
 
     $.post( "MySQL/ConsultaDbHistorico.php", { FechaInicio: Fecha_Inicio_PHP, FechaFinal: Fecha_Final_PHP,
                                                HoraInicio:  Hora_Inicio_PHP,  HoraFinal:  Hora_Final_PHP,
-                                               Vehiculo: Tabla_Usuarios[Cont_Historico].ID_VEHICULO        }).done(
+                                               Vehiculo: Tabla_Usuarios[Cont_Distancia].ID_VEHICULO        }).done(
         
-    function( data ) { 
-        Tabla_Historico[Cont_Historico] = JSON.parse(data);
+    function( data ) {
+        
+        Tabla_Distancia[Cont_Distancia] = JSON.parse(data);
 
-        for(i in Tabla_Historico[Cont_Historico]){
+        for(i in Tabla_Distancia[Cont_Distancia]){
 
-            Posicion[Cont_Historico]=new google.maps.LatLng(parseFloat(Tabla_Historico[Cont_Historico][i].LATITUD),parseFloat(Tabla_Historico[Cont_Historico][i].LONGITUD));
+            Posicion[Cont_Distancia]=new google.maps.LatLng(parseFloat(Tabla_Distancia[Cont_Distancia][i].LATITUD),parseFloat(Tabla_Distancia[Cont_Distancia][i].LONGITUD));
             
-            Ruta_Historica[Cont_Historico].push(Posicion[Cont_Historico]); 
-            PoliLinea_Historica[Cont_Historico].setPath(Ruta_Historica[Cont_Historico]);
-        }  
+            Ruta_Historica[Cont_Distancia].push(Posicion[Cont_Distancia]); 
+            PoliLinea_Historica[Cont_Distancia].setPath(Ruta_Historica[Cont_Distancia]);
+        } 
+
+        Distancias_Recorridas.push(PoliLinea_Historica[Cont_Distancia].inKm().toFixed(5));
         Distancia_KM();
     });                                          
 
-    }else{           Distancia_KM();             }
+    }else{ Distancias_Recorridas.push(0);          Distancia_KM();             }
  }
-    
-
-   Distancia_Recorrida = PoliLinea_Historica[1].inKm();
-   console.log(Distancia_Recorrida);
+  if (Cont_Distancia==Tabla_Usuarios.length){ DiagramaBarras();}  
 
 } 
     
@@ -817,8 +832,8 @@ function Consulta_Marker_Hora_Graficar(){
     
         if(Combinar){
                 
-    $.post("MySQL/Marker_Hora_Fecha.php", {FechaFinal: Fecha_Final_PHP, FechaInicio: Fecha_Inicio_PHP,HoraInicio: Hora_Inicio_PHP,  HoraFinal: Hora_Final_PHP , LatitudMarker: LatMarker_Hora, LongitudMarker: LonMarker_Hora, Metros:  Metros_Redonda, Vehiculo: Tabla_Usuarios[Cont_Historico].ID_VEHICULO   }).done(
-                
+    $.post("MySQL/Marker_Hora_fecha.php", {FechaFinal: Fecha_Final_PHP, FechaInicio: Fecha_Inicio_PHP,HoraInicio: Hora_Inicio_PHP,  HoraFinal: Hora_Final_PHP , LatitudMarker: LatMarker_Hora, LongitudMarker: LonMarker_Hora, Metros:  Metros_Redonda, Vehiculo: Tabla_Usuarios[Cont_Historico].ID_VEHICULO   }).done(
+
     function( data ) {  
 
      Tabla = JSON.parse(data);
@@ -911,24 +926,27 @@ try{
 >>>>>>> refs/remotes/origin/master
 
 }catch(err){ return "Error";}
-
-Fecha_Inicio_PHP='2016-03-25';
-Fecha_Final_PHP='2016-03-25';
+/*
+Fecha_Inicio_PHP='2016-03-10';
+Fecha_Final_PHP='2016-03-30';
 Hora_Inicio_PHP='10:02:00';
 Hora_Final_PHP='10:05:00'
-    
+*///    
+
  }
-    
+
 function MostrarDistancia(){
-        Hide_Dist=false;
+
+    Hide_Dist=false;
     document.getElementById("MenuDistancia").style="animation-duration:2s;animation-name:bounceInRight;";
     document.getElementById("MenuDistancia").style.display = 'inline-block';
-    DiagramaBarras();
+    ObtenerDateTime();
+    Distancia_KM();
     
 } 
-    
+
 function OcultarDistancia(){
-        
+
         if (!Hide_Dist){
         document.getElementById("MenuDistancia").style="animation-duration:1s;animation-name:Steven;";
         document.getElementById("MenuDistancia").style.display = 'inline-block';
@@ -936,14 +954,14 @@ function OcultarDistancia(){
         }
         Hide_Dist=true;
     }
-    
+
 function MostrarHistoricos(){
     Hide_Hist=false;
     document.getElementById("divmenu").style="animation-duration:2s;animation-name:bounceInRight;";
     document.getElementById("divmenu").style.display = 'inline-block';
 
 }
-    
+
 function OcultarHistoricos(){
         if (!Hide_Hist){
         document.getElementById("divmenu").style="animation-duration:1s;animation-name:Steven;";
@@ -1025,29 +1043,35 @@ function Ocultar_Calendario2(){
  }
 
 function DiagramaBarras(){
+    var Nombres=[];
+    for (i in Tabla_Usuarios){Nombres.push(Tabla_Usuarios[i].ID_VEHICULO);}
     
     var graph = new BAR_GRAPH('hBar');  // hBar: Horizontal   vBar:Vertical
-    graph.values = "300,100";
-    graph.labels = Tabla_Usuarios;
-    graph.showValues = 2; // 0:% only   -  1: abs & %   -   2:abs only    - ninguno
+    graph.values = Distancias_Recorridas;
+    graph.labels = Nombres;
+    graph.showValues = 1; // 0:% only   -  1: abs & %   -   2:abs only    - ninguno
     graph.barWidth = 15; // ANCHO DE LAS BARRAS
     graph.barLength = 2; // LARGO DE LAS BARRAS
     graph.labelSize = 20;// SIZE NOMBRES
     graph.absValuesSize = 20;// SIZE VALORES
     graph.percValuesSize = 0;
     graph.graphPadding = 5;
-    graph.graphBGColor = 'red';
-    graph.graphBorder = '10px solid darkmagenta';
+    graph.graphBGColor = '#00c7fc';
+    graph.graphBorder = '5px solid #00c7fc';
     graph.barColors = 'green';
-    graph.barBGColor = 'blue';
-    graph.barBorder = '2px outset white';
-    graph.labelColor = 'white';
-    graph.labelBGColor = 'black';
-    graph.labelBorder = '1px solid white';
-    graph.absValuesColor = 'cyan';
-    graph.absValuesBGColor = 'magenta';
-    graph.absValuesBorder = '2px groove white';
+    graph.barBGColor = 'white';
+    graph.barBorder = '2px solid black';
+    graph.labelColor = 'black';
+    graph.labelBGColor = 'white';
+    graph.labelBorder = '2px solid black';
+    graph.absValuesColor = 'black';
+    graph.absValuesBGColor = 'white';
+    graph.absValuesBorder = '2px solid black';
     document.getElementById('divGraph').innerHTML = graph.create();
+    
+    var izqmarg = 661 - document.getElementById('MenuDistancia').clientWidth;
+    document.getElementById('MenuDistancia').style.marginLeft =  izqmarg + "px";
+
 }    
 
 /*    
