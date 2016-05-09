@@ -259,9 +259,20 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
    </div> 
  </div>
          
+<<<<<<< HEAD
+<div id="googleMap"></div>
+
+<h1 id="prueba"></h1>
+<h1 id="prueba1"></h1>
+
+
+    <input type="button" id="Boton_Real24" value="TIEMPO REAL" onclick="Consulta_Real();">
+<p class="auto"><input type="text" id="autoc"/></p>
+=======
  <div id="googleMap"></div>
  <input type="button" id="Boton_Real24" value="Tiempo Real" onclick="Consulta_Real();">
  <p class="auto"><input type="text" id="autoc"/></p>
+>>>>>>> refs/remotes/origin/master
     
  <select id="seleccion" onChange="Centrar()"><option>Centrar Mapa</option></select>
  <input type="button" id="btHist" value="Historico" onclick="MostrarHistoricos()">
@@ -582,6 +593,42 @@ function Consulta_Hora_Marker(){
     
     clearInterval(MarkerInterval);
 
+<<<<<<< HEAD
+
+       year=parseInt(Fecha_Inicio_PHP.substring(0, 4));
+        month=parseInt(Fecha_Inicio_PHP.substring(5, 7));
+        day=parseInt(Fecha_Inicio_PHP.substring(8, 10));
+
+        year1=parseInt(Fecha_Final_PHP.substring(0, 4));
+        month1=parseInt(Fecha_Final_PHP.substring(5, 7));
+        day1=parseInt(Fecha_Final_PHP.substring(8, 10));
+    
+    
+  //culquier cambio
+
+    var msj=ObtenerDateTime();
+    if(msj!="Error" && year==year1 && month==month1 && day<day1){
+    Posicion=[];
+    Consulta_Hora_Marker_Graficar();
+    }
+    if(msj!="Error" && year==year1 && month<month1){
+    Posicion=[];
+    Consulta_Hora_Marker_Graficar();
+    }
+    if (msj!="Error" && year==year1 && month==month1 && day==day1 && hour<=hour1){
+    Posicion=[];
+    Consulta_Hora_Marker_Graficar();
+    }
+    if (msj!="Error" && year==year1 && month==month1 && day==day1 && hour>hour1){
+    alert("La hora final es anterior a la inicial");
+    }
+    if(msj!="Error" && year==year1 && month>month1){
+    alert("La fecha final es anterior a la inicial")
+    }
+    if(msj!="Error" && year==year1 && month==month1 && day>day1){
+    alert("La fecha final es anterior a la inicial")
+    }
+=======
     if(msj!="Error" && typeof(Fecha_Inicio_PHP)==='undefined' && typeof(Fecha_Final_PHP)==='undefined'){
     alert("No se permiten fechas en blanco")
     }
@@ -626,11 +673,16 @@ function Consulta_Hora_Marker(){
     }
 
 
+>>>>>>> refs/remotes/origin/master
  }
 
 function Consulta_Hora_Marker_Graficar(){
 
     Cont_Historico++;
+
+
+
+
 
     if (Cont_Historico<Tabla_Usuarios.length){
     if (Checkes[Cont_Historico]){
@@ -761,6 +813,11 @@ function Consulta_Marker_Hora(){
     ObtenerDateTime();
     Posicion=[];
 
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> refs/remotes/origin/master
     Consulta_Marker_Hora_Graficar()
         
     }); 
@@ -849,6 +906,7 @@ function ObtenerDateTime(){
 try{
     
     Tiempo = new Date(2016,10,10,$('#Tiempo_Hora1').timepicker('getHour'),$('#Tiempo_Minuto1').timepicker('getMinute'));  
+    
     Hora_Inicio_PHP=String(Tiempo).substring(16,24);
 
     hour=parseInt(String(Tiempo).substring(16,18));
@@ -858,8 +916,14 @@ try{
     Tiempo = new Date(2016,10,10,$('#Tiempo_Hora2').timepicker('getHour'),$('#Tiempo_Minuto2').timepicker('getMinute'));  
     Hora_Final_PHP=String(Tiempo).substring(16,24);	
 
+<<<<<<< HEAD
+     hour1=parseInt(String(Tiempo).substring(16,18));
+     min1=parseInt(String(Tiempo).substring(19,21));
+
+=======
     hour1=parseInt(String(Tiempo).substring(16,18));
     min1=parseInt(String(Tiempo).substring(19,21));
+>>>>>>> refs/remotes/origin/master
 
 }catch(err){ return "Error";}
 /*
