@@ -151,10 +151,10 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
  <div class="container">
     <div class="row">
 
-        <div class="col-md-3 col-sm-10 wow fadeInLeft">
+        <div class="col-md-2 col-sm-12 wow fadeInLeft">
             <div class="media">
                 <a href="#" class="pull-left">
-                    <img src="images/longi.jpg" class="media-object" alt="Monitor">
+                    <img src="images/longi.jpg" alt="Ruler">
                 </a>
                 <div class="media-body">
                     <h3>Latitud</h3>
@@ -163,10 +163,10 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
             </div>
         </div>
 
-        <div class="col-md-3 col-sm-10 wow fadeInRight" data-wow-delay="0.2s">
+        <div class="col-md-2 col-sm-12 wow fadeInRight" data-wow-delay="0.2s">
             <div class="media">
                 <a href="#" class="pull-left">
-                    <img src="images/longi.jpg" alt="Cog">
+                    <img src="images/longi.jpg" alt="Ruler">
                 </a>
                 <div class="media-body">
                     <h3>Longitud</h3>
@@ -175,7 +175,7 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
             </div>
         </div>
 
-        <div class="col-md-3 col-sm-10 wow fadeInLeft">
+        <div class="col-md-2 col-sm-12 wow fadeInLeft">
             <div class="media">
                 <a href="#" class="pull-left">
                     <img src="images/fecha.jpg" alt="Ruler">
@@ -187,22 +187,23 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
             </div>
         </div>
 
-        <div class="col-md-3 col-sm-10 wow fadeInRight" data-wow-delay="0.2s">
+        
+        <div class="col-md-2 col-sm-12 wow fadeInLeft" data-wow-delay="0.2s">
             <div class="media">
                 <a href="#" class="pull-left">
-                    <img src="images/hora.png" alt="Camera">
+                    <img src="images/hora.jpg" alt="Ruler">
                 </a>
                 <div class="media-body">
                     <h3>Hora</h3>
-                    <p id="fila_hora">00:00:00</p>
+                    <p id="fila_hora"> 00:00:00</p>
                 </div>
             </div>
         </div>
         
-        <div class="col-md-3 col-sm-10 wow fadeInRight" data-wow-delay="0.2s">
+        <div class="col-md-2 col-sm-12 wow fadeInRight" data-wow-delay="0.2s">
             <div class="media">
                 <a href="#" class="pull-left">
-                    <img src="images/hora.png" alt="Camera">
+                    <img src="images/balanza.jpg" alt="Camera">
                 </a>
                 <div class="media-body">
                     <h3>Peso</h3>
