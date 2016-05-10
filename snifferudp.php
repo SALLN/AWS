@@ -12,6 +12,7 @@ socket_recvfrom($socket, $datos, 200, 0, $from, $port);
 
 $s1=strpos($datos,"&");    $s2=strpos($datos,"#");  $lon=strlen($datos);
 
+    
 if (!empty($s1) && !empty($s2) && $lon<78 && $lon>62){
 include("MySQL/ConexionMySQL.php");
 $tim=strpos($datos,"+");    $latlon=strpos($datos,"-");
