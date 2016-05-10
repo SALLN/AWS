@@ -431,7 +431,7 @@ function CargarVehiculos(){
  }
 
 function CrearCheck(){
-        
+         
     if (Solicitar_Despliegue){
         
     Icono_Historico[Cont_Vehiculos]={
