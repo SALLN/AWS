@@ -14,7 +14,7 @@ $s1=strpos($datos,"&");    $s2=strpos($datos,"#");
 
 $lon=strlen($datos);
 
-if (!empty($s1) && !empty($s2) && $lon<72 && $lon>62){
+if (!empty($s1) && !empty($s2) && $lon<78 && $lon>62){
 include("MySQL/ConexionMySQL.php");
 $tim=strpos($datos,"+");    $latlon=strpos($datos,"-");
 $i=strpos($datos,"ID=");    $j=strpos($datos,"_");    $k=strpos($datos,"<"); $time=substr($datos,$tim-10,10);  
@@ -29,7 +29,7 @@ $peso=substr($datos,$s1+1,$s2-$s1-1);
 $fecha=date('Y-m-d H:i:s', $tiempogps);
 $fecha_servidor = date('Y-m-d H:i:s');
 
-$consulta=mysql_query("INSERT INTO $usuario (LATITUD,LONGITUD,FECHA_HORA,ID_VEHICULO,FECHA_HORA_SERVER,PESO) VALUES('$latitud','$longitud','$fecha','$idv','$fecha_servidor','$peso')");
+$consulta=mysql_query("INSERT INTO GrupoTicoll(LATITUD,LONGITUD,FECHA_HORA,ID_VEHICULO,FECHA_HORA_SERV,PESO) VALUES('$latitud','$longitud','$fecha','Steven','$fecha_servidor','$peso')");
 
 mysql_close($conexion);
 }

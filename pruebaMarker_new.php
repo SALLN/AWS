@@ -23,8 +23,8 @@ $peso=$reg['PESO'];
 $pesofloat = floatval($peso)+0.1;
 
 	
-mysql_query("INSERT INTO grupoticoll(LATITUD,LONGITUD,FECHA_HORA,ID_VEHICULO,FECHA_HORA_SERV,PESO) VALUES ('$latifloat2','$longifloat2','2016-03-23 21:23:04','Nel','2016-03-23 21:23:04','$pesofloat')");
+mysql_query("INSERT INTO grupoticoll(LATITUD,LONGITUD,FECHA_HORA,ID_VEHICULO,FECHA_HORA_SERV,PESO) VALUES ('$latifloat2','$longifloat2','2016-03-23 21:23:04','Steven','2016-03-23 21:23:04','$pesofloat')");
 		
 
 
-?>S
+?>

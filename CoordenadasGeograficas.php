@@ -52,8 +52,8 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
     <script src="js/jquery.ui.core.min.js"></script>
     <script src="js/jquery.ui.timepicker.js?v=0.3.3"></script>
     <script src="js/modernizr-2.6.2.min.js"></script>
-    
-    <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel.js"></script>
+    <script src="js/markerwithlabel.js"></script>
+    <!--<script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel.js"></script>-->
 
 </head>
 	
@@ -148,7 +148,7 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
 
 <section id="service"> <!--#Mapa-->
 
- <div class="container">
+ <div class="container" style="margin-left:150px;">
     <div class="row">
 
         <div class="col-md-2 col-sm-12 wow fadeInLeft">
@@ -203,7 +203,7 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
         <div class="col-md-2 col-sm-12 wow fadeInRight" data-wow-delay="0.2s">
             <div class="media">
                 <a href="#" class="pull-left">
-                    <img src="images/balanza.jpg" alt="Camera">
+                    <img src="images/balanza.jpg" alt="Ruler">
                 </a>
                 <div class="media-body">
                     <h3>Peso</h3>
@@ -533,10 +533,10 @@ function SetMarkerVarios(){
                     Posicion[i]=new google.maps.LatLng(Latitud,Longitud);
                     
                     if (Mapa_Centrado && Seleccionado==i){
- document.getElementById('fila_latitud').innerHTML  = Latitud;   document.getElementById('fila_fecha').innerHTML    = Fecha_Hora.substring(0,10);   
- document.getElementById('fila_longitud').innerHTML = Longitud;  document.getElementById('fila_hora').innerHTML     = Fecha_Hora.substring(11,19);
                         
- document.getElementById('peso').innerHTML= peso;
+                        document.getElementById('fila_latitud').innerHTML  = Latitud;   
+                        document.getElementById('fila_fecha').innerHTML    = Fecha_Hora.substring(0,10); document.getElementById('fila_longitud').innerHTML = Longitud;  
+                        document.getElementById('fila_hora').innerHTML     = Fecha_Hora.substring(11,19); document.getElementById('peso').innerHTML= peso;
  }
                     if (Latitud!=LatAux[i] || Longitud!=LonAux[i] || RealAgain[i]==0 || Recargar_Vehiculos ){ 
                         LatAux[i] =Latitud;    LonAux[i] =Longitud;
@@ -748,23 +748,28 @@ function Consulta_Marker_Hora(){
     Cont_Historico=-1;
     LimpiarMapa();
     clearInterval(MarkerInterval);
-
+        map.addListener('dblclick', function(e) {
+console.log("Doble click");
+        
+    
+google.maps.event.clearListeners(map, 'click');
     map.addListener('click', function(e) {
-
-    LatMarker_Hora=e.latLng.lat();
-    LonMarker_Hora=e.latLng.lng();
+        console.log(e);
+    console.log(LatMarker_Hora=e.latLng.lat());
+    console.log(LonMarker_Hora=e.latLng.lng());
     Metros_Redonda=document.getElementById('Metros').value;
 
     map.setCenter(new google.maps.LatLng(parseFloat(LatMarker_Hora),parseFloat(LonMarker_Hora)));
 
-    google.maps.event.clearListeners(map, 'click');
+    //google.maps.event.clearListeners(map, 'click');
     
-    ObtenerDateTime();
-    Posicion=[];
+    //ObtenerDateTime();
+    //Posicion=[];
 
-    Consulta_Marker_Hora_Graficar()
+    //Consulta_Marker_Hora_Graficar()
         
     }); 
+            }); 
  }
 
 function Consulta_Marker_Hora_Graficar(){
