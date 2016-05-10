@@ -29,7 +29,7 @@ $peso=substr($datos,$s1+1,$s2-$s1-1);
 $fecha=date('Y-m-d H:i:s', $tiempogps);
 $fecha_servidor = date('Y-m-d H:i:s');
 
-$consulta=mysql_query("INSERT INTO $usuario (LATITUD,LONGITUD,FECHA_HORA,ID_VEHICULO,FECHA_HORA_SERVER,PESO) VALUES('$latitud','$longitud','$fecha','$idv','$fecha_servidor','$peso')");
+$consulta=mysql_query("INSERT INTO GrupoTicoll(LATITUD,LONGITUD,FECHA_HORA,ID_VEHICULO,FECHA_HORA_SERV,PESO) VALUES('$latitud','$longitud','$fecha','Steven','$fecha_servidor','$peso')");
 
 mysql_close($conexion);
 }
