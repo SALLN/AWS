@@ -207,7 +207,7 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
                 </a>
                 <div class="media-body">
                     <h3>Peso</h3>
-                    <p id="peso">00:00:00</p>
+                    <p id="peso">0kg</p>
                 </div>
             </div>
         </div>
@@ -533,11 +533,11 @@ function SetMarkerVarios(){
                     Posicion[i]=new google.maps.LatLng(Latitud,Longitud);
                     
                     if (Mapa_Centrado && Seleccionado==i){
-document.getElementById('fila_latitud').innerHTML  = Latitud;   document.getElementById('fila_fecha').innerHTML    = Fecha_Hora.substring(0,10);   
-document.getElementById('fila_longitud').innerHTML = Longitud;  document.getElementById('fila_hora').innerHTML     = Fecha_Hora.substring(11,19);
+ document.getElementById('fila_latitud').innerHTML  = Latitud;   document.getElementById('fila_fecha').innerHTML    = Fecha_Hora.substring(0,10);   
+ document.getElementById('fila_longitud').innerHTML = Longitud;  document.getElementById('fila_hora').innerHTML     = Fecha_Hora.substring(11,19);
                         
-document.getElementById('peso').innerHTML= peso;
-}
+ document.getElementById('peso').innerHTML= peso;
+ }
                     if (Latitud!=LatAux[i] || Longitud!=LonAux[i] || RealAgain[i]==0 || Recargar_Vehiculos ){ 
                         LatAux[i] =Latitud;    LonAux[i] =Longitud;
                         RealAgain[i]=1;
@@ -562,7 +562,7 @@ document.getElementById('peso').innerHTML= peso;
                                     Recargar_Vehiculos=false;
 
         });
-}
+ }
 
 function Consulta_Real(){
     
@@ -741,7 +741,7 @@ function Distancia_KM(){
  }
   if (Cont_Distancia==Tabla_Usuarios.length){ DiagramaBarras();}  
 
-} 
+ } 
     
 function Consulta_Marker_Hora(){
  
@@ -847,7 +847,7 @@ function LimpiarMapa(){
         
 function ObtenerDateTime(){
     
-try{
+ try{
     
     Tiempo = new Date(2016,10,10,$('#Tiempo_Hora1').timepicker('getHour'),$('#Tiempo_Minuto1').timepicker('getMinute'));  
     Hora_Inicio_PHP=String(Tiempo).substring(16,24);
@@ -862,15 +862,15 @@ try{
     hour1=parseInt(String(Tiempo).substring(16,18));
     min1=parseInt(String(Tiempo).substring(19,21));
 
-}catch(err){ return "Error";}
-/*
-Fecha_Inicio_PHP='2016-03-10';
-Fecha_Final_PHP='2016-03-30';
-Hora_Inicio_PHP='10:02:00';
-Hora_Final_PHP='10:05:00'
-*///    
+ }catch(err){ return "Error";}
+ /*
+ Fecha_Inicio_PHP='2016-03-10';
+ Fecha_Final_PHP='2016-03-30';
+ Hora_Inicio_PHP='10:02:00';
+ Hora_Final_PHP='10:05:00'
+ *///    
 
- }
+  }
 
 function MostrarDistancia(){
 
@@ -880,7 +880,7 @@ function MostrarDistancia(){
     ObtenerDateTime();
     Distancia_KM();
     
-} 
+ } 
 
 function OcultarDistancia(){
 
@@ -890,14 +890,14 @@ function OcultarDistancia(){
         setTimeout(function(){ document.getElementById("MenuDistancia").style.display = 'none'; }, 800);
         }
         Hide_Dist=true;
-    }
+          }
 
 function MostrarHistoricos(){
     Hide_Hist=false;
     document.getElementById("divmenu").style="animation-duration:2s;animation-name:bounceInRight;";
     document.getElementById("divmenu").style.display = 'inline-block';
 
-}
+ }
 
 function OcultarHistoricos(){
         if (!Hide_Hist){
@@ -906,7 +906,7 @@ function OcultarHistoricos(){
         setTimeout(function(){ document.getElementById("divmenu").style.display = 'none'; }, 800);
         }
         Hide_Hist=true;
-}
+         }
   
 function Mostrar_Calendario1(){
 
@@ -928,16 +928,11 @@ function Mostrar_Calendario1(){
 	            Calendario1=1;   
 	            CalSet=1;
     			Fecha_Inicio_PHP = $('#Fecha_Inicio').DatePickerGetDate(true);
-    			document.getElementById('Fecha_Inicio2').innerHTML  = Fecha_Inicio_PHP;  
-
-        
-
-
-              
- }
-          }
-            });
-             }}
+    			document.getElementById('Fecha_Inicio2').innerHTML  = Fecha_Inicio_PHP;   }
+                    }
+                                });
+                                 }
+                                  }
     
 function Ocultar_Calendario1(){
  	$('#Fecha_Inicio').DatePickerHide();
@@ -1009,15 +1004,15 @@ function DiagramaBarras(){
     var izqmarg = 661 - document.getElementById('MenuDistancia').clientWidth;
     document.getElementById('MenuDistancia').style.marginLeft =  izqmarg + "px";
 
-}    
+ }    
 
-/*    
-var Ruta_Snap=[];var PoliLinea_Snap = [];
-var latlng;var Snap=false;var Ruta_Snap_Aux=[];var NumMarkerSnap=0; 
-var Ent=0;var Res;var t=0;var Tabla_Residuo;
-var cont=[];cont[0]=0;cont[1]=0;var Tabla_Entero;var Cont_Snap=0;var Tabla_Long;var Marker_Snap=[];
-var Cont_Aux=100;    var Contador=0;
-function Historico_Snap(){
+ /*    
+ var Ruta_Snap=[];var PoliLinea_Snap = [];
+ var latlng;var Snap=false;var Ruta_Snap_Aux=[];var NumMarkerSnap=0; 
+ var Ent=0;var Res;var t=0;var Tabla_Residuo;
+ var cont=[];cont[0]=0;cont[1]=0;var Tabla_Entero;var Cont_Snap=0;var Tabla_Long;var Marker_Snap=[];
+ var Cont_Aux=100;    var Contador=0;
+ function Historico_Snap(){
     console.log(Contador);
     
     if(t==0 || Contador!=Cont_Aux){
@@ -1084,7 +1079,7 @@ function Historico_Snap(){
         }
     }); 
  }
-*/  
+ */  
     
 </script>
 </body>
