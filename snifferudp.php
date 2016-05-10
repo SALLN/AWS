@@ -14,7 +14,7 @@ $s1=strpos($datos,"&");    $s2=strpos($datos,"#");
 
 $lon=strlen($datos);
 
-if (!empty($s1) && !empty($s2) && $lon<72 && $lon>62){
+if (!empty($s1) && !empty($s2) && $lon<78 && $lon>62){
 include("MySQL/ConexionMySQL.php");
 $tim=strpos($datos,"+");    $latlon=strpos($datos,"-");
 $i=strpos($datos,"ID=");    $j=strpos($datos,"_");    $k=strpos($datos,"<"); $time=substr($datos,$tim-10,10);  
