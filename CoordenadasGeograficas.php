@@ -203,7 +203,7 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
         <div class="col-md-2 col-sm-12 wow fadeInRight" data-wow-delay="0.2s">
             <div class="media">
                 <a href="#" class="pull-left">
-                    <img src="images/balanza.jpg" alt="Ruler">
+                    <img src="images/balanza2.jpg" alt="Ruler">
                 </a>
                 <div class="media-body">
                     <h3>Peso</h3>
