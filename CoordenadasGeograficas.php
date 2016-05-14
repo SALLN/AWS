@@ -53,7 +53,8 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
     <script src="js/jquery.ui.timepicker.js?v=0.3.3"></script>
     <script src="js/modernizr-2.6.2.min.js"></script>
     
-    <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel.js"></script>
+    <script src="js/markerwithlabel.js"></script>
+    <!--<script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel.js"></script>-->
 
 </head>
 	
@@ -148,13 +149,13 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
 
 <section id="service"> <!--#Mapa-->
 
- <div class="container">
+ <div class="container" style="margin-left:150px;">
     <div class="row">
 
-        <div class="col-md-3 col-sm-10 wow fadeInLeft">
+        <div class="col-md-2 col-sm-12 wow fadeInLeft">
             <div class="media">
                 <a href="#" class="pull-left">
-                    <img src="images/longi.jpg" class="media-object" alt="Monitor">
+                    <img src="images/longi.jpg" alt="Ruler">
                 </a>
                 <div class="media-body">
                     <h3>Latitud</h3>
@@ -163,10 +164,10 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
             </div>
         </div>
 
-        <div class="col-md-3 col-sm-10 wow fadeInRight" data-wow-delay="0.2s">
+        <div class="col-md-2 col-sm-12 wow fadeInRight" data-wow-delay="0.2s">
             <div class="media">
                 <a href="#" class="pull-left">
-                    <img src="images/longi.jpg" alt="Cog">
+                    <img src="images/longi.jpg" alt="Ruler">
                 </a>
                 <div class="media-body">
                     <h3>Longitud</h3>
@@ -175,7 +176,7 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
             </div>
         </div>
 
-        <div class="col-md-3 col-sm-10 wow fadeInLeft">
+        <div class="col-md-2 col-sm-12 wow fadeInLeft">
             <div class="media">
                 <a href="#" class="pull-left">
                     <img src="images/fecha.jpg" alt="Ruler">
@@ -187,26 +188,27 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
             </div>
         </div>
 
-        <div class="col-md-3 col-sm-10 wow fadeInRight" data-wow-delay="0.2s">
+        
+        <div class="col-md-2 col-sm-12 wow fadeInLeft" data-wow-delay="0.2s">
             <div class="media">
                 <a href="#" class="pull-left">
-                    <img src="images/hora.png" alt="Camera">
+                    <img src="images/hora.jpg" alt="Ruler">
                 </a>
                 <div class="media-body">
                     <h3>Hora</h3>
-                    <p id="fila_hora">00:00:00</p>
+                    <p id="fila_hora"> 00:00:00</p>
                 </div>
             </div>
         </div>
         
-        <div class="col-md-3 col-sm-10 wow fadeInRight" data-wow-delay="0.2s">
+        <div class="col-md-2 col-sm-12 wow fadeInRight" data-wow-delay="0.2s">
             <div class="media">
                 <a href="#" class="pull-left">
-                    <img src="images/hora.png" alt="Camera">
+                    <img src="images/balanza2.jpg" alt="Ruler">
                 </a>
                 <div class="media-body">
                     <h3>Peso</h3>
-                    <p id="peso">00:00:00</p>
+                    <p id="peso">0kg</p>
                 </div>
             </div>
         </div>
@@ -259,20 +261,10 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
    </div> 
  </div>
          
-<<<<<<< HEAD
-<div id="googleMap"></div>
-
-<h1 id="prueba"></h1>
-<h1 id="prueba1"></h1>
-
-
-    <input type="button" id="Boton_Real24" value="TIEMPO REAL" onclick="Consulta_Real();">
-<p class="auto"><input type="text" id="autoc"/></p>
-=======
  <div id="googleMap"></div>
+ <input type ="button" id="Boton_grafica" value = 'Graficar tiempo real' onclick="promptForTwo(); return false;"/> 
  <input type="button" id="Boton_Real24" value="Tiempo Real" onclick="Consulta_Real();">
  <p class="auto"><input type="text" id="autoc"/></p>
->>>>>>> refs/remotes/origin/master
     
  <select id="seleccion" onChange="Centrar()"><option>Centrar Mapa</option></select>
  <input type="button" id="btHist" value="Historico" onclick="MostrarHistoricos()">
@@ -354,6 +346,7 @@ var Solicitar_Vehiculos=true;   var Tabla;                      var Seleccionado
 var drawingManager;             var Tiempo;                     var Combinar=false;     var CalSet=0;               var Hide_Hist=true;
 var Tabla_Historico=[];         var year; var month; var day; var year1; var month1; var day1;
 var Recargar_Vehiculos=true;    var hour; var min; var hour1; var min1; var peso;
+var userid = '';  var password = ''; var windowReference;
 var Tabla_Select=[];    
 var Icono_Historico =[];
 var Distancia_Recorrida;
@@ -378,6 +371,8 @@ var mapOptions ={
                 disableDefaultUI: false    };
 
 map=new google.maps.Map(document.getElementById("googleMap"),mapOptions);
+
+map.controls[google.maps.ControlPosition.LEFT_CENTER].push( document.getElementById('Boton_grafica'));
 
 map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('autoc'));
 
@@ -419,6 +414,23 @@ $('#Tiempo_Minuto1').timepicker({   showHours: false,      minutes: { interval: 
 $('#Tiempo_Hora2').timepicker  ({   showMinutes: false,    showPeriod: true,            rows: 4    	});
 $('#Tiempo_Minuto2').timepicker({   showHours: false,      minutes: { interval: 1 },    rows: 6    	});
 
+function promptForTwo() {
+  var w = 480, h = 340;
+
+  if (window.screen) {
+    w = screen.availWidth;
+    h = screen.availHeight;
+  }
+
+  var popW = 800, popH = 450;
+  var leftPos = (w-popW)/2, topPos = (h-popH)/2;
+
+  window.open('grafica.html','windowName','width=' + popW + ',height=' + popH + ',top=' + topPos + ',left=' + leftPos);
+
+  if (!windowReference.opener)
+    windowReference.opener = self;
+}
+
   
 function Centrar(){
     for (i in Tabla_Usuarios){
@@ -441,7 +453,7 @@ function CargarVehiculos(){
  }
 
 function CrearCheck(){
-        
+         
     if (Solicitar_Despliegue){
         
     Icono_Historico[Cont_Vehiculos]={
@@ -543,11 +555,11 @@ function SetMarkerVarios(){
                     Posicion[i]=new google.maps.LatLng(Latitud,Longitud);
                     
                     if (Mapa_Centrado && Seleccionado==i){
-document.getElementById('fila_latitud').innerHTML  = Latitud;   document.getElementById('fila_fecha').innerHTML    = Fecha_Hora.substring(0,10);   
-document.getElementById('fila_longitud').innerHTML = Longitud;  document.getElementById('fila_hora').innerHTML     = Fecha_Hora.substring(11,19);
                         
-document.getElementById('peso').innerHTML= peso;
-}
+                        document.getElementById('fila_latitud').innerHTML  = Latitud;   
+                        document.getElementById('fila_fecha').innerHTML    = Fecha_Hora.substring(0,10); document.getElementById('fila_longitud').innerHTML = Longitud;  
+                        document.getElementById('fila_hora').innerHTML     = Fecha_Hora.substring(11,19); document.getElementById('peso').innerHTML= peso;
+ }
                     if (Latitud!=LatAux[i] || Longitud!=LonAux[i] || RealAgain[i]==0 || Recargar_Vehiculos ){ 
                         LatAux[i] =Latitud;    LonAux[i] =Longitud;
                         RealAgain[i]=1;
@@ -572,7 +584,7 @@ document.getElementById('peso').innerHTML= peso;
                                     Recargar_Vehiculos=false;
 
         });
-}
+ }
 
 function Consulta_Real(){
     
@@ -593,42 +605,6 @@ function Consulta_Hora_Marker(){
     
     clearInterval(MarkerInterval);
 
-<<<<<<< HEAD
-
-       year=parseInt(Fecha_Inicio_PHP.substring(0, 4));
-        month=parseInt(Fecha_Inicio_PHP.substring(5, 7));
-        day=parseInt(Fecha_Inicio_PHP.substring(8, 10));
-
-        year1=parseInt(Fecha_Final_PHP.substring(0, 4));
-        month1=parseInt(Fecha_Final_PHP.substring(5, 7));
-        day1=parseInt(Fecha_Final_PHP.substring(8, 10));
-    
-    
-  //culquier cambio
-
-    var msj=ObtenerDateTime();
-    if(msj!="Error" && year==year1 && month==month1 && day<day1){
-    Posicion=[];
-    Consulta_Hora_Marker_Graficar();
-    }
-    if(msj!="Error" && year==year1 && month<month1){
-    Posicion=[];
-    Consulta_Hora_Marker_Graficar();
-    }
-    if (msj!="Error" && year==year1 && month==month1 && day==day1 && hour<=hour1){
-    Posicion=[];
-    Consulta_Hora_Marker_Graficar();
-    }
-    if (msj!="Error" && year==year1 && month==month1 && day==day1 && hour>hour1){
-    alert("La hora final es anterior a la inicial");
-    }
-    if(msj!="Error" && year==year1 && month>month1){
-    alert("La fecha final es anterior a la inicial")
-    }
-    if(msj!="Error" && year==year1 && month==month1 && day>day1){
-    alert("La fecha final es anterior a la inicial")
-    }
-=======
     if(msj!="Error" && typeof(Fecha_Inicio_PHP)==='undefined' && typeof(Fecha_Final_PHP)==='undefined'){
     alert("No se permiten fechas en blanco")
     }
@@ -673,16 +649,11 @@ function Consulta_Hora_Marker(){
     }
 
 
->>>>>>> refs/remotes/origin/master
  }
 
 function Consulta_Hora_Marker_Graficar(){
 
     Cont_Historico++;
-
-
-
-
 
     if (Cont_Historico<Tabla_Usuarios.length){
     if (Checkes[Cont_Historico]){
@@ -792,35 +763,35 @@ function Distancia_KM(){
  }
   if (Cont_Distancia==Tabla_Usuarios.length){ DiagramaBarras();}  
 
-} 
+ } 
     
 function Consulta_Marker_Hora(){
  
     Cont_Historico=-1;
     LimpiarMapa();
     clearInterval(MarkerInterval);
-
+        map.addListener('dblclick', function(e) {
+console.log("Doble click");
+        
+    
+google.maps.event.clearListeners(map, 'click');
     map.addListener('click', function(e) {
-
-    LatMarker_Hora=e.latLng.lat();
-    LonMarker_Hora=e.latLng.lng();
+        console.log(e);
+    console.log(LatMarker_Hora=e.latLng.lat());
+    console.log(LonMarker_Hora=e.latLng.lng());
     Metros_Redonda=document.getElementById('Metros').value;
 
     map.setCenter(new google.maps.LatLng(parseFloat(LatMarker_Hora),parseFloat(LonMarker_Hora)));
 
-    google.maps.event.clearListeners(map, 'click');
+    //google.maps.event.clearListeners(map, 'click');
     
-    ObtenerDateTime();
-    Posicion=[];
+    //ObtenerDateTime();
+    //Posicion=[];
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> refs/remotes/origin/master
-    Consulta_Marker_Hora_Graficar()
+    //Consulta_Marker_Hora_Graficar()
         
     }); 
+            }); 
  }
 
 function Consulta_Marker_Hora_Graficar(){
@@ -903,10 +874,9 @@ function LimpiarMapa(){
         
 function ObtenerDateTime(){
     
-try{
+ try{
     
     Tiempo = new Date(2016,10,10,$('#Tiempo_Hora1').timepicker('getHour'),$('#Tiempo_Minuto1').timepicker('getMinute'));  
-    
     Hora_Inicio_PHP=String(Tiempo).substring(16,24);
 
     hour=parseInt(String(Tiempo).substring(16,18));
@@ -916,24 +886,18 @@ try{
     Tiempo = new Date(2016,10,10,$('#Tiempo_Hora2').timepicker('getHour'),$('#Tiempo_Minuto2').timepicker('getMinute'));  
     Hora_Final_PHP=String(Tiempo).substring(16,24);	
 
-<<<<<<< HEAD
-     hour1=parseInt(String(Tiempo).substring(16,18));
-     min1=parseInt(String(Tiempo).substring(19,21));
-
-=======
     hour1=parseInt(String(Tiempo).substring(16,18));
     min1=parseInt(String(Tiempo).substring(19,21));
->>>>>>> refs/remotes/origin/master
 
-}catch(err){ return "Error";}
-/*
-Fecha_Inicio_PHP='2016-03-10';
-Fecha_Final_PHP='2016-03-30';
-Hora_Inicio_PHP='10:02:00';
-Hora_Final_PHP='10:05:00'
-*///    
+ }catch(err){ return "Error";}
+ /*
+ Fecha_Inicio_PHP='2016-03-10';
+ Fecha_Final_PHP='2016-03-30';
+ Hora_Inicio_PHP='10:02:00';
+ Hora_Final_PHP='10:05:00'
+ *///    
 
- }
+  }
 
 function MostrarDistancia(){
 
@@ -943,7 +907,7 @@ function MostrarDistancia(){
     ObtenerDateTime();
     Distancia_KM();
     
-} 
+ } 
 
 function OcultarDistancia(){
 
@@ -953,14 +917,14 @@ function OcultarDistancia(){
         setTimeout(function(){ document.getElementById("MenuDistancia").style.display = 'none'; }, 800);
         }
         Hide_Dist=true;
-    }
+          }
 
 function MostrarHistoricos(){
     Hide_Hist=false;
     document.getElementById("divmenu").style="animation-duration:2s;animation-name:bounceInRight;";
     document.getElementById("divmenu").style.display = 'inline-block';
 
-}
+ }
 
 function OcultarHistoricos(){
         if (!Hide_Hist){
@@ -969,7 +933,7 @@ function OcultarHistoricos(){
         setTimeout(function(){ document.getElementById("divmenu").style.display = 'none'; }, 800);
         }
         Hide_Hist=true;
-}
+         }
   
 function Mostrar_Calendario1(){
 
@@ -991,16 +955,11 @@ function Mostrar_Calendario1(){
 	            Calendario1=1;   
 	            CalSet=1;
     			Fecha_Inicio_PHP = $('#Fecha_Inicio').DatePickerGetDate(true);
-    			document.getElementById('Fecha_Inicio2').innerHTML  = Fecha_Inicio_PHP;  
-
-        
-
-
-              
- }
-          }
-            });
-             }}
+    			document.getElementById('Fecha_Inicio2').innerHTML  = Fecha_Inicio_PHP;   }
+                    }
+                                });
+                                 }
+                                  }
     
 function Ocultar_Calendario1(){
  	$('#Fecha_Inicio').DatePickerHide();
@@ -1072,15 +1031,15 @@ function DiagramaBarras(){
     var izqmarg = 661 - document.getElementById('MenuDistancia').clientWidth;
     document.getElementById('MenuDistancia').style.marginLeft =  izqmarg + "px";
 
-}    
+ }    
 
-/*    
-var Ruta_Snap=[];var PoliLinea_Snap = [];
-var latlng;var Snap=false;var Ruta_Snap_Aux=[];var NumMarkerSnap=0; 
-var Ent=0;var Res;var t=0;var Tabla_Residuo;
-var cont=[];cont[0]=0;cont[1]=0;var Tabla_Entero;var Cont_Snap=0;var Tabla_Long;var Marker_Snap=[];
-var Cont_Aux=100;    var Contador=0;
-function Historico_Snap(){
+ /*    
+ var Ruta_Snap=[];var PoliLinea_Snap = [];
+ var latlng;var Snap=false;var Ruta_Snap_Aux=[];var NumMarkerSnap=0; 
+ var Ent=0;var Res;var t=0;var Tabla_Residuo;
+ var cont=[];cont[0]=0;cont[1]=0;var Tabla_Entero;var Cont_Snap=0;var Tabla_Long;var Marker_Snap=[];
+ var Cont_Aux=100;    var Contador=0;
+ function Historico_Snap(){
     console.log(Contador);
     
     if(t==0 || Contador!=Cont_Aux){
@@ -1147,7 +1106,7 @@ function Historico_Snap(){
         }
     }); 
  }
-*/  
+ */  
     
 </script>
 </body>
