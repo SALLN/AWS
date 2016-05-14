@@ -9,13 +9,13 @@
 <body>
 
 
-<h1>Prueba para llenar DB cada 3 segundos</h1>
+<h1>Prueba para llenar DB</h1>
 
 <div id="result"><?php include("pruebaMarker_new.php"); ?></div>
 
 <script>
           
-setInterval(function(){$('#result').load('pruebaMarker_new.php');},3000);
+setInterval(function(){$('#result').load('pruebaMarker_new.php');},1000);
                 
 </script>
 

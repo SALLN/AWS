@@ -320,3 +320,15 @@ p {display: inline;}
     font-weight: bold;
     float:left;
 }
+
+#Marcar_Recorrido {
+    background-color: #00c7fc;
+    color: white;
+    display: inline-block;
+    padding: 2px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
