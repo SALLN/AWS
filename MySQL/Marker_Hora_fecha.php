@@ -9,7 +9,7 @@ $MetrosRedonda=floatval($_POST['Metros']);
 $Latitud_Marker=$_POST['LatitudMarker'];
 $Longitud_Marker=$_POST['LongitudMarker'];
 
-$consulta=mysql_query("SELECT LATITUD,LONGITUD,FECHA_HORA FROM $_SESSION[user] where ID_VEHICULO='$_POST[Vehiculo]' AND FECHA_HORA between  '$fecha_start' and '$fecha_end' ") or die("Problemas en consulta: ".mysql_error());
+$consulta=mysql_query("SELECT LATITUD,LONGITUD,FECHA_HORA,PESO FROM $_SESSION[user] where ID_VEHICULO='$_POST[Vehiculo]' AND FECHA_HORA between  '$fecha_start' and '$fecha_end' ") or die("Problemas en consulta: ".mysql_error());
 
 $tabla=array();
 $i=0;

@@ -5,7 +5,8 @@ $Lat = $_SESSION['Lat'];
 $Lng = $_SESSION['Lng'];
 
 include("MySQL/ConexionMySQL.php");
-	 
+	 date_default_timezone_set('America/Bogota');
+
 $rs = mysql_query("SELECT MAX(ID) AS id FROM grupoticoll");
 if ($row = mysql_fetch_row($rs)) {
 $id = trim($row[0]);
@@ -20,8 +21,9 @@ $reg=mysql_fetch_array($registro);
 $peso=$reg['PESO'];	 
 $pesofloat = floatval($peso);
 
+$fecha_servidor = date('Y-m-d H:i:s');
 
-    mysql_query("INSERT INTO grupoticoll(LATITUD,LONGITUD,FECHA_HORA,ID_VEHICULO,FECHA_HORA_SERV,PESO) VALUES ('$Lat','$Lng','2016-03-23 21:23:04','Steven','2016-03-23 21:23:04','$pesofloat')");
+    mysql_query("INSERT INTO grupoticoll(LATITUD,LONGITUD,FECHA_HORA,ID_VEHICULO,FECHA_HORA_SERV,PESO) VALUES ('$Lat','$Lng','$fecha_servidor','Steven','$fecha_servidor','$pesofloat')");
 
 
 ?>
