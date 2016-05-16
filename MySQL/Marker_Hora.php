@@ -5,7 +5,7 @@ include("ConexionMySQL.php");
 $Latitud_Marker=$_POST['LatitudMarker'];
 $Longitud_Marker=$_POST['LongitudMarker'];
 $MetrosRedonda=floatval($_POST['Metros']);
-$consulta=mysql_query("SELECT LATITUD,LONGITUD,FECHA_HORA FROM $_SESSION[user] where ID_VEHICULO='$_POST[Vehiculo]'") or die("Problemas en consulta: ".mysql_error());
+$consulta=mysql_query("SELECT LATITUD,LONGITUD,FECHA_HORA,PESO FROM $_SESSION[user] where ID_VEHICULO='$_POST[Vehiculo]'") or die("Problemas en consulta: ".mysql_error());
 
 $tabla=array();
 $i=0;

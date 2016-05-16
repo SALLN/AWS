@@ -66,6 +66,7 @@ p {display: inline;}
     display:inline-block;
     color: white;
     font-weight: bold;
+    z-index: -1;
 }
 
 #markerfecha {
@@ -241,6 +242,30 @@ p {display: inline;}
 }
 #Seleccionar:hover{
     color:rebeccapurple;
+}
+
+#Seleccionar2 {
+    
+    background-color: #00c7fc;
+    color: white;
+    display: inline-block;
+    font-size: 14px;
+    text-align: center;
+    padding: 2px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    border: 1px solid transparent;
+    margin-top:5px;
+}
+#Seleccionar:hover{
+    color:rebeccapurple;
+}
+
+#Imagen{
+    
+    margin-top: 20px;
+    background-color: black;
+    display: none;
 }
 
 #Boton_Real23 {
