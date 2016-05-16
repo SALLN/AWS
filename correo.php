@@ -1,6 +1,6 @@
 <?php
 
-$destino = "stevenllerena@hotmail.com";
+$destino = "steven150924@gmail.com";
 $desde = "From: " . "PHP Codigo Facilito";
 $asunto = $_POST['asunto'];
 $mensaje = $_POST['mensaje'];
