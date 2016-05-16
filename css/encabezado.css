@@ -332,3 +332,9 @@ p {display: inline;}
     cursor: pointer;
     border: 1px solid transparent;
 }
+
+#ListaPesos {
+    height:auto;
+    width:auto;
+    background-color: white;
+}

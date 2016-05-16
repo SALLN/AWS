@@ -60,22 +60,35 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
 </head>
 	
 <body>
+    
 <style type="text/css">
+    
 table{
 
     border-spacing: 10px;
     border-collapse: collapse;
 }
-    th,td,tr{
+    
+th,td,tr{
 
     border: 1px solid red;
-    color: white;
+    color: black;
     margin-top: 10px;
+    font-weight: bold;
+    padding: 5px 5px 2px 3px;
 }
+    
 #pesos{
 
-    background-color: black;
+    background-color: white;
+    border: 1px solid white;
 }
+      
+.clapesos{
+    
+    text-align: center;
+}    
+    
 </style>
     
     
@@ -290,7 +303,7 @@ table{
  <input type="button" id="btHist" value="Historico" onclick="MostrarHistoricos()">
     
  <input type="button" id="Marcar_Recorrido" value="Marcar_Recorrido" onclick="Marcar_Recorrido()">
-<div id="ListaPesos" style=";height:auto;width:auto;background-color: black"></div>
+<div id="ListaPesos"></div>
  <div id="ListaCheckBoxes">
  <input type="button" id="btAdd" value="Cargar Vehiculos" onclick="CargarVehiculos()"/>
 
@@ -377,7 +390,11 @@ var Cont_Distancia=-1;
 var Tabla_Distancias=[];
 var Tabla_Distancia=[];
 var Distancias_Recorridas=[];
-    
+var Cont_Geocode=0;
+var Direcciones=[];
+    var Pesos=[];
+
+ var VigilarInterval;   
 var Recorrido_Marcado=[];   
 
 var Colores={0:'red',1:'blue',2:'magenta',3:'coral',4:'green',5:'cyan',6:'darkgoldenrod',7:'darkorange',8:'darkslateblue'};    
@@ -411,7 +428,6 @@ map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(  document.getElemen
 
 map.controls[google.maps.ControlPosition.LEFT_CENTER].push(  document.getElementById('ListaCheckBoxes'));   
 
-
 map.controls[google.maps.ControlPosition.TOP_CENTER].push(  document.getElementById('ListaPesos')); 
 
 
@@ -420,7 +436,7 @@ autocomplete.bindTo('bounds', map);
 autocomplete.addListener('place_changed', function() {
 var place = autocomplete.getPlace();
 if (place.geometry.viewport) {      map.fitBounds(place.geometry.viewport);    } 
-else {       map.setCenter(place.geometry.location);       map.setZoom(17);    }
+else {       map.setCenter(place.geometry.location);       map.setZoom(16);    }
 });
 
 google.maps.LatLng.prototype.kmTo = function(a){
@@ -446,9 +462,6 @@ $('#Tiempo_Hora2').timepicker  ({   showMinutes: false,    showPeriod: true,    
 $('#Tiempo_Minuto2').timepicker({   showHours: false,      minutes: { interval: 1 },    rows: 6    	});
 
   
-var Cont_Geocode=0;
-
-
 function promptForTwo() {
   var w = 480, h = 340;
 
@@ -464,54 +477,122 @@ function promptForTwo() {
 
   if (!windowReference.opener)
     windowReference.opener = self;
-}
+ }
 
 function Geoco(){
 
-    console.log("FUNCION");
 
     var geocoder = geocoder = new google.maps.Geocoder();
     var direccion;
-                    geocoder.geocode({ 'latLng': Recorrido_Marcado[Cont_Geocode] }, function (results, status) {
-                // if (status == google.maps.GeocoderStatus.OK) {
-                console.log(status);
+    
+    geocoder.geocode({ 'latLng': Recorrido_Marcado[Cont_Geocode] }, function (results, status) {
+        
+        if (status == google.maps.GeocoderStatus.OK) {
+            
+            direccion = results[0].formatted_address;
+            var direccion2 = direccion.split(",");
+            Direcciones.push(direccion2[0]);
+            Cont_Geocode++;
+        }
+    });
+    
+    
+    if(Cont_Geocode==Recorrido_Marcado.length){
+        clearInterval(MarkerInterval);
+        CrearTabla();
+    }
+ }
 
-                direccion = results[0].formatted_address;
-                var direccion2 = direccion.split(",");
+function CrearTabla(){
 
-                    $('#ListaPesos').append('<tr><td>'+Recorrido_Marcado[Cont_Geocode].lat()+'</td><td>'+Recorrido_Marcado[Cont_Geocode].lng()+'</td><td>'+direccion2[0]+'</td><td><input id=pesos></input> </td> </tr>');
-                //}
-            });
-                Cont_Geocode++;
-                if(Cont_Geocode==Recorrido_Marcado.length){
-                    console.log("Termino");
-                    clearInterval(MarkerInterval);
-                    console.log(Recorrido_Marcado.length);
+    console.log("SE CREALA TABLA");
+    $('#ListaPesos').append("<br>");
+    $('#ListaPesos').append('<table style="border: 1px solid white;"> ');
+    $('#ListaPesos').append('<tr><td> PUNTO   </td><td> LATITUD   </td><td>  LONGITUD  </td><td>  DIRECCION  </td><td>  PESO  </td> </tr>');
+
+    for (i in Direcciones){
+
+        $('#ListaPesos').append('<tr><td>'+i+'</td><td>'+Recorrido_Marcado[i].lat()+'</td><td>'+Recorrido_Marcado[i].lng()+'</td><td>'+Direcciones[i]+'</td><td class="editpesos"><input id=Peso'+i+' class=clapesos placeholder="Ingresar peso"></input> </td> </tr>');
+    }
+
+    $('#ListaPesos').append('<input type=button onclick="GuardarPesos()" id="Seleccionar" value=Guardar />');
+    $('#ListaPesos').append('</table> ');
+    map.setZoom(map.getZoom());
+ }
+
+var CercaDetectada=[];
+var Intervalos;
+var Pesos_Debidos=[];
+var Pos_Actual;
+$.post("correo.php", {asunto: "Este es el asunto", mensaje: "Este es el mensaje"  }).done(function( data ) {
+    console.log(data);
+});
+function GuardarPesos(){
+    
+    console.log("Guardar pesos");
+    for (i in Direcciones){
+
+        Pesos.push(document.getElementById("Peso"+i).value);
+
+        if (i==0){            Pesos_Debidos[i]=Pesos[0]-0;        }
+        else{ Pesos_Debidos[i]=Pesos_Debidos[i-1]-Pesos[i];                   }
+        CercaDetectada.push(true);    
+    }
+    
+    var distancia = google.maps.geometry.spherical.computeDistanceBetween (Recorrido_Marcado[0],Recorrido_Marcado[1]);
+    
+    document.getElementById("ListaPesos").style.display = 'none';
+    VigilarInterval = setInterval(function(){VigilarPesos()},1000);
+    }
+
+function VigilarPesos(){
+    //console.log("Vigilando pesos: "+Latitud+"--"+Longitud);
+    Pos_Actual=new google.maps.LatLng(Latitud,Longitud);
+
+    for (i in Recorrido_Marcado) {
+
+        var distancia = google.maps.geometry.spherical.computeDistanceBetween (Pos_Actual,Recorrido_Marcado[i]);
+
+        if (distancia<50 && CercaDetectada[i]){
+
+            console.log("CERCA DETECTADA");
+            CercaDetectada[i]=false;
+            if (peso==Pesos_Debidos[Cercas]){
+                console.log("LLEGO CON PESO INDICADO");
+            }else{console.log("PESO INCORRECTO");}
+            Intervalos=setInterval(function(){VigilarCarga_Punto()},1000);
+
+        }
+    }
+    
+ }
+    var Cercas=0;
+
+ function VigilarCarga_Punto(){
+
+    var distancia2 = google.maps.geometry.spherical.computeDistanceBetween (Pos_Actual,Recorrido_Marcado[Cercas]);
+    if (distancia2>50){
+        Cercas++;
+
+        if (peso==Pesos_Debidos[Cercas]){
+                console.log("SALIO CON PESO INDICADO");
+            }else{console.log(" SALIO CON PESO INCORRECTO");
+            $.post("correo.php", {asunto: "Este es el asunto", mensaje: "Este es el mensaje"  }).done(function( data ) {});
+        }
+
                 }
-}
+       clearInterval(Intervalos);
+
+
+    
+
+
+ }
 
 function Marcar_Recorrido(){
-/*
-    var divSubmit = $(document.createElement('div'));
-    $(divSubmit).append('<input type=button onclick="SeleccionVehiculos()" id="Seleccionar" value=Seleccionar />');
-    $('#btAdd').after("<br>");
-    $('#btAdd').after(divSubmit);*/
-
-
-
-/*
-<table style="border: 1px solid black;">    
-<tr><th> LATITUD   </th><th>  LONGITUD  </th><th>  PESO  </th> </tr> 
-<tr><td> LATITUD   </td><td>  LONGITUD  </td><td><input></input> </td> </tr> 
-<tr><td> LATITUD   </td><td>  LONGITUD  </td><td>  PESO  </td> </tr> 
-
-</table>*/
-
-
 
         map.addListener('click', function(e) {
-        console.log(LatMarker_Hora=e.latLng.lat());
-        console.log(LonMarker_Hora=e.latLng.lng());
+            
         Recorrido_Marcado.push(new google.maps.LatLng(parseFloat(e.latLng.lat()),parseFloat(e.latLng.lng())));
 
         var center2 = new google.maps.LatLng(parseFloat(e.latLng.lat()),parseFloat(e.latLng.lng()));
@@ -524,8 +605,7 @@ function Marcar_Recorrido(){
         fillColor: "#FF0000",
         fillOpacity: 0.2,
         map: map
-    });
-
+            });
         var draw_circle = new google.maps.Circle({
         center: center2,
         radius: 10,
@@ -536,20 +616,17 @@ function Marcar_Recorrido(){
         fillOpacity: 1,
         map: map
             });
-            });
-
+            
+        });
 
 
         map.addListener("rightclick", function(e) {
-            MarkerInterval = setInterval(function(){Geoco()}, 500);
-
-        google.maps.event.clearListeners(map, 'click');
-        google.maps.event.clearListeners(map, 'rightclick');
-
-            $('#ListaPesos').append("<br>");
-    $('#ListaPesos').append('<table style="border: 1px solid black;"> ');
-    $('#ListaPesos').append('<tr><td> LATITUD   </td><td>  LONGITUD  </td><td>  DIRECCION  </td><td>  PESO  </td> </tr>');
-        for (i in Recorrido_Marcado){        new MarkerWithLabel({
+            
+            MarkerInterval = setInterval(function(){Geoco()},300);
+            
+            google.maps.event.clearListeners(map, 'click');
+            
+            for (i in Recorrido_Marcado){                new MarkerWithLabel({
                 position: Recorrido_Marcado[i],
                 map: map,
                 raiseOnDrag: true,
@@ -565,17 +642,16 @@ function Marcar_Recorrido(){
                       strokeWeight: 0,
                       fillColor: 'red',
                       fillOpacity:0  }
-                });    
-
-}
-    $('#ListaPesos').append('</table> ');
-
-        var poli=new google.maps.Polyline({ path: Recorrido_Marcado,  strokeColor: '#FF0000',  strokeOpacity: 1.0,  strokeWeight: 5    });
-    poli.setMap(map);
-                });
-
-
-}
+                });                }
+            
+            google.maps.event.clearListeners(map, 'rightclick');        
+                
+            $('#ListaPesos').append('</table> ');
+            var poli=new google.maps.Polyline({ path: Recorrido_Marcado,  strokeColor: '#FF0000',  strokeOpacity: 1.0,  strokeWeight: 5    });
+            poli.setMap(map);
+        
+        });
+         }
 
 function Centrar(){
     for (i in Tabla_Usuarios){
@@ -583,7 +659,7 @@ function Centrar(){
         if(Tabla_Usuarios[i].ID_VEHICULO==document.getElementById('seleccion').value){map.setCenter(Posicion[i]); Seleccionado=i;}
     }
  }
-     
+
 function CargarVehiculos(){
     document.getElementById("ListaCheckBoxes").style.height ='auto';
     clearInterval(MarkerInterval);
@@ -598,7 +674,7 @@ function CargarVehiculos(){
  }
 
 function CrearCheck(){
-         
+            
     if (Solicitar_Despliegue){
         
     Icono_Historico[Cont_Vehiculos]={
@@ -651,12 +727,12 @@ function CrearCheck(){
         for (i=0;i<Cont_CrearHTML;i++){ document.getElementById("Check"+i).style.display = 'inline'; document.getElementById("H"+i).style.display = 'inline';    }
     }
  }    
-    
+
 function SeleccionVehiculos(){
     
     LimpiarMapa();
     Recargar_Vehiculos=true;
-    MarkerInterval = setInterval(function(){SetMarkerVarios()}, 2000);
+    //MarkerInterval = setInterval(function(){SetMarkerVarios()}, 2000);
     Solicitar_Despliegue=false;
     document.getElementById("Seleccionar").style.display = 'none';
     
@@ -737,9 +813,9 @@ function Consulta_Real(){
     OcultarHistoricos();
     for (i in PoliLinea_Real)        {   PoliLinea_Real[i].setMap(map); RealAgain[i]=0;       }
     clearInterval(MarkerInterval);
-    MarkerInterval = setInterval(function(){SetMarkerVarios()}, 2000);
+    MarkerInterval = setInterval(function(){SetMarkerVarios()}, 500);
  }
-    
+
 function Consulta_Hora_Marker(){
     
     for (i in Ruta_Historica){  Ruta_Historica[i]=[];  };
@@ -878,7 +954,7 @@ function Consulta_Hora_Marker_Graficar(){
     
     //if(Cont_Historico==Tabla_Usuarios.length-1){    Distancia_KM();    /*Historico_Snap();*/    }
  } 
- 
+
 function Distancia_KM(){
     Cont_Distancia++;
     if (Cont_Distancia<Tabla_Usuarios.length){
@@ -909,7 +985,7 @@ function Distancia_KM(){
   if (Cont_Distancia==Tabla_Usuarios.length){ DiagramaBarras();}  
 
  } 
-    
+
 function Consulta_Marker_Hora(){
  
    
@@ -925,7 +1001,7 @@ function Consulta_Marker_Hora(){
  
      map.setCenter(new google.maps.LatLng(parseFloat(LatMarker_Hora),parseFloat(LonMarker_Hora)));
  
-     google.maps.event.clearListeners(map, 'click');
+     google.maps.event.clearListeners(map,'click');
      
      ObtenerDateTime();
      Posicion=[];
@@ -1000,7 +1076,7 @@ function Consulta_Marker_Hora_Graficar(){
         }else{           Consulta_Marker_Hora_Graficar();             }
         }
  }
- 
+
 function LimpiarMapa(){
 
     for (i in Marker_Real)           {   Marker_Real[i].setMap(null);          }
@@ -1012,7 +1088,7 @@ function LimpiarMapa(){
 
     //for (i in Marker_Snap)           {   Marker_Snap[i].setMap(null);          }
  }
-        
+
 function ObtenerDateTime(){
     
  try{
@@ -1075,7 +1151,7 @@ function OcultarHistoricos(){
         }
         Hide_Hist=true;
          }
-  
+
 function Mostrar_Calendario1(){
 
     	if (Calendario1==1){
@@ -1101,7 +1177,7 @@ function Mostrar_Calendario1(){
                                 });
                                  }
                                   }
-    
+
 function Ocultar_Calendario1(){
  	$('#Fecha_Inicio').DatePickerHide();
  	Calendario1=1;
