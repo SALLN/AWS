@@ -1,3 +1,9 @@
+<?php
+session_start();
+$_SESSION['Lat']=$_GET['Latitud'];
+$_SESSION['Lng']=$_GET['Longitud'];
+?>
+
 <!doctype html>
 <html>
 <head>
@@ -7,15 +13,29 @@
  </head>
 
 <body>
-
-
-<h1>Prueba para llenar DB</h1>
-
-<div id="result"><?php include("pruebaMarker_new.php"); ?></div>
-
+ <input type ="button" id="Boton_grafica" value = 'INICIAR' onclick="Iniciar();"/>
+ <input type ="button" id="Boton_grafica" value ='DETENER' onclick="Detener();"/>
+ <input type ="button" id="Boton_grafica" value ='PASO A PASO' onclick="Step();"/>    
 <script>
-          
-setInterval(function(){$('#result').load('pruebaMarker_new.php');},1000);
+      var Inter;
+function Iniciar(){
+$.post("pruebaMarker_new2.php",function( data ) {});    
+Inter = setInterval(function(){$.post("pruebaMarker_new.php",function( data ) {})},3000);
+    
+    
+}   
+    
+function Detener(){
+        
+clearInterval(Inter);
+
+}
+    
+    function Step(){
+        $.post("pruebaMarker_new.php",function( data ) {});
+        
+    }
+    
                 
 </script>
 
