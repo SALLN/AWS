@@ -10,7 +10,7 @@ if (mysqli_connect_errno($con)) {
 } else {
 	$i=0;
     $data_points = array();
-    $result = mysqli_query($con, "SELECT ID,LATITUD,LONGITUD,FECHA_HORA,PESO,TIEMPO  FROM grupoticoll WHERE FECHA_HORA between '$fecha_inicio' and '$fecha_final' "); 
+    $result = mysqli_query($con, "SELECT ID,LATITUD,LONGITUD,FECHA_HORA,PESO,TIEMPO  FROM GrupoTicoll WHERE FECHA_HORA between '$fecha_inicio' and '$fecha_final' "); 
     while ($row = mysqli_fetch_array($result)) {
         $i=$i+1;
 
