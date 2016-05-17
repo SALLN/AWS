@@ -8,7 +8,7 @@ if (mysqli_connect_errno($con)) {
 } else {
     $data_points = array();
     $i=0;
-    $result = mysqli_query($con, "SELECT LATITUD,LONGITUD,FECHA_HORA,PESO,TIEMPO  FROM GrupoTicoll WHERE FECHA_HORA between '$fecha_hora_serv' and '2017-05-19 23:59:59'"); 
+    $result = mysqli_query($con, "SELECT LATITUD,LONGITUD,FECHA_HORA,PESO  FROM GrupoTicoll WHERE FECHA_HORA between '$fecha_hora_serv' and '2017-05-19 23:59:59'"); 
     while ($row = mysqli_fetch_array($result)) {
          $i=$i+1;
         $point = array("valorx" => $i,"valory" => $row['PESO']);
