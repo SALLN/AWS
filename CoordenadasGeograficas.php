@@ -733,7 +733,7 @@ function DescargarTxt(){
         var save = document.createElement('a');
         save.href = event.target.result;
         save.target = '_blank';
-        save.download = 'steven.txt' || 'archivo.dat';
+        save.download = 'Recorrido.txt' || 'archivo.dat';
         var clicEvent = new MouseEvent('click', {
             'view': window,
                 'bubbles': true,
@@ -1043,9 +1043,10 @@ function Consulta_Hora_Marker_Graficar(){
         //}else{          //Historico_Snap(Cont_Historico);        } 
   
         Consulta_Hora_Marker_Graficar();
+        promptForHist();
     });                                          
 
-    }else{           Consulta_Hora_Marker_Graficar();             }
+    }else{           Consulta_Hora_Marker_Graficar(); promptForHist();             }
  }
     
     //if(Cont_Historico==Tabla_Usuarios.length-1){    Distancia_KM();    /*Historico_Snap();*/    }
