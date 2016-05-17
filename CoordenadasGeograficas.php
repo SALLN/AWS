@@ -1174,10 +1174,10 @@ function ObtenerDateTime(){
 
  }catch(err){ return "Error";}
  
- Fecha_Inicio_PHP='2016-05-16';
- Fecha_Final_PHP='2016-05-16';
- Hora_Inicio_PHP='01:22:00';
- Hora_Final_PHP='01:24:00';
+ //Fecha_Inicio_PHP='2016-05-16';
+ //Fecha_Final_PHP='2016-05-16';
+ //Hora_Inicio_PHP='01:22:00';
+ //Hora_Final_PHP='01:24:00';
     
 
   }

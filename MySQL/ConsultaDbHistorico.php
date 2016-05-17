@@ -5,6 +5,9 @@ include("ConexionMySQL.php");
 $fecha_start=$_POST['FechaInicio']." ".$_POST['HoraInicio'];
 $fecha_end=$_POST['FechaFinal']." ".$_POST['HoraFinal'];
 
+$_SESSION['fecha_ini']=$fecha_start;
+$_SESSION['fecha_fi']=$fecha_end;
+
 $consulta=mysql_query("SELECT LATITUD,LONGITUD,FECHA_HORA,PESO FROM $_SESSION[user] where ID_VEHICULO='$_POST[Vehiculo]' AND FECHA_HORA between  '$fecha_start' and '$fecha_end'	order by  ID asc") or die("Problemas en consulta: ".mysql_error());
 $tabla=array();
 $i=0;
