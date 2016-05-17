@@ -1,13 +1,17 @@
 <?php
-header('Content-Type: application/json');
+session_start();
+$fecha_hora_serv=$_SESSION['Hora_Servidor'];
+
 $con = mysqli_connect("localhost", "root", "ticoll", "diseno");
 if (mysqli_connect_errno($con)) {
     echo "Failed to connect to DataBase: " . mysqli_connect_error();
 } else {
     $data_points = array();
-    $result = mysqli_query($con, "SELECT * FROM grupoticoll"); 
+    $i=0;
+    $result = mysqli_query($con, "SELECT LATITUD,LONGITUD,FECHA_HORA,PESO,TIEMPO  FROM grupoticoll WHERE FECHA_HORA between '$fecha_hora_serv' and '2017-05-19 23:59:59'"); 
     while ($row = mysqli_fetch_array($result)) {
-        $point = array("valorx" => $row['TIEMPO'],"valory" => $row['PESO']);
+         $i=$i+1;
+        $point = array("valorx" => $i,"valory" => $row['PESO']);
         array_push($data_points, $point);
        
     }

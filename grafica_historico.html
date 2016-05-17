@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Documento sin título</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+ 
+
+        
+        <script type="text/javascript" src="assets/script/canvasjs.min.js"></script>
+        <script type="text/javascript" src="assets/script/jquery-2.2.3.min.js"></script>
+    </head>
+
+
+    <body>
+
+
+
+
+        <div id="chart">
+        </div>
+
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+        <h3>Inserte el punto ("eje x") que desee consultar</h3>
+        <input type="text" id="consulta" name="i" >
+         <br><br>
+
+<form action="mapa_punto_consultado.php" id="formulario" method="post" name="formulario" onsubmit="consulta()">
+    
+    <input id="latit" name="latit" type="hidden" />
+    <input id="longit" name="longit" type="hidden" />
+    <input id="enviar" type="submit" value="Ubicar en Mapa" />
+</form>
+          
+       
+
+
+<script type="text/javascript">
+
+            
+           
+                var dataLength = 0;
+                var data = [];
+                var updateInterval = 500;
+                var lati=[];
+                var longi=[];
+                
+           
+                updateChart();
+                function updateChart() {
+                    $.getJSON("data2.php", function (consulta) {
+                        if (dataLength !== consulta.length) {
+                            for (var i = dataLength; i < consulta.length; i++) {
+                                lati.push(consulta[i].latitud)
+                                longi.push(consulta[i].longitud)
+
+                                data.push({
+                                    x: parseFloat(consulta[i].valorx),
+                                    y: parseFloat(consulta[i].valory)
+                                });
+                            }
+                            dataLength = consulta.length;
+                            chart.render();
+                        }
+                    });
+                }
+                var chart = new CanvasJS.Chart("chart", {
+                    title: {
+                        text: "PESO vs. POSICIÓN"
+                    },
+                    axisX: {
+                        title: "Posición",
+                    },
+                    axisY: {
+                        title: "Peso (Kg)",
+                    },
+                    data: [{type: "line", dataPoints: data}],
+                });
+
+
+                function consulta(){
+
+                   var punto=document.getElementById("consulta").value; 
+                   
+
+                   document.getElementById("latit").value=lati[punto];
+                  document.getElementById("longit").value=longi[punto];
+                   
+                }
+
+               
+
+
+            function promptForTwo() {
+            var w = 480, h = 340;
+
+           if (window.screen) {
+             w = screen.availWidth;
+             h = screen.availHeight;
+            }
+
+        var popW = 800, popH = 450;
+        var leftPos = (w-popW)/2, topPos = (h-popH)/2;
+
+        window.open('mapa_punto_consultado.php','windowName','width=' + popW + ',height=' + popH + ',top=' + topPos + ',left=' + leftPos);
+
+         }
+        
+               
+
+        </script>
+
+
+</body>
+
+</html>

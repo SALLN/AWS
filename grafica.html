@@ -6,14 +6,33 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
  
 
-        <script type="text/javascript">
-            window.onload = function () {
+        
+        <script type="text/javascript" src="assets/script/canvasjs.min.js"></script>
+        <script type="text/javascript" src="assets/script/jquery-2.2.3.min.js"></script>
+    </head>
+
+
+    <body>
+
+
+        <div id="chart">
+        </div>
+ 
+       
+
+       <script type="text/javascript">
+
+            
+            
                 var dataLength = 0;
                 var data = [];
                 var updateInterval = 500;
+                $.post("hora_servidor.php");
                 updateChart();
                 function updateChart() {
+                    
                     $.getJSON("data.php", function (result) {
+                        
                         if (dataLength !== result.length) {
                             for (var i = dataLength; i < result.length; i++) {
                                 data.push({
@@ -31,26 +50,23 @@
                         text: "PESO vs. TIEMPO"
                     },
                     axisX: {
-                        title: "tiempo (s)",
+                        title: "Tiempo (s)",
                     },
                     axisY: {
                         title: "Peso (Kg)",
                     },
                     data: [{type: "line", dataPoints: data}],
                 });
+
                 setInterval(function () {
                     updateChart()
                 }, updateInterval);
-            }
+            
+
+    
+
         </script>
-        <script type="text/javascript" src="assets/script/canvasjs.min.js"></script>
-        <script type="text/javascript" src="assets/script/jquery-2.2.3.min.js"></script>
-    </head>
 
-
-    <body>
-        <div id="chart">
-        </div>
 
 </body>
 
