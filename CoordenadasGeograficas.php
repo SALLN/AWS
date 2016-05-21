@@ -1043,10 +1043,10 @@ function Consulta_Hora_Marker_Graficar(){
         //}else{          //Historico_Snap(Cont_Historico);        } 
   
         Consulta_Hora_Marker_Graficar();
-        promptForHist();
+        promptForTwo();
     });                                          
 
-    }else{           Consulta_Hora_Marker_Graficar(); promptForHist();             }
+    }else{           Consulta_Hora_Marker_Graficar();             }
  }
     
     //if(Cont_Historico==Tabla_Usuarios.length-1){    Distancia_KM();    /*Historico_Snap();*/    }
