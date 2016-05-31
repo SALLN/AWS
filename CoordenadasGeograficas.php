@@ -512,11 +512,13 @@ function Marcar_Recorrido(){
         map.addListener('click', function(e) {
             
         Recorrido_Marcado.push(new google.maps.LatLng(parseFloat(e.latLng.lat()),parseFloat(e.latLng.lng())));
-
+        var texto_añadir=e.latLng.lat()+","+e.latLng.lng();
+        Texto_txt.push(texto_añadir);
+        Texto_txt.push("\r\n");
         var center2 = new google.maps.LatLng(parseFloat(e.latLng.lat()),parseFloat(e.latLng.lng()));
         var draw_circle = new google.maps.Circle({
         center: center2,
-        radius: 50,
+        radius: 20,
         strokeColor: "#FF0000",
         strokeOpacity: 1,
         strokeWeight: 0,
@@ -526,7 +528,7 @@ function Marcar_Recorrido(){
             });
         var draw_circle = new google.maps.Circle({
         center: center2,
-        radius: 10,
+        radius: 3,
         strokeColor: "#000000",
         strokeOpacity: 1,
         strokeWeight: 2,
@@ -572,16 +574,16 @@ function Marcar_Recorrido(){
             google.maps.event.clearListeners(map, 'rightclick');        
                 
             $('#ListaPesos').append('</table> ');
-            var poli=new google.maps.Polyline({ path: Recorrido_Marcado,  strokeColor: '#FF0000',  strokeOpacity: 1.0,  strokeWeight: 5    });
-            poli.setMap(map);
+            //var poli=new google.maps.Polyline({ path: Recorrido_Marcado,  strokeColor: '#FF0000',  strokeOpacity: 1.0,  strokeWeight: 5    });
+            //       poli.setMap(map);
         
         });
          }
+    var geocoder= new google.maps.Geocoder();
 
 function Obtener_Direcciones(){
 
 
-    var geocoder = geocoder = new google.maps.Geocoder();
     var direccion;
     
     geocoder.geocode({ 'latLng': Recorrido_Marcado[Cont_Geocode] }, function (results, status) {
@@ -601,14 +603,55 @@ function Obtener_Direcciones(){
     }
  }
 
+var directionsDisplay = new google.maps.DirectionsRenderer();
+    directionsDisplay.setOptions( { suppressMarkers: true,
+                                    polylineOptions: {
+                                    strokeWeight: 6,
+                                    strokeOpacity: 1,
+                                    strokeColor:  'red' 
+                                    }} );
+    var directionsService = new google.maps.DirectionsService();
+    directionsDisplay.setMap(map);
+var respon;
+    
 function CrearTabla(){
+
+ var waypts = [];
+ var orig;
+ var desti;
+ for (i in Direcciones){
+
+    if (i==0){    orig = Recorrido_Marcado[i].lat()+","+Recorrido_Marcado[i].lng();    }
+    else if(i==Direcciones.length-1){    desti = Recorrido_Marcado[i].lat()+","+Recorrido_Marcado[i].lng();    }
+    else{  waypts.push({ location: Recorrido_Marcado[i].lat()+","+Recorrido_Marcado[i].lng(),  stopover: true            }); }
+ }
+    
+    var request = {
+ origin: orig,
+ destination: desti,
+ waypoints: waypts,
+ optimizeWaypoints: false,
+ travelMode: google.maps.DirectionsTravelMode["DRIVING"],
+ unitSystem: google.maps.DirectionsUnitSystem["METRIC"],
+ provideRouteAlternatives: true
+ };
+
+
+ directionsService.route(request, function(response, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+        //directionsDisplay.setPanel($("#panel_ruta").get(0));
+        respon=response['geocoded_waypoints'][0].place_id;
+        directionsDisplay.setDirections(response);
+
+ } else {        alert("No existen rutas entre ambos puntos");        }
+
+});
 
     $('#ListaPesos').append("<br>");
     $('#ListaPesos').append('<table style="border: 1px solid white;"> ');
     $('#ListaPesos').append('<tr><td> PUNTO   </td><td> LATITUD   </td><td>  LONGITUD  </td><td>  DIRECCION  </td><td>  PESO  </td> </tr>');
 
     for (i in Direcciones){
-
         $('#ListaPesos').append('<tr><td>'+i+'</td><td>'+Recorrido_Marcado[i].lat()+'</td><td>'+Recorrido_Marcado[i].lng()+'</td><td>'+Direcciones[i]+'</td><td class="editpesos"><input id=Peso'+i+' class=clapesos placeholder="Ingresar peso"></input> </td> </tr>');
     }
 
@@ -635,7 +678,7 @@ function GuardarPesos(){
     }
 
 
-var Vig_Recorrido=true;
+ var Vig_Recorrido=true;
 
 function VigilarPesos(){
 
@@ -648,7 +691,7 @@ function VigilarPesos(){
     for (i in Recorrido_Marcado) {
 
         var distancia = google.maps.geometry.spherical.computeDistanceBetween (Pos_Actual,Recorrido_Marcado[i]);
-        if (distancia<50 && CercaDetectada[i]){
+        if (distancia<20 && CercaDetectada[i]){
             Vig_Recorrido=false;
 
             console.log("CERCA DETECTADA: "+Cercas);
@@ -657,7 +700,7 @@ function VigilarPesos(){
             //Texto_txt.push("\r\n");
 
             CercaDetectada[i]=false;
-            if (peso==Pesos_Debidos[Cercas]){
+            if (peso>Pesos_Debidos[Cercas]-5 &&  peso<Pesos_Debidos[Cercas]+5){
                 
                 console.log("LLEGÓ CON PESO INDICADO AL PUNTO "+Cercas);
                 var texto_añadir=Obtener_Hora()+separador+"Llegó con peso indicado al punto "+Cercas;
@@ -682,12 +725,12 @@ function VigilarCarga_Punto(){
 
     var distancia2 = google.maps.geometry.spherical.computeDistanceBetween (Pos_Actual,Recorrido_Marcado[Cercas]);
 
-    if (distancia2>50){
+    if (distancia2>20){
         Cercas++;
         Vig_Recorrido=true;
 
 
-        if (peso==Pesos_Debidos[Cercas]){
+        if (peso>Pesos_Debidos[Cercas]-5 &&  peso<Pesos_Debidos[Cercas]+5){
             
             console.log("SALIO CON PESO INDICADO: "+(Cercas-1));
             var texto_añadir=Obtener_Hora()+separador+"Salió con peso indicando del punto "+(Cercas-1);
