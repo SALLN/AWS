@@ -718,7 +718,7 @@ function VigilarPesos(){
 
         }
     }
-    if (Vig_Recorrido){    /*console.log("RECORRIDO VIGILADO"); */if (Pesos_Debidos[Cercas]!=peso){console.log("NO TIENE EL PESO DEBIDO")}}
+if (Vig_Recorrido){    /*console.log("RECORRIDO VIGILADO"); */if (peso>Pesos_Debidos[Cercas]-5 &&  peso<Pesos_Debidos[Cercas]+5){}else{alert("VARIACION DE PESO INDEBIDA")}}
  }
 
 function VigilarCarga_Punto(){
