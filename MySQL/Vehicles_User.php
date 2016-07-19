@@ -5,17 +5,17 @@ include("ConexionMySQL.php");
 
 if ($_POST['App']=="APP")
 {
-$consulta=mysql_query("SELECT ID_VEHICULO FROM $_POST[Usuario] GROUP BY ID_VEHICULO") or die("Problemas en consulta: ".mysql_error());
+$consulta=mysql_query("SELECT ID_VEHICULO FROM FamiliaLlerenaNavarro GROUP BY ID_VEHICULO") or die("Problemas en consulta: ".mysql_error());
 }
 else
 {
-$consulta=mysql_query("SELECT ID_VEHICULO FROM $_SESSION[user] GROUP BY ID_VEHICULO") or die("Problemas en consulta: ".mysql_error());
+$consulta=mysql_query("SELECT ID_VEHICULO FROM FamiliaLlerena GROUP BY ID_VEHICULO") or die("Problemas en consulta: ".mysql_error());
 }
 $tabla=array();
 $i=0;
 while($reg=mysql_fetch_array($consulta)){  
 
-	$tabla[$i]=$reg;
+	$tabla[$i]=$reg['ID_VEHICULO'];
 	$i++;
 }
 
