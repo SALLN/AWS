@@ -9,7 +9,7 @@ $consulta=mysql_query("SELECT ID_VEHICULO FROM FamiliaLlerenaNavarro GROUP BY ID
 }
 else
 {
-$consulta=mysql_query("SELECT ID_VEHICULO FROM FamiliaLlerena GROUP BY ID_VEHICULO") or die("Problemas en consulta: ".mysql_error());
+$consulta=mysql_query("SELECT ID_VEHICULO FROM $_SESSION[user] GROUP BY ID_VEHICULO") or die("Problemas en consulta: ".mysql_error());
 }
 $tabla=array();
 $i=0;
