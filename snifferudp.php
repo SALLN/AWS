@@ -33,7 +33,7 @@ $fecha=date('Y-m-d H:i:s', $tiempogps);
 $fecha_servidor = date('Y-m-d H:i:s');
 $consulta=mysql_query("SELECT user FROM admin where id=$usuario") or die("Problemas en consulta: ".mysql_error());
 $tabla_usuario  = mysql_fetch_array($consulta)['user'];
-$consulta2=mysql_query("INSERT INTO $tabla_usuario(LATITUD,LONGITUD,FECHA_HORA,FECHA_HORA_SERVER,PLACA,PESO_1,PESO_2,PESO_TOTAL) VALUES('$latitud','$longitud','$fecha','$fecha_servidor','$placa','$pesos[0]','$pesos[1]','$pesos[2]')");
+$consulta2=mysql_query("INSERT INTO $tabla_usuario(LATITUD,LONGITUD,FECHA_HORA,FECHA_HORA_SERVER,ID_VEHICULO,PESO_1,PESO_2,PESO_TOTAL) VALUES('$latitud','$longitud','$fecha','$fecha_servidor','$placa','$pesos[0]','$pesos[1]','$pesos[2]')");
 mysql_close($conexion);
 
 }
