@@ -14,8 +14,8 @@ socket_recvfrom($socket, $mensaje, 200, 0, $from, $port);
 // >RTX&mensajeencapsulado&@;EV001911628664+1095488-0747963600032432;ID=357666051297791<
 //$mensaje = ">RTX#55-94-149#@;EV001912019802+1095464-0747961700000032;ID=001EUQ426<";
 
-$mensaje_div = split('#',$mensaje);
-$pesos = split('-',$mensaje_div[1]);
+$mensaje_div = explode('#',$mensaje);
+$pesos = explode('-',$mensaje_div[1]);
 
 $s1=strpos($mensaje,"#");    $s2=strpos($mensaje,"@");  $lon=strlen($mensaje);
 
@@ -38,5 +38,5 @@ $consulta2=mysql_query("INSERT INTO $tabla_usuario(LATITUD,LONGITUD,FECHA_HORA,F
 mysql_close($conexion);
 
 }
-//} while (true);
+} while (true);
 ?>
