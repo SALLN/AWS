@@ -1,6 +1,5 @@
 <?php
 session_start();
-if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION/inicio_sesion.php"; </script>';   }
 ?>
 
 
@@ -34,7 +33,8 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
     <script src="js/graphs.js"></script>
-    <script src="js/jquery-3.1.0.min.js"></script>
+    <script src="js/jquery-1.12.1.min.js"></script>
+    <!--<script src="js/jquery-3.1.0.min.js"></script>-->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.nav.js"></script>
     <script src="js/jquery.mixitup.min.js"></script>
@@ -116,9 +116,10 @@ th,td,tr{
                 <nav class="collapse navigation navbar-collapse navbar-right" role="navigation">
                     <ul id="nav" class="nav navbar-nav">
                         <li class="current"><a href="#home">Inicio</a></li>
-                        <li><a href="#service">Mapa</a></li>
+                        <li><a href="javascript:void(0);" onclick="INICIAR_SESION();return false;">Iniciar Sesión</a></li>
+                        <li><a href="javascript:void(0);" onclick="REGISTRAR();return false;">Registrarse</a></li>
                         <li><a href="#contact">Contacto</a></li>
-                        <li><a href="INICIAR_SESION/logout.php">Salir</a><li>
+
 
                     </ul>
                 </nav>
@@ -179,146 +180,7 @@ th,td,tr{
     </div>
 </section>
 
-<section id="service"> <!--#Mapa-->
 
- <div class="container" style="margin-left:150px;">
-    <div class="row">
-
-        <div class="col-md-2 col-sm-12 wow fadeInLeft">
-            <div class="media">
-                <a href="#" class="pull-left">
-                    <img src="images/longi.jpg" alt="Ruler">
-                </a>
-                <div class="media-body">
-                    <h3>Latitud</h3>
-                    <p id="fila_latitud">00.00000</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-2 col-sm-12 wow fadeInRight" data-wow-delay="0.2s">
-            <div class="media">
-                <a href="#" class="pull-left">
-                    <img src="images/longi.jpg" alt="Ruler">
-                </a>
-                <div class="media-body">
-                    <h3>Longitud</h3>
-                    <p id="fila_longitud">-00.00000</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-2 col-sm-12 wow fadeInLeft">
-            <div class="media">
-                <a href="#" class="pull-left">
-                    <img src="images/fecha.jpg" alt="Ruler">
-                </a>
-                <div class="media-body">
-                    <h3>Fecha</h3>
-                    <p id="fila_fecha">0000-00-00</p>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="col-md-2 col-sm-12 wow fadeInLeft" data-wow-delay="0.2s">
-            <div class="media">
-                <a href="#" class="pull-left">
-                    <img src="images/hora.jpg" alt="Ruler">
-                </a>
-                <div class="media-body">
-                    <h3>Hora</h3>
-                    <p id="fila_hora"> 00:00:00</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-2 col-sm-12 wow fadeInRight" data-wow-delay="0.2s">
-            <div class="media">
-                <a href="#" class="pull-left">
-                    <img src="images/balanza2.jpg" alt="Ruler">
-                </a>
-                <div class="media-body">
-                    <h3>Peso</h3>
-                    <p id="peso">0kg</p>
-                </div>
-            </div>
-        </div>
-
-    </div>
- </div> <!--LATITUD LONGITUD ARRIBA DEL MAPA-->
-
-
- <div id="divmenu" class="AnimacionDerecha">
-
-    <input type="button" id="Cerrar" value="X" onclick="OcultarHistoricos()">
-
-    <div style="display:block;margin: 20px 0px 0px 0px;">
-     <h5 class="TextoHistorico">FECHA INICIAL :</h5>
-     <h5 id="Fecha_Inicio2" onmouseover="Mostrar_Calendario1();" class="TextoHistorico">0000-00-00</h5>
-     <div style="margin:2px" id="Fecha_Inicio" onmouseleave="Ocultar_Calendario1();" ></div>
-     <input type="text"  id="Tiempo_Hora1" value="12 AM" class="TextoHistorico">:
-     <input type="text"  id="Tiempo_Minuto1" value="00" class="TextoHistorico">
-
-    </div>
-
-   <div style="display:block;margin: 15px 0px 0px 0px;">
-    <h5 class="TextoHistorico">FECHA FINAL &nbsp :</h5>
-    <h5 id="Fecha_Final2" onmouseover="Mostrar_Calendario2();" class="TextoHistorico">0000-00-00</h5>
-    <div  id="Fecha_Final" onmouseleave="Ocultar_Calendario2();"></div>
-    <input type="text"  id="Tiempo_Hora2" value="12 AM" class="TextoHistorico">:
-    <input type="text"  id="Tiempo_Minuto2" value="00" class="TextoHistorico" >
-   </div>
-
-   <div style="display:block;margin: 15px 0px 0px 0px;">
-        <input id="Boton_Real23" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Hora_Marker(),OcultarHistoricos()"/>
-   </div>
-
-   <div style="display:block;margin: 15px 0px 0px -10px;">
-        <input type="text" id="Metros" placeholder="Digite metros a la redonda">
-        <!--<input type="checkbox" id="markerfecha2"  onclick="Snap=!Snap;"><h3 id="Pulsalo">Snap</h3> -->
-   </div>
-
-   <div style="display:block;margin: 15px 0px 0px 0px;">
-       <input type="button" id="Ubicar" value="UBICAR MARKER" onclick="Consulta_Marker_Hora(),OcultarHistoricos()">
-   </div>
-
-   <div style="display:inline-block;margin: 15px 0px 0px 0px;">
-        <h4 id="Pulsalo2">Combinar</h4>
-        <input type="checkbox" id="markerfecha" onclick="Combinar=!Combinar;">
-   </div>
-
-       <div style="display:block;margin: 15px 0px 0px 0px;">
-       <input type="button" id="Distancia_Recorrida" value="Distancia Recorrida" onclick="MostrarDistancia(),OcultarHistoricos()">
-   </div>
- </div>
-
- <div id="googleMap"></div>
- <input type ="button" id="Boton_grafica" value = 'Graficar tiempo real' onclick="promptForTwo(); return false;"/>
-
- <input type="button" id="Boton_Real24" value="Tiempo Real" onclick="Consulta_Real();">
- <p class="auto"><input type="text" id="autoc"/></p>
-
- <select id="seleccion" onChange="Centrar()"><option>Centrar Mapa</option></select>
- <input type="button" id="btHist" value="Historico" onclick="MostrarHistoricos()">
-
- <input type="button" id="Marcar_Recorrido" value="Marcar Recorrido" onclick="Marcar_Recorrido()">
-<div id="ListaPesos"></div>
- <div id="ListaCheckBoxes">
- <input type="button" id="btAdd" value="Cargar Vehiculos" onclick="CargarVehiculos()"/>
-
- </div>
-
-
- <img id="Imagen" src="images/ajax-loader.gif">
-
-<div id="MenuDistancia">
-    <input type="button" id="Cerrar_Distancia" value="X" onclick="OcultarDistancia()">
-    <div id="divGraph" style="margin:20px 20px;"></div>
-
-    </div>
-
- </section>
 
 <section id="contact"> <!--#contact-->
 
@@ -372,6 +234,23 @@ th,td,tr{
     </div>
  </footer>
 
-<script src="js/CodigoMapa.js"></script>
+<script>
+
+
+function INICIAR_SESION() {
+
+  var a = document.createElement("a");
+  a.target = "_blank";
+  a.href = "http://localhost/AWS/INICIAR_SESION/inicio_sesion.php";
+  a.click();
+}
+
+
+function REGISTRAR() {
+
+window.location='http://localhost/AWS/INICIAR_SESION/inicio_sesion.php';
+}
+
+</script>
 </body>
 </html>

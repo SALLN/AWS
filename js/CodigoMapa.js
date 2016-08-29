@@ -96,32 +96,21 @@ $('#Tiempo_Minuto2').timepicker({   showHours: false,      minutes: { interval: 
 
 
 function promptForTwo() {
-  var w = 480, h = 340;
 
-  if (window.screen) {
-    w = screen.availWidth;
-    h = screen.availHeight;
-  }
-
-  var popW = 800, popH = 450;
-  var leftPos = (w-popW)/2, topPos = (h-popH)/2;
-
-  window.open('grafica.html','windowName','width=' + popW + ',height=' + popH + ',top=' + topPos + ',left=' + leftPos);
+  var a = document.createElement("a");
+  a.target = "_blank";
+  a.href = "http://localhost/AWS/Grafica_TiempoReal.html";
+  a.click();
 
  }
 
 function promptForHist() {
-  var w = 480, h = 340;
 
-  if (window.screen) {
-    w = screen.availWidth;
-    h = screen.availHeight;
-  }
+  var a = document.createElement("a");
+  a.target = "_blank";
+  a.href = "http://localhost/AWS/Grafica_Historico.html?fechainicio="+Fecha_Inicio_PHP+"_"+Hora_Inicio_PHP+"&fechafinal="+Fecha_Final_PHP+"_"+Hora_Final_PHP;
+  a.click();
 
-  var popW = 800, popH = 450;
-  var leftPos = (w-popW)/2, topPos = (h-popH)/2;
-
-  window.open('grafica_historico.html','windowName','width=' + popW + ',height=' + popH + ',top=' + topPos + ',left=' + leftPos);
 
  }
 
@@ -710,7 +699,7 @@ function Consulta_Hora_Marker_Graficar(){
         //}else{          //Historico_Snap(Cont_Historico);        }
 
         Consulta_Hora_Marker_Graficar();
-        promptForTwo();
+        promptForHist();
     });
 
     }else{           Consulta_Hora_Marker_Graficar();             }
