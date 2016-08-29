@@ -241,14 +241,14 @@ function INICIAR_SESION() {
 
   var a = document.createElement("a");
   a.target = "_blank";
-  a.href = "http://localhost/AWS/INICIAR_SESION/inicio_sesion.php";
+  a.href = "http://ticollcloud.ddns.net/AWS/INICIAR_SESION/inicio_sesion.php";
   a.click();
 }
 
 
 function REGISTRAR() {
 
-window.location='http://localhost/AWS/INICIAR_SESION/inicio_sesion.php';
+window.location='http://ticollcloud.ddns.net/AWS/INICIAR_SESION/inicio_sesion.php';
 }
 
 </script>
