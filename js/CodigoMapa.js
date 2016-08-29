@@ -638,16 +638,16 @@ function Consulta_Hora_Marker_Graficar(){
     function( data ) {
         Tabla_Historico[Cont_Historico] = JSON.parse(data);
         Cont_Markers=0;
-
+var Num_Markers = 0;
          if (Tabla_Historico[Cont_Historico].length==0){
 
              alert("La consulta del ID: " + Tabla_Usuarios[Cont_Historico].ID_VEHICULO + ", está vacia");
          }else{
 
-        //if(!Snap){
         PoliLinea_Historica[Cont_Historico].setMap(map);
-
         for(i in Tabla_Historico[Cont_Historico]){
+            Num_Markers = parseInt(i)+1;
+            console.log(Num_Markers);
             Latitud_Historica = parseFloat(Tabla_Historico[Cont_Historico][i].LATITUD);
             Longitud_Historica = parseFloat(Tabla_Historico[Cont_Historico][i].LONGITUD);
             Posicion[Cont_Historico]=new google.maps.LatLng(Latitud_Historica,Longitud_Historica);
@@ -665,7 +665,7 @@ function Consulta_Hora_Marker_Graficar(){
                 labelAnchor: new google.maps.Point(17,9 ),
                 labelClass: "labels",
                 labelStyle: {opacity: 1},
-                title:Tabla_Historico[Cont_Historico][i].FECHA_HORA,
+                title: Num_Markers+" -- "+Tabla_Historico[Cont_Historico][i].FECHA_HORA+" -- "+peso+"kg",
                 icon: Icono_Historico[Cont_Historico]
                 });
 
@@ -679,7 +679,7 @@ function Consulta_Hora_Marker_Graficar(){
                 labelAnchor: new google.maps.Point(17,9 ),
                 labelClass: "labels",
                 labelStyle: {opacity: 1},
-                title:Tabla_Historico[Cont_Historico][i].FECHA_HORA,
+                title: Num_Markers+" -- "+Tabla_Historico[Cont_Historico][i].FECHA_HORA+" -- "+peso+"kg",
                 icon: Icono_Historico[Cont_Historico]
                 });
 
@@ -688,15 +688,13 @@ function Consulta_Hora_Marker_Graficar(){
                 Marker_Hora_Marker[Cont_Historico][Cont_Markers++]=new google.maps.Marker({
                 position:Posicion[Cont_Historico],
                 map: map,
-                title: Tabla_Historico[Cont_Historico][i].FECHA_HORA+" --- "+peso+"kg",
+                title: Num_Markers+" -- "+Tabla_Historico[Cont_Historico][i].FECHA_HORA+" -- "+peso+"kg",
                 icon: Icono_Historico[Cont_Historico]
                 });
             }
 
         }
         }
-
-        //}else{          //Historico_Snap(Cont_Historico);        }
 
         Consulta_Hora_Marker_Graficar();
         promptForHist();
@@ -777,6 +775,7 @@ function Consulta_Marker_Hora_Graficar(){
     function( data ) {
 
     Tabla = JSON.parse(data);
+    if (Tabla.length==0){alert("El vehículo no ha transitado en esta zona.")}
     Cont_Markers=0;
     for(i in Tabla)
     {
@@ -915,7 +914,7 @@ function Mostrar_Calendario1(){
 
 	     flat: true,
 	     date:  '',
-	     current: '2016-05-16',
+	     current: '2016-08-16',
 	     calendars: 1,
 	     starts: 0,
 	     mode: 'single',
@@ -947,7 +946,7 @@ function Mostrar_Calendario2(){
 
     flat: true,
     date:  '',
-    current: '2016-05-16',
+    current: '2016-08-16',
     calendars: 1,
     starts: 0,
     mode: 'single',
