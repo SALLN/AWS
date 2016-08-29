@@ -99,7 +99,7 @@ function promptForTwo() {
 
   var a = document.createElement("a");
   a.target = "_blank";
-  a.href = "http://localhost/AWS/Grafica_TiempoReal.html";
+  a.href = "http://ticollcloud.ddns.net/AWS/Grafica_TiempoReal.html";
   a.click();
 
  }
@@ -108,7 +108,7 @@ function promptForHist() {
 
   var a = document.createElement("a");
   a.target = "_blank";
-  a.href = "http://localhost/AWS/Grafica_Historico.html?fechainicio="+Fecha_Inicio_PHP+"_"+Hora_Inicio_PHP+"&fechafinal="+Fecha_Final_PHP+"_"+Hora_Final_PHP;
+  a.href = "http://ticollcloud.ddns.net/AWS/Grafica_Historico.html?fechainicio="+Fecha_Inicio_PHP+"_"+Hora_Inicio_PHP+"&fechafinal="+Fecha_Final_PHP+"_"+Hora_Final_PHP;
   a.click();
 
 
