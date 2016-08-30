@@ -11,7 +11,7 @@ include("ConexionMySQL.php");
          $i=$i+1;
         $point = array("valorx" => $i,"valory" => $row['PESO_TOTAL']);
         array_push($data_points, $point);
-
+ 
     }
 echo json_encode($data_points);
 mysql_free_result($consulta);
