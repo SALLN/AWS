@@ -649,7 +649,6 @@ function Consulta_Hora_Marker_Graficar(){
         PoliLinea_Historica[Cont_Historico].setMap(map);
         for(i in Tabla_Historico[Cont_Historico]){
             Num_Markers = parseInt(i)+1;
-
             Latitud_Historica = parseFloat(Tabla_Historico[Cont_Historico][i].LATITUD);
             Longitud_Historica = parseFloat(Tabla_Historico[Cont_Historico][i].LONGITUD);
             Posicion[Cont_Historico]=new google.maps.LatLng(Latitud_Historica,Longitud_Historica);
@@ -673,7 +672,6 @@ function Consulta_Hora_Marker_Graficar(){
 
             }else if(i==Tabla_Historico[Cont_Historico].length-1){
 
-              if (i%saltos==0){
                 Marker_Hora_Marker[Cont_Historico][Cont_Markers++]= new MarkerWithLabel({
                 position: Posicion[Cont_Historico],
                 map: map,
@@ -685,7 +683,6 @@ function Consulta_Hora_Marker_Graficar(){
                 title: Num_Markers+" -- "+Tabla_Historico[Cont_Historico][i].FECHA_HORA+" -- "+peso+"kg",
                 icon: Icono_Historico[Cont_Historico]
                 });
-              }
             }else{
 
                 Marker_Hora_Marker[Cont_Historico][Cont_Markers++]=new google.maps.Marker({
