@@ -5,7 +5,7 @@ $consulta=mysqli_query($conexion,"SELECT LATITUD,LONGITUD,FECHA_HORA FROM $_POST
 $tabla=array();
 $i=0;
 $mensaje="";
-while($reg=mysqli_fetch_array($consulta)){
+while($reg=mysqli_fetch_array($consulta,MYSQLI_ASSOC)){
 
 	$mensaje=$mensaje.$reg['LATITUD'].",".$reg['LONGITUD'].",".$reg['FECHA_HORA'];
 	$i++;

@@ -10,7 +10,7 @@ $consulta=mysqli_query($conexion,"SELECT LATITUD,LONGITUD,FECHA_HORA FROM $_SESS
  						order by  ID asc");
 $tabla=array();
 $i=0;
-while($reg=mysqli_fetch_array($consulta)){
+while($reg=mysqli_fetch_array($consulta,MYSQLI_ASSOC)){
 
 	$tabla[$i]=$reg;
 	$i++;

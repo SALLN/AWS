@@ -13,7 +13,7 @@ $consulta=mysqli_query($conexion,"SELECT LATITUD,LONGITUD,FECHA_HORA,PESO_TOTAL 
 
 $tabla=array();
 $i=0;
-while($reg=mysqli_fetch_array($consulta)){
+while($reg=mysqli_fetch_array($consulta,MYSQLI_ASSOC)){
 
 $Dif_Latitud=abs(floatval($Latitud_Marker)-floatval($reg['LATITUD']));
 $Dif_Longitud=abs(floatval($Longitud_Marker)-floatval($reg['LONGITUD']));
