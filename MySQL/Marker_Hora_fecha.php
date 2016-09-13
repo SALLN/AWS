@@ -9,11 +9,11 @@ $MetrosRedonda=floatval($_POST['Metros']);
 $Latitud_Marker=$_POST['LatitudMarker'];
 $Longitud_Marker=$_POST['LongitudMarker'];
 
-$consulta=mysql_query("SELECT LATITUD,LONGITUD,FECHA_HORA,PESO_TOTAL FROM $_SESSION[user] where ID_VEHICULO='$_POST[Vehiculo]' AND FECHA_HORA between  '$fecha_start' and '$fecha_end' ") or die("Problemas en consulta: ".mysql_error());
+$consulta=mysqli_query($conexion,"SELECT LATITUD,LONGITUD,FECHA_HORA,PESO_TOTAL FROM $_SESSION[user] where ID_VEHICULO='$_POST[Vehiculo]' AND FECHA_HORA between  '$fecha_start' and '$fecha_end' ");
 
 $tabla=array();
 $i=0;
-while($reg=mysql_fetch_array($consulta)){
+while($reg=mysqli_fetch_array($consulta)){
 
 $Dif_Latitud=abs(floatval($Latitud_Marker)-floatval($reg['LATITUD']));
 $Dif_Longitud=abs(floatval($Longitud_Marker)-floatval($reg['LONGITUD']));
@@ -27,6 +27,6 @@ $i++;
 }
 
 echo json_encode($tabla);
-mysql_free_result($consulta);
-mysql_close($conexion);
+mysqli_free_result($consulta);
+mysqli_close($conexion);
 ?>

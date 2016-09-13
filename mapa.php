@@ -237,7 +237,7 @@ th,td,tr{
 
  </section>
 
- <script src="js/CodigoMapa.js"></script>
+ <script src="js/Funciones/CodigoMapa.js"></script>
 
 </body>
 </html>

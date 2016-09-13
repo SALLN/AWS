@@ -217,7 +217,7 @@ function Obtener_Direcciones(){
     }
  }
 
-var directionsDisplay = new google.maps.DirectionsRenderer();
+ var directionsDisplay = new google.maps.DirectionsRenderer();
     directionsDisplay.setOptions( { suppressMarkers: true,
                                     polylineOptions: {
                                     strokeWeight: 6,
@@ -226,7 +226,7 @@ var directionsDisplay = new google.maps.DirectionsRenderer();
                                     }} );
     var directionsService = new google.maps.DirectionsService();
     directionsDisplay.setMap(map);
-var respon;
+ var respon;
 
 function CrearTabla(){
 
@@ -259,8 +259,7 @@ function CrearTabla(){
 
  } else {        alert("No existen rutas entre ambos puntos");        }
 
-});
-
+ });
     $('#ListaPesos').append("<br>");
     $('#ListaPesos').append('<table style="border: 1px solid white;"> ');
     $('#ListaPesos').append('<tr><td> PUNTO   </td><td> LATITUD   </td><td>  LONGITUD  </td><td>  DIRECCION  </td><td>  PESO  </td> </tr>');
@@ -332,7 +331,7 @@ function VigilarPesos(){
 
         }
     }
-if (Vig_Recorrido){    /*console.log("RECORRIDO VIGILADO"); */if (peso>Pesos_Debidos[Cercas]-5 &&  peso<Pesos_Debidos[Cercas]+5){}else{alert("VARIACION DE PESO INDEBIDA")}}
+ if (Vig_Recorrido){    /*console.log("RECORRIDO VIGILADO"); */if (peso>Pesos_Debidos[Cercas]-5 &&  peso<Pesos_Debidos[Cercas]+5){}else{alert("VARIACION DE PESO INDEBIDA")}}
  }
 
 function VigilarCarga_Punto(){

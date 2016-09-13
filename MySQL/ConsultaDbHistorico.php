@@ -8,18 +8,18 @@ $fecha_end=$_POST['FechaFinal']." ".$_POST['HoraFinal'];
 $_SESSION['fecha_ini']=$fecha_start;
 $_SESSION['fecha_fi']=$fecha_end;
 
-$consulta=mysql_query("SELECT LATITUD,LONGITUD,FECHA_HORA,PESO_TOTAL FROM $_SESSION[user] where ID_VEHICULO='$_POST[Vehiculo]' AND FECHA_HORA between  '$fecha_start' and '$fecha_end'	order by  ID asc") or die("Problemas en consulta: ".mysql_error());
+$consulta=mysqli_query($conexion,"SELECT LATITUD,LONGITUD,FECHA_HORA,PESO_TOTAL FROM $_SESSION[user] where ID_VEHICULO='$_POST[Vehiculo]' AND FECHA_HORA between  '$fecha_start' and '$fecha_end'	order by  ID asc");
 $tabla=array();
 $i=0;
-while($reg=mysql_fetch_array($consulta)){
+while($reg=mysqli_fetch_array($consulta)){
 
 	$tabla[$i]=$reg;
 	$i++;
 }
 
 echo json_encode($tabla);
-mysql_free_result($consulta);
-mysql_close($conexion);
+mysqli_free_result($consulta);
+mysqli_close($conexion);
 
 
 ?>
