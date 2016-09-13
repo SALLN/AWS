@@ -622,8 +622,6 @@ function Consulta_Hora_Marker(){
     if(msj!="Error" && year<=year1 && month==month1 && day>day1){
     alert("La fecha final está antes de la inicial")
     }
-
-
  }
 
 function Consulta_Hora_Marker_Graficar(){
@@ -648,6 +646,10 @@ function Consulta_Hora_Marker_Graficar(){
 
         PoliLinea_Historica[Cont_Historico].setMap(map);
         for(i in Tabla_Historico[Cont_Historico]){
+            Num_Markers = parseInt(i)+1;
+            Num_Markers = parseInt(i)+1;
+            Num_Markers = parseInt(i)+1;
+            Num_Markers = parseInt(i)+1;
             Num_Markers = parseInt(i)+1;
             Latitud_Historica = parseFloat(Tabla_Historico[Cont_Historico][i].LATITUD);
             Longitud_Historica = parseFloat(Tabla_Historico[Cont_Historico][i].LONGITUD);
