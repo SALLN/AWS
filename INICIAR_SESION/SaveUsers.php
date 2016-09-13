@@ -8,15 +8,15 @@ $usuario = $_POST['userid'];
 $contrasena = $_POST['password'];
 
 
-$q=mysqli_query($conexion,"SELECT * FROM admin WHERE user='$_POST[userid]'");
+$q=mysql_query("SELECT * FROM admin WHERE user='$_POST[userid]'");
 
 if (isset($_POST['userid']) && !empty($_POST['userid']) && isset($_POST['password']) && !empty($_POST['password']) && (preg_match("/^[a-zA-Z0-9\-_]+$/",$usuario)) &&
 (preg_match("/^[a-zA-Z0-9\-_]+$/",$contrasena)) && (mysql_num_rows($q)==0) ){
 
 
-$r=mysqli_query($conexion,"INSERT INTO admin(user,pw) VALUES ('$usuario','$contrasena')");
+$r=mysql_query("INSERT INTO admin(user,pw) VALUES ('$usuario','$contrasena')");
 
-$s=mysqli_query($conexion,"CREATE TABLE $usuario(ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, LATITUD VARCHAR(20), LONGITUD VARCHAR(20), FECHA_HORA datetime,  ID_VEHICULO VARCHAR(20),FECHA_HORA_SERV datetime )");
+$s=mysql_query("CREATE TABLE $usuario(ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, LATITUD VARCHAR(20), LONGITUD VARCHAR(20), FECHA_HORA datetime,  ID_VEHICULO VARCHAR(20),FECHA_HORA_SERV datetime )");
 
 echo "<script type='text/javascript'>";
 echo "alert('Felicitaciones, usted se ha registrado satisfactoriamente');";
@@ -67,8 +67,8 @@ if(!preg_match("/^[a-zA-Z0-9\-_]+$/", $usuario)){
 
  }
 
-mysqli_free_result($q);
-mysqli_free_result($r);
-mysqli_free_result($s);
-mysqli_close($conexion);
+mysql_free_result($q);
+mysql_free_result($r);
+mysql_free_result($s);
+mysql_close($conexion);
 ?>

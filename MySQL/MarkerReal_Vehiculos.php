@@ -28,7 +28,7 @@ if($Marcados[$i]=="true"){
 
 }
 
-$consulta=mysqli_query($conexion,$query);
+$consulta=mysql_query($query) or die("Empty");
 $i=0;
 while($reg=mysql_fetch_array($consulta)){
 
@@ -37,8 +37,8 @@ while($reg=mysql_fetch_array($consulta)){
 }
 
 echo json_encode($tabla);
-mysqli_free_result($consulta);
-mysqli_close($conexion);
+mysql_free_result($consulta);
+mysql_close($conexion);
 
 
 
