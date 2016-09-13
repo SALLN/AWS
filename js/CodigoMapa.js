@@ -673,7 +673,7 @@ function Consulta_Hora_Marker_Graficar(){
 
             }else if(i==Tabla_Historico[Cont_Historico].length-1){
 
-              if (i%saltos){
+              if (i%saltos==0){
                 Marker_Hora_Marker[Cont_Historico][Cont_Markers++]= new MarkerWithLabel({
                 position: Posicion[Cont_Historico],
                 map: map,
