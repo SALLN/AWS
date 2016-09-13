@@ -188,6 +188,7 @@ th,td,tr{
 
    <div style="display:block;margin: 15px 0px 0px 0px;">
         <input id="Boton_Real23" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Hora_Marker(),OcultarHistoricos()"/>
+        <input type="text" id="Saltos" placeholder="Digite salto">
    </div>
 
    <div style="display:block;margin: 15px 0px 0px -10px;">

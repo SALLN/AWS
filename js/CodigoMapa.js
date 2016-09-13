@@ -29,6 +29,7 @@ var Texto_txt=[];
 var separador = "      ";
 var VigilarInterval;
 var Recorrido_Marcado=[];
+var Saltos;
 
 var Colores={0:'red',1:'blue',2:'magenta',3:'coral',4:'green',5:'cyan',6:'darkgoldenrod',7:'darkorange',8:'darkslateblue'};
 
@@ -569,7 +570,8 @@ function Consulta_Real(){
  }
 
 function Consulta_Hora_Marker(){
-
+    Saltos=document.getElementById('Saltos').value;
+    console.log(Saltos);
     for (i in Ruta_Historica){  Ruta_Historica[i]=[];  };
 
     Cont_Historico=-1;
@@ -638,7 +640,7 @@ function Consulta_Hora_Marker_Graficar(){
     function( data ) {
         Tabla_Historico[Cont_Historico] = JSON.parse(data);
         Cont_Markers=0;
-var Num_Markers = 0;
+        var Num_Markers = 0;
          if (Tabla_Historico[Cont_Historico].length==0){
 
              alert("La consulta del ID: " + Tabla_Usuarios[Cont_Historico].ID_VEHICULO + ", está vacia");
@@ -647,7 +649,7 @@ var Num_Markers = 0;
         PoliLinea_Historica[Cont_Historico].setMap(map);
         for(i in Tabla_Historico[Cont_Historico]){
             Num_Markers = parseInt(i)+1;
-            console.log(Num_Markers);
+
             Latitud_Historica = parseFloat(Tabla_Historico[Cont_Historico][i].LATITUD);
             Longitud_Historica = parseFloat(Tabla_Historico[Cont_Historico][i].LONGITUD);
             Posicion[Cont_Historico]=new google.maps.LatLng(Latitud_Historica,Longitud_Historica);
