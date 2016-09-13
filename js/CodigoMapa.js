@@ -571,6 +571,7 @@ function Consulta_Real(){
 
 function Consulta_Hora_Marker(){
     Saltos=document.getElementById('Saltos').value;
+    console.log("si entra aca");
     console.log(Saltos);
     for (i in Ruta_Historica){  Ruta_Historica[i]=[];  };
 
