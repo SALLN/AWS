@@ -82,7 +82,6 @@ p {display: inline;}
     background-color:transparent;
     border: 1px solid #1E2172;
     padding:5px;
-    border
 }
 
 #ListaCheckBoxes {
@@ -381,4 +380,13 @@ p {display: inline;}
 }
 #Boton_grafica:hover{
     color:rebeccapurple;
+}
+
+#Saltos {
+        width: 175px;
+    height: 25px;
+    text-align:center;
+    background-color:transparent;
+    border: 1px solid #1E2172;
+    padding:5px;
 }

@@ -595,7 +595,6 @@ function Consulta_Hora_Marker(){
 
     var msj=ObtenerDateTime();
 
-
     if(msj!="Error" && year>year1 && month==month1){
     alert("La hora final está antes de la inicial")
     }
@@ -674,6 +673,7 @@ function Consulta_Hora_Marker_Graficar(){
 
             }else if(i==Tabla_Historico[Cont_Historico].length-1){
 
+              if (i%saltos){
                 Marker_Hora_Marker[Cont_Historico][Cont_Markers++]= new MarkerWithLabel({
                 position: Posicion[Cont_Historico],
                 map: map,
@@ -685,7 +685,7 @@ function Consulta_Hora_Marker_Graficar(){
                 title: Num_Markers+" -- "+Tabla_Historico[Cont_Historico][i].FECHA_HORA+" -- "+peso+"kg",
                 icon: Icono_Historico[Cont_Historico]
                 });
-
+              }
             }else{
 
                 Marker_Hora_Marker[Cont_Historico][Cont_Markers++]=new google.maps.Marker({
