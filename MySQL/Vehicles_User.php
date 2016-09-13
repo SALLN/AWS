@@ -8,7 +8,7 @@ $i=0;
 
 if ($_POST['App']=="APP")
 {
-$consulta=mysqli_query($conexion,"SELECT ID_VEHICULO FROM FamiliaLlerenaNavarro GROUP BY ID_VEHICULO"); 
+$consulta=mysqli_query($conexion,"SELECT ID_VEHICULO FROM FamiliaLlerenaNavarro GROUP BY ID_VEHICULO");
     while($reg=mysqli_fetch_array($consulta)){
 
 	$tabla[$i]=$reg['ID_VEHICULO'];
@@ -29,8 +29,8 @@ $consulta=mysqli_query($conexion,"SELECT ID_VEHICULO FROM $_SESSION[user] GROUP 
 
 echo json_encode($tabla);
 
-mysql_free_result($consulta);
-mysql_close($conexion);
+mysqli_free_result($consulta);
+mysqli_close($conexion);
 
 
 ?>
