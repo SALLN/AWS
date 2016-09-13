@@ -30,7 +30,7 @@ if($Marcados[$i]=="true"){
 
 $consulta=mysqli_query($conexion,$query);
 $i=0;
-while($reg=mysqli_fetch_array($consulta,MYSQLI_ASSOC)){
+while($reg=mysql_fetch_array($consulta)){
 
 	$tabla[$i]=$reg;
 	$i++;
