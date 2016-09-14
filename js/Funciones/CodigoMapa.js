@@ -514,7 +514,6 @@ function SetMarkerVarios(){
         function( data ) {
 
             if(data=="Empty"){   clearInterval(MarkerInterval);}else{ var Tabla2=JSON.parse(data);    }
-            console.log(Tabla2);
 
             Cont_Join=0;
 
