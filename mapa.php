@@ -93,6 +93,8 @@ th,td,tr{
 
 
 <h3><a href="INICIAR_SESION/logout.php">Cerrar Sesión</a><h3>
+<br>
+
 
 
 <section id="service"> <!--#Mapa-->

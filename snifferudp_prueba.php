@@ -2,18 +2,11 @@
 
 date_default_timezone_set('America/Bogota');
 
-error_reporting(E_ALL | E_STRICT);
-$socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
-socket_bind($socket, '172.31.21.77', 55057);
-
-do{
-
-socket_recvfrom($socket, $mensaje, 200, 0, $from, $port);
 
 // >REV031911376617+1101913-0748515900235901;ID=Grupo2<
 // >RTX&mensajeencapsulado&@;EV001911628664+1095488-0747963600032432;ID=357666051297791<
-//$mensaje = ">RTX#55-94-149#@;EV001912019802+1095464-0747961700000032;ID=001EUQ426<";
-
+$mensaje = ">RTX#55-94-149#@;EV001912019802+1095464-0747961711100032;ID=001EUQ426<";
+echo "Mensaje: ".$mensaje."<br>";
 $mensaje_div = explode('#',$mensaje);
 $pesos = explode('-',$mensaje_div[1]);
 
@@ -32,15 +25,21 @@ $placa=substr($mensaje_div[2],$id+6,6);
 $fecha=date('Y-m-d H:i:s', $tiempogps);
 $fecha_servidor = date('Y-m-d H:i:s');
 $velocidad = intval(substr($mensaje_div[2],$lng+9,3)*1.60934);
-$consulta=mysql_query("INSERT INTO Mensajes(Mensaje) VALUES('$mensaje')");
-$consulta2=mysql_query("SELECT user FROM admin where id=$usuario") or die("Problemas en consulta: ".mysql_error());
-$tabla_usuario  = mysql_fetch_array($consulta2)['user'];
-$consulta3=mysql_query("INSERT INTO $tabla_usuario(LATITUD,LONGITUD,FECHA_HORA,FECHA_HORA_SERVER,ID_VEHICULO,PESO_1,PESO_2,PESO_TOTAL,VEL) VALUES('$latitud','$longitud','$fecha','$fecha_servidor','$placa','$pesos[0]','$pesos[1]','$pesos[2]','$velocidad')");
-mysql_free_result($consulta);
-mysql_free_result($consulta2);
-mysql_free_result($consulta3);
+$consulta=mysql_query("SELECT user FROM admin where id=$usuario") or die("Problemas en consulta: ".mysql_error());
+$tabla_usuario  = mysql_fetch_array($consulta)['user'];
+$consulta2=mysql_query("INSERT INTO $tabla_usuario(LATITUD,LONGITUD,FECHA_HORA,FECHA_HORA_SERVER,ID_VEHICULO,PESO_1,PESO_2,PESO_TOTAL) VALUES('$latitud','$longitud','$fecha','$fecha_servidor','$placa','$pesos[0]','$pesos[1]','$pesos[2]')");
 mysql_close($conexion);
+echo "Latitud: ".$latitud."<br>";
+echo "Longitud: ".$longitud."<br>";
+echo "Usuario: ".$usuario."<br>";
+echo "Placa: ".$placa."<br>";
+echo "Fecha: ".$fecha."<br>";
+echo "Fecha Servidor: ".$fecha_servidor."<br>";
+echo "Peso 1: ".$pesos[0]."<br>";
+echo "Peso 2: ".$pesos[1]."<br>";
+echo "Peso Total: ".$pesos[2]."<br>";
+echo "Velocidad: ".$velocidad."<br>";
+
 
 }
-} while (true);
 ?>
