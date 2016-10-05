@@ -248,7 +248,10 @@ function INICIAR_SESION() {
 
 function REGISTRAR() {
 
-window.location='http://ticollcloud.ddns.net/AWS/INICIAR_SESION/inicio_sesion.php';
+  var a = document.createElement("a");
+  a.target = "_blank";
+  a.href = "http://ticollcloud.ddns.net/AWS/INICIAR_SESION/popup.htm";
+  a.click();
 }
 
 </script>
