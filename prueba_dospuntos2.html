@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Geolocation Dinámico</title>
+<!--<script src="http://maps.googleapis.com/maps/api/js?v3"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>-->
+
+
+</head>
+
+<body>
+
+<div>
+    <label for="origen">Tabla: </label>
+    <input type="text" name="tabla" id="Tabla" placeholder="Digite el nombre de la tabla" />
+    <br />
+      <br />
+    <label for="destino">ID: </label>
+    <input type="text" name="id" id="ID" placeholder="Digite el ID del vehiculo"/>
+    <br />
+    <br />
+  <label for="destino">Incremento: </label>
+  <input type="text" name="incremento" id="incremento" placeholder="Digite el incremento" value="0.1"/>
+  <br/><br/>
+    <label for="destino">Delta: </label>
+    <input type="text" name="delta" id="delta" placeholder="Digite el delta" value="0.1"/>
+    <br/><br/>
+    <label for="destino">Automatico: </label>
+    <input type="checkbox" id="automatico"  onclick="Auto=!Auto;">
+    <br/><br/>
+    <!--<input type="button"  value="CAMBIAR COORDENADA" onclick="CambiarCoordenada()">-->
+
+</div>
+<br />
+
+<div id="rutaOps">
+
+</div>
+<br />
+<div>
+    <div id="map_canvas" style="float:left; width:70%; height:500px"></div>
+    <div id="panel_ruta" style="float:right; overflow: auto; width:30%; height: 500px"></div>
+</div>
+
+<script>
+var Auto = false;
+var ShiftPulsada = false;
+document.onkeypress = mostrarInformacionCaracter;
+document.onkeyup = mostrarInformacionTeclaUp;
+
+function mostrarInformacionCaracter(evObject) {
+  var elCaracter = String.fromCharCode(evObject.which);
+  var Delta=parseFloat(document.getElementById("delta").value);
+  var Incremento=parseFloat(document.getElementById("incremento").value);
+  console.log("Delta: "+Delta+"  Incremento: "+Incremento);
+  var Total = parseFloat(Delta)+parseFloat(Incremento);
+  console.log(Total);
+  if (elCaracter=="+"){
+    document.getElementById("incremento").value = Delta+Incremento;
+  }else if (elCaracter=="-"){
+    document.getElementById("incremento").value = Incremento-Delta;
+  }else if (elCaracter=="*"){
+    console.log("por");
+  }else if (elCaracter=="/"){
+    console.log("divvvv");
+  }
+  //console.log("caracter: " + elCaracter);}
+}
+function mostrarInformacionTeclaUp(evObject) {
+
+               var teclaPulsada = evObject.keyCode;
+               console.log("informacion: " + teclaPulsada);
+               if (teclaPulsada==37){
+                 console.log("izquierda");
+               }else if(teclaPulsada==38){
+                 console.log("arriba");
+               }else if(teclaPulsada==39){
+                 console.log("derecha");
+               }else if(teclaPulsada==40){
+                 console.log("abajo");
+               }else if(teclaPulsada==13){
+                 console.log("enter");
+               }
+
+}
+
+/*
+left = 37          up = 38                  rigth = 39              down = 40
+
+*/
+
+
+</script>
+
+</body>

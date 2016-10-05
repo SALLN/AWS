@@ -39,7 +39,5 @@ echo "Peso 1: ".$pesos[0]."<br>";
 echo "Peso 2: ".$pesos[1]."<br>";
 echo "Peso Total: ".$pesos[2]."<br>";
 echo "Velocidad: ".$velocidad."<br>";
-
-
 }
 ?>

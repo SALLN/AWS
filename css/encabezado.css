@@ -23,7 +23,7 @@ p {display: inline;}
 
 #fila_longitud,#fila_latitud,#fila_fecha,#fila_hora{       }
 
-#googleMap{ margin-left: 0.5em;  width:98%;		height:19.438em;	}
+#googleMap{ margin-left: 0.5em;  width:98%;		height:26em; margin-top:-1em;	}
 
 #Boton_Real24{
     background-color: #00c7fc;

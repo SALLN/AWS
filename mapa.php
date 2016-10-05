@@ -53,8 +53,6 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
     <script src="js/jquery.ui.timepicker.js?v=0.3.3"></script>
     <script src="js/modernizr-2.6.2.min.js"></script>
     <script src="js/markerwithlabel.js"></script>
-
-
     <!--<script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel.js"></script>-->
 
 </head>
@@ -62,47 +60,21 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
 <body>
 
 <style type="text/css">
-
-table{
-
-    border-spacing: 10px;
-    border-collapse: collapse;
-}
-
-th,td,tr{
-
-    border: 1px solid red;
-    color: black;
-    margin-top: 10px;
-    font-weight: bold;
-    padding: 5px 5px 2px 3px;
-}
-
-#pesos{
-
-    background-color: white;
-    border: 1px solid white;
-}
-
-.clapesos{
-
-    text-align: center;
-}
-
+table{    border-spacing: 10px;    border-collapse: collapse;}
+th,td,tr{    border: 1px solid red;    color: black;    margin-top: 10px;    font-weight: bold;    padding: 5px 5px 2px 3px;}
+#pesos{    background-color: white;    border: 1px solid white;}
+.clapesos{    text-align: center;}
 </style>
 
 
-<h3><a href="INICIAR_SESION/logout.php">Cerrar Sesión</a><h3>
-<br>
-
-
+<h3 style="margin-left:0%;font-size:100%;font: italic bold 15px/15px Georgia, serif;"><a href="INICIAR_SESION/logout.php" >Cerrar Sesión</a><h3><br>
 
 <section id="service"> <!--#Mapa-->
 
- <div class="container" style="margin-left:150px;">
-    <div class="row">
+   <!--<div class="container" style="margin-left:150px;">
+     <div class="row">
 
-        <div class="col-md-2 col-sm-12 wow fadeInLeft">
+     <div class="col-md-2 col-sm-12 wow fadeInLeft">
             <div class="media">
                 <a href="#" class="pull-left">
                     <img src="images/longi.jpg" alt="Ruler">
@@ -164,8 +136,14 @@ th,td,tr{
         </div>
 
     </div>
- </div> <!--LATITUD LONGITUD ARRIBA DEL MAPA-->
 
+
+ </div> --><!--LATITUD LONGITUD ARRIBA DEL MAPA-->
+ <p style="font: italic bold 15px/15px Georgia, serif;color:red;" id="fila_latitud">00.00000</p>
+ <p style="font: italic bold 15px/15px Georgia, serif;color:red;" id="fila_longitud">-00.00000</p>
+ <p style="font: italic bold 15px/15px Georgia, serif;color:red;" id="fila_fecha">0000-00-00</p>
+ <p style="font: italic bold 15px/15px Georgia, serif;color:red;" id="fila_hora"> 00:00:00</p>
+ <p style="font: italic bold 15px/15px Georgia, serif;color:red;" id="peso">0kg</p>
 
  <div id="divmenu" class="AnimacionDerecha">
 

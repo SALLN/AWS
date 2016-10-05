@@ -51,6 +51,16 @@ map.controls[google.maps.ControlPosition.LEFT_CENTER].push( document.getElementB
 
 map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('autoc'));
 
+map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_latitud'));
+
+map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_longitud'));
+
+map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_fecha'));
+
+map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_hora'));
+
+map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('peso'));
+
 map.controls[google.maps.ControlPosition.RIGHT_CENTER].push( document.getElementById('Boton_Real24'));
 
 map.controls[google.maps.ControlPosition.LEFT_TOP].push(  document.getElementById('seleccion'));
