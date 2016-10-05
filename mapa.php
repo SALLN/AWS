@@ -76,6 +76,7 @@ th,td,tr{    border: 1px solid red;    color: black;    margin-top: 10px;    fon
 
      <div class="col-md-2 col-sm-12 wow fadeInLeft">
             <div class="media">
+            
                 <a href="#" class="pull-left">
                     <img src="images/longi.jpg" alt="Ruler">
                 </a>
@@ -139,11 +140,11 @@ th,td,tr{    border: 1px solid red;    color: black;    margin-top: 10px;    fon
 
 
  </div> --><!--LATITUD LONGITUD ARRIBA DEL MAPA-->
- <p style="font: italic bold 15px/15px Georgia, serif;color:red;" id="fila_latitud">00.00000</p>
- <p style="font: italic bold 15px/15px Georgia, serif;color:red;" id="fila_longitud">-00.00000</p>
- <p style="font: italic bold 15px/15px Georgia, serif;color:red;" id="fila_fecha">0000-00-00</p>
- <p style="font: italic bold 15px/15px Georgia, serif;color:red;" id="fila_hora"> 00:00:00</p>
- <p style="font: italic bold 15px/15px Georgia, serif;color:red;" id="peso">0kg</p>
+ <p style="font: italic bold 12px/15px Georgia, serif;color:red;background-color:white;" id="fila_latitud">00.00000</p>
+ <p style="font: italic bold 12px/15px Georgia, serif;color:red;background-color:white;" id="fila_longitud">-00.00000</p>
+ <p style="font: italic bold 12px/15px Georgia, serif;color:red;background-color:white;" id="fila_fecha">0000-00-00</p>
+ <p style="font: italic bold 12px/15px Georgia, serif;color:red;background-color:white;" id="fila_hora"> 00:00:00</p>
+ <p style="font: italic bold 12px/15px Georgia, serif;color:red;background-color:white;" id="peso">0kg</p>
 
  <div id="divmenu" class="AnimacionDerecha">
 
