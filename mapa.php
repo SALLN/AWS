@@ -150,47 +150,51 @@ th,td,tr{    border: 1px solid red;    color: black;    margin-top: 10px;    fon
 
     <input type="button" id="Cerrar" value="X" onclick="OcultarHistoricos()">
 
-    <div style="display:block;margin: 20px 0px 0px 0px;">
-     <h5 class="TextoHistorico">FECHA INICIAL :</h5>
-     <h5 id="Fecha_Inicio2" onmouseover="Mostrar_Calendario1();" class="TextoHistorico">0000-00-00</h5>
-     <div style="margin:2px" id="Fecha_Inicio" onmouseleave="Ocultar_Calendario1();" ></div>
-     <input type="text"  id="Tiempo_Hora1" value="12 AM" class="TextoHistorico">:
-     <input type="text"  id="Tiempo_Minuto1" value="00" class="TextoHistorico">
+     <div style="display:block;margin: 20px 0px 0px 0px;">
+        <h5 class="TextoHistorico">FECHA INICIAL :</h5>
+        <h5 id="Fecha_Inicio2" onmouseover="Mostrar_Calendario1();" class="TextoHistorico">0000-00-00</h5>
+        <div style="margin:2px" id="Fecha_Inicio" onmouseleave="Ocultar_Calendario1();" ></div>
+        <input type="text"  id="Tiempo_Hora1" value="12 AM" class="TextoHistorico"><h5 style="color:white;margin-left:3px;">:</h5>
+        <input type="text"  id="Tiempo_Minuto1" value="00" class="TextoHistorico">
+     </div>
 
-    </div>
-
-   <div style="display:block;margin: 15px 0px 0px 0px;">
-    <h5 class="TextoHistorico">FECHA FINAL &nbsp :</h5>
-    <h5 id="Fecha_Final2" onmouseover="Mostrar_Calendario2();" class="TextoHistorico">0000-00-00</h5>
-    <div  id="Fecha_Final" onmouseleave="Ocultar_Calendario2();"></div>
-    <input type="text"  id="Tiempo_Hora2" value="12 AM" class="TextoHistorico">:
-    <input type="text"  id="Tiempo_Minuto2" value="00" class="TextoHistorico" >
-   </div>
-
-   <div style="display:block;margin: 15px 0px 0px 0px;">
+     <div style="display:block;margin: 10px 0px 0px 0px;">
+       <h5 class="TextoHistorico">FECHA FINAL &nbsp :</h5>
+       <h5 id="Fecha_Final2" onmouseover="Mostrar_Calendario2();" class="TextoHistorico">0000-00-00</h5>
+       <div  id="Fecha_Final" onmouseleave="Ocultar_Calendario2();"></div>
+        <input type="text"  id="Tiempo_Hora2" value="12 AM" class="TextoHistorico"><h5 style="color:white;margin-left:3px;">:</h5>
+        <input type="text"  id="Tiempo_Minuto2" value="00" class="TextoHistorico" >
+     </div>
+     
+     <div style="display:block;margin: 10px 0px 0px 0px;">
         <input id="Boton_Real23" type="button" value="CONSULTAR HISTORICO" onclick="Consulta_Hora_Marker(),OcultarHistoricos()"/>
-        <input type="text" id="Saltos" placeholder="Digite salto">
-   </div>
+     </div>
+     
+     <div style="display:block;margin: 10px 0px 0px 0px;">
+         <input type="text" id="Saltos" placeholder="Digite salto" style="font-size:13px;">
+     </div>     
 
-   <div style="display:block;margin: 15px 0px 0px -10px;">
-        <input type="text" id="Metros" placeholder="Digite metros a la redonda">
+     <div style="display:block;margin: 10px 0px 0px -10px;">
+        <input type="text" id="Metros" placeholder="Digite metros a la redonda" style="font-size:13px;">
         <!--<input type="checkbox" id="markerfecha2"  onclick="Snap=!Snap;"><h3 id="Pulsalo">Snap</h3> -->
-   </div>
+     </div>
 
-   <div style="display:block;margin: 15px 0px 0px 0px;">
+     <div style="display:block;margin: 10px 0px 0px 0px;">
        <input type="button" id="Ubicar" value="UBICAR MARKER" onclick="Consulta_Marker_Hora(),OcultarHistoricos()">
-   </div>
+     </div>
 
-   <div style="display:inline-block;margin: 15px 0px 0px 0px;">
+     <div style="display:inline-block;margin: 10px 0px 0px 0px;">
         <h4 id="Pulsalo2">Combinar</h4>
         <input type="checkbox" id="markerfecha" onclick="Combinar=!Combinar;">
-   </div>
+     </div>
 
-       <div style="display:block;margin: 15px 0px 0px 0px;">
+     <div style="display:block;margin: 10px 0px 5px 0px;">
        <input type="button" id="Distancia_Recorrida" value="Distancia Recorrida" onclick="MostrarDistancia(),OcultarHistoricos()">
-   </div>
- </div>
+     </div>
+     
+    </div>
 
+    
  <div id="googleMap"></div>
  <input type ="button" id="Boton_grafica" value = 'Graficar tiempo real' onclick="promptForTwo(); return false;"/>
 
