@@ -138,7 +138,9 @@ document.getElementById('Boton_Real24').style.display='none';
 document.getElementById('Boton_grafica').style.display='none';
 }
 
+var Peso_Vacio=false;
 var Recorrido_o_Real=null;
+
 function Marcar_Recorrido(){
 
 
@@ -336,17 +338,15 @@ function CrearTabla(){
  }
 
 function GuardarPesos(){
-
+    Peso_Vacio=false;
     //console.log("Guardar pesos");
-    for (i in Direcciones){
-      console.log(document.getElementById("Peso"+i).value);
-      if (document.getElementById("Peso"+i).value.length==0){console.log("nulll");}
-    }
-    for (i in Direcciones){
+    for (i in Direcciones){      if (document.getElementById("Peso"+i).value.length==0){ Peso_Vacio = true;}    }
 
+    if (!Peso_Vacio){
+    for (i in Direcciones){
         Pesos.push(document.getElementById("Peso"+i).value);
 
-        if (i==0){            Pesos_Debidos.push(Pesos[0]-0); Pesos_Debidos.push(Pesos[0]-0);        }
+        if (i==0){ Pesos_Debidos.push(Pesos[0]-0); Pesos_Debidos.push(Pesos[0]-0);        }
         else{ Pesos_Debidos.push(Pesos_Debidos[i]-Pesos[i]);                   }
         CercaDetectada.push(true);
     }
@@ -369,10 +369,16 @@ function GuardarPesos(){
         Info_Recorrido_Pes = Info_Recorrido_Pes+Pesos[i]+"%";
               }
         var Info=Info_Recorrido_Lat+"&"+Info_Recorrido_Lng+"&"+Info_Recorrido_Pes;
-        console.log(Info);
 
     //VigilarInterval = setInterval(function(){VigilarPesos()},1000);
  }
+ for (i in Checkes){
+      if (Checkes[i]){
+        $.post("MySQL/Recorridos.php", {Usuario: Usuario, Vehiculo: Tabla_Usuarios[i].ID_VEHICULO, Mensaje: Info  }).done()
+              } }
+ console.log(Info);
+
+ }else{alert("Casilla de peso vacía")}
 }
 
 function VigilarPesos(){
