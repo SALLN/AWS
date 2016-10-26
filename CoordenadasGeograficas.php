@@ -7,6 +7,7 @@ session_start();
 <html lang="en" class="no-js">
 <head>
 
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -33,7 +34,6 @@ session_start();
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
     <script src="js/graphs.js"></script>
-    <script src="js/jquery-1.12.1.min.js"></script>
     <!--<script src="js/jquery-3.1.0.min.js"></script>-->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.nav.js"></script>
@@ -84,6 +84,7 @@ th,td,tr{
     border: 1px solid white;
 }
 
+
 .clapesos{
 
     text-align: center;
@@ -129,43 +130,44 @@ th,td,tr{
 
 <section id="home">
 
-    <div id="home-carousel" class="carousel slide" data-interval="false">
-        <ol class="carousel-indicators">
-        <li data-target="#home-carousel" data-slide-to="0" class="active"></li>
-        <li data-target="#home-carousel" data-slide-to="1"></li>
-        <li data-target="#home-carousel" data-slide-to="2"></li>
-        </ol>
+  <div id="home-carousel" class="carousel slide" data-interval="false">
+         <ol class="carousel-indicators">
+         <li data-target="#home-carousel" data-slide-to="0" class="active"></li>
+         <li data-target="#home-carousel" data-slide-to="1"></li>
+         <li data-target="#home-carousel" data-slide-to="2"></li>
+         </ol>
 
-    <div class="carousel-inner">
+     <div class="carousel-inner">
 
-        <div class="item active"  style="background-image: url('images/bg21.jpeg')" >
-        <div class="carousel-caption">
-        <div class="animated bounceInRight">
-        <h2>Hola Mundo! <br>Somos ticoll</h2>
-        <p>¿Quieres ver el recorrido de tu vehículo en tiempo real?</p>
-        </div>
-        </div>
-        </div>
+         <div class="item active"  style="background-image: url('images/bg21.jpeg')" >
+         <div class="carousel-caption">
+         <div class="animated bounceInRight">
+         <h2>Hola Mundo! <br>Somos ticoll</h2>
+         <p>¿Quieres ver el recorrido de tu vehículo en tiempo real?</p>
+         </div>
+         </div>
+         </div>
 
-        <div class="item" style="background-image: url('images/bg1.jpg')">
-        <div class="carousel-caption">
-        <div class="animated bounceInDown">
-        <h2>Hola Mundo! <br>Somos ticoll</h2>
-        <p>¿Deseas conocer tu recorrido histórico? </p>
-        </div>
-        </div>
-        </div>
+         <div class="item" style="background-image: url('images/bg1.jpg')">
+         <div class="carousel-caption">
+         <div class="animated bounceInDown">
+         <h2>Hola Mundo! <br>Somos ticoll</h2>
+         <p>¿Deseas conocer tu recorrido histórico? </p>
+         </div>
+         </div>
+         </div>
 
-        <div class="item" style="background-image: url('images/bg3.jpg')">
-        <div class="carousel-caption">
-        <div class="animated bounceInUp">
-        <h2>Hola Mundo! <br>Somos ticoll</h2>
-        <p>...Y somos la solución!!!</p>
-        </div>
-        </div>
-        </div>
+         <div class="item" style="background-image: url('images/bg3.jpg')">
+         <div class="carousel-caption">
+         <div class="animated bounceInUp">
+         <h2>Hola Mundo! <br>Somos ticoll</h2>
+         <p>...Y somos la solución!!!</p>
+         </div>
+         </div>
+         </div>
 
-    </div>
+     </div>
+
 
         <!--/.carousel-inner-->
         <nav id="nav-arrows" class="nav-arrows hidden-xs hidden-sm visible-md visible-lg">
@@ -179,8 +181,6 @@ th,td,tr{
 
     </div>
 </section>
-
-
 
 <section id="contact"> <!--#contact-->
 

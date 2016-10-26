@@ -1,6 +1,5 @@
 <?php
 session_start();
-$usua = "$_SESSION[user]";
 if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION/inicio_sesion.php"; </script>';   }
 
 ?>
@@ -33,9 +32,9 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDULHVVSQ-vjy1ScgiJU0hPuKb-IRt6bmw&libraries=geometry,drawing,places"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
 
     <script src="js/graphs.js"></script>
+    <script src="js/jquery-1.12.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.nav.js"></script>
     <script src="js/jquery.mixitup.min.js"></script>
@@ -61,59 +60,46 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
 <body>
 
 <style type="text/css">
-
 table{    border-spacing: 10px;    border-collapse: collapse;}
 th,td,tr{    border: 1px solid red;    color: black;    margin-top: 10px;    font-weight: bold;    padding: 5px 5px 2px 3px;}
 #pesos{    background-color: white;    border: 1px solid white;}
 .clapesos{    text-align: center;}
 
+
+h1,h3 {
+	text-align:center;
+}
 a {
 	cursor:pointer;
 }
 
 #fondo {
-	width: 100%; height: 100%; position: absolute; top: 0px; left: 0px; z-index: 990;opacity: 0.8;background:#000;
+	width: 100%; height: 100%; position: fixed; top: 0px; left: 0px; z-index: 990;opacity: 0.8;background:#000;
 }
 #flotante {
-	z-index: 999; border: 8px solid #fff; margin-top: -100%; left: 40%;
-  padding: 0px; position: fixed; width: auto; height:auto; background-color: #fff; border-radius: 3px;
+	z-index: 999; border: 8px solid #fff; margin-top: -756px; margin-left: -153px; top: 50%;
+  left: 50%; padding: 12px; position: fixed; width: auto; height:auto;; background-color: #fff; border-radius: 3px;
 }
 
 
 
 </style>
 
-
- <div id="googleMap"></div>
- <input type ="button" id="Boton_grafica" value = 'Graficar tiempo real' onclick="promptForTwo(); return false;"/>
-
- <input type = "button" class="Botones_Mapa" id="Marcar_Recorrido" value="Marcar Recorrido" onclick="flotante(1)">
- <input type = "button" class="Botones_Mapa" id="Boton_Rutas" value = "Cargar Recorrido" onclick="flotante(4);"/>
- <input type = "button" class="Botones_Mapa" id="Boton_Real24" value="Tiempo Real" onclick="flotante(3);">
- <input type = "button" class="Botones_Mapa" id="btHist" value="Historico" onclick="MostrarHistoricos()">
- <input type = "button" class="Botones_Mapa" id="Cerrar_Sesion" value="Cerrar Sesion" onclick="CerrarSesion();">
-
- <select id="seleccion" onChange="Centrar()"><option>Centrar Mapa</option></select>
- <p class="auto"><input type="text" id="autoc"/></p>
-
-<div id="ListaPesos"></div>
-
-
 <!--<h1>Ventana flotante animada con javascript y jquery</h1>
 <h3><a onClick="flotante(1)">Abrir ventana</a></h3>-->
 
-<div id="contenedor2" style="display:none">
+<div id="contenedor" style="display:none">
 
-<div id="flotante"><h3>Seleccione el vehiculo</h3>
-     <div id="ListaCheckBoxes">
- <!--<input type="button" id="btAdd" value="Cargar Vehiculos" onclick="CargarVehiculos()"/>-->
-
- </div>
-<h5 style="margin-left:8.5%;margin-top:-2.5%;position:fixed;"><a onClick="flotante(2)">X</a></h5>
+<div id="flotante"><h1>Seleccione el vehiculo</h1>
+<h3><a onClick="flotante(2)">Cerrar ventana</a></h3>
 </div>
 
 <div id="fondo"></div>
 </div>
+
+<h3 style="margin-left:0%;font-size:100%;font: italic bold 15px/15px Georgia, serif;"><a href="INICIAR_SESION/logout.php" >Cerrar Sesión</a><h3><br>
+
+<section id="service"> <!--#Mapa-->
 
    <!--<div class="container" style="margin-left:150px;">
      <div class="row">
@@ -182,13 +168,13 @@ a {
 
     </div>
 
- </div> --><!--LATITUD LONGITUD ARRIBA DEL MAPA-->
 
- <p style="font: italic bold 12px/15px Georgia, serif;color:red;background-color:white;display:none;" id="fila_latitud">00.00000</p>
- <p style="font: italic bold 12px/15px Georgia, serif;color:red;background-color:white;display:none;" id="fila_longitud">-00.00000</p>
- <p style="font: italic bold 12px/15px Georgia, serif;color:red;background-color:white;display:none;" id="fila_fecha">0000-00-00</p>
- <p style="font: italic bold 12px/15px Georgia, serif;color:red;background-color:white;display:none;" id="fila_hora"> 00:00:00</p>
- <p style="font: italic bold 12px/15px Georgia, serif;color:red;background-color:white;display:none;" id="peso">0kg</p>
+ </div> --><!--LATITUD LONGITUD ARRIBA DEL MAPA-->
+ <p style="font: italic bold 12px/15px Georgia, serif;color:red;background-color:white;" id="fila_latitud">00.00000</p>
+ <p style="font: italic bold 12px/15px Georgia, serif;color:red;background-color:white;" id="fila_longitud">-00.00000</p>
+ <p style="font: italic bold 12px/15px Georgia, serif;color:red;background-color:white;" id="fila_fecha">0000-00-00</p>
+ <p style="font: italic bold 12px/15px Georgia, serif;color:red;background-color:white;" id="fila_hora"> 00:00:00</p>
+ <p style="font: italic bold 12px/15px Georgia, serif;color:red;background-color:white;" id="peso">0kg</p>
 
  <div id="divmenu" class="AnimacionDerecha">
 
@@ -239,6 +225,21 @@ a {
     </div>
 
 
+ <div id="googleMap"></div>
+ <input type ="button" id="Boton_grafica" value = 'Graficar tiempo real' onclick="promptForTwo(); return false;"/>
+
+ <input type="button" id="Boton_Real24" value="Tiempo Real" onclick="Consulta_Real();">
+ <p class="auto"><input type="text" id="autoc"/></p>
+
+ <select id="seleccion" onChange="Centrar()"><option>Centrar Mapa</option></select>
+ <input type="button" id="btHist" value="Historico" onclick="MostrarHistoricos()">
+
+ <input type="button" id="Marcar_Recorrido" value="Marcar Recorrido" onclick="Marcar_Recorrido()">
+<div id="ListaPesos"></div>
+ <div id="ListaCheckBoxes">
+ <input type="button" id="btAdd" value="Cargar Vehiculos" onclick="CargarVehiculos()"/>
+
+ </div>
 
 
  <img id="Imagen" src="images/ajax-loader.gif">
@@ -249,10 +250,8 @@ a {
 
     </div>
 
- <script type="text/javascript">
- var Usuario = "<? echo $_SESSION['user']; ?>";
- var Cargo = "<? echo $_SESSION['cargo']; ?>";
- </script>
+ </section>
+
  <script src="js/Funciones/CodigoMapa.js"></script>
 
 </body>

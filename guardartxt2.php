@@ -13,7 +13,7 @@ fwrite($file,"----------- \n\n");
 
 fclose($file);
 
-echo "Datos guardados satisfaxctoriamente";
+echo "Datos guardados satisfactoriamente";
 
 
 

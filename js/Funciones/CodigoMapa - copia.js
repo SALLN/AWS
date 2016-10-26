@@ -30,14 +30,8 @@ var separador = "      ";
 var VigilarInterval;
 var Recorrido_Marcado=[];
 var Saltos;
-var vie;
+
 var Colores={0:'red',1:'blue',2:'magenta',3:'coral',4:'green',5:'cyan',6:'darkgoldenrod',7:'darkorange',8:'darkslateblue'};
-var Vig_Recorrido=true;
-
-//var phhhp = <?php echo "yee";?>;
-
-//console.log(phhhp);
-
 
 var apiKey = 'AIzaSyCF6NfbnvzeseQoQPP5Bh6iSHA3_fcHu1g';
 
@@ -67,18 +61,13 @@ map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementBy
 
 map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('peso'));
 
+map.controls[google.maps.ControlPosition.RIGHT_CENTER].push( document.getElementById('Boton_Real24'));
+
 map.controls[google.maps.ControlPosition.LEFT_TOP].push(  document.getElementById('seleccion'));
 
-map.controls[google.maps.ControlPosition.LEFT_TOP].push(  document.getElementById('Marcar_Recorrido'));
+map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(  document.getElementById('Marcar_Recorrido'));
 
-map.controls[google.maps.ControlPosition.LEFT_TOP].push(  document.getElementById('Boton_Rutas'));
-
-map.controls[google.maps.ControlPosition.LEFT_TOP].push( document.getElementById('Boton_Real24'));
-
-map.controls[google.maps.ControlPosition.LEFT_TOP].push(  document.getElementById('btHist'));
-
-map.controls[google.maps.ControlPosition.LEFT_TOP].push(  document.getElementById('Cerrar_Sesion'));
-
+map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(  document.getElementById('btHist'));
 
 map.controls[google.maps.ControlPosition.LEFT_CENTER].push(  document.getElementById('ListaCheckBoxes'));
 
@@ -89,24 +78,10 @@ map.controls[google.maps.ControlPosition.TOP_CENTER].push(  document.getElementB
 var autocomplete = new google.maps.places.Autocomplete(    document.getElementById('autoc'));
 autocomplete.bindTo('bounds', map);
 autocomplete.addListener('place_changed', function() {
- var place = autocomplete.getPlace();
- if (place.geometry.viewport) {
-       map.fitBounds(place.geometry.viewport);
-       vie=place.geometry.viewport;
-       var merk =new google.maps.Marker({
-       position:new google.maps.LatLng(parseFloat(vie['f']['f']),parseFloat(vie['b']['b'])),
-       map: map
-       });
-
-       var merk2 =new google.maps.Marker({
-       position:new google.maps.LatLng(parseFloat(vie['f']['b']),parseFloat(vie['b']['f'])),
-       map: map
-       });
-
-
-       console.log(place.geometry.viewport);    }
- else {       map.setCenter(place.geometry.location); console.log(place.geometry.location);       map.setZoom(16);    }
- });
+var place = autocomplete.getPlace();
+if (place.geometry.viewport) {      map.fitBounds(place.geometry.viewport);    }
+else {       map.setCenter(place.geometry.location);       map.setZoom(16);    }
+});
 
 google.maps.LatLng.prototype.kmTo = function(a){
     var e = Math, ra = e.PI/180;
@@ -131,20 +106,32 @@ $('#Tiempo_Hora2').timepicker  ({   showMinutes: false,    showPeriod: true,    
 $('#Tiempo_Minuto2').timepicker({   showHours: false,      minutes: { interval: 1 },    rows: 6    	});
 
 
-if(Cargo=="vehiculo"){
-document.getElementById('Marcar_Recorrido').style.display='none';
-document.getElementById('btHist').style.display='none';
-document.getElementById('Boton_Real24').style.display='none';
-document.getElementById('Boton_grafica').style.display='none';
-}
+function promptForTwo() {
 
-var Recorrido_o_Real=null;
+  var a = document.createElement("a");
+  a.target = "_blank";
+  a.href = "http://ticollcloud.ddns.net/AWS/Grafica_TiempoReal.html";
+  a.click();
+
+ }
+
+function promptForHist() {
+
+  var a = document.createElement("a");
+  a.target = "_blank";
+  a.href = "http://ticollcloud.ddns.net/AWS/Grafica_Historico.html?fechainicio="+Fecha_Inicio_PHP+"_"+Hora_Inicio_PHP+"&fechafinal="+Fecha_Final_PHP+"_"+Hora_Final_PHP;
+  a.click();
+
+
+ }
+
 function Marcar_Recorrido(){
 
-
+        flotante(1);
+        
         var texto_añadir=Obtener_Hora()+separador+"Inicio Crear Recorrido";
-
-        Texto_txt.push(texto_añadir);        Texto_txt.push("\r\n");
+        Texto_txt.push(texto_añadir);
+        Texto_txt.push("\r\n");
 
         $.post("hora_servidor.php");
 
@@ -152,8 +139,8 @@ function Marcar_Recorrido(){
 
         Recorrido_Marcado.push(new google.maps.LatLng(parseFloat(e.latLng.lat()),parseFloat(e.latLng.lng())));
         var texto_añadir=e.latLng.lat()+","+e.latLng.lng();
-
-        Texto_txt.push(texto_añadir);        Texto_txt.push("\r\n");
+        Texto_txt.push(texto_añadir);
+        Texto_txt.push("\r\n");
         var center2 = new google.maps.LatLng(parseFloat(e.latLng.lat()),parseFloat(e.latLng.lng()));
         var draw_circle = new google.maps.Circle({ center: center2, radius: 20, strokeColor: "#FF0000", strokeOpacity: 1,
         strokeWeight: 0, fillColor: "#FF0000", fillOpacity: 0.2, map: map       });
@@ -165,7 +152,6 @@ function Marcar_Recorrido(){
         map.addListener("rightclick", function(e) {
 
             var texto_añadir=Obtener_Hora()+separador+"Recorrido Creado";
-
             Texto_txt.push(texto_añadir);            Texto_txt.push("\r\n");
 
             document.getElementById('Imagen').style.display='inline';
@@ -204,59 +190,8 @@ function Marcar_Recorrido(){
          }
     var geocoder= new google.maps.Geocoder();
 
-function SeleccionVehiculos(){
-
-      if (Recorrido_o_Real=="Recorrido") {
-        Marcar_Recorrido();
-      }else if (Recorrido_o_Real=="Real") {
-        Consulta_Real();
-      }
-        flotante(2);
-        LimpiarMapa();
-        Recargar_Vehiculos=true;
-        //MarkerInterval = setInterval(function(){SetMarkerVarios()}, 2000);
-        //document.getElementById("Seleccionar").style.display = 'none';
-        Solicitar_Despliegue=false;
-        for (i in Checkes){
-
-            if(Checkes[i] && !Tabla_Select[i])
-                {
-            var option = document.createElement("option");
-            option.text = Tabla_Usuarios[i].ID_VEHICULO;
-            option.style="font-weight: bold;color:"+Colores[i];
-            Select.add(option);
-            Tabla_Select[i]=true;
-                }
-        }
-
-        //for (i=0;i<Cont_CrearHTML;i++){ document.getElementById("Check"+i).style.display = 'none'; document.getElementById("H"+i).style.display = 'none';    }
-        //SetMarkerVarios();
-        //document.getElementById("ListaCheckBoxes").style.height ='1px';
-     }
-
-function flotante(tipo){
-     	if (tipo==1){
-     	//Si hacemos clic en abrir mostramos el fondo negro y el flotante
-     	$('#contenedor2').show();
-        $('#flotante').animate({           marginTop: "20%"         });
-        Recorrido_o_Real="Recorrido";
-        CargarVehiculos();
-     	}
-      if (tipo==3){
-      //Si hacemos clic en abrir mostramos el fondo negro y el flotante
-      $('#contenedor2').show();
-        $('#flotante').animate({           marginTop: "20%"         });
-        Recorrido_o_Real="Real";
-        CargarVehiculos();
-      }
-     	if (tipo==2){
-      $('#flotante').animate({           marginTop: "-756px"         }); //Si hacemos clic en cerrar, deslizamos el flotante hacia arriba
-     	setTimeout(function(){ 	$('#contenedor2').hide();     	},500); //Una vez ocultado el flotante cerramos el fondo negro
-         	}
-
-             }
-
 function Obtener_Direcciones(){
+
 
     var direccion;
 
@@ -322,10 +257,12 @@ function CrearTabla(){
  });
     $('#ListaPesos').append("<br>");
     $('#ListaPesos').append('<table style="border: 1px solid white;"> ');
-    $('#ListaPesos').append('<tr><td> PUNTO   </td><td>  DIRECCION  </td><td>  PESO  </td> </tr>');
+    $('#ListaPesos').append('<tr><td> PUNTO   </td>'+/*<td> LATITUD   </td><td>  LONGITUD  </td>*/'<td>  DIRECCION  </td><td>  PESO  </td> </tr>');
 
     for (i in Direcciones){
-        $('#ListaPesos').append('<tr><td>'+i+'</td></td><td><input style="border: 1px solid transparent;" id=Peso value="'+Direcciones[i]+'"></input></td><td class="editpesos"><input style="border: 1px solid transparent;" id=Peso'+i
+        $('#ListaPesos').append('<tr><td>'+i+'</td>'/*<td>'+Recorrido_Marcado[i].lat()+'</td><td>'
+        +Recorrido_Marcado[i].lng()*/+'</td><td>'+Direcciones[i]
+        +'</td><td class="editpesos"><input id=Peso'+i
         +' class=clapesos placeholder="Ingresar peso"></input> </td> </tr>');
     }
 
@@ -338,10 +275,7 @@ function CrearTabla(){
 function GuardarPesos(){
 
     //console.log("Guardar pesos");
-    for (i in Direcciones){
-      console.log(document.getElementById("Peso"+i).value);
-      if (document.getElementById("Peso"+i).value.length==0){console.log("nulll");}
-    }
+
     for (i in Direcciones){
 
         Pesos.push(document.getElementById("Peso"+i).value);
@@ -372,8 +306,11 @@ function GuardarPesos(){
         console.log(Info);
 
     //VigilarInterval = setInterval(function(){VigilarPesos()},1000);
- }
 }
+    }
+
+
+ var Vig_Recorrido=true;
 
 function VigilarPesos(){
 
@@ -492,8 +429,7 @@ function Centrar(){
  }
 
 function CargarVehiculos(){
-
-    document.getElementById("ListaCheckBoxes").style.height ='auto';
+    document.getElementById("flotante").style.height ='auto';
     clearInterval(MarkerInterval);
     if(Solicitar_Vehiculos){
         Cont_Vehiculos=0;
@@ -537,29 +473,52 @@ function CrearCheck(){
     Cont_CrearHTML=0;
     Solicitar_Vehiculos=false;
 
-    var divSubmit = document.createElement('div');
-    var lista23 = document.getElementById("ListaCheckBoxes");
-    document.getElementById("flotante").appendChild(lista23);
-    //$('#flotante').after(divSubmit);
+    var divSubmit = $(document.createElement('div'));
     $(divSubmit).append('<input type=button onclick="SeleccionVehiculos()" id="Seleccionar" value=Seleccionar />');
-    $('#ListaCheckBoxes').after(divSubmit);
+    $('#btAdd').after("<br>");
+    $('#btAdd').after(divSubmit);
  }
 
         Checkes[Cont_CrearHTML]=false;
         var texto=Tabla_Usuarios[Cont_CrearHTML].ID_VEHICULO;
         var divSubmit = $(document.createElement('div'));
 
-        $(divSubmit).append('<input type=checkbox onclick="Checkes['+Cont_CrearHTML+']=!Checkes['+Cont_CrearHTML+'];" id=Check'+Cont_CrearHTML+' style=position:absolute;margin-left:-30px;cursor:pointer;/>'+'<h5 id=H'+Cont_CrearHTML+' style=position:absolute;color:black;cursor:default;margin-left:-14px;margin-top:1px;>'+texto+'</h5>');
+        $(divSubmit).append('<input type=checkbox onclick="Checkes['+Cont_CrearHTML+']=!Checkes['+Cont_CrearHTML+'];" id=Check'+Cont_CrearHTML+' style=position:absolute;margin-left:-30px;cursor:pointer;/>'+'<h5 id=H'+Cont_CrearHTML+' style=position:absolute;color:white;cursor:default;margin-left:-14px;margin-top:1px;>'+texto+'</h5>');
 
         Cont_CrearHTML++;
-        $('#ListaCheckBoxes').after("<br>");
-        $('#ListaCheckBoxes').after(divSubmit);
-        $('#ListaCheckBoxes').after("<br>");
+        $('#btAdd').after(divSubmit);
+        $('#btAdd').after("<br>");
+        $('#btAdd').after("<br>");
     } else{
 
         document.getElementById("Seleccionar").style.display = 'inline';
         for (i=0;i<Cont_CrearHTML;i++){ document.getElementById("Check"+i).style.display = 'inline'; document.getElementById("H"+i).style.display = 'inline';    }
     }
+ }
+
+function SeleccionVehiculos(){
+
+    LimpiarMapa();
+    Recargar_Vehiculos=true;
+    //MarkerInterval = setInterval(function(){SetMarkerVarios()}, 2000);
+    Solicitar_Despliegue=false;
+    document.getElementById("Seleccionar").style.display = 'none';
+
+    for (i in Checkes){
+
+        if(Checkes[i] && !Tabla_Select[i])
+            {
+        var option = document.createElement("option");
+        option.text = Tabla_Usuarios[i].ID_VEHICULO;
+        option.style="font-weight: bold;color:"+Colores[i];
+        Select.add(option);
+        Tabla_Select[i]=true;
+            }
+    }
+
+    for (i=0;i<Cont_CrearHTML;i++){ document.getElementById("Check"+i).style.display = 'none'; document.getElementById("H"+i).style.display = 'none';    }
+    //SetMarkerVarios();
+    document.getElementById("ListaCheckBoxes").style.height ='1px';
  }
 
 function SetMarkerVarios(){
@@ -620,7 +579,6 @@ function Consulta_Real(){
 
     LimpiarMapa();
     OcultarHistoricos();
-
     for (i in PoliLinea_Real)        {   PoliLinea_Real[i].setMap(map); RealAgain[i]=0;       }
     clearInterval(MarkerInterval);
     MarkerInterval = setInterval(function(){SetMarkerVarios()}, 500);
@@ -745,18 +703,20 @@ function Consulta_Hora_Marker_Graficar(){
                 title: Num_Markers+" -- "+Tabla_Historico[Cont_Historico][i].FECHA_HORA+" -- "+peso+"kg",
                 icon: Icono_Historico[Cont_Historico]
                 });
-                      }
-                         }
-                            }
-                              }
+            }
+}
+        }
+        }
 
         Consulta_Hora_Marker_Graficar();
         promptForHist();
-          });
+    });
+
     }else{           Consulta_Hora_Marker_Graficar();             }
-   }
+ }
+
     //if(Cont_Historico==Tabla_Usuarios.length-1){    Distancia_KM();    /*Historico_Snap();*/    }
-   }
+ }
 
 function Consulta_Marker_Hora(){
 
@@ -944,20 +904,16 @@ function OcultarDistancia(){
 
 function MostrarHistoricos(){
     Hide_Hist=false;
-    //document.getElementById("divmenu").style="animation-duration:2s;animation-name:bounceInRight;";
-    //document.getElementById("divmenu").style.display = 'inline-block';
-    $('#contenedor2').show();
-      $('#divmenu').animate({           marginTop: "20%"         });
+    document.getElementById("divmenu").style="animation-duration:2s;animation-name:bounceInRight;";
+    document.getElementById("divmenu").style.display = 'inline-block';
+
  }
 
 function OcultarHistoricos(){
         if (!Hide_Hist){
-        //document.getElementById("divmenu").style="animation-duration:1s;animation-name:Steven;";
-        //document.getElementById("divmenu").style.display = 'inline-block';
-        //setTimeout(function(){ document.getElementById("divmenu").style.display = 'none'; }, 800);
-        $('#divmenu').animate({           marginTop: "-756px"         }); //Si hacemos clic en cerrar, deslizamos el flotante hacia arriba
-        setTimeout(function(){ 	$('#contenedor2').hide();     	},500); //Una vez ocultado el flotante cerramos el fondo negro
-
+        document.getElementById("divmenu").style="animation-duration:1s;animation-name:Steven;";
+        document.getElementById("divmenu").style.display = 'inline-block';
+        setTimeout(function(){ document.getElementById("divmenu").style.display = 'none'; }, 800);
         }
         Hide_Hist=true;
          }
@@ -1074,97 +1030,101 @@ function Obtener_Hora(){
  return fecha_serv;
 }
 
-function promptForTwo() {
-   var a = document.createElement("a");
-   a.target = "_blank";
-   a.href = "http://ticollcloud.ddns.net/AWS/Grafica_TiempoReal.html";
-   a.click();
-  }
 
-function promptForHist() {
-   var a = document.createElement("a");
-   a.target = "_blank";
-   a.href = "http://ticollcloud.ddns.net/AWS/Grafica_Historico.html?fechainicio="+Fecha_Inicio_PHP+"_"+Hora_Inicio_PHP+"&fechafinal="+Fecha_Final_PHP+"_"+Hora_Final_PHP;
-   a.click();
-  }
+function flotante(tipo){
 
-  /*
-  var Ruta_Snap=[];var PoliLinea_Snap = [];
-  var latlng;var Snap=false;var Ruta_Snap_Aux=[];var NumMarkerSnap=0;
-  var Ent=0;var Res;var t=0;var Tabla_Residuo;
-  var cont=[];cont[0]=0;cont[1]=0;var Tabla_Entero;var Cont_Snap=0;var Tabla_Long;var Marker_Snap=[];
-  var Cont_Aux=100;    var Contador=0;
-  function Historico_Snap(){
-     console.log(Contador);
+	if (tipo==1){
+	//Si hacemos clic en abrir mostramos el fondo negro y el flotante
+	$('#contenedor').show();
+    $('#flotante').animate({
+      marginTop: "-152px"
+    });
+	}
+	if (tipo==2){
+	//Si hacemos clic en cerrar, deslizamos el flotante hacia arriba
+    $('#flotante').animate({
+      marginTop: "-756px"
+    });
+	//Una vez ocultado el flotante cerramos el fondo negro
+	setTimeout(function(){
+	$('#contenedor').hide();
 
-     if(t==0 || Contador!=Cont_Aux){
+	},500)
+	}
 
-     PoliLinea_Snap[Contador].setMap(map);
-     NumMarkerSnap=0;
-     Cont_Snap=0;
-     Ent=0;
-     Tabla_Long    = Tabla_Historico[Contador].length;
-     Tabla_Entero  = parseInt(Tabla_Long/100);
-     Tabla_Residuo = Tabla_Long%100;
-
-     if(Tabla_Residuo>0) Tabla_Entero++;
-     }
-     Cont_Aux=Contador;
-     t=1;
-     Ent++;
-
-     if(Ent==Tabla_Entero){ Res=Tabla_Residuo}
-     else {Res=100;}
-
-     Ruta_Snap_Aux=[];
-
-     for(i=0;i<Res;i++){
-         console.log("se mete");
-         Ruta_Snap_Aux.push(Tabla_Historico[Contador][i+Cont_Snap].LATITUD+","+Tabla_Historico[Contador][i+Cont_Snap].LONGITUD);
-     }
-
-     Cont_Snap=Cont_Snap+100;
-
-     $.get('https://roads.googleapis.com/v1/snapToRoads', {
-     interpolate: true,
-     key: apiKey,
-     path: Ruta_Snap_Aux.join('|')
-
-     },function(data) {
-
-         for (i = 0; i < data.snappedPoints.length; i++) {
-
-             latlng = new google.maps.LatLng(data.snappedPoints[i].location.latitude,data.snappedPoints[i].location.longitude);
-             Marker_Snap[NumMarkerSnap]=new google.maps.Marker({
-                 position:latlng,
-                 map: map,
-                 icon: Icono_Historico,
-                 title: String(NumMarkerSnap)
-             });
-             Ruta_Snap[Contador].push(latlng);
-             NumMarkerSnap++;
-         }
-
-         map.setCenter(latlng);
-         cont[Contador]++;
-         console.log("el cont es: "+cont[Contador]+"  y el conthis es: "+Contador+" el tablaentero es: "+Tabla_Entero);
-         if(cont[Contador]==Tabla_Entero)
-         {
-             PoliLinea_Snap[Contador].setPath(Ruta_Snap[Contador]);
-             Contador++;
-             t=0;
-             if(Contador!=Tabla_Usuarios.length-1){
-             Historico_Snap();
-             }
-         }else{
-             Historico_Snap();
-         }
-     });
-  }
-  */
-
-function CerrarSesion(){
-  var a = document.createElement("a");
-  a.href = "http://localhost/AWS/INICIAR_SESION/logout.php";
-  a.click();
 }
+
+ /*
+ var Ruta_Snap=[];var PoliLinea_Snap = [];
+ var latlng;var Snap=false;var Ruta_Snap_Aux=[];var NumMarkerSnap=0;
+ var Ent=0;var Res;var t=0;var Tabla_Residuo;
+ var cont=[];cont[0]=0;cont[1]=0;var Tabla_Entero;var Cont_Snap=0;var Tabla_Long;var Marker_Snap=[];
+ var Cont_Aux=100;    var Contador=0;
+ function Historico_Snap(){
+    console.log(Contador);
+
+    if(t==0 || Contador!=Cont_Aux){
+
+    PoliLinea_Snap[Contador].setMap(map);
+    NumMarkerSnap=0;
+    Cont_Snap=0;
+    Ent=0;
+    Tabla_Long    = Tabla_Historico[Contador].length;
+    Tabla_Entero  = parseInt(Tabla_Long/100);
+    Tabla_Residuo = Tabla_Long%100;
+
+    if(Tabla_Residuo>0) Tabla_Entero++;
+    }
+    Cont_Aux=Contador;
+    t=1;
+    Ent++;
+
+    if(Ent==Tabla_Entero){ Res=Tabla_Residuo}
+    else {Res=100;}
+
+    Ruta_Snap_Aux=[];
+
+    for(i=0;i<Res;i++){
+        console.log("se mete");
+        Ruta_Snap_Aux.push(Tabla_Historico[Contador][i+Cont_Snap].LATITUD+","+Tabla_Historico[Contador][i+Cont_Snap].LONGITUD);
+    }
+
+    Cont_Snap=Cont_Snap+100;
+
+    $.get('https://roads.googleapis.com/v1/snapToRoads', {
+    interpolate: true,
+    key: apiKey,
+    path: Ruta_Snap_Aux.join('|')
+
+    },function(data) {
+
+        for (i = 0; i < data.snappedPoints.length; i++) {
+
+            latlng = new google.maps.LatLng(data.snappedPoints[i].location.latitude,data.snappedPoints[i].location.longitude);
+            Marker_Snap[NumMarkerSnap]=new google.maps.Marker({
+                position:latlng,
+                map: map,
+                icon: Icono_Historico,
+                title: String(NumMarkerSnap)
+            });
+            Ruta_Snap[Contador].push(latlng);
+            NumMarkerSnap++;
+        }
+
+        map.setCenter(latlng);
+        cont[Contador]++;
+        console.log("el cont es: "+cont[Contador]+"  y el conthis es: "+Contador+" el tablaentero es: "+Tabla_Entero);
+        if(cont[Contador]==Tabla_Entero)
+        {
+            PoliLinea_Snap[Contador].setPath(Ruta_Snap[Contador]);
+            Contador++;
+            t=0;
+            if(Contador!=Tabla_Usuarios.length-1){
+            Historico_Snap();
+            }
+        }else{
+            Historico_Snap();
+        }
+    });
+ }
+ */

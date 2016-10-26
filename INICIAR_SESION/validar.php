@@ -19,6 +19,7 @@
 				if (mysql_num_rows($consulta)>0) {
 					$row = mysql_fetch_array($consulta);
 					$_SESSION["user"] = $row['user'];
+					$_SESSION["cargo"] = $row['cargo'];
 				  	echo 'Iniciando sesión para '.$_SESSION['user'].' <p>';
 					echo '<script> window.location="../mapa.php"; </script>';
 				}

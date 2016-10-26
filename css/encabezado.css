@@ -1,6 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
-  
+
 p {display: inline;}
 
 									/* 		.CLASS  #ID    	*/
@@ -23,23 +23,7 @@ p {display: inline;}
 
 #fila_longitud,#fila_latitud,#fila_fecha,#fila_hora{       }
 
-#googleMap{ margin-left: 0.5em;  width:98%;		height:26em; margin-top:-1em;	}
-
-#Boton_Real24{
-    background-color: #00c7fc;
-    color: white;
-    display: inline-block;
-    font-size: 13px;
-    padding: 3px 5px;
-    text-align: center;
-    cursor: pointer;
-    border: 1px solid transparent;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-#Boton_Real24:hover{
-    color:rebeccapurple;
-}
+#googleMap{ position: absolute;  width:100%; height:100%;  	}
 
 #autoc {        width: 175px; height: 25px; box-sizing: border-box; border-radius: 5px;  font-size: 15px; border-color: red; }
 
@@ -85,7 +69,6 @@ p {display: inline;}
 }
 
 #ListaCheckBoxes {
-    position: absolute;
     display:inline-block;
     background-color: black;
     z-index: 10;
@@ -98,7 +81,7 @@ p {display: inline;}
      font-size: 12px;
      font-weight: bold;
      text-align: center;
-     width: auto;     
+     width: auto;
      border: 2px solid black;
      white-space: nowrap;
 }
@@ -106,39 +89,40 @@ p {display: inline;}
 #seleccion {
     color: black;
     font-weight: bold;
+    display:none;
 }
 
 #Fecha_Inicio {
     position: absolute;
-    margin-left: 170px; 
+    margin-left: 170px;
     margin-top: -30px;
 }
 
 #Fecha_Final {
-    
+
     position: absolute;
-    margin-left: -15px; 
-    margin-top: -30px;   
-    
+    margin-left: -15px;
+    margin-top: -30px;
+
 }
 
 #Tiempo_Hora1 {
-    width: 39px;  
-    text-align:center; 
-    background-color: transparent; 
+    width: 39px;
+    text-align:center;
+    background-color: transparent;
     border:none;
     cursor:pointer;
 }
 
 #Tiempo_Hora2 {
-    width: 39px;  
-    text-align:center; 
-    background-color:transparent; 
+    width: 39px;
+    text-align:center;
+    background-color:transparent;
     border:none;
     cursor:pointer;
 }
 .TextoHistorico{
-    
+
     color:white;
     font-weight: bold;
     font-size: 13px;
@@ -161,7 +145,7 @@ p {display: inline;}
 }
 
 #mensaje {
-    
+
   display: block;
   width: 100%;
   height: 150px;
@@ -179,37 +163,22 @@ p {display: inline;}
 
 #divmenu {
     background-color:black;
-    width:260px;
+    width:265px;
     height:inherit;
-    position:absolute;
-    display: none;
-    z-index: 10;
-    margin-left:29.9%; /*400*/
-    margin-top:110px;
+    position:fixed;
+    z-index: 999;
+    margin-left:50%; /*400*/
+    margin-top:-2810px;
 }
 
 .AnimacionDerecha {
-  
+
  /* animation-duration: 2s;
   animation-name: Steven;*/
 }
 
-#btHist {
-    
-    height:20px;
-    background-color: #00c7fc;
-    color: white;
-    display: inline-block;
-    padding:0 5px;
-    font-size: 14px;
-    text-align: center;
-    cursor: pointer;
-    border: 1px solid transparent;
-    font-weight: bold;
-}
-#btHist:hover{
-    color:rebeccapurple;
-}
+
+
 
 #btAdd {
     background-color: #00c7fc;
@@ -227,7 +196,7 @@ p {display: inline;}
 }
 
 #Seleccionar {
-    
+
     background-color: #00c7fc;
     color: white;
     display: inline-block;
@@ -244,7 +213,7 @@ p {display: inline;}
 }
 
 #Seleccionar2 {
-    
+
     background-color: #00c7fc;
     color: white;
     display: inline-block;
@@ -261,14 +230,14 @@ p {display: inline;}
 }
 
 #Imagen{
-    
+
     margin-top: 20px;
     background-color: black;
     display: none;
 }
 
 #Boton_Real23 {
-    
+
     background-color: #00c7fc;
     color: white;
     display: inline-block;
@@ -278,7 +247,7 @@ p {display: inline;}
     text-align: center;
     cursor: pointer;
     border: 1px solid transparent;
-    
+
 }
 #Boton_Real23:hover{
    color:rebeccapurple;
@@ -345,17 +314,7 @@ p {display: inline;}
     float:left;
 }
 
-#Marcar_Recorrido {
-    background-color: #00c7fc;
-    color: white;
-    display: inline-block;
-    padding: 2px 10px;
-    font-size: 14px;
-    font-weight: bold;
-    text-align: center;
-    cursor: pointer;
-    border: 1px solid transparent;
-}
+
 #Marcar_Recorrido:hover{
     color:rebeccapurple;
 }
@@ -367,7 +326,7 @@ p {display: inline;}
 }
 
 #Boton_grafica {
-        background-color: #00c7fc;
+    background-color: #00c7fc;
     color: white;
     display: inline-block;
     font-size: 13px;
@@ -377,16 +336,42 @@ p {display: inline;}
     border: 1px solid transparent;
     font-weight: bold;
     margin-bottom: 5px;
+    margin-top:5px;
+    display:none;
 }
 #Boton_grafica:hover{
     color:rebeccapurple;
 }
 
 #Saltos {
-        width: 175px;
+    width: 175px;
     height: 25px;
     text-align:center;
     background-color:transparent;
     border: 1px solid #1E2172;
     padding:5px;
+}
+
+.Botones_Mapa {
+
+    background-color: #00c7fc;
+    color: white;
+    display: inline-block;
+    font-size: 12px;
+    padding: 3px 5px;
+    width: 8%;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid transparent;
+    font-weight: bold;
+    margin-top:5px;
+    margin-bottom: 5px;
+}
+
+.Botones_Mapa:hover{
+    color:rebeccapurple;
+}
+
+#Cerrar_Sesion:hover {
+    color:rebeccapurple;
 }
