@@ -57,17 +57,6 @@ map.controls[google.maps.ControlPosition.LEFT_CENTER].push( document.getElementB
 
 map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('autoc'));
 
-map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_latitud'));
-
-map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_longitud'));
-
-map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_fecha'));
-
-map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_hora'));
-
-map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('peso'));
-
-map.controls[google.maps.ControlPosition.LEFT_TOP].push(  document.getElementById('seleccion'));
 
 map.controls[google.maps.ControlPosition.LEFT_TOP].push(  document.getElementById('Marcar_Recorrido'));
 
@@ -85,6 +74,7 @@ map.controls[google.maps.ControlPosition.LEFT_CENTER].push(  document.getElement
 map.controls[google.maps.ControlPosition.TOP_CENTER].push(  document.getElementById('ListaPesos'));
 
 map.controls[google.maps.ControlPosition.TOP_CENTER].push(  document.getElementById('Imagen'));
+
 
 var autocomplete = new google.maps.places.Autocomplete(    document.getElementById('autoc'));
 autocomplete.bindTo('bounds', map);
@@ -292,7 +282,6 @@ function CargarRecorrido(){
       });
 
  }
-
 
 function GuardarPesos(){
     Peso_Vacio=false;
@@ -618,7 +607,7 @@ function SetMarkerVarios(){
 
                         document.getElementById('fila_latitud').innerHTML  = Latitud;
                         document.getElementById('fila_fecha').innerHTML    = Fecha_Hora.substring(0,10); document.getElementById('fila_longitud').innerHTML = Longitud;
-                        document.getElementById('fila_hora').innerHTML     = Fecha_Hora.substring(11,19); document.getElementById('peso').innerHTML= peso;
+                        document.getElementById('fila_hora').innerHTML     = Fecha_Hora.substring(11,19); document.getElementById('peso').innerHTML= peso+"kg";
  }
                     if (Latitud!=LatAux[i] || Longitud!=LonAux[i] || RealAgain[i]==0 || Recargar_Vehiculos ){
                         LatAux[i] =Latitud;    LonAux[i] =Longitud;
@@ -650,6 +639,13 @@ function Consulta_Real(){
 
     LimpiarMapa();
     OcultarHistoricos();
+
+    document.getElementById('seleccion').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('seleccion'));
+    document.getElementById('fila_latitud').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_latitud'));
+    document.getElementById('fila_longitud').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_longitud'));
+    document.getElementById('fila_fecha').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_fecha'));
+    document.getElementById('fila_hora').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_hora'));
+    document.getElementById('peso').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('peso'));
 
     for (i in PoliLinea_Real)        {   PoliLinea_Real[i].setMap(map); RealAgain[i]=0;       }
     clearInterval(MarkerInterval);

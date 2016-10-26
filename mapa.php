@@ -79,7 +79,7 @@ a {
   padding: 0px; position: fixed; width: auto; height:auto; background-color: #fff; border-radius: 3px;
 }
 
- 
+
 
 </style>
 
@@ -104,91 +104,19 @@ a {
 
 <div id="contenedor2" style="display:none">
 
-<div id="flotante"><h3>Seleccione el vehiculo</h3>
-     <div id="ListaCheckBoxes">
- <!--<input type="button" id="btAdd" value="Cargar Vehiculos" onclick="CargarVehiculos()"/>-->
-
- </div>
-<h5 style="margin-left:8.5%;margin-top:-2.5%;position:fixed;"><a onClick="flotante(2)">X</a></h5>
+  <div id="flotante"><h3>Seleccione el vehiculo</h3>
+      <div id="ListaCheckBoxes"></div>
+      <h5 style="margin-left:8.5%;margin-top:-2.5%;position:fixed;"><a onClick="flotante(2)">X</a></h5>
+   </div>
+  <div id="fondo"></div>
 </div>
 
-<div id="fondo"></div>
-</div>
 
-   <!--<div class="container" style="margin-left:150px;">
-     <div class="row">
-
-     <div class="col-md-2 col-sm-12 wow fadeInLeft">
-            <div class="media">
-
-                <a href="#" class="pull-left">
-                    <img src="images/longi.jpg" alt="Ruler">
-                </a>
-                <div class="media-body">
-                    <h3>Latitud</h3>
-                    <p id="fila_latitud">00.00000</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-2 col-sm-12 wow fadeInRight" data-wow-delay="0.2s">
-            <div class="media">
-                <a href="#" class="pull-left">
-                    <img src="images/longi.jpg" alt="Ruler">
-                </a>
-                <div class="media-body">
-                    <h3>Longitud</h3>
-                    <p id="fila_longitud">-00.00000</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-2 col-sm-12 wow fadeInLeft">
-            <div class="media">
-                <a href="#" class="pull-left">
-                    <img src="images/fecha.jpg" alt="Ruler">
-                </a>
-                <div class="media-body">
-                    <h3>Fecha</h3>
-                    <p id="fila_fecha">0000-00-00</p>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="col-md-2 col-sm-12 wow fadeInLeft" data-wow-delay="0.2s">
-            <div class="media">
-                <a href="#" class="pull-left">
-                    <img src="images/hora.jpg" alt="Ruler">
-                </a>
-                <div class="media-body">
-                    <h3>Hora</h3>
-                    <p id="fila_hora"> 00:00:00</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-2 col-sm-12 wow fadeInRight" data-wow-delay="0.2s">
-            <div class="media">
-                <a href="#" class="pull-left">
-                    <img src="images/balanza2.jpg" alt="Ruler">
-                </a>
-                <div class="media-body">
-                    <h3>Peso</h3>
-                    <p id="peso">0kg</p>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
- </div> --><!--LATITUD LONGITUD ARRIBA DEL MAPA-->
-
- <p style="font: italic bold 12px/15px Georgia, serif;color:red;background-color:white;display:none;" id="fila_latitud">00.00000</p>
- <p style="font: italic bold 12px/15px Georgia, serif;color:red;background-color:white;display:none;" id="fila_longitud">-00.00000</p>
- <p style="font: italic bold 12px/15px Georgia, serif;color:red;background-color:white;display:none;" id="fila_fecha">0000-00-00</p>
- <p style="font: italic bold 12px/15px Georgia, serif;color:red;background-color:white;display:none;" id="fila_hora"> 00:00:00</p>
- <p style="font: italic bold 12px/15px Georgia, serif;color:red;background-color:white;display:none;" id="peso">0kg</p>
+ <h3 style="font: italic bold 12px/15px Georgia, serif;color:red;background-color:white;display:none;width:90px;height:20px;" id="fila_latitud">00.00000</h3>
+ <h3 style="font: italic bold 12px/15px Georgia, serif;color:red;background-color:white;display:none;width:90px;height:20px;" id="fila_longitud">-00.00000</h3>
+ <h3 style="font: italic bold 12px/15px Georgia, serif;color:red;background-color:white;display:none;width:90px;height:20px;" id="fila_fecha">0000-00-00</h3>
+ <h3 style="font: italic bold 12px/15px Georgia, serif;color:red;background-color:white;display:none;width:90px;height:20px;" id="fila_hora"> 00:00:00</h3>
+ <h3 style="font: italic bold 12px/15px Georgia, serif;color:red;background-color:white;display:none;width:90px;height:20px;" id="peso">0kg</h3>
 
  <div id="divmenu" class="AnimacionDerecha">
 
