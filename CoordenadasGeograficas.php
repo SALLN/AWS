@@ -32,9 +32,9 @@ session_start();
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDULHVVSQ-vjy1ScgiJU0hPuKb-IRt6bmw&libraries=geometry,drawing,places"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
- 
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+
     <script src="js/graphs.js"></script>
-    <!--<script src="js/jquery-3.1.0.min.js"></script>-->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.nav.js"></script>
     <script src="js/jquery.mixitup.min.js"></script>
