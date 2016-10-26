@@ -380,7 +380,7 @@ function GuardarPesos(){
 
  }else{alert("Casilla de peso vacía")}
 }
-
+ 
 function VigilarPesos(){
 
     Pos_Actual=new google.maps.LatLng(Latitud,Longitud);

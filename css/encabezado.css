@@ -10,7 +10,7 @@ p {display: inline;}
 .imagen_taxi{           position:absolute;           top:0.625em;           right:0.313em;           }
 
 .titulo{           margin: 0em;           top: 0.313em;           font-size:3em;           }
-
+ 
 .parametros{           padding-left: 130px;           }
 
 .historicoinicio{		position:absolute; 	right: 0.1em;	 top: 7.25em;	}
