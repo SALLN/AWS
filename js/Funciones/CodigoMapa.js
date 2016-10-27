@@ -258,7 +258,6 @@ function flotante(tipo){
       $('#contenedor2').show();
         $('#flotante').animate({           marginTop: "20%"         });
         Recorrido_o_Real="Cargar";
-        console.log(Cargo);
         if (Cargo=="admin"){        CargarVehiculos(); }
         else{ CargarRecorrido();  }
       }
@@ -289,8 +288,8 @@ function CargarRecorrido(){
   var orig;
   var desti;
 
-if (Cargo=="admin"){  for (i in Checkes){  if (Checkes[i]){   Placa = Tabla_Usuarios[i].ID_VEHICULO  }    }    }
-else{Vehiculo= Usuario};
+ if (Cargo=="admin"){  for (i in Checkes){  if (Checkes[i]){   Placa = Tabla_Usuarios[i].ID_VEHICULO  }    }    }
+ else{Vehiculo= Usuario};
 
   $.post("MySQL/Recorridos.php", {Modo: "Cargar", Vehiculo: Placa  }).done(
       function( data ) {

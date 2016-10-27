@@ -1,6 +1,5 @@
 <?php
 session_start();
-$usua = "$_SESSION[user]";
 if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION/inicio_sesion.php"; </script>';   }
 
 ?>
@@ -181,6 +180,8 @@ a {
  <script type="text/javascript">
  var Usuario = "<? echo $_SESSION['user']; ?>";
  var Cargo = "<? echo $_SESSION['cargo']; ?>";
+ console.log(Usuario);
+ console.log(Cargo);
  </script>
  <script src="js/Funciones/CodigoMapa.js"></script>
 
