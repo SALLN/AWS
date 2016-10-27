@@ -1290,6 +1290,6 @@ function promptForHist() {
 
 function CerrarSesion(){
   var a = document.createElement("a");
-  a.href = "http://localhost/AWS/INICIAR_SESION/logout.php";
+  a.href = "http://ticollcloud.ddns.net/AWS/INICIAR_SESION/logout.php";
   a.click();
 }
