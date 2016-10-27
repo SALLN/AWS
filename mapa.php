@@ -96,8 +96,9 @@ a {
  <select id="seleccion" onChange="Centrar()"><option>Centrar Mapa</option></select>
  <p class="auto"><input type="text" id="autoc"/></p>
 
-<div id="ListaPesos"></div>
+<div id="ListaPesos"> </div>
 
+<div id="ListaPesos3">  <div id="ListaPesos2"></div>   </div>
 
 <!--<h1>Ventana flotante animada con javascript y jquery</h1>
 <h3><a onClick="flotante(1)">Abrir ventana</a></h3>-->

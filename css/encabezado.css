@@ -10,7 +10,7 @@ p {display: inline;}
 .imagen_taxi{           position:absolute;           top:0.625em;           right:0.313em;           }
 
 .titulo{           margin: 0em;           top: 0.313em;           font-size:3em;           }
- 
+
 .parametros{           padding-left: 130px;           }
 
 .historicoinicio{		position:absolute; 	right: 0.1em;	 top: 7.25em;	}
@@ -282,7 +282,7 @@ p {display: inline;}
 }
 
 #Distancia_Recorrida {
-        height:20px;
+    height:20px;
     background-color: #00c7fc;
     color: white;
     display: inline-block;
@@ -322,7 +322,7 @@ p {display: inline;}
 #ListaPesos {
     height:auto;
     width:auto;
-    background-color: white;
+    background-color: #D7D7D7;
 }
 
 #Boton_grafica {
@@ -357,9 +357,9 @@ p {display: inline;}
     background-color: #00c7fc;
     color: white;
     display: inline-block;
-    font-size: 95%;
+    font-size: 13;
     padding: 3px 5px;
-    width: 8%;
+    width: 100px;
     text-align: center;
     cursor: pointer;
     border: 1px solid transparent;
@@ -374,4 +374,10 @@ p {display: inline;}
 
 #Cerrar_Sesion:hover {
     color:rebeccapurple;
+}
+
+#ListaPesos3 {
+    height:auto;
+    width:auto;
+    background-color: #D7D7D7;
 }

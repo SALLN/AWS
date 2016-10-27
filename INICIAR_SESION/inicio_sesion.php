@@ -5,30 +5,29 @@
 	}
 ?>
 <!DOCTYPE html>
-<html>
-
+<html lang="en" class="no-js">
 <head>
 
-	<link href="../css/inicio_sesion.css"=
-      rel="stylesheet" type="text/css">
-	<title>login Admin</title>
-	<meta charset="utf-8">
+<link rel="stylesheet" href="insesion.css">
+<script src="insesion.js"></script>
+
 
 </head>
-<body BACKGROUND="fondo.png" >
 
-	<div id="welcome">
-		<h1 style="color:white"> Bienvenido a Ticoll </h1>
-			<h4 style="color:white">Por favor inicie sesión</h4><br>
-			<form method="post" action="validar.php">
-				<h3 class="h1" style="color:white">Usuario</h3><input type="text" name="user" autocomplete="off" required><br>
-				<h3 class="h1" style="color:white">Contraseña</h3><input type="password" name="pw" autocomplete="off" required><br><br><br>
-				<input type="submit" class="btn btn-success" name="login" value="Ingresar">
-			</form>
-        
-           
-   </div>
-
-
+<body>
+<form method="post" action="validar.php">
+<div class='login'>
+  <h2>Sign in</h2>
+  <input name='user' placeholder='Username' type='text'/>
+  <input id='pw' name='pw' placeholder='Password' type='password'/>
+  <div class='remember'>
+    <input checked='' id='remember' name='remember' type='checkbox'/>
+    <label for='remember'></label>Remember me
+  </div>
+  <input type='submit' value='Sign in' name="login"/>
+  <a class='forgot' href='#'>Forgot your password?</a>
+</div>
+</form>
 </body>
-</html>
+
+<script class="cssdeck" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>

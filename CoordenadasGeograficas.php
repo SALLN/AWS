@@ -90,6 +90,16 @@ th,td,tr{
     text-align: center;
 }
 
+
+#fondo {
+  width: 100%; height: 100%; position: absolute; top: 0px; left: 0px; z-index: 990;opacity: 0.8;background:#000;
+}
+#flotante {
+  z-index: 90; border: 8px solid #fff; margin-top: -100%; left: 40%;
+  padding: 0px; position: fixed; width: auto; height:auto; background-color: #fff; border-radius: 3px;
+}
+
+
 </style>
 
 
@@ -108,7 +118,7 @@ th,td,tr{
                 <!-- logo -->
                 <h1 class="navbar-brand">
                     <a href="#body">
-                        <img src="images/iconoprueba.png" alt="Kasper Logo">
+                        <img src="images/icon.png" alt="Kasper Logo">
                     </a>
                 </h1>
                 <!-- /logo -->
@@ -116,10 +126,9 @@ th,td,tr{
                 <!-- main nav -->
                 <nav class="collapse navigation navbar-collapse navbar-right" role="navigation">
                     <ul id="nav" class="nav navbar-nav">
-                        <li class="current"><a href="#home">Inicio</a></li>
-                        <li><a href="javascript:void(0);" onclick="INICIAR_SESION();return false;">Iniciar Sesión</a></li>
-                        <li><a href="javascript:void(0);" onclick="REGISTRAR();return false;">Registrarse</a></li>
-                        <li><a href="#contact">Contacto</a></li>
+                        <li class="current"><a href="#home">HOME</a></li>
+                        <li><a href="javascript:void(0);" onclick="INICIAR_SESION();return false;">Sign In</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
 
 
                     </ul>
@@ -130,6 +139,10 @@ th,td,tr{
 
 <section id="home">
 
+
+
+
+
   <div id="home-carousel" class="carousel slide" data-interval="false">
          <ol class="carousel-indicators">
          <li data-target="#home-carousel" data-slide-to="0" class="active"></li>
@@ -137,36 +150,35 @@ th,td,tr{
          <li data-target="#home-carousel" data-slide-to="2"></li>
          </ol>
 
-     <div class="carousel-inner">
+   <div class="carousel-inner">
 
-         <div class="item active"  style="background-image: url('images/bg21.jpeg')" >
-         <div class="carousel-caption">
-         <div class="animated bounceInRight">
-         <h2>Hola Mundo! <br>Somos ticoll</h2>
-         <p>¿Quieres ver el recorrido de tu vehículo en tiempo real?</p>
-         </div>
-         </div>
-         </div>
+        <div class="item active"  style="background-image: url('images/transporte-trofeos.jpg')" >
+        <div class="carousel-caption">
+        <div class="animated bounceInRight">
+        <h2>Sistema de telemetría para el apoyo al despacho de mercancía</h2>
 
-         <div class="item" style="background-image: url('images/bg1.jpg')">
-         <div class="carousel-caption">
-         <div class="animated bounceInDown">
-         <h2>Hola Mundo! <br>Somos ticoll</h2>
-         <p>¿Deseas conocer tu recorrido histórico? </p>
-         </div>
-         </div>
-         </div>
+        </div>
+        </div>
+        </div>
 
-         <div class="item" style="background-image: url('images/bg3.jpg')">
-         <div class="carousel-caption">
-         <div class="animated bounceInUp">
-         <h2>Hola Mundo! <br>Somos ticoll</h2>
-         <p>...Y somos la solución!!!</p>
-         </div>
-         </div>
-         </div>
+        <div class="item" style="background-image: url('images/camiones1.jpg')">
+        <div class="carousel-caption">
+        <div class="animated bounceInDown">
+        <h2>Supervisar en tiempo real el peso de la mercancía transportada</h2>
 
-     </div>
+        </div>
+        </div>
+        </div>
+
+        <div class="item" style="background-image: url('images/camiones2.jpg')">
+        <div class="carousel-caption">
+        <div class="animated bounceInUp">
+        <h2>MARCACIÓN DE RUTAS DE DESPACHO SOBRE EL MAPA</h2>
+        </div>
+        </div>
+        </div>
+
+    </div>
 
 
         <!--/.carousel-inner-->
@@ -180,6 +192,28 @@ th,td,tr{
         </nav>
 
     </div>
+
+
+
+
+<div id="contenedor2" style="display:none">
+
+  <div id="flotante2"><h3>Ingrese su usuario y contraseña</h3>
+      <h5 style="margin-left:8.5%;margin-top:-2.5%;position:fixed;"><a onClick="flotante(2)">X</a></h5>
+     <form method="post" action="validar.php">
+        <h3 class="h1" style="color:white">Usuario</h3><input type="text" name="user" autocomplete="off" required><br>
+        <h3 class="h1" style="color:white">Contraseña</h3><input type="password" name="pw" autocomplete="off" required><br><br><br>
+        <input type="submit" class="btn btn-success" name="login" value="Ingresar">
+      </form>
+
+   </div>
+  <div id="fondo"></div>
+</div>
+
+
+
+
+
 </section>
 
 <section id="contact"> <!--#contact-->
@@ -190,7 +224,7 @@ th,td,tr{
 
     <div class="section-title text-center wow fadeInDown">
     <h2>Contáctanos</h2><BR>
-    <h4>Envia tus mensaje con tus requerimientos</h4>
+    <h4>Envia tu mensaje</h4>
     </div>
 
     <div class="col-md-8 col-sm-8 wow fadeInLeft">
@@ -220,28 +254,24 @@ th,td,tr{
     </div>
  </section>
 
-<footer id="footer" class="text-center">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
 
-                <div class="footer-logo wow fadeInDown">
-                    <img src="images/iconoprueba.png" alt="logo">
-                </div>
 
-            </div>
-        </div>
-    </div>
- </footer>
+
+
+<script src="js/Funciones/CodigoMapa.js"></script>
 
 <script>
+
 
 
 function INICIAR_SESION() {
 
   var a = document.createElement("a");
   a.target = "_blank";
-  a.href = "http://ticollcloud.ddns.net/AWS/INICIAR_SESION/inicio_sesion.php";
+  //a.href = "http://ticollcloud.ddns.net/AWS/INICIAR_SESION/inicio_sesion.php";
+  //a.href = "http://localhost/AWS-master/INICIAR_SESION/inicio_sesion.php";
+  a.href = "http://localhost/AWS/INICIAR_SESION/inicio_sesion.php";
+
   a.click();
 }
 

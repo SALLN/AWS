@@ -11,7 +11,7 @@ mysql_query("INSERT INTO Recorridos (USUARIO,VEHICULO,RECORRIDO,FECHA) VALUES('$
 
 	$consulta=mysql_query("SELECT USUARIO,VEHICULO,RECORRIDO,FECHA FROM Recorridos WHERE VEHICULO='$_POST[Vehiculo]' ORDER BY ID DESC LIMIT 1 ") or die("Problemas en consulta: ".mysql_error());
 
-	while($reg=mysql_fetch_array($consulta)){		$tabla[$i]=$reg;		}
+	while($reg=mysql_fetch_array($consulta)){		$tabla=$reg;		}
 
 	echo json_encode($tabla);
 	mysql_free_result($consulta);

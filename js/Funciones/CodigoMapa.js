@@ -33,6 +33,12 @@ var Saltos;
 var vie;
 var Colores={0:'red',1:'blue',2:'magenta',3:'coral',4:'green',5:'cyan',6:'darkgoldenrod',7:'darkorange',8:'darkslateblue'};
 var Vig_Recorrido=true;
+var Placa;
+var InfoRuta;
+var Lat_Ruta;
+var Lng_Ruta;
+var Dir_Ruta;
+var Pes_Ruta;
 
 //var phhhp = <?php echo "yee";?>;
 
@@ -72,6 +78,8 @@ map.controls[google.maps.ControlPosition.LEFT_TOP].push(  document.getElementByI
 map.controls[google.maps.ControlPosition.LEFT_CENTER].push(  document.getElementById('ListaCheckBoxes'));
 
 map.controls[google.maps.ControlPosition.TOP_CENTER].push(  document.getElementById('ListaPesos'));
+
+map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('ListaPesos3'));
 
 map.controls[google.maps.ControlPosition.TOP_CENTER].push(  document.getElementById('Imagen'));
 
@@ -184,7 +192,8 @@ function Marcar_Recorrido(){
                       strokeWeight: 0,
                       fillColor: 'red',
                       fillOpacity:0  }
-                });                }
+                });
+              }
 
             google.maps.event.clearListeners(map, 'rightclick');
 
@@ -249,7 +258,9 @@ function flotante(tipo){
       $('#contenedor2').show();
         $('#flotante').animate({           marginTop: "20%"         });
         Recorrido_o_Real="Cargar";
-        CargarVehiculos();
+        console.log(Cargo);
+        if (Cargo=="admin"){        CargarVehiculos(); }
+        else{ CargarRecorrido();  }
       }
      	if (tipo==2){
       $('#flotante').animate({           marginTop: "-756px"         }); //Si hacemos clic en cerrar, deslizamos el flotante hacia arriba
@@ -271,16 +282,82 @@ function CargarVehiculos(){
 
                  }else {        if(!Solicitar_Despliegue){            CrearCheck();        }    }
               }
-var Placa;
+
 function CargarRecorrido(){
 
-  for (i in Checkes){  if (Checkes[i]){   Placa = Tabla_Usuarios[i].ID_VEHICULO  }       }
+  var waypts = [];
+  var orig;
+  var desti;
+
+if (Cargo=="admin"){  for (i in Checkes){  if (Checkes[i]){   Placa = Tabla_Usuarios[i].ID_VEHICULO  }    }    }
+else{Vehiculo= Usuario};
+
   $.post("MySQL/Recorridos.php", {Modo: "Cargar", Vehiculo: Placa  }).done(
       function( data ) {
-        var Tabla_Recorrido =JSON.parse(data);
-        console.log(Tabla_Recorrido)
-      });
+        console.log(Vehiculo);
 
+        console.log(data);
+        var Tabla_Recorrido =JSON.parse(data);
+
+        var InfoRuta = Tabla_Recorrido[2].split("&");
+        Lat_Ruta = InfoRuta[0].split("%");
+        Lng_Ruta = InfoRuta[1].split("%");
+        Dir_Ruta = InfoRuta[2].split("%");
+        Pes_Ruta = InfoRuta[3].split("%");
+        for (i in Lat_Ruta){
+
+          new MarkerWithLabel({
+            position: new google.maps.LatLng(parseFloat(Lat_Ruta[i]),parseFloat(Lng_Ruta[i])),
+            map: map,
+            raiseOnDrag: true,
+            labelContent: i,
+            labelAnchor: new google.maps.Point(17,9 ),
+            labelClass: "labels",
+            labelStyle: {opacity: 1},
+            title:"Titulo",
+            icon: {
+                  path: google.maps.SymbolPath.CIRCLE,
+                  scale: 10,
+                  strokeColor: '#000000',
+                  strokeWeight: 0,
+                  fillColor: 'red',
+                  fillOpacity:0  }
+            });
+
+          var center2 = new google.maps.LatLng(parseFloat(Lat_Ruta[i]),parseFloat(Lng_Ruta[i]));
+          var draw_circle = new google.maps.Circle({ center: center2, radius: 20, strokeColor: "#FF0000", strokeOpacity: 1,
+          strokeWeight: 0, fillColor: "#FF0000", fillOpacity: 0.2, map: map       });
+          var draw_circle = new google.maps.Circle({center: center2, radius: 3, strokeColor: "#000000", strokeOpacity: 1,
+          strokeWeight: 2, fillColor: "#000000", fillOpacity: 1, map: map            });
+
+
+             if (i==0){    orig = Lat_Ruta[i]+","+Lng_Ruta[i];    }
+             else if(i==Lat_Ruta.length-1){    desti = Lat_Ruta[i]+","+Lng_Ruta[i];    }
+             else{  waypts.push({ location: Lat_Ruta[i]+","+Lng_Ruta[i],  stopover: true            }); }
+
+                                 }
+
+        var request = {
+           origin: orig,
+           destination: desti,
+           waypoints: waypts,
+           optimizeWaypoints: false,
+           travelMode: google.maps.DirectionsTravelMode["DRIVING"],
+           unitSystem: google.maps.DirectionsUnitSystem["METRIC"],
+           provideRouteAlternatives: true
+          };
+
+
+    directionsService.route(request, function(response, status) {
+       if (status == google.maps.DirectionsStatus.OK) {
+           //directionsDisplay.setPanel($("#panel_ruta").get(0));
+           respon=response['geocoded_waypoints'][0].place_id;
+           directionsDisplay.setDirections(response);
+
+    } else {        alert("No existen rutas entre ambos puntos");        }
+    });
+ CrearTabla_Ruta();
+  }); // FIN CIERRE $.POST
  }
 
 function GuardarPesos(){
@@ -473,16 +550,14 @@ function CrearTabla(){
          //directionsDisplay.setPanel($("#panel_ruta").get(0));
          respon=response['geocoded_waypoints'][0].place_id;
          directionsDisplay.setDirections(response);
-
   } else {        alert("No existen rutas entre ambos puntos");        }
-
   });
-     $('#ListaPesos').append("<br>");
+
      $('#ListaPesos').append('<table style="border: 1px solid white;"> ');
      $('#ListaPesos').append('<tr><td> PUNTO   </td><td>  DIRECCION  </td><td>  PESO  </td> </tr>');
 
      for (i in Direcciones){
-         $('#ListaPesos').append('<tr><td>'+i+'</td></td><td><input style="border: 1px solid transparent;" id=Peso value="'+Direcciones[i]+'"></input></td><td class="editpesos"><input style="border: 1px solid transparent;" id=Peso'+i
+         $('#ListaPesos').append('<tr><td>'+i+'</td></td><td><input style="background-color:#D7D7D7; border: 1px solid transparent;" id=Peso value="'+Direcciones[i]+'"></input></td><td class="editpesos"><input style="background-color:#D7D7D7;border: 1px solid transparent;" id=Peso'+i
          +' class=clapesos placeholder="Ingresar peso"></input> </td> </tr>');
      }
 
@@ -491,6 +566,30 @@ function CrearTabla(){
      document.getElementById('Imagen').style.display='none';
      map.setZoom(map.getZoom());
   }
+
+function CerrarListaPesos(){
+  document.getElementById('ListaPesos').style.display='none';
+  document.getElementById('ListaPesos3').style.display='none';
+}
+
+function CrearTabla_Ruta(){
+  document.getElementById('ListaPesos3').style.display='inline';
+  $('#ListaPesos2').remove();
+  var Tabla_Pesos = document.createElement("div");
+  Tabla_Pesos.id = "ListaPesos2";
+  $('#ListaPesos3').append(Tabla_Pesos);
+  $('#ListaPesos2').append('<h5 style="color:black;margin-left:210px;border: 1px solid transparent; cursor:pointer;" onClick=CerrarListaPesos(); >X</h5>');
+
+  $('#ListaPesos2').append('<table style="border: 1px solid white;"> ');
+  $('#ListaPesos2').append('<tr><td> PUNTO   </td><td>  DIRECCION  </td><td>  PESO  </td> </tr>');
+
+  for (i in Dir_Ruta){
+      $('#ListaPesos2').append('<tr><td>'+i+'</td></td><td>'+Dir_Ruta[i]+'</td><td>'+Pes_Ruta[i]+'</td> </tr>');
+  }
+  $('#ListaPesos2').append('</table> ');
+  document.getElementById('Imagen').style.display='none';
+  map.setZoom(map.getZoom());
+}
 
 function DescargarTxt(){
 
@@ -973,7 +1072,7 @@ function MostrarHistoricos(){
     //document.getElementById("divmenu").style="animation-duration:2s;animation-name:bounceInRight;";
     //document.getElementById("divmenu").style.display = 'inline-block';
     $('#contenedor2').show();
-      $('#divmenu').animate({           marginTop: "20%"         });
+      $('#divmenu').animate({           marginTop: "15%" ,marginLeft:"35%"         });
  }
 
 function OcultarHistoricos(){
@@ -1191,6 +1290,6 @@ function promptForHist() {
 
 function CerrarSesion(){
   var a = document.createElement("a");
-  a.href = "http://ticollcloud.ddns.net/AWS/INICIAR_SESION/logout.php";
+  a.href = "http://localhost/AWS/INICIAR_SESION/logout.php";
   a.click();
 }
