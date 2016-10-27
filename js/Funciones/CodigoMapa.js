@@ -39,10 +39,8 @@ var Lat_Ruta;
 var Lng_Ruta;
 var Dir_Ruta;
 var Pes_Ruta;
-
-//var phhhp = <?php echo "yee";?>;
-
-//console.log(phhhp);
+var Peso_Vacio=false;
+var Recorrido_o_Real=null;
 
 
 var apiKey = 'AIzaSyCF6NfbnvzeseQoQPP5Bh6iSHA3_fcHu1g';
@@ -105,7 +103,6 @@ autocomplete.addListener('place_changed', function() {
        console.log(place.geometry.viewport);    }
  else {       map.setCenter(place.geometry.location); console.log(place.geometry.location);       map.setZoom(16);    }
  });
-
 google.maps.LatLng.prototype.kmTo = function(a){
     var e = Math, ra = e.PI/180;
     var b = this.lat() * ra, c = a.lat() * ra, d = b - c;
@@ -114,7 +111,6 @@ google.maps.LatLng.prototype.kmTo = function(a){
     (c) * e.pow(e.sin(g/2), 2)));
     return f * 6378.137;
     }
-
 google.maps.Polyline.prototype.inKm = function(n){
     var a = this.getPath(n), len = a.getLength(), dist = 0;
     for (var i=0; i < len-1; i++) {
@@ -135,9 +131,6 @@ document.getElementById('btHist').style.display='none';
 document.getElementById('Boton_Real24').style.display='none';
 document.getElementById('Boton_grafica').style.display='none';
 }
-
-var Peso_Vacio=false;
-var Recorrido_o_Real=null;
 
 function Marcar_Recorrido(){
 
@@ -239,14 +232,12 @@ function SeleccionVehiculos(){
 
 function flotante(tipo){
      	if (tipo==1){
-     	//Si hacemos clic en abrir mostramos el fondo negro y el flotante
      	$('#contenedor2').show();
         $('#flotante').animate({           marginTop: "20%"         });
         Recorrido_o_Real="Recorrido";
         CargarVehiculos();
      	}
       if (tipo==3){
-      //Si hacemos clic en abrir mostramos el fondo negro y el flotante
       $('#contenedor2').show();
         $('#flotante').animate({           marginTop: "20%"         });
         Recorrido_o_Real="Real";
@@ -254,11 +245,12 @@ function flotante(tipo){
       }
 
       if (tipo==4){
-      //Si hacemos clic en abrir mostramos el fondo negro y el flotante
-      $('#contenedor2').show();
-        $('#flotante').animate({           marginTop: "20%"         });
+
         Recorrido_o_Real="Cargar";
-        if (Cargo=="admin"){        CargarVehiculos(); }
+        if (Cargo=="admin"){
+          $('#contenedor2').show();
+          $('#flotante').animate({           marginTop: "20%"         });
+          CargarVehiculos(); }
         else{ CargarRecorrido();  }
       }
      	if (tipo==2){
@@ -269,7 +261,6 @@ function flotante(tipo){
              }
 
 function CargarVehiculos(){
-
                  document.getElementById("ListaCheckBoxes").style.height ='auto';
                  clearInterval(MarkerInterval);
                  if(Solicitar_Vehiculos){
@@ -287,15 +278,12 @@ function CargarRecorrido(){
   var waypts = [];
   var orig;
   var desti;
-
  if (Cargo=="admin"){  for (i in Checkes){  if (Checkes[i]){   Placa = Tabla_Usuarios[i].ID_VEHICULO  }    }    }
- else{Vehiculo= Usuario};
+ else{Placa = Usuario};
 
   $.post("MySQL/Recorridos.php", {Modo: "Cargar", Vehiculo: Placa  }).done(
       function( data ) {
-        console.log(Vehiculo);
 
-        console.log(data);
         var Tabla_Recorrido =JSON.parse(data);
 
         var InfoRuta = Tabla_Recorrido[2].split("&");

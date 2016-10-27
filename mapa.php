@@ -180,8 +180,6 @@ a {
  <script type="text/javascript">
  var Usuario = "<?php echo $_SESSION['user']; ?>";
  var Cargo = "<?php echo $_SESSION['cargo']; ?>";
- console.log(Usuario);
- console.log(Cargo);
  </script>
  <script src="js/Funciones/CodigoMapa.js"></script>
 
