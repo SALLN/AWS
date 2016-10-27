@@ -178,8 +178,8 @@ a {
     </div>
 
  <script type="text/javascript">
- var Usuario = "<? echo $_SESSION['user']; ?>";
- var Cargo = "<? echo $_SESSION['cargo']; ?>";
+ var Usuario = "<?php echo $_SESSION['user']; ?>";
+ var Cargo = "<?php echo $_SESSION['cargo']; ?>";
  console.log(Usuario);
  console.log(Cargo);
  </script>
