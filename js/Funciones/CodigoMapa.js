@@ -1,4 +1,4 @@
- var Marker_Real=[];             var Latitud_Historica;          var Latitud;            var Fecha_Inicio_PHP;       var Cont_Markers;
+var Marker_Real=[];             var Latitud_Historica;          var Latitud;            var Fecha_Inicio_PHP;       var Cont_Markers;
 var Marker_Marker_Hora=[];      var Longitud_Historica;         var Longitud;           var Fecha_Final_PHP;        var Cont_Historico;
 var Marker_Hora_Marker=[];      var PoliLinea_Historica=[];     var LatAux=[];          var Hora_Inicio_PHP;        var Cont_CrearHTML=0;
 var LatMarker_Hora;             var PoliLinea_Real=[];          var LonAux=[];          var Hora_Final_PHP;         var Cont_Vehiculos=0;
@@ -1199,81 +1199,6 @@ function promptForHist() {
    a.href = "http://ticollcloud.ddns.net/AWS/Grafica_Historico.html?fechainicio="+Fecha_Inicio_PHP+"_"+Hora_Inicio_PHP+"&fechafinal="+Fecha_Final_PHP+"_"+Hora_Final_PHP;
    a.click();
   }
-
-  /*
-  var Ruta_Snap=[];var PoliLinea_Snap = [];
-  var latlng;var Snap=false;var Ruta_Snap_Aux=[];var NumMarkerSnap=0;
-  var Ent=0;var Res;var t=0;var Tabla_Residuo;
-  var cont=[];cont[0]=0;cont[1]=0;var Tabla_Entero;var Cont_Snap=0;var Tabla_Long;var Marker_Snap=[];
-  var Cont_Aux=100;    var Contador=0;
-  function Historico_Snap(){
-     console.log(Contador);
-
-     if(t==0 || Contador!=Cont_Aux){
-
-     PoliLinea_Snap[Contador].setMap(map);
-     NumMarkerSnap=0;
-     Cont_Snap=0;
-     Ent=0;
-     Tabla_Long    = Tabla_Historico[Contador].length;
-     Tabla_Entero  = parseInt(Tabla_Long/100);
-     Tabla_Residuo = Tabla_Long%100;
-
-     if(Tabla_Residuo>0) Tabla_Entero++;
-     }
-     Cont_Aux=Contador;
-     t=1;
-     Ent++;
-
-     if(Ent==Tabla_Entero){ Res=Tabla_Residuo}
-     else {Res=100;}
-
-     Ruta_Snap_Aux=[];
-
-     for(i=0;i<Res;i++){
-         console.log("se mete");
-         Ruta_Snap_Aux.push(Tabla_Historico[Contador][i+Cont_Snap].LATITUD+","+Tabla_Historico[Contador][i+Cont_Snap].LONGITUD);
-     }
-
-     Cont_Snap=Cont_Snap+100;
-
-     $.get('https://roads.googleapis.com/v1/snapToRoads', {
-     interpolate: true,
-     key: apiKey,
-     path: Ruta_Snap_Aux.join('|')
-
-     },function(data) {
-
-         for (i = 0; i < data.snappedPoints.length; i++) {
-
-             latlng = new google.maps.LatLng(data.snappedPoints[i].location.latitude,data.snappedPoints[i].location.longitude);
-             Marker_Snap[NumMarkerSnap]=new google.maps.Marker({
-                 position:latlng,
-                 map: map,
-                 icon: Icono_Historico,
-                 title: String(NumMarkerSnap)
-             });
-             Ruta_Snap[Contador].push(latlng);
-             NumMarkerSnap++;
-         }
-
-         map.setCenter(latlng);
-         cont[Contador]++;
-         console.log("el cont es: "+cont[Contador]+"  y el conthis es: "+Contador+" el tablaentero es: "+Tabla_Entero);
-         if(cont[Contador]==Tabla_Entero)
-         {
-             PoliLinea_Snap[Contador].setPath(Ruta_Snap[Contador]);
-             Contador++;
-             t=0;
-             if(Contador!=Tabla_Usuarios.length-1){
-             Historico_Snap();
-             }
-         }else{
-             Historico_Snap();
-         }
-     });
-  }
-  */
 
 function CerrarSesion(){
   var a = document.createElement("a");
