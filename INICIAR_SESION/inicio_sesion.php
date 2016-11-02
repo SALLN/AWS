@@ -8,7 +8,9 @@
 <html lang="en" class="no-js">
 <head>
 
-<link rel="stylesheet" href="insesion.css">
+	<link href="insesion.css" rel="stylesheet" type="text/css" media="screen and (min-device-width: 481px)" />
+	<link href="insesionmovil.css" rel="stylesheet" type="text/css" media="handheld, only screen and (max-device-width: 480px)" />
+
 <script src="insesion.js"></script>
 
 

@@ -89,7 +89,7 @@ a {
  <input type = "button" class="Botones_Mapa" id="Marcar_Recorrido" value="Marcar Recorrido" onclick="flotante(1)">
  <input type = "button" class="Botones_Mapa" id="Boton_Rutas" value = "Cargar Recorrido" onclick="flotante(4);"/>
  <input type = "button" class="Botones_Mapa" id="Boton_Real24" value="Tiempo Real" onclick="flotante(3);">
- <input type = "button" class="Botones_Mapa" id="btHist" value="Historico" onclick="MostrarHistoricos()">
+ <input type = "button" class="Botones_Mapa" id="btHist" value="Historico" onclick="flotante(5)">
  <input type = "button" class="Botones_Mapa" id="Cerrar_Sesion" value="Cerrar Sesion" onclick="CerrarSesion();">
 
  <select id="seleccion" onChange="Centrar()"><option>Centrar Mapa</option></select>
@@ -108,9 +108,8 @@ a {
       <div id="ListaCheckBoxes"></div>
       <h5 style="margin-left:8.5%;margin-top:-2.5%;position:fixed;"><a onClick="flotante(2)">X</a></h5>
    </div>
-  <div id="fondo"></div>
+  <div id="fondo" onClick="flotante(2);"></div>
 </div>
-
 
  <h3 style="font: italic bold 12px/15px Georgia, serif;color:red;background-color:white;display:none;width:90px;height:20px;" id="fila_latitud">00.00000</h3>
  <h3 style="font: italic bold 12px/15px Georgia, serif;color:red;background-color:white;display:none;width:90px;height:20px;" id="fila_longitud">-00.00000</h3>
