@@ -336,8 +336,6 @@ p {display: inline;}
     border: 1px solid transparent;
     font-weight: bold;
     margin-bottom: 5px;
-    margin-top:5px;
-    display:none;
 }
 #Boton_grafica:hover{
     color:rebeccapurple;
