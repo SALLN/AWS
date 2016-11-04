@@ -129,7 +129,7 @@ if(Cargo=="vehiculo"){
 document.getElementById('Marcar_Recorrido').style.display='none';
 document.getElementById('btHist').style.display='none';
 document.getElementById('Boton_Real24').style.display='none';
-//document.getElementById('Boton_grafica').style.display='none';
+document.getElementById('Boton_grafica').style.display='none';
 }
 
 function Marcar_Recorrido(){
