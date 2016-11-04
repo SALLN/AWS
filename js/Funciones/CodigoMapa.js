@@ -916,7 +916,7 @@ console.log("HISTORICO GRAFICAR");
                 labelAnchor: new google.maps.Point(17,9 ),
                 labelClass: "labels",
                 labelStyle: {opacity: 1},
-                title: Num_Markers+" -- "+Tabla_Historico[Cont_Historico][i].FECHA_HORA+" -- "+peso+"kg"+ " --- "+Tabla_Historico[Cont_Historico][i].VEL+" km/h",
+                title: Num_Markers+" -- "+Tabla_Historico[Cont_Historico][i].FECHA_HORA+" -- "+peso+" ADC "+ " --- "+Tabla_Historico[Cont_Historico][i].VEL+" km/h",
                 icon: Icono_Historico[Cont_Historico]
                 });
 
@@ -930,7 +930,7 @@ console.log("HISTORICO GRAFICAR");
                 labelAnchor: new google.maps.Point(17,9 ),
                 labelClass: "labels",
                 labelStyle: {opacity: 1},
-                title: Num_Markers+" -- "+Tabla_Historico[Cont_Historico][i].FECHA_HORA+" -- "+peso+"kg"+ " --- "+Tabla_Historico[Cont_Historico][i].VEL+" km/h",
+                title: Num_Markers+" -- "+Tabla_Historico[Cont_Historico][i].FECHA_HORA+" -- "+peso+" ADC "+ " --- "+Tabla_Historico[Cont_Historico][i].VEL+" km/h",
                 icon: Icono_Historico[Cont_Historico]
                 });
             }else{
@@ -938,7 +938,7 @@ console.log("HISTORICO GRAFICAR");
                 Marker_Hora_Marker[Cont_Historico][Cont_Markers++]=new google.maps.Marker({
                 position:Posicion[Cont_Historico],
                 map: map,
-                title: Num_Markers+" -- "+Tabla_Historico[Cont_Historico][i].FECHA_HORA+" -- "+peso+"kg"+ " --- "+Tabla_Historico[Cont_Historico][i].VEL+" km/h",
+                title: Num_Markers+" -- "+Tabla_Historico[Cont_Historico][i].FECHA_HORA+" -- "+peso+" ADC "+ " --- "+Tabla_Historico[Cont_Historico][i].VEL+" km/h",
                 icon: Icono_Historico[Cont_Historico]
                 });
                       }
