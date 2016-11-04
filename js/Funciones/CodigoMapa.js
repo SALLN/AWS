@@ -766,6 +766,11 @@ function SetMarkerVarios(){
                     Longitud = parseFloat(Tabla2[Cont_Join++].LATITUD);
                     Fecha_Hora=Tabla2[Cont_Join++].LATITUD;
                     peso=Tabla2[Cont_Join++].LATITUD;
+                    var z = peso+0;
+                    peso=-0.0000000475698863*z^5+0.0001*z^4-0.3234*z^3+266*z^2-109518*z+17999930;
+console.log(266.2794120132949728940729983151*z^2);
+console.log(peso);
+
                     Posicion[i]=new google.maps.LatLng(Latitud,Longitud);
 
                     if (Mapa_Centrado && Seleccionado==i){
@@ -814,7 +819,7 @@ function Consulta_Real(){
 
     for (i in PoliLinea_Real)        {   PoliLinea_Real[i].setMap(map); RealAgain[i]=0;       }
     clearInterval(MarkerInterval);
-    MarkerInterval = setInterval(function(){SetMarkerVarios()}, 500);
+    MarkerInterval = setInterval(function(){SetMarkerVarios()}, 1500);
  }
 
 function Consulta_Hora_Marker(){
@@ -872,7 +877,7 @@ function Consulta_Hora_Marker(){
  }
 
 function Consulta_Hora_Marker_Graficar(){
-
+console.log("HISTORICO GRAFICAR");
     Cont_Historico++;
 
     if (Cont_Historico<Tabla_Usuarios.length){
@@ -911,7 +916,7 @@ function Consulta_Hora_Marker_Graficar(){
                 labelAnchor: new google.maps.Point(17,9 ),
                 labelClass: "labels",
                 labelStyle: {opacity: 1},
-                title: Num_Markers+" -- "+Tabla_Historico[Cont_Historico][i].FECHA_HORA+" -- "+peso+"kg",
+                title: Num_Markers+" -- "+Tabla_Historico[Cont_Historico][i].FECHA_HORA+" -- "+peso+"kg"+ " --- Vel: "+Tabla_Historico[Cont_Historico][i].VEL,
                 icon: Icono_Historico[Cont_Historico]
                 });
 
@@ -975,7 +980,6 @@ function Consulta_Marker_Hora(){
       }
 
 function Consulta_Marker_Hora_Graficar(){
-
     Cont_Historico++;
 
     if (Cont_Historico<Tabla_Usuarios.length){
@@ -1156,7 +1160,7 @@ function Mostrar_Calendario1(){
 
 	     flat: true,
 	     date:  '',
-	     current: '2016-08-16',
+	     current: '2016-11-03',
 	     calendars: 1,
 	     starts: 0,
 	     mode: 'single',
@@ -1188,7 +1192,7 @@ function Mostrar_Calendario2(){
 
     flat: true,
     date:  '',
-    current: '2016-08-16',
+    current: '2016-11-03',
     calendars: 1,
     starts: 0,
     mode: 'single',
