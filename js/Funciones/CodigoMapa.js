@@ -766,10 +766,6 @@ function SetMarkerVarios(){
                     Longitud = parseFloat(Tabla2[Cont_Join++].LATITUD);
                     Fecha_Hora=Tabla2[Cont_Join++].LATITUD;
                     peso=Tabla2[Cont_Join++].LATITUD;
-                    var z = peso+0;
-                    peso=-0.0000000475698863*z^5+0.0001*z^4-0.3234*z^3+266*z^2-109518*z+17999930;
-console.log(266.2794120132949728940729983151*z^2);
-console.log(peso);
 
                     Posicion[i]=new google.maps.LatLng(Latitud,Longitud);
 
