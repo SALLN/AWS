@@ -1,3 +1,3 @@
 <?php
-header('Location: CoordenadasGeograficas.php');
+header('Location: home.php');
 ?>

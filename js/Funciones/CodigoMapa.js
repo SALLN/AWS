@@ -29,7 +29,7 @@ var Texto_txt=[];
 var separador = "      ";
 var VigilarInterval;
 var Recorrido_Marcado=[];
-var Saltos;
+var Saltos = 1;
 var vie;
 var Colores={0:'red',1:'blue',2:'magenta',3:'coral',4:'green',5:'cyan',6:'darkgoldenrod',7:'darkorange',8:'darkslateblue'};
 var Placa;
@@ -40,6 +40,15 @@ var Dir_Ruta;
 var Pes_Ruta;
 var Peso_Vacio=false;
 var Modo_SeleccionVehiculo=null;
+var Marker_Recorrido;
+var Latitud_R;
+var Longitud_R;
+var Lat_R_Aux;
+var Lng_R_Aux;
+var Peso_R;
+var Fecha_Hora_R;
+var Fecha_Inicio_Recorrido;
+var InfoRuta;
 
 
 var apiKey = 'AIzaSyCF6NfbnvzeseQoQPP5Bh6iSHA3_fcHu1g';
@@ -283,7 +292,7 @@ function CargarVehiculos(){
 
                  }else {        if(!Solicitar_Despliegue){            CrearCheck();        }    }
               }
-var InfoRuta;
+
 function CargarRecorrido(){
 
   var a = document.createElement("a");
@@ -404,19 +413,12 @@ function GuardarPesos(){
       //VigilarRecorrido();
  }else{alert("Casilla de peso vacía")}
 }
-var Marker_Recorrido;
-var Latitud_R;
-var Longitud_R;
-var Lat_R_Aux;
-var Lng_R_Aux;
-var Peso_R;
-var Fecha_Hora_R;
-var Fecha_Inicio_Recorrido;
 
 function VigilarRecorrido(){
+  Centrar();
   document.getElementById('seleccion').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('seleccion'));
-  document.getElementById('fila_latitud').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_latitud'));
-  document.getElementById('fila_longitud').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_longitud'));
+  // document.getElementById('fila_latitud').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_latitud'));
+  // document.getElementById('fila_longitud').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_longitud'));
   document.getElementById('fila_fecha').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_fecha'));
   document.getElementById('fila_hora').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_hora'));
   document.getElementById('peso').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('peso'));
@@ -446,9 +448,11 @@ function VigilarPesos(){
         Fecha_Hora_R=Db_Recorrido.FECHA_HORA;
         Peso_R=Db_Recorrido.PESO_TOTAL;
 
-        document.getElementById('fila_latitud').innerHTML  = Latitud_R;
-        document.getElementById('fila_fecha').innerHTML    = Fecha_Hora_R.substring(0,10); document.getElementById('fila_longitud').innerHTML = Longitud_R;
-        document.getElementById('fila_hora').innerHTML     = Fecha_Hora_R.substring(11,19); document.getElementById('peso').innerHTML= Peso_R+"kg";
+        // document.getElementById('fila_latitud').innerHTML  = Latitud_R;
+        document.getElementById('fila_fecha').innerHTML    = Fecha_Hora_R.substring(0,10);
+        // document.getElementById('fila_longitud').innerHTML = Longitud_R;
+        document.getElementById('fila_hora').innerHTML     = Fecha_Hora_R.substring(11,19);
+        document.getElementById('peso').innerHTML= Peso_R+"kg";
 
         Posicion=new google.maps.LatLng(parseFloat(Latitud_R),parseFloat(Longitud_R));
 
@@ -754,9 +758,11 @@ function SetMarkerVarios(){
 
                     if (Mapa_Centrado && Seleccionado==i){
 
-                        document.getElementById('fila_latitud').innerHTML  = Latitud;
-                        document.getElementById('fila_fecha').innerHTML    = Fecha_Hora.substring(0,10); document.getElementById('fila_longitud').innerHTML = Longitud;
-                        document.getElementById('fila_hora').innerHTML     = Fecha_Hora.substring(11,19); document.getElementById('peso').innerHTML= peso+"kg";
+                        // document.getElementById('fila_latitud').innerHTML  = Latitud;
+                        document.getElementById('fila_fecha').innerHTML    = Fecha_Hora.substring(0,10);
+                        // document.getElementById('fila_longitud').innerHTML = Longitud;
+                        document.getElementById('fila_hora').innerHTML     = Fecha_Hora.substring(11,19);
+                        document.getElementById('peso').innerHTML= peso+"kg";
  }
                     if (Latitud!=LatAux[i] || Longitud!=LonAux[i] || RealAgain[i]==0 || Recargar_Vehiculos ){
                         LatAux[i] =Latitud;    LonAux[i] =Longitud;
@@ -788,10 +794,10 @@ function Consulta_Real(){
 
     LimpiarMapa();
     OcultarHistoricos();
-
+    Centrar();
     document.getElementById('seleccion').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('seleccion'));
-    document.getElementById('fila_latitud').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_latitud'));
-    document.getElementById('fila_longitud').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_longitud'));
+    // document.getElementById('fila_latitud').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_latitud'));
+    // document.getElementById('fila_longitud').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_longitud'));
     document.getElementById('fila_fecha').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_fecha'));
     document.getElementById('fila_hora').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_hora'));
     document.getElementById('peso').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('peso'));
@@ -802,8 +808,6 @@ function Consulta_Real(){
  }
 
 function Consulta_Hora_Marker(){
-    Saltos=document.getElementById('Saltos').value;
-    console.log(Saltos);
     for (i in Ruta_Historica){  Ruta_Historica[i]=[];  };
 
     Cont_Historico=-1;
