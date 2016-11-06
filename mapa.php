@@ -84,11 +84,13 @@ a {
 
 
  <div id="googleMap"></div>
- <input type ="button" id="Boton_grafica" value = 'Graficar tiempo real' onclick="promptForTwo(); return false;"/>
 
  <input type = "button" class="Botones_Mapa" id="Marcar_Recorrido" value="Marcar Recorrido" onclick="flotante(1)">
+ <input type = "button" class="Botones_Mapa" id="Reporte_Recorrido" value="Reporte Recorrido" onclick="flotante(1)">
  <input type = "button" class="Botones_Mapa" id="Boton_Rutas" value = "Cargar Recorrido" onclick="flotante(4);"/>
  <input type = "button" class="Botones_Mapa" id="Boton_Real24" value="Tiempo Real" onclick="flotante(3);">
+ <input type ="button"  class="Botones_Mapa" id="Boton_grafica" value = 'Grafica tiempo real' onclick="promptForTwo(); return false;"/>
+
  <input type = "button" class="Botones_Mapa" id="btHist" value="Historico" onclick="flotante(5)">
  <input type = "button" class="Botones_Mapa" id="Cerrar_Sesion" value="Cerrar Sesion" onclick="CerrarSesion();">
 

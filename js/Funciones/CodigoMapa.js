@@ -65,20 +65,25 @@ var mapOptions ={
 
 map=new google.maps.Map(document.getElementById("googleMap"),mapOptions);
 
-map.controls[google.maps.ControlPosition.LEFT_CENTER].push( document.getElementById('Boton_grafica'));
 
 map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('autoc'));
 
 
 map.controls[google.maps.ControlPosition.LEFT_TOP].push(  document.getElementById('Marcar_Recorrido'));
 
+map.controls[google.maps.ControlPosition.LEFT_TOP].push(  document.getElementById('Reporte_Recorrido'));
+
 map.controls[google.maps.ControlPosition.LEFT_TOP].push(  document.getElementById('Boton_Rutas'));
 
 map.controls[google.maps.ControlPosition.LEFT_TOP].push( document.getElementById('Boton_Real24'));
 
+map.controls[google.maps.ControlPosition.LEFT_TOP].push( document.getElementById('Boton_grafica'));
+
 map.controls[google.maps.ControlPosition.LEFT_TOP].push(  document.getElementById('btHist'));
 
-map.controls[google.maps.ControlPosition.LEFT_TOP].push(  document.getElementById('Cerrar_Sesion'));
+
+
+map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(  document.getElementById('Cerrar_Sesion'));
 
 
 map.controls[google.maps.ControlPosition.LEFT_CENTER].push(  document.getElementById('ListaCheckBoxes'));
@@ -135,9 +140,13 @@ $('#Tiempo_Minuto2').timepicker({   showHours: false,      minutes: { interval: 
 
 if(Cargo=="vehiculo"){
 document.getElementById('Marcar_Recorrido').style.display='none';
+document.getElementById('Reporte_Recorrido').style.display='none';
 document.getElementById('btHist').style.display='none';
 document.getElementById('Boton_Real24').style.display='none';
 document.getElementById('Boton_grafica').style.display='none';
+}else{
+  document.getElementById('Reporte_Recorrido').style.display='inline-block';
+
 }
 
 function Marcar_Recorrido(){
@@ -249,6 +258,12 @@ function flotante(tipo){
         Modo_SeleccionVehiculo="Recorrido";
         CargarVehiculos();
      	}
+
+      if (tipo==2){
+      $('#flotante').animate({           marginTop: "-756px"         }); //Si hacemos clic en cerrar, deslizamos el flotante hacia arriba
+      setTimeout(function(){ 	$('#contenedor2').hide();     	},500); //Una vez ocultado el flotante cerramos el fondo negro
+      }
+
       if (tipo==3){
       $('#contenedor2').show();        $('#flotante').animate({           marginTop: "20%"         });
 
@@ -265,12 +280,14 @@ function flotante(tipo){
           CargarVehiculos(); }
         else{ CargarRecorrido();  }
       }
-     	if (tipo==2){
-      $('#flotante').animate({           marginTop: "-756px"         }); //Si hacemos clic en cerrar, deslizamos el flotante hacia arriba
-     	setTimeout(function(){ 	$('#contenedor2').hide();     	},500); //Una vez ocultado el flotante cerramos el fondo negro
-         	}
 
-          if (tipo==5){
+      if (tipo==5){
+              $('#contenedor2').show();  $('#flotante').animate({ marginTop: "20%"});
+              Modo_SeleccionVehiculo="Historico";
+              CargarVehiculos();
+          }
+
+          if (tipo==6){
               $('#contenedor2').show();  $('#flotante').animate({ marginTop: "20%"});
               Modo_SeleccionVehiculo="Historico";
               CargarVehiculos();
