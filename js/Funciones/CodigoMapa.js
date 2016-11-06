@@ -81,9 +81,7 @@ map.controls[google.maps.ControlPosition.LEFT_TOP].push( document.getElementById
 
 map.controls[google.maps.ControlPosition.LEFT_TOP].push(  document.getElementById('btHist'));
 
-
-
-map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(  document.getElementById('Cerrar_Sesion'));
+map.controls[google.maps.ControlPosition.LEFT_TOP].push(  document.getElementById('Cerrar_Sesion'));
 
 
 map.controls[google.maps.ControlPosition.LEFT_CENTER].push(  document.getElementById('ListaCheckBoxes'));
