@@ -20,6 +20,7 @@
 					$row = mysql_fetch_array($consulta);
 					$_SESSION["user"] = $row['user'];
 					$_SESSION["cargo"] = $row['cargo'];
+					$_SESSION["empresa"] = $row['empresa'];
 				  	echo 'Iniciando sesión para '.$_SESSION['user'].' <p>';
 					echo '<script> window.location="../mapa.php"; </script>';
 				}

@@ -179,6 +179,7 @@ a {
  <script type="text/javascript">
  var Usuario = "<?php echo $_SESSION['user']; ?>";
  var Cargo = "<?php echo $_SESSION['cargo']; ?>";
+ var Empresa = "<?php echo $_SESSION['empresa']; ?>";
  </script>
  <script src="js/Funciones/CodigoMapa.js"></script>
 
