@@ -25,6 +25,7 @@
                       function( result ) {
 
                          result = JSON.parse(result);
+                         console.log(result);
                         if (dataLength !== result.length) {
                             for (var i = dataLength; i < result.length; i++) {
                                 data.push({

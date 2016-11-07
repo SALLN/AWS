@@ -61,7 +61,6 @@ var Llegada = "";
 var Salida  = "";
 var Camino  = "";
 
-
 var apiKey = 'AIzaSyCF6NfbnvzeseQoQPP5Bh6iSHA3_fcHu1g';
 
 var Select = document.getElementById("seleccion");
@@ -107,6 +106,7 @@ map.controls[google.maps.ControlPosition.TOP_CENTER].push(  document.getElementB
 
 
 var autocomplete = new google.maps.places.Autocomplete(    document.getElementById('autoc'));
+
 autocomplete.bindTo('bounds', map);
 autocomplete.addListener('place_changed', function() {
  var place = autocomplete.getPlace();
@@ -160,7 +160,6 @@ if(Cargo=="vehiculo"){
  }
 
 // $.post("MySQL/Promedio_Peso.php", {Cargo: 'admin', Usuario:'JamesLlerena', Vehiculo: 'EUQ426'  }).done(  function( data ) {console.log(JSON.parse(data));});
-
 
 function Marcar_Recorrido(){
 
@@ -510,7 +509,7 @@ function Vigilar_Llegada_Punto(){
   if (Interval_Cerca==null){  Interval_Cerca=setInterval(function(){Vigilar_Llegada_Punto()},1000);}
 
   var distancia = google.maps.geometry.spherical.computeDistanceBetween (Posicion,Recorrido_Marcado[Punto_Despacho]);
-console.log(Peso_R);
+  console.log(Peso_R);
     if (distancia<20 && CercaDetectada[Punto_Despacho]){
         console.log("CERCA DETECTADA: "+Punto_Despacho);
         CercaDetectada[Punto_Despacho]=false;
@@ -774,16 +773,21 @@ function SetMarkerVarios(){
                     Fecha_Hora=Tabla2[Cont_Join++].LATITUD;
                     peso=Tabla2[Cont_Join++].LATITUD;
 
+                    $.post("MySQL/Promedio_Peso.php", {Cargo: Cargo, Usuario:Usuario, Vehiculo: 'EUQ426'  }).done(
+                      function( data ) {
+                         console.log(data);
+                        peso=data;
+
                     Posicion[i]=new google.maps.LatLng(Latitud,Longitud);
 
                     if (Mapa_Centrado && Seleccionado==i){
 
                         // document.getElementById('fila_latitud').innerHTML  = Latitud;
-                        document.getElementById('fila_fecha').innerHTML    = Fecha_Hora.substring(0,10);
+                        document.getElementById('fila_fecha').innerHTML = Fecha_Hora.substring(0,10);
                         // document.getElementById('fila_longitud').innerHTML = Longitud;
-                        document.getElementById('fila_hora').innerHTML     = Fecha_Hora.substring(11,19);
+                        document.getElementById('fila_hora').innerHTML  = Fecha_Hora.substring(11,19);
                         document.getElementById('peso').innerHTML= peso+"kg";
- }
+                        }
                     if (Latitud!=LatAux[i] || Longitud!=LonAux[i] || RealAgain[i]==0 || Recargar_Vehiculos ){
                         LatAux[i] =Latitud;    LonAux[i] =Longitud;
                         RealAgain[i]=1;
@@ -803,7 +807,11 @@ function SetMarkerVarios(){
                             icon: Icono_Historico[i]
                         });
                     }
+
+                  });
+
                 }
+
             }
                                     Recargar_Vehiculos=false;
 
@@ -1289,8 +1297,6 @@ function CerrarSesion(){
 
 function Zero(){
 
-  $.post("MySQL/Zero.php",{ Usuario: Usuario, Vehiculo: Tabla_Usuarios[i].ID_VEHICULO}).done( function(data){
-
-    console.log(data);
-  });
+    $.post("MySQL/Zero.php",{ Usuario: Usuario, Vehiculo: Tabla_Usuarios[i].ID_VEHICULO}).done( function(data){
+    });
 }

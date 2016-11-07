@@ -1,59 +1,34 @@
 <?php
 
-// $z  = 786;
-// $p1 = floatval(-0.000000047569886303660145453734196070369*pow($z,5));
-// $p2 = floatval(0.00019620364848816853773835755525567*pow($z,4));
-// $p3 = floatval(-0.32340019792437918466632140734873*pow($z,3));
-// $p4 = floatval(266.2794120132949728940729983151*pow($z,2));
-// $p5 = floatval(-109518.86846073795459233224391937*pow($z,1));
-// $peso = $p1+$p2+$p3+$p4+$p5+17999930.779782894998788833618164;
-// echo $p1.'|'.$p2.'|'.$p3.'|'.$p4.'|'.$p5.'|'.$peso;
-date_default_timezone_set('America/Bogota');
+session_start();
+$fecha_hora_serv='2016-09-12 12:57:42';
+include("MySQL/ConexionMySQL.php");
 
-// >REV031911376617+1101913-0748515900235901;ID=Grupo2<
-// >RTX&mensajeencapsulado&@;EV001911628664+1095488-0747963600032432;ID=357666051297791<
-$mensaje = ">RTX#55-94-811#@;EV001912019802+1095464-0747961700000032;ID=001EUQ426<";
 
-$mensaje_div = explode('#',$mensaje);
-$pesos = explode('-',$mensaje_div[1]);
+    $data_points = array();
+    $i=0;
+    $suma=0;
+    $prom=0;
+    $consulta=mysql_query("SELECT ID,LATITUD,LONGITUD,FECHA_HORA FROM JamesLlerena WHERE FECHA_HORA between '$fecha_hora_serv' and '2017-05-19 23:59:59'") or die("Problemas en consulta: ".mysql_error());
 
-$s1=strpos($mensaje,"#");    $s2=strpos($mensaje,"@");  $lon=strlen($mensaje);
+    while ($row = mysql_fetch_array($consulta)) {
+         $i=$i+1;
+         $resta=$row['ID']-9;
+    $consulta1=mysql_query("SELECT PESO_TOTAL FROM JamesLlerena WHERE ID between $resta and '$row[ID]' ") or die("Problemas en consulta: ".mysql_error());
 
-if (!empty($s1) && !empty($s2) && $lon<83 && $lon>66){
-include("ConexionMySQL.php");
-$lat=strpos($mensaje_div[2],"+");    $lng=strpos($mensaje_div[2],"-");
-$id=strpos($mensaje_div[2],"ID=");    $time=substr($mensaje_div[2],$lat-10,10);
-$weeksTosecond=substr($time,0,4)*7*24*60*60;    $daysToseconds=substr($time,4,1)*24*60*60;    $seconds=substr($time,5,5);
-$tiempogps=$weeksTosecond+$daysToseconds+$seconds+315964800;
-$latitud=substr($mensaje_div[2],$lat+1,2).'.'.substr($mensaje_div[2],$lat+3,5);
-$longitud='-'.substr($mensaje_div[2],$lng+2,2).'.'.substr($mensaje_div[2],$lng+4,5);
-$usuario=substr($mensaje_div[2],$id+3,3);
-$placa=substr($mensaje_div[2],$id+6,6);
-$fecha=date('Y-m-d H:i:s', $tiempogps);
-$fecha_servidor = date('Y-m-d H:i:s');
-$velocidad = intval(substr($mensaje_div[2],$lng+9,3)/1.60934);
-$consulta=mysql_query("INSERT INTO Mensajes(Mensaje) VALUES('$mensaje')");
-$consulta2=mysql_query("SELECT user FROM admin where id=$usuario") or die("Problemas en consulta: ".mysql_error());
-$tabla_usuario  = mysql_fetch_array($consulta2)['user'];
-$consulta3=mysql_query("SELECT * FROM formulas") or die("Problemas en consulta: ".mysql_error());
-$tabla = mysql_fetch_array($consulta3);
-$coeficientes = $tabla['COEFICIENTES'];
-$diferencia   = $tabla['DIFERENCIA'];
-$coeficientes = explode('%',$coeficientes);
-$z = $pesos[2]-$diferencia;
-$p1 = floatval($coeficientes[0]*pow($z,5));
-$p2 = floatval($coeficientes[1]*pow($z,4));
-$p3 = floatval($coeficientes[2]*pow($z,3));
-$p4 = floatval($coeficientes[3]*pow($z,2));
-$p5 = floatval($coeficientes[4]*pow($z,1));
-$peso = $p1+$p2+$p3+$p4+$p5+$coeficientes[5];
-$consulta4=mysql_query("INSERT INTO $tabla_usuario(LATITUD,LONGITUD,FECHA_HORA,FECHA_HORA_SERVER,ID_VEHICULO,PESO_1,PESO_2,PESO_TOTAL,VEL) VALUES('$latitud','$longitud','$fecha','$fecha_servidor','$placa','$pesos[0]','$pesos[1]','$peso','$velocidad')");
-//mysql_free_result($consulta);
-mysql_free_result($consulta2);
-mysql_free_result($consulta3);
-// mysql_free_result($consulta4);
-mysql_close($conexion);
+    while ($row1 = mysql_fetch_array($consulta1)) {
+            $suma=$suma+$row1['PESO_TOTAL'];
+            print_r($row1);
 
-}
+          }
+          $prom=$suma/10;
+        $point = array("valorx" => $i,"valory" => $prom);
+        array_push($data_points, $point);
+
+    }
+
+    echo json_encode($data_points);
+    mysql_free_result($consulta);
+    mysql_close($conexion);
 
  ?>
