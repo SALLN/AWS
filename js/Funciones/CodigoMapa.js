@@ -81,7 +81,21 @@ map.controls[google.maps.ControlPosition.LEFT_TOP].push( document.getElementById
 
 map.controls[google.maps.ControlPosition.LEFT_TOP].push(  document.getElementById('btHist'));
 
-map.controls[google.maps.ControlPosition.LEFT_CENTER].push(  document.getElementById('Cerrar_Sesion'));
+
+if(Cargo=="vehiculo"){
+ document.getElementById('Marcar_Recorrido').style.display='none';
+ document.getElementById('Reporte_Recorrido').style.display='none';
+ document.getElementById('btHist').style.display='none';
+ document.getElementById('Boton_Real24').style.display='none';
+ document.getElementById('Boton_grafica').style.display='none';
+ document.getElementById('Boton_Zero').style.display='none';
+ map.controls[google.maps.ControlPosition.LEFT_TOP].push(  document.getElementById('Cerrar_Sesion'));
+
+ }else{
+  document.getElementById('Reporte_Recorrido').style.display='inline-block';
+  map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(  document.getElementById('Cerrar_Sesion'));
+
+ }
 
 map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(  document.getElementById('Boton_Zero'));
 
@@ -138,15 +152,7 @@ $('#Tiempo_Hora2').timepicker  ({   showMinutes: false,    showPeriod: true,    
 $('#Tiempo_Minuto2').timepicker({   showHours: false,      minutes: { interval: 1 },    rows: 6    	});
 
 
-if(Cargo=="vehiculo"){
- document.getElementById('Marcar_Recorrido').style.display='none';
- document.getElementById('Reporte_Recorrido').style.display='none';
- document.getElementById('btHist').style.display='none';
- document.getElementById('Boton_Real24').style.display='none';
- document.getElementById('Boton_grafica').style.display='none';
- }else{
-  document.getElementById('Reporte_Recorrido').style.display='inline-block';
- }
+
 
 function Marcar_Recorrido(){
 
@@ -444,8 +450,9 @@ function VigilarRecorrido(){
 
   var Punto_Despacho=0;
   var Alerta_Camino=true;
-  var Tolerancia_Puntos=5;
-  var Tolerancia_Camino=5;
+  var Tolerancia_Puntos;
+  var Tolerancia_Camino;
+  var Tolerancia = 0.1;
 
 function VigilarPesos(){
 
@@ -509,6 +516,7 @@ function Vigilar_Llegada_Punto(){
     if (distancia<20 && CercaDetectada[Punto_Despacho]){
         console.log("CERCA DETECTADA: "+Punto_Despacho);
         CercaDetectada[Punto_Despacho]=false;
+        Tolerancia_Puntos=Pesos_Debidos[Punto_Despacho]*Tolerancia;
 
         if(Punto_Despacho!=0){if (Alerta_Camino){Camino=Camino+"1%";}else{Camino=Camino+"0%";}}
         else{ Fecha_Inicio_Recorrido=Obtener_Hora();}
@@ -518,6 +526,7 @@ function Vigilar_Llegada_Punto(){
             Llegada=Llegada+"1%";
         }else{
             console.log(" LLEGÓ PESO INCORRECTO: "+Punto_Despacho);
+            alert("Llegó al punto con un peso incorrecto");
             Llegada=Llegada+"0%";
         }
         clearInterval(Interval_Cerca); Interval_Cerca=null;
@@ -525,9 +534,10 @@ function Vigilar_Llegada_Punto(){
       }
 
           if (Punto_Despacho!=0){
+              Tolerancia_Camino=Pesos_Debidos[Punto_Despacho]*Tolerancia;
               if (Alerta_Camino && (Peso_R<Pesos_Debidos[Punto_Despacho]-Tolerancia_Camino ||  Peso_R>Pesos_Debidos[Punto_Despacho]+Tolerancia_Camino)){
                       Alerta_Camino = false;
-                      console.log("VARIACION DE PESO INDEBIDA");
+                      alert("Variación de peso incorrecta");
               }
           }
 }
@@ -540,13 +550,14 @@ function Vigilar_Salida_Punto(){
 
     if (distancia2>20){
         Punto_Despacho++;
-
+        Tolerancia_Puntos=Pesos_Debidos[Punto_Despacho]*Tolerancia;
         if (Peso_R>Pesos_Debidos[Punto_Despacho]-Tolerancia_Puntos &&  Peso_R<Pesos_Debidos[Punto_Despacho]+Tolerancia_Puntos){
 
                   console.log("SALIÓ CON PESO INDICADO: "+(Punto_Despacho-1));
                   Salida=Salida+"1%";
         }else{
                   console.log(" SALIÓ CON PESO INCORRECTO: "+(Punto_Despacho-1));
+                  alert("Salió del punto con un peso incorrecto");
                   Salida=Salida+"0%";
         }
             clearInterval(Interval_Punto); Interval_Punto=null;
