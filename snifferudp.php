@@ -35,10 +35,23 @@ $velocidad = intval(substr($mensaje_div[2],$lng+9,3)*1.60934);
 $consulta=mysql_query("INSERT INTO Mensajes(Mensaje) VALUES('$mensaje')");
 $consulta2=mysql_query("SELECT user FROM admin where id=$usuario") or die("Problemas en consulta: ".mysql_error());
 $tabla_usuario  = mysql_fetch_array($consulta2)['user'];
-$consulta3=mysql_query("INSERT INTO $tabla_usuario(LATITUD,LONGITUD,FECHA_HORA,FECHA_HORA_SERVER,ID_VEHICULO,PESO_1,PESO_2,PESO_TOTAL,VEL) VALUES('$latitud','$longitud','$fecha','$fecha_servidor','$placa','$pesos[0]','$pesos[1]','$pesos[2]','$velocidad')");
-mysql_free_result($consulta);
+$consulta3=mysql_query("SELECT * FROM formulas") or die("Problemas en consulta: ".mysql_error());
+$tabla = mysql_fetch_array($consulta3);
+$coeficientes = $tabla['COEFICIENTES'];
+$diferencia   = $tabla['DIFERENCIA'];
+$coeficientes = explode('%',$coeficientes);
+$z = $pesos[2]-$diferencia;
+$p1 = floatval($coeficientes[0]*pow($z,5));
+$p2 = floatval($coeficientes[1]*pow($z,4));
+$p3 = floatval($coeficientes[2]*pow($z,3));
+$p4 = floatval($coeficientes[3]*pow($z,2));
+$p5 = floatval($coeficientes[4]*pow($z,1));
+$peso = $p1+$p2+$p3+$p4+$p5+$coeficientes[5];
+$consulta4=mysql_query("INSERT INTO $tabla_usuario(LATITUD,LONGITUD,FECHA_HORA,FECHA_HORA_SERVER,ID_VEHICULO,PESO_1,PESO_2,PESO_TOTAL,VEL) VALUES('$latitud','$longitud','$fecha','$fecha_servidor','$placa','$pesos[0]','$pesos[1]','$peso','$velocidad')");
+//mysql_free_result($consulta);
 mysql_free_result($consulta2);
 mysql_free_result($consulta3);
+// mysql_free_result($consulta4);
 mysql_close($conexion);
 
 }

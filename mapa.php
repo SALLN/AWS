@@ -12,6 +12,8 @@ if(!isset($_SESSION['user'])) {   echo '<script> window.location="INICIAR_SESION
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
 
+      <meta name="description" content="math.js | basic usage">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.5.3/math.min.js"></script>
     <title>Ticoll</title>
     <link rel="shortcut icon" href="images/taxi6.ico">
 
@@ -170,8 +172,6 @@ a {
      </div> -->
 
     </div>
-
-
 
 
  <img id="Imagen" src="images/ajax-loader.gif">
