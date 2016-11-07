@@ -19,8 +19,8 @@ $pesos = explode('-',$mensaje_div[1]);
 
 $s1=strpos($mensaje,"#");    $s2=strpos($mensaje,"@");  $lon=strlen($mensaje);
 
-if (!empty($s1) && !empty($s2) && $lon<77 && $lon>66){
-include("MySQL/ConexionMySQL.php");
+if (!empty($s1) && !empty($s2) && $lon<83 && $lon>66){
+include("ConexionMySQL.php");
 $lat=strpos($mensaje_div[2],"+");    $lng=strpos($mensaje_div[2],"-");
 $id=strpos($mensaje_div[2],"ID=");    $time=substr($mensaje_div[2],$lat-10,10);
 $weeksTosecond=substr($time,0,4)*7*24*60*60;    $daysToseconds=substr($time,4,1)*24*60*60;    $seconds=substr($time,5,5);
@@ -35,7 +35,7 @@ $velocidad = intval(substr($mensaje_div[2],$lng+9,3)*1.60934);
 $consulta=mysql_query("INSERT INTO Mensajes(Mensaje) VALUES('$mensaje')");
 $consulta2=mysql_query("SELECT user FROM admin where id=$usuario") or die("Problemas en consulta: ".mysql_error());
 $tabla_usuario  = mysql_fetch_array($consulta2)['user'];
-$consulta3=mysql_query("SELECT * FROM formulas") or die("Problemas en consulta: ".mysql_error());
+$consulta3=mysql_query("SELECT * FROM Formulas") or die("Problemas en consulta: ".mysql_error());
 $tabla = mysql_fetch_array($consulta3);
 $coeficientes = $tabla['COEFICIENTES'];
 $diferencia   = $tabla['DIFERENCIA'];

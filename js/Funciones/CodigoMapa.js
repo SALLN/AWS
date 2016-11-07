@@ -83,6 +83,8 @@ map.controls[google.maps.ControlPosition.LEFT_TOP].push(  document.getElementByI
 
 map.controls[google.maps.ControlPosition.LEFT_CENTER].push(  document.getElementById('Cerrar_Sesion'));
 
+map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(  document.getElementById('Boton_Zero'));
+
 
 map.controls[google.maps.ControlPosition.LEFT_CENTER].push(  document.getElementById('ListaCheckBoxes'));
 
@@ -145,38 +147,6 @@ if(Cargo=="vehiculo"){
  }else{
   document.getElementById('Reporte_Recorrido').style.display='inline-block';
  }
-
-// - 0.000000047569886303660145453734196070369*z^5 + 0.00019620364848816853773835755525567*z^4
-//  - 0.32340019792437918466632140734873*z^3 + 266.2794120132949728940729983151*z^2 - 109518.86846073795459233224391937*z
-//   + 17999930.779782894998788833618164
-    // print(math.round(math.e, 3));            // 2.718
-    // print(math.atan2(3, -3) / math.pi);      // 0.75
-    // print(math.log(1000, 10));               // 3
-    // print(math.sqrt(-4));                    // 2i
-    // // console.log(math.pow(780,5).multiply(- 0.000000047569886303660145453734196070369));   // [[7, 0], [0, 7]]
-    // var peso = 786;
-    // var p1 = math.chain(math.pow(peso,5)).multiply(-0.000000047569886303660145453734196070369).done(); // 14
-    // var p2 = math.chain(math.pow(peso,4)).multiply(0.00019620364848816853773835755525567).done();
-    // var p3 = math.chain(math.pow(peso,3)).multiply(-0.32340019792437918466632140734873).done();
-    // var p4 = math.chain(math.pow(peso,2)).multiply(266.2794120132949728940729983151).done();
-    // var p5 = math.chain(math.pow(peso,1)).multiply(- 109518.86846073795459233224391937).done();
-    // var peso_total = math.chain(p1).add(p2).add(p3).add(p4).add(p5).add(17999930.779782894998788833618164).done();
-    // console.log(p1);
-    // console.log(p2);
-    // console.log(p3);
-    // console.log(p4);
-    // console.log(p5);
-    //
-    // console.log(peso_total);
-    // expressions
-    // print(math.eval('12 / (2.3 + 0.7)'));    // 4
-    // print(math.eval('5.08 cm to inch'));     // 2 inch
-    // print(math.eval('9 / 3 + 2i'));          // 3 + 2i
-    // print(math.eval('det([-1, 2; 3, 1])'));  // -7
-
-
-
-
 
 function Marcar_Recorrido(){
 
