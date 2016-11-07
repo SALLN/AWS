@@ -1277,3 +1277,11 @@ function CerrarSesion(){
   a.href = "http://ticollcloud.ddns.net/AWS/INICIAR_SESION/logout.php";
   a.click();
 }
+
+function Zero(){
+
+  $.post("MySQL/Zero.php",{ Usuario: Usuario, Vehiculo: Tabla_Usuarios[i].ID_VEHICULO}).done( function(data){
+
+    console.log(data);
+  });
+}

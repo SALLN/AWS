@@ -93,7 +93,7 @@ a {
  <input type = "button" class="Botones_Mapa" id="Boton_Real24" value="Tiempo Real" onclick="flotante(3);">
  <input type ="button"  class="Botones_Mapa" id="Boton_grafica" value = 'Grafica tiempo real' onclick="promptForTwo(); return false;"/>
 
- <input type ="button" class="Botones_Zero" id="Boton_Zero" value = 'ZERO' onclick=""/>
+ <input type ="button" class="Botones_Zero" id="Boton_Zero" value = 'ZERO' onclick="Zero();"/>
 
  <input type = "button" class="Botones_Mapa" id="btHist" value="Historico" onclick="flotante(5)">
  <input type = "button" class="Botones_Mapa" id="Cerrar_Sesion" value="Cerrar Sesion" onclick="CerrarSesion();">
