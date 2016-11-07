@@ -49,6 +49,17 @@ var Peso_R;
 var Fecha_Hora_R;
 var Fecha_Inicio_Recorrido;
 var InfoRuta;
+var Punto_Despacho=0;
+var Alerta_Camino=true;
+var Tolerancia_Puntos;
+var Tolerancia_Camino;
+var Tolerancia = 0.1;
+var Vigilar_UnaVez = true;
+var Interval_Cerca;
+var Interval_Punto;
+var Llegada = "";
+var Salida  = "";
+var Camino  = "";
 
 
 var apiKey = 'AIzaSyCF6NfbnvzeseQoQPP5Bh6iSHA3_fcHu1g';
@@ -81,21 +92,7 @@ map.controls[google.maps.ControlPosition.LEFT_TOP].push( document.getElementById
 
 map.controls[google.maps.ControlPosition.LEFT_TOP].push(  document.getElementById('btHist'));
 
-
-if(Cargo=="vehiculo"){
- document.getElementById('Marcar_Recorrido').style.display='none';
- document.getElementById('Reporte_Recorrido').style.display='none';
- document.getElementById('btHist').style.display='none';
- document.getElementById('Boton_Real24').style.display='none';
- document.getElementById('Boton_grafica').style.display='none';
- document.getElementById('Boton_Zero').style.display='none';
- map.controls[google.maps.ControlPosition.LEFT_TOP].push(  document.getElementById('Cerrar_Sesion'));
-
- }else{
-  document.getElementById('Reporte_Recorrido').style.display='inline-block';
-  map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(  document.getElementById('Cerrar_Sesion'));
-
- }
+map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(  document.getElementById('Cerrar_Sesion'));
 
 map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(  document.getElementById('Boton_Zero'));
 
@@ -151,7 +148,18 @@ $('#Tiempo_Minuto1').timepicker({   showHours: false,      minutes: { interval: 
 $('#Tiempo_Hora2').timepicker  ({   showMinutes: false,    showPeriod: true,            rows: 4    	});
 $('#Tiempo_Minuto2').timepicker({   showHours: false,      minutes: { interval: 1 },    rows: 6    	});
 
+if(Cargo=="vehiculo"){
+ document.getElementById('Marcar_Recorrido').style.display='none';
+ document.getElementById('Reporte_Recorrido').style.display='none';
+ document.getElementById('btHist').style.display='none';
+ document.getElementById('Boton_Real24').style.display='none';
+ document.getElementById('Boton_grafica').style.display='none';
+ document.getElementById('Boton_Zero').style.display='none';
+ }else{
+  document.getElementById('Reporte_Recorrido').style.display='inline-block';
+ }
 
+// $.post("MySQL/Promedio_Peso.php", {Cargo: 'admin', Usuario:'JamesLlerena', Vehiculo: 'EUQ426'  }).done(  function( data ) {console.log(JSON.parse(data));});
 
 
 function Marcar_Recorrido(){
@@ -448,12 +456,6 @@ function VigilarRecorrido(){
   // VigilarPesos();
   }
 
-  var Punto_Despacho=0;
-  var Alerta_Camino=true;
-  var Tolerancia_Puntos;
-  var Tolerancia_Camino;
-  var Tolerancia = 0.1;
-
 function VigilarPesos(){
 
   if (Cargo=="admin"){  for (i in Checkes){  if (Checkes[i]){   Placa = Tabla_Usuarios[i].ID_VEHICULO  }    }    }
@@ -464,8 +466,11 @@ function VigilarPesos(){
         Latitud_R = Db_Recorrido.LATITUD;
         Longitud_R = Db_Recorrido.LONGITUD;
         Fecha_Hora_R=Db_Recorrido.FECHA_HORA;
-        Peso_R=Db_Recorrido.PESO_TOTAL;
+        //Peso_R=Db_Recorrido.PESO_TOTAL;
+        $.post("MySQL/Promedio_Peso.php", {Cargo: Cargo, Usuario:Usuario, Vehiculo: Placa  }).done(
 
+          function( data ) {
+            Peso_R=data;
         // document.getElementById('fila_latitud').innerHTML  = Latitud_R;
         document.getElementById('fila_fecha').innerHTML    = Fecha_Hora_R.substring(0,10);
         // document.getElementById('fila_longitud').innerHTML = Longitud_R;
@@ -498,21 +503,14 @@ function VigilarPesos(){
 
           if (Cargo=="vehiculo" && Vigilar_UnaVez){ Vigilar_UnaVez=false;   Vigilar_Llegada_Punto();  }
  });
-
+  });
   }
-
-  var Vigilar_UnaVez = true;
-  var Interval_Cerca;
-  var Interval_Punto;
-  var Llegada = "";
-  var Salida  = "";
-  var Camino  = "";
 
 function Vigilar_Llegada_Punto(){
   if (Interval_Cerca==null){  Interval_Cerca=setInterval(function(){Vigilar_Llegada_Punto()},1000);}
 
   var distancia = google.maps.geometry.spherical.computeDistanceBetween (Posicion,Recorrido_Marcado[Punto_Despacho]);
-
+console.log(Peso_R);
     if (distancia<20 && CercaDetectada[Punto_Despacho]){
         console.log("CERCA DETECTADA: "+Punto_Despacho);
         CercaDetectada[Punto_Despacho]=false;
