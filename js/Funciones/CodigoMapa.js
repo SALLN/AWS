@@ -392,7 +392,10 @@ function CargarRecorrido(){
     } else {        alert("No existen rutas entre ambos puntos");        }
     });
  CrearTabla_Ruta();
- if (Cargo=="vehiculo"){ VigilarRecorrido(); }
+
+ // if (Cargo=="vehiculo"){ VigilarRecorrido(); }
+
+ VigilarRecorrido(); 
 
   }); // FIN CIERRE $.POST
  }
