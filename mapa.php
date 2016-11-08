@@ -88,7 +88,7 @@ a {
  <div id="googleMap"></div>
 
  <input type = "button" class="Botones_Mapa" id="Marcar_Recorrido" value="Marcar Recorrido" onclick="flotante(1)">
- <input type = "button" class="Botones_Mapa" id="Reporte_Recorrido" value="Reporte Recorrido" onclick="flotante(1)">
+ <input type = "button" class="Botones_Mapa" id="Reporte_Recorrido" value="Reporte Recorrido" onclick="flotante(6)">
  <input type = "button" class="Botones_Mapa" id="Boton_Rutas" value = "Cargar Recorrido" onclick="flotante(4);"/>
  <input type = "button" class="Botones_Mapa" id="Boton_Real24" value="Tiempo Real" onclick="flotante(3);">
  <input type ="button"  class="Botones_Mapa" id="Boton_grafica" value = 'Grafica tiempo real' onclick="promptForTwo(); return false;"/>
@@ -112,7 +112,7 @@ a {
 
   <div id="flotante"><h3>Seleccione el vehiculo</h3>
       <div id="ListaCheckBoxes"></div>
-      <h5 style="margin-left:8.5%;margin-top:-2.5%;position:fixed;"><a onClick="flotante(2)">X</a></h5>
+      <h5 style="margin-left:48%;margin-top:-14.5%;position:absolute;"><a onClick="flotante(2)">X</a></h5>
    </div>
   <div id="fondo" onClick="flotante(2);"></div>
 </div>

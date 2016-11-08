@@ -51,8 +51,8 @@ var Fecha_Inicio_Recorrido;
 var InfoRuta;
 var Punto_Despacho=0;
 var Alerta_Camino=true;
-var Tolerancia_Puntos;
-var Tolerancia_Camino;
+var Tol_Puntos;
+var Tol_Camino;
 var Tolerancia = 0.1;
 var Vigilar_UnaVez = true;
 var Interval_Cerca;
@@ -238,6 +238,8 @@ function SeleccionVehiculos(){
         CargarRecorrido();
       }else if (Modo_SeleccionVehiculo=="Historico") {
         MostrarHistoricos();
+      }else if (Modo_SeleccionVehiculo=="Reporte") {
+        Reporte_Recorrido();
       }
         flotante(2);
         LimpiarMapa();
@@ -301,7 +303,7 @@ function flotante(tipo){
 
           if (tipo==6){
               $('#contenedor2').show();  $('#flotante').animate({ marginTop: "20%"});
-              Modo_SeleccionVehiculo="Historico";
+              Modo_SeleccionVehiculo="Reporte";
               CargarVehiculos();
           }
 
@@ -394,12 +396,17 @@ function CargarRecorrido(){
  CrearTabla_Ruta();
 
  // if (Cargo=="vehiculo"){ VigilarRecorrido(); }
-
- VigilarRecorrido(); 
+ VigilarRecorrido();
 
   }); // FIN CIERRE $.POST
  }
 
+function Reporte_Recorrido(){
+  var a = document.createElement("a");
+  a.target = "_blank";
+  a.href = "http://localhost/AWS/jspdf.html?3";
+  a.click();
+}
 function GuardarPesos(){
     Peso_Vacio=false;
     for (i in Direcciones){      if (document.getElementById("Peso"+i).value.length==0){ Peso_Vacio = true;}    }
@@ -457,22 +464,26 @@ function VigilarRecorrido(){
   VigilarInterval = setInterval(function(){VigilarPesos()},1000);
   // VigilarPesos();
   }
-
+var Vel_R;
 function VigilarPesos(){
 
   if (Cargo=="admin"){  for (i in Checkes){  if (Checkes[i]){   Placa = Tabla_Usuarios[i].ID_VEHICULO  }    }    }
   else{Placa = Usuario};
+
   $.post("MySQL/Marker_Recorrido.php", {Cargo: Cargo, Usuario:Usuario, Vehiculo: Placa  }).done(
       function( data ) {
+        // console.log(data);
+
         var Db_Recorrido = JSON.parse(data);
         Latitud_R = Db_Recorrido.LATITUD;
         Longitud_R = Db_Recorrido.LONGITUD;
         Fecha_Hora_R=Db_Recorrido.FECHA_HORA;
-        //Peso_R=Db_Recorrido.PESO_TOTAL;
-        $.post("MySQL/Promedio_Peso.php", {Cargo: Cargo, Usuario:Usuario, Vehiculo: Placa  }).done(
+        Peso_R=Db_Recorrido.PESO_TOTAL;
+        Vel_R=Db_Recorrido.VEL;
+        // $.post("MySQL/Promedio_Peso.php", {Cargo: Cargo, Usuario:Usuario, Vehiculo: Placa  }).done(
+        // function( data ) {
+        // Peso_R=data;
 
-          function( data ) {
-            Peso_R=data;
         // document.getElementById('fila_latitud').innerHTML  = Latitud_R;
         document.getElementById('fila_fecha').innerHTML    = Fecha_Hora_R.substring(0,10);
         // document.getElementById('fila_longitud').innerHTML = Longitud_R;
@@ -503,25 +514,45 @@ function VigilarPesos(){
                 });
           }
 
-          if (Cargo=="vehiculo" && Vigilar_UnaVez){ Vigilar_UnaVez=false;   Vigilar_Llegada_Punto();  }
- });
+          if (/*Cargo=="vehiculo" && */Vigilar_UnaVez){ Vigilar_UnaVez=false;   Vigilar_Llegada_Punto();  }
+ // });
   });
   }
-
+var Aux_Peso_R;
+var Dentro_Punto;
 function Vigilar_Llegada_Punto(){
-  if (Interval_Cerca==null){  Interval_Cerca=setInterval(function(){Vigilar_Llegada_Punto()},1000);}
 
+  console.log("llegada");
+
+  if (Interval_Cerca==null){  Interval_Cerca=setInterval(function(){Vigilar_Llegada_Punto()},3000);}
+
+  if (Vel_R==0){ Aux_Peso_R=Peso_R}
   var distancia = google.maps.geometry.spherical.computeDistanceBetween (Posicion,Recorrido_Marcado[Punto_Despacho]);
-  console.log(Peso_R);
-    if (distancia<20 && CercaDetectada[Punto_Despacho]){
+  if (distancia<20 && CercaDetectada[Punto_Despacho]){Dentro_Punto=true;}else{Dentro_Punto=false;}
+
+  if (Vigilar_Camino){
+
+        if (Punto_Despacho!=0 && !Dentro_Punto ){
+            Tol_Camino=Pesos_Debidos[Punto_Despacho]*Tolerancia;
+            if (Alerta_Camino && (Aux_Peso_R<Pesos_Debidos[Punto_Despacho]-Tol_Camino ||  Aux_Peso_R>Pesos_Debidos[Punto_Despacho]+Tol_Camino)){
+                Alerta_Camino = false;
+                alert("Variación de peso incorrecta");
+                }
+              }
+        if (Punto_Despacho!=0 && Dentro_Punto){
+          console.log("escribe camino");
+           if (Alerta_Camino){Camino=Camino+"1%";}else{Camino=Camino+"0%";}
+            Vigilar_Camino=false;}
+  }
+
+    if (Dentro_Punto && Vel_R==0){
+      if (Punto_Despacho==0){ Aux_Peso_R=Peso_R; Fecha_Inicio_Recorrido=Obtener_Hora();}
+      else{
         console.log("CERCA DETECTADA: "+Punto_Despacho);
         CercaDetectada[Punto_Despacho]=false;
-        Tolerancia_Puntos=Pesos_Debidos[Punto_Despacho]*Tolerancia;
+        Tol_Puntos=Pesos_Debidos[Punto_Despacho]*Tolerancia;
 
-        if(Punto_Despacho!=0){if (Alerta_Camino){Camino=Camino+"1%";}else{Camino=Camino+"0%";}}
-        else{ Fecha_Inicio_Recorrido=Obtener_Hora();}
-
-        if (Peso_R>Pesos_Debidos[Punto_Despacho]-Tolerancia_Puntos && Peso_R<Pesos_Debidos[Punto_Despacho]+Tolerancia_Puntos){
+        if (Peso_R>Pesos_Debidos[Punto_Despacho]-Tol_Puntos && Peso_R<Pesos_Debidos[Punto_Despacho]+Tol_Puntos){
             console.log("LLEGÓ CON PESO INDICADO AL PUNTO: "+Punto_Despacho);
             Llegada=Llegada+"1%";
         }else{
@@ -529,29 +560,31 @@ function Vigilar_Llegada_Punto(){
             alert("Llegó al punto con un peso incorrecto");
             Llegada=Llegada+"0%";
         }
-        clearInterval(Interval_Cerca); Interval_Cerca=null;
-        Vigilar_Salida_Punto();
+
+      }
+      clearInterval(Interval_Cerca); Interval_Cerca=null; Salida_Punto=false;
+      Vigilar_Salida_Punto();
       }
 
-          if (Punto_Despacho!=0){
-              Tolerancia_Camino=Pesos_Debidos[Punto_Despacho]*Tolerancia;
-              if (Alerta_Camino && (Peso_R<Pesos_Debidos[Punto_Despacho]-Tolerancia_Camino ||  Peso_R>Pesos_Debidos[Punto_Despacho]+Tolerancia_Camino)){
-                      Alerta_Camino = false;
-                      alert("Variación de peso incorrecta");
-              }
-          }
-}
 
+}
+var Vigilar_Camino=true;
+var Salida_Punto=false;
+var Termino_Camino;
 function Vigilar_Salida_Punto(){
 
-    if (Interval_Punto==null){ Interval_Punto=setInterval(function(){Vigilar_Salida_Punto()},1000); Alerta_Camino=true;}
+  console.log("salida");
+
+    if (Interval_Punto==null){ Interval_Punto=setInterval(function(){Vigilar_Salida_Punto()},3000); Alerta_Camino=true; Vigilar_Camino=true;}
 
     var distancia2 = google.maps.geometry.spherical.computeDistanceBetween (Posicion,Recorrido_Marcado[Punto_Despacho]);
 
-    if (distancia2>20){
+    if (Vel_R==0){ Aux_Peso_R=Peso_R}else{   Salida_Punto=true;    }
+
+    if (distancia2>20 && Salida_Punto){
         Punto_Despacho++;
-        Tolerancia_Puntos=Pesos_Debidos[Punto_Despacho]*Tolerancia;
-        if (Peso_R>Pesos_Debidos[Punto_Despacho]-Tolerancia_Puntos &&  Peso_R<Pesos_Debidos[Punto_Despacho]+Tolerancia_Puntos){
+        Tol_Puntos=Pesos_Debidos[Punto_Despacho]*Tolerancia;
+        if (Peso_R>Pesos_Debidos[Punto_Despacho]-Tol_Puntos &&  Peso_R<Pesos_Debidos[Punto_Despacho]+Tol_Puntos){
 
                   console.log("SALIÓ CON PESO INDICADO: "+(Punto_Despacho-1));
                   Salida=Salida+"1%";
@@ -562,7 +595,7 @@ function Vigilar_Salida_Punto(){
         }
             clearInterval(Interval_Punto); Interval_Punto=null;
             if (Punto_Despacho!=Pesos_Debidos.length-1){  Vigilar_Llegada_Punto(); }
-           else{ $.post("MySQL/Recorridos_Terminados.php", { Modo: "Guardar" , Empresa: Empresa , Placa: Usuario , Fecha_Inicio: Fecha_Inicio_Recorrido  , Direcciones: InfoRuta[2] , Pesos: InfoRuta[3] , Llegada: Llegada , Salida: Salida , Camino: Camino  }).done( function(data){
+           else{ $.post("MySQL/Recorridos_Terminados.php", { Modo: "Guardar" , Empresa: Empresa , Placa: Placa , Fecha_Inicio: Fecha_Inicio_Recorrido  , Direcciones: InfoRuta[2] , Pesos: InfoRuta[3] , Llegada: Llegada , Salida: Salida , Camino: Camino  }).done( function(data){
              console.log(data);
            })  }
     }
@@ -776,10 +809,10 @@ function SetMarkerVarios(){
                     Fecha_Hora=Tabla2[Cont_Join++].LATITUD;
                     peso=Tabla2[Cont_Join++].LATITUD;
 
-                    $.post("MySQL/Promedio_Peso.php", {Cargo: Cargo, Usuario:Usuario, Vehiculo: 'EUQ426'  }).done(
-                      function( data ) {
-                         console.log(data);
-                        peso=data;
+                    // $.post("MySQL/Promedio_Peso.php", {Cargo: Cargo, Usuario:Usuario, Vehiculo: 'EUQ426'  }).done(
+                      // function( data ) {
+                        //  console.log(data);
+                        // peso=data;
 
                     Posicion[i]=new google.maps.LatLng(Latitud,Longitud);
 
@@ -811,7 +844,7 @@ function SetMarkerVarios(){
                         });
                     }
 
-                  });
+                  // });
 
                 }
 
