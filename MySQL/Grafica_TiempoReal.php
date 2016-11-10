@@ -14,13 +14,13 @@ include("ConexionMySQL.php");
     while ($row = mysql_fetch_array($consulta)) {
          $i=$i+1;
          $suma=0;
-         $resta=$row['ID']-9;
+         $resta=$row['ID']-4;
         $consulta1=mysql_query("SELECT PESO_TOTAL FROM JamesLlerena WHERE ID between $resta and '$row[ID]' ") or die("Problemas en consulta: ".mysql_error());
 
     while ($row1 = mysql_fetch_array($consulta1)) {
             $suma=$suma+$row1['PESO_TOTAL'];
           }
-          $prom=$suma/10;
+          $prom=$suma/5;
         $point = array("valorx" => $i,"valory" => $prom);
         array_push($data_points, $point);
 

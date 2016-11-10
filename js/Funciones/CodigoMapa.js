@@ -60,6 +60,12 @@ var Interval_Punto;
 var Llegada = "";
 var Salida  = "";
 var Camino  = "";
+var Aux_Peso_R;
+var Dentro_Punto;
+var Vigilar_Camino=true;
+var Salida_Punto=false;
+var Termino_Camino;
+var Vel_R;
 
 var apiKey = 'AIzaSyCF6NfbnvzeseQoQPP5Bh6iSHA3_fcHu1g';
 
@@ -74,7 +80,6 @@ var mapOptions ={
                 disableDefaultUI: false    };
 
 map=new google.maps.Map(document.getElementById("googleMap"),mapOptions);
-
 
 map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('autoc'));
 
@@ -306,9 +311,6 @@ function flotante(tipo){
               Modo_SeleccionVehiculo="Reporte";
               CargarVehiculos();
           }
-
-
-
              }
 
 function CargarVehiculos(){
@@ -407,6 +409,7 @@ function Reporte_Recorrido(){
   a.href = "http://localhost/AWS/jspdf.html?3";
   a.click();
 }
+
 function GuardarPesos(){
     Peso_Vacio=false;
     for (i in Direcciones){      if (document.getElementById("Peso"+i).value.length==0){ Peso_Vacio = true;}    }
@@ -451,20 +454,22 @@ function GuardarPesos(){
 function VigilarRecorrido(){
   Centrar();
   //document.getElementById('seleccion').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('seleccion'));
-  // document.getElementById('fila_latitud').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_latitud'));
-  // document.getElementById('fila_longitud').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_longitud'));
+  //document.getElementById('fila_latitud').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_latitud'));
+  //document.getElementById('fila_longitud').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_longitud'));
   document.getElementById('fila_fecha').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_fecha'));
   document.getElementById('fila_hora').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('fila_hora'));
   document.getElementById('peso').style.display='inline-block'; map.controls[google.maps.ControlPosition.RIGHT_TOP].push(  document.getElementById('peso'));
+
+  $.post("MySQL/Cambiar_Formula.php", { Modo: "subida"});
 
   for (i in Pes_Ruta){ Recorrido_Marcado.push(new google.maps.LatLng(parseFloat(Lat_Ruta[i]),parseFloat(Lng_Ruta[i])));
   if (i==0){ Pesos_Debidos.push(Pes_Ruta[0]-0); Pesos_Debidos.push(Pes_Ruta[0]-0);        }
   else{ Pesos_Debidos.push(Pesos_Debidos[i]-Pes_Ruta[i]);                   }
   CercaDetectada.push(true);  }
-  VigilarInterval = setInterval(function(){VigilarPesos()},1000);
+  VigilarInterval = setInterval(function(){VigilarPesos()},4000);
   // VigilarPesos();
   }
-var Vel_R;
+
 function VigilarPesos(){
 
   if (Cargo=="admin"){  for (i in Checkes){  if (Checkes[i]){   Placa = Tabla_Usuarios[i].ID_VEHICULO  }    }    }
@@ -488,6 +493,7 @@ function VigilarPesos(){
         document.getElementById('fila_fecha').innerHTML    = Fecha_Hora_R.substring(0,10);
         // document.getElementById('fila_longitud').innerHTML = Longitud_R;
         document.getElementById('fila_hora').innerHTML     = Fecha_Hora_R.substring(11,19);
+        if (peso<0){peso=0;}
         document.getElementById('peso').innerHTML= Peso_R+"kg";
 
         Posicion=new google.maps.LatLng(parseFloat(Latitud_R),parseFloat(Longitud_R));
@@ -518,13 +524,12 @@ function VigilarPesos(){
  // });
   });
   }
-var Aux_Peso_R;
-var Dentro_Punto;
+
 function Vigilar_Llegada_Punto(){
 
   console.log("llegada");
 
-  if (Interval_Cerca==null){  Interval_Cerca=setInterval(function(){Vigilar_Llegada_Punto()},3000);}
+  if (Interval_Cerca==null){  Interval_Cerca=setInterval(function(){Vigilar_Llegada_Punto()},1000);}
 
   if (Vel_R==0){ Aux_Peso_R=Peso_R}
   var distancia = google.maps.geometry.spherical.computeDistanceBetween (Posicion,Recorrido_Marcado[Punto_Despacho]);
@@ -568,20 +573,21 @@ function Vigilar_Llegada_Punto(){
 
 
 }
-var Vigilar_Camino=true;
-var Salida_Punto=false;
-var Termino_Camino;
+
 function Vigilar_Salida_Punto(){
 
   console.log("salida");
 
-    if (Interval_Punto==null){ Interval_Punto=setInterval(function(){Vigilar_Salida_Punto()},3000); Alerta_Camino=true; Vigilar_Camino=true;}
+    if (Interval_Punto==null){ Interval_Punto=setInterval(function(){Vigilar_Salida_Punto()},1000); Alerta_Camino=true; Vigilar_Camino=true;}
 
     var distancia2 = google.maps.geometry.spherical.computeDistanceBetween (Posicion,Recorrido_Marcado[Punto_Despacho]);
 
     if (Vel_R==0){ Aux_Peso_R=Peso_R}else{   Salida_Punto=true;    }
 
     if (distancia2>20 && Salida_Punto){
+
+      if (Punto_Despacho==0){ $.post("MySQL/Cambiar_Formula.php", { Modo: "Bajada"});}
+
         Punto_Despacho++;
         Tol_Puntos=Pesos_Debidos[Punto_Despacho]*Tolerancia;
         if (Peso_R>Pesos_Debidos[Punto_Despacho]-Tol_Puntos &&  Peso_R<Pesos_Debidos[Punto_Despacho]+Tol_Puntos){
@@ -822,7 +828,9 @@ function SetMarkerVarios(){
                         document.getElementById('fila_fecha').innerHTML = Fecha_Hora.substring(0,10);
                         // document.getElementById('fila_longitud').innerHTML = Longitud;
                         document.getElementById('fila_hora').innerHTML  = Fecha_Hora.substring(11,19);
+                        if (peso<0){peso=0;}
                         document.getElementById('peso').innerHTML= peso+"kg";
+
                         }
                     if (Latitud!=LatAux[i] || Longitud!=LonAux[i] || RealAgain[i]==0 || Recargar_Vehiculos ){
                         LatAux[i] =Latitud;    LonAux[i] =Longitud;
@@ -843,14 +851,10 @@ function SetMarkerVarios(){
                             icon: Icono_Historico[i]
                         });
                     }
-
                   // });
-
                 }
-
             }
                                     Recargar_Vehiculos=false;
-
         });
  }
 
@@ -1002,7 +1006,6 @@ function Consulta_Hora_Marker_Graficar(){
    }
 
 function Consulta_Marker_Hora(){
-
 
      Cont_Historico=-1;
      LimpiarMapa();

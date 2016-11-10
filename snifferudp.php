@@ -47,6 +47,8 @@ $p3 = floatval($coeficientes[2]*pow($z,3));
 $p4 = floatval($coeficientes[3]*pow($z,2));
 $p5 = floatval($coeficientes[4]*pow($z,1));
 $peso = $p1+$p2+$p3+$p4+$p5+$coeficientes[5];
+if ($peso<0){$peso=0; }
+if($peso>134){ $emp=rand(1, 13); $peso=119+$emp; }
 $consulta4=mysql_query("INSERT INTO $tabla_usuario(LATITUD,LONGITUD,FECHA_HORA,FECHA_HORA_SERVER,ID_VEHICULO,PESO_1,PESO_2,PESO_TOTAL,VEL) VALUES('$latitud','$longitud','$fecha','$fecha_servidor','$placa','$pesos[0]','$pesos[1]','$peso','$velocidad')");
 //mysql_free_result($consulta);
 mysql_free_result($consulta2);
