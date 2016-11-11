@@ -1,7 +1,7 @@
 <?php
 session_start();
 // $fecha_hora_serv=$_SESSION['Hora_Servidor'];
-$fecha_hora_serv=$_SESSION['2016-11-09 52:40:00';
+$fecha_hora_serv='2016-11-09 52:40:00';
 
 // $fecha_hora_serv='2016-09-12 12:57:42';
 include("ConexionMySQL.php");
@@ -16,8 +16,8 @@ include("ConexionMySQL.php");
     while ($row = mysql_fetch_array($consulta)) {
          $i=$i+1;
          $suma=0;
-         $resta=$row['ID']-0;
-        $consulta1=mysql_query("SELECT PESO_TOTAL FROM JamesLlerena WHERE ID between $resta and '$row[ID]' ") or die("Problemas en consulta: ".mysql_error());
+         $resta=$row['ID'];
+        $consulta1=mysql_query("SELECT PESO_TOTAL FROM JamesLlerena WHERE ID=$resta ") or die("Problemas en consulta: ".mysql_error());
 
     while ($row1 = mysql_fetch_array($consulta1)) {
             $suma=$suma+$row1['PESO_TOTAL'];
