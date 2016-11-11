@@ -352,7 +352,7 @@ function Salvacion_Pf2(){
 
 function CargarRecorrido(){
 
-  Salvacion_Interval = setInterval(function(){Salvacion_Pf();},500);
+  Salvacion_Interval = setInterval(function(){Salvacion_Pf();},4000);
 
 
   var waypts = [];
