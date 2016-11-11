@@ -1,6 +1,8 @@
 <?php
 session_start();
-$fecha_hora_serv=$_SESSION['Hora_Servidor'];
+// $fecha_hora_serv=$_SESSION['Hora_Servidor'];
+$fecha_hora_serv=$_SESSION['2016-11-09 52:40:00';
+
 // $fecha_hora_serv='2016-09-12 12:57:42';
 include("ConexionMySQL.php");
 
