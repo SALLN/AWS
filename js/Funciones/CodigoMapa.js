@@ -66,6 +66,14 @@ var Vigilar_Camino=true;
 var Salida_Punto=false;
 var Termino_Camino;
 var Vel_R;
+var geocoder= new google.maps.Geocoder();
+var Marker_Recorrido_Marcado=[];
+var Circulo_Interior_Recorrido=[];
+var Circulo_Exterior_Recorrido=[];
+var Cont_Circulos=0;
+
+
+
 
 var apiKey = 'AIzaSyCF6NfbnvzeseQoQPP5Bh6iSHA3_fcHu1g';
 
@@ -165,9 +173,7 @@ if(Cargo=="vehiculo"){
  }
 
 // $.post("MySQL/Promedio_Peso.php", {Cargo: 'admin', Usuario:'JamesLlerena', Vehiculo: 'EUQ426'  }).done(  function( data ) {console.log(JSON.parse(data));});
-var Circulo_Interior_Recorrido=[];
-var Circulo_Exterior_Recorrido=[];
-var Cont_Circulos=0;
+
 function Marcar_Recorrido(){
 
 
@@ -237,8 +243,6 @@ function Marcar_Recorrido(){
         });
          }
 
-var geocoder= new google.maps.Geocoder();
-var Marker_Recorrido_Marcado=[];
 function SeleccionVehiculos(){
 
       if (Modo_SeleccionVehiculo=="Recorrido") {
@@ -332,7 +336,24 @@ function CargarVehiculos(){
                  }else {        if(!Solicitar_Despliegue){            CrearCheck();        }    }
               }
 
+var Salvacion_Interval;
+var Cont_Salvacion=16007;
+
+function Salvacion_Pf(){
+  console.log(Cont_Salvacion);
+  $.post("snifferudp_prueba.php", {idd: Cont_Salvacion })
+  Cont_Salvacion++;
+}
+
+function Salvacion_Pf2(){
+  console.log(Cont_Salvacion);
+  $.post("snifferudp_prueba.php", {idd: Cont_Salvacion-1 })
+}
+
 function CargarRecorrido(){
+
+  Salvacion_Interval = setInterval(function(){Salvacion_Pf();},500);
+
 
   var waypts = [];
   var orig;
@@ -413,7 +434,7 @@ function CargarRecorrido(){
 function Reporte_Recorrido(){
   var a = document.createElement("a");
   a.target = "_blank";
-  a.href = "http://localhost/AWS/jspdf.html?3";
+  a.href = "http://ticollcloud.ddns.net/AWS/jspdf.html?3";
   a.click();
 }
 
@@ -475,7 +496,7 @@ function VigilarRecorrido(){
   if (i==0){ Pesos_Debidos.push(Pes_Ruta[0]-0); Pesos_Debidos.push(Pes_Ruta[0]-0);        }
   else{ Pesos_Debidos.push(Pesos_Debidos[i]-Pes_Ruta[i]);                   }
   CercaDetectada.push(true);  }
-  VigilarInterval = setInterval(function(){VigilarPesos()},4000);
+  VigilarInterval = setInterval(function(){VigilarPesos()},300);
   // VigilarPesos();
   }
 
@@ -536,7 +557,6 @@ function VigilarPesos(){
 
 function Vigilar_Llegada_Punto(){
 
-  console.log("llegada");
 
   if (Interval_Cerca==null){  Interval_Cerca=setInterval(function(){Vigilar_Llegada_Punto()},1000);}
 
@@ -550,6 +570,9 @@ function Vigilar_Llegada_Punto(){
             Tol_Camino=Pesos_Debidos[Punto_Despacho]*Tolerancia;
             if (Alerta_Camino && (Aux_Peso_R<Pesos_Debidos[Punto_Despacho]-Tol_Camino ||  Aux_Peso_R>Pesos_Debidos[Punto_Despacho]+Tol_Camino)){
                 Alerta_Camino = false;
+                console.log("Aux_Peso_R: "+Aux_Peso_R);
+                console.log("Peso_D: "+Pesos_Debidos[Punto_Despacho]);
+
                 alert("Variación de peso incorrecta");
                 }
               }
@@ -585,7 +608,6 @@ function Vigilar_Llegada_Punto(){
 
 function Vigilar_Salida_Punto(){
 
-  console.log("salida");
 
     if (Interval_Punto==null){ Interval_Punto=setInterval(function(){Vigilar_Salida_Punto()},1000); Alerta_Camino=true; Vigilar_Camino=true;}
 
@@ -604,6 +626,8 @@ function Vigilar_Salida_Punto(){
                   console.log("SALIÓ CON PESO INDICADO: "+(Punto_Despacho-1));
                   Salida=Salida+"1%";
         }else{
+          console.log("Peso_R: "+Peso_R);
+          console.log("Pesos_deb: "+Pesos_Debidos[Punto_Despacho]);
                   console.log(" SALIÓ CON PESO INCORRECTO: "+(Punto_Despacho-1));
                   alert("Salió del punto con un peso incorrecto");
                   Salida=Salida+"0%";
@@ -824,7 +848,6 @@ function SetMarkerVarios(){
                     Longitud = parseFloat(Tabla2[Cont_Join++].LATITUD);
                     Fecha_Hora=Tabla2[Cont_Join++].LATITUD;
                     peso=Tabla2[Cont_Join++].LATITUD;
-                    if (peso>120){ $.post("MySQL/Cambiar_Formula.php", { Modo: "Bajada"});}
                     // $.post("MySQL/Promedio_Peso.php", {Cargo: Cargo, Usuario:Usuario, Vehiculo: 'EUQ426'  }).done(
                       // function( data ) {
                         //  console.log(data);
