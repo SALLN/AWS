@@ -165,7 +165,9 @@ if(Cargo=="vehiculo"){
  }
 
 // $.post("MySQL/Promedio_Peso.php", {Cargo: 'admin', Usuario:'JamesLlerena', Vehiculo: 'EUQ426'  }).done(  function( data ) {console.log(JSON.parse(data));});
-
+var Circulo_Interior_Recorrido=[];
+var Circulo_Exterior_Recorrido=[];
+var Cont_Circulos=0;
 function Marcar_Recorrido(){
 
 
@@ -182,10 +184,12 @@ function Marcar_Recorrido(){
 
         Texto_txt.push(texto_añadir);        Texto_txt.push("\r\n");
         var center2 = new google.maps.LatLng(parseFloat(e.latLng.lat()),parseFloat(e.latLng.lng()));
-        var draw_circle = new google.maps.Circle({ center: center2, radius: 20, strokeColor: "#FF0000", strokeOpacity: 1,
+        Circulo_Exterior_Recorrido[Cont_Circulos] = new google.maps.Circle({ center: center2, radius: 20, strokeColor: "#FF0000", strokeOpacity: 1,
         strokeWeight: 0, fillColor: "#FF0000", fillOpacity: 0.2, map: map       });
-        var draw_circle = new google.maps.Circle({center: center2, radius: 3, strokeColor: "#000000", strokeOpacity: 1,
+        Circulo_Interior_Recorrido[Cont_Circulos] = new google.maps.Circle({center: center2, radius: 3, strokeColor: "#000000", strokeOpacity: 1,
         strokeWeight: 2, fillColor: "#000000", fillOpacity: 1, map: map            });
+
+        Cont_Circulos++;
         });
 
 
@@ -204,7 +208,8 @@ function Marcar_Recorrido(){
             google.maps.event.clearListeners(map, 'click');
 
             for (i in Recorrido_Marcado){
-              new MarkerWithLabel({
+
+                Marker_Recorrido_Marcado[i] = new MarkerWithLabel({
                 position: Recorrido_Marcado[i],
                 map: map,
                 raiseOnDrag: true,
@@ -231,8 +236,9 @@ function Marcar_Recorrido(){
 
         });
          }
-    var geocoder= new google.maps.Geocoder();
 
+var geocoder= new google.maps.Geocoder();
+var Marker_Recorrido_Marcado=[];
 function SeleccionVehiculos(){
 
       if (Modo_SeleccionVehiculo=="Recorrido") {
@@ -392,6 +398,7 @@ function CargarRecorrido(){
            //directionsDisplay.setPanel($("#panel_ruta").get(0));
            respon=response['geocoded_waypoints'][0].place_id;
            directionsDisplay.setDirections(response);
+           directionsDisplay.setMap(map);
 
     } else {        alert("No existen rutas entre ambos puntos");        }
     });
@@ -411,6 +418,8 @@ function Reporte_Recorrido(){
 }
 
 function GuardarPesos(){
+
+    LimpiarMapa();
     Peso_Vacio=false;
     for (i in Direcciones){      if (document.getElementById("Peso"+i).value.length==0){ Peso_Vacio = true;}    }
 
@@ -626,20 +635,21 @@ function Obtener_Direcciones(){
          clearInterval(MarkerInterval);
          CrearTabla();
      }
-  }
 
-  var directionsDisplay = new google.maps.DirectionsRenderer();
-     directionsDisplay.setOptions( { suppressMarkers: true,
-                                     polylineOptions: {
-                                     strokeWeight: 6,
-                                     strokeOpacity: 1,
-                                     strokeColor:  'red'
-                                     }} );
-     var directionsService = new google.maps.DirectionsService();
-     directionsDisplay.setMap(map);
-  var respon;
+   }
+var respon;
+var directionsDisplay = new google.maps.DirectionsRenderer();
+var directionsService = new google.maps.DirectionsService();
+directionsDisplay.setOptions( { suppressMarkers: true,
+                                polylineOptions: {
+                                strokeWeight: 6,
+                                strokeOpacity: 1,
+                                strokeColor:  'red'
+                                }} );
 
 function CrearTabla(){
+
+     directionsDisplay.setMap(map);
 
   var waypts = [];
   var orig;
@@ -814,7 +824,7 @@ function SetMarkerVarios(){
                     Longitud = parseFloat(Tabla2[Cont_Join++].LATITUD);
                     Fecha_Hora=Tabla2[Cont_Join++].LATITUD;
                     peso=Tabla2[Cont_Join++].LATITUD;
-
+                    if (peso>120){ $.post("MySQL/Cambiar_Formula.php", { Modo: "Bajada"});}
                     // $.post("MySQL/Promedio_Peso.php", {Cargo: Cargo, Usuario:Usuario, Vehiculo: 'EUQ426'  }).done(
                       // function( data ) {
                         //  console.log(data);
@@ -967,7 +977,7 @@ function Consulta_Hora_Marker_Graficar(){
                 labelAnchor: new google.maps.Point(17,9 ),
                 labelClass: "labels",
                 labelStyle: {opacity: 1},
-                title: Num_Markers+" -- "+Tabla_Historico[Cont_Historico][i].FECHA_HORA+" -- "+peso+" ADC "+ " --- "+Tabla_Historico[Cont_Historico][i].VEL+" km/h",
+                title: Num_Markers+" -- "+Tabla_Historico[Cont_Historico][i].FECHA_HORA+" -- "+peso+" Kg "+ " --- "+Tabla_Historico[Cont_Historico][i].VEL+" km/h",
                 icon: Icono_Historico[Cont_Historico]
                 });
 
@@ -981,7 +991,7 @@ function Consulta_Hora_Marker_Graficar(){
                 labelAnchor: new google.maps.Point(17,9 ),
                 labelClass: "labels",
                 labelStyle: {opacity: 1},
-                title: Num_Markers+" -- "+Tabla_Historico[Cont_Historico][i].FECHA_HORA+" -- "+peso+" ADC "+ " --- "+Tabla_Historico[Cont_Historico][i].VEL+" km/h",
+                title: Num_Markers+" -- "+Tabla_Historico[Cont_Historico][i].FECHA_HORA+" -- "+peso+" Kg "+ " --- "+Tabla_Historico[Cont_Historico][i].VEL+" km/h",
                 icon: Icono_Historico[Cont_Historico]
                 });
             }else{
@@ -989,7 +999,7 @@ function Consulta_Hora_Marker_Graficar(){
                 Marker_Hora_Marker[Cont_Historico][Cont_Markers++]=new google.maps.Marker({
                 position:Posicion[Cont_Historico],
                 map: map,
-                title: Num_Markers+" -- "+Tabla_Historico[Cont_Historico][i].FECHA_HORA+" -- "+peso+" ADC "+ " --- "+Tabla_Historico[Cont_Historico][i].VEL+" km/h",
+                title: Num_Markers+" -- "+Tabla_Historico[Cont_Historico][i].FECHA_HORA+" -- "+peso+" Kg "+ " --- "+Tabla_Historico[Cont_Historico][i].VEL+" km/h",
                 icon: Icono_Historico[Cont_Historico]
                 });
                       }
@@ -1092,13 +1102,18 @@ function Consulta_Marker_Hora_Graficar(){
  }
 
 function LimpiarMapa(){
-
     for (i in Marker_Real)           {   Marker_Real[i].setMap(null);          }
     for (i in Marker_Hora_Marker){     for (j in Marker_Hora_Marker[i]){    Marker_Hora_Marker[i][j].setMap(null);   }      }
     for (i in Marker_Marker_Hora){     for (j in Marker_Marker_Hora[i]){    Marker_Marker_Hora[i][j].setMap(null);   }      }
 
     for (i in PoliLinea_Real)        {   PoliLinea_Real[i].setMap(null);       }
     for (i in PoliLinea_Historica)   {   PoliLinea_Historica[i].setMap(null);  }
+
+    for (i in Marker_Recorrido_Marcado)           {   Marker_Recorrido_Marcado[i].setMap(null);          }
+    for (i in Circulo_Interior_Recorrido)           {   Circulo_Interior_Recorrido[i].setMap(null);          }
+    for (i in Circulo_Exterior_Recorrido)           {   Circulo_Exterior_Recorrido[i].setMap(null);          }
+
+    directionsDisplay.setMap(null);
 
     //for (i in Marker_Snap)           {   Marker_Snap[i].setMap(null);          }
  }
