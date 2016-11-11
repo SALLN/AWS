@@ -6,7 +6,7 @@ date_default_timezone_set('America/Bogota');
 
 if ($_POST['Modo']=="Guardar"){
 
-$fecha_servidor = date('Y-m-d H:i:s');
+$fecha_servidor = '2016-11-09 22:59:43';
 
 $consulta1=mysql_query("SELECT empresa FROM admin WHERE user='$_POST[Placa]'") or die("Problemas en consulta: ".mysql_error());
 $reg=mysql_fetch_array($consulta1);

@@ -583,7 +583,7 @@ function Vigilar_Llegada_Punto(){
   }
 
     if (Dentro_Punto && Vel_R==0){
-      if (Punto_Despacho==0){ Aux_Peso_R=Peso_R; Fecha_Inicio_Recorrido=Obtener_Hora();}
+      if (Punto_Despacho==0){ Aux_Peso_R=Peso_R; Fecha_Inicio_Recorrido='2016-11-09 22:51:38';}
       else{
         console.log("CERCA DETECTADA: "+Punto_Despacho);
         CercaDetectada[Punto_Despacho]=false;
@@ -626,8 +626,6 @@ function Vigilar_Salida_Punto(){
                   console.log("SALIÓ CON PESO INDICADO: "+(Punto_Despacho-1));
                   Salida=Salida+"1%";
         }else{
-          console.log("Peso_R: "+Peso_R);
-          console.log("Pesos_deb: "+Pesos_Debidos[Punto_Despacho]);
                   console.log(" SALIÓ CON PESO INCORRECTO: "+(Punto_Despacho-1));
                   alert("Salió del punto con un peso incorrecto");
                   Salida=Salida+"0%";
