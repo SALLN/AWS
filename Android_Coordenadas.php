@@ -9,5 +9,5 @@ $consulta=mysql_query("INSERT INTO $_POST[Usuario] (LATITUD,LONGITUD,FECHA_HORA,
 
 mysql_free_result($consulta);
 mysql_close($conexion);
- 
+
 ?>
