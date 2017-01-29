@@ -336,23 +336,10 @@ function CargarVehiculos(){
                  }else {        if(!Solicitar_Despliegue){            CrearCheck();        }    }
               }
 
-var Salvacion_Interval;
-var Cont_Salvacion=16007;
 
-function Salvacion_Pf(){
-  console.log(Cont_Salvacion);
-  $.post("snifferudp_prueba.php", {idd: Cont_Salvacion })
-  Cont_Salvacion++;
-}
-
-function Salvacion_Pf2(){
-  console.log(Cont_Salvacion);
-  $.post("snifferudp_prueba.php", {idd: Cont_Salvacion-1 })
-}
 
 function CargarRecorrido(){
 
-  Salvacion_Interval = setInterval(function(){Salvacion_Pf();},4000);
 
 
   var waypts = [];
