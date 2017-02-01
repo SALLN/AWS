@@ -832,7 +832,7 @@ function SetMarkerVarios(){
                     Latitud = parseFloat(Tabla2[Cont_Join++].LATITUD);
                     Longitud = parseFloat(Tabla2[Cont_Join++].LATITUD);
                     Fecha_Hora=Tabla2[Cont_Join++].LATITUD;
-                    peso=Tabla2[Cont_Join++].LATITUD;
+                    //peso=Tabla2[Cont_Join++].LATITUD;
                     // $.post("MySQL/Promedio_Peso.php", {Cargo: Cargo, Usuario:Usuario, Vehiculo: 'EUQ426'  }).done(
                       // function( data ) {
                         //  console.log(data);
