@@ -971,7 +971,7 @@ function Consulta_Hora_Marker_Graficar(){
             Latitud_Historica = parseFloat(Tabla_Historico[Cont_Historico][i].LATITUD);
             Longitud_Historica = parseFloat(Tabla_Historico[Cont_Historico][i].LONGITUD);
             Posicion[Cont_Historico]=new google.maps.LatLng(Latitud_Historica,Longitud_Historica);
-            peso=parseFloat(Tabla_Historico[Cont_Historico][i].PESO_TOTAL)
+            //peso=parseFloat(Tabla_Historico[Cont_Historico][i].PESO_TOTAL)
             Ruta_Historica[Cont_Historico].push(Posicion[Cont_Historico]);
             PoliLinea_Historica[Cont_Historico].setPath(Ruta_Historica[Cont_Historico]);
 
@@ -1068,7 +1068,7 @@ function Consulta_Marker_Hora_Graficar(){
             Latitud_Historica = parseFloat(Tabla[i].LATITUD);
             Longitud_Historica = parseFloat(Tabla[i].LONGITUD);
             Posicion[Cont_Historico]=new google.maps.LatLng(Latitud_Historica,Longitud_Historica);
-            peso=parseFloat(Tabla[i].PESO_TOTAL);
+            //peso=parseFloat(Tabla[i].PESO_TOTAL);
             Marker_Marker_Hora[Cont_Historico][Cont_Markers++]=new google.maps.Marker({
             position:Posicion[Cont_Historico],
             map: map,
@@ -1094,7 +1094,7 @@ function Consulta_Marker_Hora_Graficar(){
     Latitud_Historica = parseFloat(Tabla[i].LATITUD);
     Longitud_Historica = parseFloat(Tabla[i].LONGITUD);
     Posicion[Cont_Historico]=new google.maps.LatLng(Latitud_Historica,Longitud_Historica);
-    peso=parseFloat(Tabla[i].PESO_TOTAL);
+    //peso=parseFloat(Tabla[i].PESO_TOTAL);
 
     Marker_Marker_Hora[Cont_Historico][Cont_Markers++]=new google.maps.Marker({
                         position:Posicion[Cont_Historico],
