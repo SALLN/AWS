@@ -20,8 +20,8 @@ if($Marcados[$i]=="true"){
    $query.="(	SELECT LONGITUD  FROM $_SESSION[user]    WHERE ID_VEHICULO='".$Usuarios[$i][0]."'	ORDER BY ID DESC LIMIT 1) ";
    $query.=$union;
    $query.="(	SELECT FECHA_HORA  FROM $_SESSION[user]    WHERE ID_VEHICULO='".$Usuarios[$i][0]."'	ORDER BY ID DESC LIMIT 1) ";
-   $query.=$union;
-   $query.="(	SELECT PESO_TOTAL  FROM $_SESSION[user]    WHERE ID_VEHICULO='".$Usuarios[$i][0]."'	ORDER BY ID DESC LIMIT 1) ";
+   //$query.=$union;
+   //$query.="(	SELECT PESO_TOTAL  FROM $_SESSION[user]    WHERE ID_VEHICULO='".$Usuarios[$i][0]."'	ORDER BY ID DESC LIMIT 1) ";
    $toco=true;
 
    }
