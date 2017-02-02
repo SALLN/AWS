@@ -14,7 +14,7 @@ $consulta=mysql_query("SELECT ID_VEHICULO FROM FamiliaLlerenaNavarro GROUP BY ID
 	$tabla[$i]=$reg['ID_VEHICULO'];
 	$i++;
 }
-}
+} 
 else
 {
 $consulta=mysql_query("SELECT ID_VEHICULO FROM $_SESSION[user] GROUP BY ID_VEHICULO") or die("Problemas en consulta: ".mysql_error());
